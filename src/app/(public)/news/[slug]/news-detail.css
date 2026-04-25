@@ -1,0 +1,224 @@
+/* News Detail Page Styles */
+
+.gesit-news-detail-page {
+    background-color: #fff;
+    padding-bottom: 80px;
+}
+
+.gesit-news-detail-header {
+    background-color: #103065;
+    padding: 100px 0 60px;
+    color: #fff;
+    text-align: center;
+}
+
+.gesit-news-detail-header .qodef-m-title {
+    font-family: "Lora", serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.qodef-breadcrumbs {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.qodef-breadcrumbs a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.qodef-breadcrumbs a:hover {
+    color: #bc9c33;
+    /* gold */
+}
+
+.qodef-breadcrumbs-separator {
+    margin: 0 10px;
+}
+
+.qodef-breadcrumbs-separator::after {
+    content: "/";
+}
+
+.gesit-news-detail-content-area {
+    margin-top: 60px;
+}
+
+.gesit-news-detail-article {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.gesit-news-detail-media {
+    margin-bottom: 30px;
+}
+
+.gesit-news-detail-featured-img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gesit-news-detail-meta-top {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.gesit-news-detail-body {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.gesit-news-detail-video {
+    margin-bottom: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gesit-news-detail-btn-wrap {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.qodef-qi-button.qodef-layout--outlined {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid #bc9c33;
+    color: #103065;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: "Source Sans Pro", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.qodef-qi-button.qodef-layout--outlined:hover {
+    background-color: #bc9c33;
+    color: #fff;
+}
+
+.gesit-news-detail-footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.gesit-news-detail-share {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.share-label {
+    font-family: "Lora", serif;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.share-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.share-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-icon:hover {
+    background: #103065;
+    color: #fff;
+}
+
+/* Navigation */
+#qodef-single-post-navigation {
+    margin-top: 80px;
+    border-top: 1px solid #eee;
+    padding-top: 40px;
+}
+
+#qodef-single-post-navigation .qodef-m-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.qodef-m-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: #333;
+    font-family: "Lora", serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.qodef-m-nav-label {
+    transition: color 0.3s ease;
+}
+
+.qodef-m-nav:hover .qodef-m-nav-label {
+    color: #bc9c33;
+}
+
+.qodef-m-nav.qodef--prev svg {
+    transform: rotate(180deg);
+}
+
+.qodef-arrow-right {
+    color: #bc9c33;
+}
+
+/* Error state */
+.gesit-news-detail-error {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.gesit-news-detail-error a {
+    color: #bc9c33;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .gesit-news-detail-header {
+        padding: 80px 20px 40px;
+    }
+
+    .gesit-news-detail-header .qodef-m-title {
+        font-size: 24px;
+    }
+
+    .gesit-news-detail-content-area {
+        padding: 0 20px;
+    }
+}

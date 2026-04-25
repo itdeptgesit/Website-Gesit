@@ -1,0 +1,230 @@
+.gesit-manufacturing-page {
+  font-family: "Lora", "Source Sans Pro", sans-serif;
+  color: #000;
+  background-color: #ffffff;
+}
+
+.gesit-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Hero Section */
+.gesit-hero-banner {
+  position: relative;
+  height: 65vh; /* Matches original layout style, standardized */
+  min-height: 400px;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Original has text roughly centered or left depending on sizing, but usually left on large screens */
+}
+
+.gesit-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(16,48,101,0.6) 0%, rgba(255,255,255,0) 100%);
+  z-index: 1;
+}
+
+.gesit-hero-content {
+  position: relative;
+  z-index: 2;
+  padding-top: 100px; /* Offset for transparent header */
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+.gesit-hero-title {
+  color: #fff;
+  font-family: "Lora", serif;
+  font-size: 65px;
+  font-weight: 400;
+  margin: 0;
+  text-shadow: 0px 0px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .gesit-hero-title {
+    font-size: 53px;
+    padding-top: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gesit-hero-title {
+    font-size: 40px;
+  }
+}
+
+/* Intro Section */
+.manufacturing-intro {
+  padding: 100px 0 80px;
+  text-align: center;
+}
+
+.manufacturing-intro-main {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.manufacturing-intro-sub {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  color: #666;
+}
+
+.manufacturing-intro-sub strong {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Row Sections */
+.manufacturing-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.manufacturing-row--reverse {
+  flex-direction: row-reverse;
+}
+
+/* Specific background colors for sections if needed, though original used white boxes. Elementor section background was usually #f9f9f9 or white */
+.manufacturing-row:nth-child(even) {
+  background-color: #fcfcfc;
+}
+
+.manufacturing-col-text,
+.manufacturing-col-image {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 30px;
+}
+
+.manufacturing-row--reverse .manufacturing-col-text {
+  padding-right: 60px;
+}
+.manufacturing-row:not(.manufacturing-row--reverse) .manufacturing-col-text {
+  padding-left: 60px;
+  padding-right: 40px;
+}
+
+.manufacturing-col-image {
+  /* No special flex for now, just holds the images */
+}
+
+/* Grid for the image carousels converted to static */
+.manufacturing-image-grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 1fr;
+}
+
+/* For multi-image setups */
+.manufacturing-image-grid.count-3 {
+  grid-template-columns: 1fr 1fr;
+}
+.manufacturing-image-grid.count-3 > :nth-child(1) {
+  grid-column: 1 / -1; /* First image full width */
+}
+
+.manufacturing-image-grid.count-4 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.manufacturing-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.manufacturing-img-featured {
+  aspect-ratio: 16/9;
+}
+.manufacturing-img-small {
+  aspect-ratio: 4/3;
+}
+
+/* Text Content */
+.manufacturing-h2 {
+  font-family: "Lora", serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 25px;
+  margin-top: 0;
+}
+
+.manufacturing-h2-sub {
+  font-family: "Lora", serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 20px;
+  margin-top: -15px;
+}
+
+.manufacturing-p {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+/* Button */
+.manufacturing-btn {
+  display: inline-block;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #333;
+  border: 1px solid #333;
+  padding: 15px 35px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.manufacturing-btn:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
+  .manufacturing-col-text,
+  .manufacturing-col-image {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 15px !important;
+  }
+
+  .manufacturing-row {
+    flex-direction: column-reverse; /* Usually stack text below image on mobile regardless of original desktop order */
+  }
+
+  .manufacturing-col-text {
+    margin-top: 40px;
+    text-align: center;
+  }
+}
