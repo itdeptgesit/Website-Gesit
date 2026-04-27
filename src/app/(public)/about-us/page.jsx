@@ -15,10 +15,10 @@ export default function AboutUs() {
   }, []);
 
   const textVariant = {
-    initial: { opacity: 0, y: 30, filter: 'blur(8px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-50px" },
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.8, ease: "easeOut" }
   };
 
   const staggerContainer = {
@@ -73,9 +73,9 @@ export default function AboutUs() {
                       <div className="elementor-element elementor-element-602e91a elementor-widget elementor-widget-heading" data-id="602e91a" data-element_type="widget" data-widget_type="heading.default">
                         <div className="elementor-widget-container">
                           <motion.h2
-                            initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
                             className="elementor-heading-title elementor-size-default"
                             style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6)' }}
                           >
@@ -307,30 +307,31 @@ export default function AboutUs() {
                         </div>
                       </section>
                       <section className="elementor-section elementor-inner-section elementor-element elementor-element-c7c8c1f elementor-section-full_width zs-custom-height no-button elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="c7c8c1f" data-element_type="section">
-                        <div className="elementor-container elementor-column-gap-extended">
+                        <div className="elementor-container elementor-column-gap-extended" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch' }}>
                           {[
                             { id: 'fabac30', img: '/wp-content/uploads/2022/01/integrity-scaled-1.jpeg', title: 'Integrity', desc: 'Think, Talk, Act Honestly and be Ethical​' },
                             { id: 'b940250', img: '/wp-content/uploads/2022/01/respect-scaled-1.jpeg', title: 'Respect', desc: 'Be Empathetic, Listen to Others and Give an Ethical Response' },
                             { id: '7e17c85', img: '/wp-content/uploads/2022/01/competency-scaled-1.jpeg', title: 'Competency', desc: 'Knowledgeable, Skillful and Right Attitude' },
                             { id: 'ad7b5aa', img: '/wp-content/uploads/2022/01/passion-scaled-1.jpeg', title: 'Passion', desc: 'Strongly Engaged and Fully Accountable with Respective Job' }
                           ].map((val, idx) => (
-                            <div key={val.id} className={`elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-${val.id}`} data-id={val.id} data-element_type="column">
+                            <div key={val.id} className={`elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-${val.id}`} data-id={val.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
                               <motion.div
                                 className="elementor-widget-wrap elementor-element-populated"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                variants={staggerContainer}
+                                initial="initial"
+                                whileInView="whileInView"
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: idx * 0.15 }}
+                                style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
                               >
                                 <div className="elementor-element elementor-element-98ea9bc p-15 text-center elementor-widget elementor-widget-thetrial_core_location_info">
                                   <div className="elementor-widget-container">
-                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden' }}>
+                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                                       <div className="qodef-m-image">
                                         <Image src={val.img} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                       </div>
-                                      <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33' }}>
-                                        <h4 className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</h4>
-                                        <p className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</p>
+                                      <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '200px', padding: '35px 25px' }}>
+                                        <motion.h4 variants={textVariant} className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</motion.h4>
+                                        <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</motion.p>
                                       </div>
                                     </div>
                                   </div>

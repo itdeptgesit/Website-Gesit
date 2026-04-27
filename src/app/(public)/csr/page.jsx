@@ -221,14 +221,13 @@ const CSRPage = () => {
 
 
                         {/* CSR Static Title */}
-                        <motion.div
+                        <motion.h1
                             className="gs-hero-title"
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
+                            initial={{ opacity: 0, y: 25 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}>
                             Corporate Social Responsibility
-                        </motion.div>
+                        </motion.h1>
 
                         {/* Navigation arrows (hidden on mobile via mobile-hidden) */}
                         <div className="gs-hero-nav hidden md:flex">
@@ -312,11 +311,10 @@ const CSRPage = () => {
                         {focusAreas.map((area, index) => (
                             <motion.div
                                 key={area.title}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                whileHover="hover"
+                                variants={staggerContainer}
+                                initial="initial"
+                                whileInView="whileInView"
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: index * 0.1 }}
                                 className="relative group flex flex-col items-center h-full"
                             >
                                 {/* Top Image Section */}
@@ -343,11 +341,11 @@ const CSRPage = () => {
 
                                 {/* Bottom Info Box - Centered Content (Exact Home Parity) */}
                                 <div className="w-full bg-[#BC9C33] p-7 text-center shadow-xl relative z-10 min-h-[180px] flex flex-col items-center rounded-[5px] flex-1">
-                                    <h3 className="text-white text-xl font-serif mb-4 leading-tight">{area.title}</h3>
+                                    <motion.h3 variants={textVariant} className="text-white text-xl font-serif mb-4 leading-tight">{area.title}</motion.h3>
                                     {/* Centered refined text per home styles */}
-                                    <p className="text-white/90 text-[13.5px] font-light leading-relaxed tracking-wide">
+                                    <motion.p variants={textVariant} className="text-white/90 text-[13.5px] font-light leading-relaxed tracking-wide">
                                         {area.desc}
-                                    </p>
+                                    </motion.p>
                                 </div>
                             </motion.div>
                         ))}
@@ -386,9 +384,13 @@ const CSRPage = () => {
                                     </div>
 
                                     {/* Title */}
-                                    <span className="text-[26px] md:text-[32px] text-[#222]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>
+                                    <motion.span
+                                        variants={textVariant}
+                                        className="text-[26px] md:text-[32px] text-[#222]"
+                                        style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
+                                    >
                                         {initiative.title}
-                                    </span>
+                                    </motion.span>
                                 </button>
 
                                 <AnimatePresence>
@@ -469,17 +471,6 @@ const CSRPage = () => {
             </section>
             <style jsx global>{`
                 @media (max-width: 1024px) {
-                    .gs-hero-title {
-                        left: 0 !important;
-                        right: 0 !important;
-                        bottom: 50% !important;
-                        transform: translateY(50%) !important;
-                        text-align: center !important;
-                        width: 100% !important;
-                        font-size: 38px !important;
-                        padding: 0 20px !important;
-                        box-sizing: border-box !important;
-                    }
                     .gs-hero-nav {
                         display: none !important;
                     }
@@ -490,4 +481,3 @@ const CSRPage = () => {
 };
 
 export default CSRPage;
-

@@ -437,17 +437,6 @@ export default function NaturalResourcesPage() {
                         text-align: left;
                         margin: 25px 0;
                     }
-                    .hero-title {
-                        left: 0 !important;
-                        right: 0 !important;
-                        bottom: 50% !important;
-                        transform: translateY(50%) !important;
-                        text-align: center !important;
-                        width: 100% !important;
-                        font-size: 45px !important;
-                        padding: 0 20px !important;
-                        box-sizing: border-box !important;
-                    }
                     .hero-navigation {
                         display: none !important;
                     }

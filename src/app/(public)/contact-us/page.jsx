@@ -111,20 +111,46 @@ export default function ContactUs() {
           <div className="gesit-hero-overlay" />
         </div>
 
-        <div className="contact-hero-title">
+        <motion.div
+          className="contact-hero-title"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
           Contact Us
-        </div>
+        </motion.div>
       </section>
 
       <section className="contact-section">
         <div className="contact-container">
-          <div className="contact-image-column" aria-label="Contact Gesit Image"></div>
+          <motion.div
+            className="contact-image-column"
+            aria-label="Contact Gesit Image"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          ></motion.div>
 
           <div className="contact-content-column">
-            <h3 className="contact-heading-title">The Gesit Companies</h3>
+            <motion.h3
+              className="contact-heading-title"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              The Gesit Companies
+            </motion.h3>
 
             <div className="contact-info-row">
-              <div className="contact-address-col">
+              <motion.div
+                className="contact-address-col"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 <p className="contact-info-label">Address</p>
                 <div className="contact-info-text">
                   <a
@@ -138,9 +164,15 @@ export default function ContactUs() {
                     DKI Jakarta 10310 &ndash; Indonesia
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="contact-details-col">
+              <motion.div
+                className="contact-details-col"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 <p className="contact-info-label">Contact</p>
                 <div className="contact-info-text">
                   <a href="tel:+62213101601">
@@ -156,12 +188,18 @@ export default function ContactUs() {
                     contact@gesit.co.id
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
 
             <div className="contact-form-wrapper">
               <form className="gesit-contact-form" onSubmit={handleFormSubmit}>
-                <div className="gesit-row">
+                <motion.div
+                  className="gesit-row"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
                   <div className="w-100">
                     <input
                       type="text"
@@ -175,7 +213,8 @@ export default function ContactUs() {
                     />
                     {errors.name && <span className="gesit-error-message">{errors.name}</span>}
                   </div>
-                </div>
+                </motion.div>
+
                 {/* Honeypot field - Invisible to users */}
                 <div style={{ display: 'none' }} aria-hidden="true">
                   <input
@@ -187,7 +226,14 @@ export default function ContactUs() {
                     autoComplete="off"
                   />
                 </div>
-                <div className="gesit-row">
+
+                <motion.div
+                  className="gesit-row"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
                   <div className="w-50">
                     <input
                       type="email"
@@ -214,10 +260,17 @@ export default function ContactUs() {
                     />
                     {errors.phone && <span className="gesit-error-message">{errors.phone}</span>}
                   </div>
-                </div>
-                <div className="gesit-row">
+                </motion.div>
+
+                <motion.div
+                  className="gesit-row"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
                   <div className="w-100">
-                    <p style={{ marginBottom: '5px', color: '#777', fontSize: '14px' }}>Message (Optional)</p>
+                    <p style={{ marginBottom: '10px', color: '#64748b', fontSize: '15px', fontWeight: '500' }}>Message (Optional)</p>
                     <textarea
                       name="message"
                       placeholder="Type here..."
@@ -227,8 +280,15 @@ export default function ContactUs() {
                       disabled={loading}
                     ></textarea>
                   </div>
-                </div>
-                <div className="gesit-row">
+                </motion.div>
+
+                <motion.div
+                  className="gesit-row"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                >
                   <div className="w-100 turnstile-wrapper">
                     <Turnstile
                       siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
@@ -238,23 +298,29 @@ export default function ContactUs() {
                     />
                     {errors.turnstile && <span className="gesit-error-message">{errors.turnstile}</span>}
                   </div>
-                </div>
-                <div className="gesit-row">
+                </motion.div>
+
+                <motion.div
+                  className="gesit-row"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                >
                   <div className="w-100">
                     <button type="submit" className="wpcf7-submit" disabled={loading}>
                       {loading ? 'Sending...' : 'Submit'}
                     </button>
                   </div>
-                </div>
+                </motion.div>
               </form>
             </div>
-
           </div>
-        </div >
-      </section >
+        </div>
+      </section>
 
       {/* Success Modal */}
-      < AnimatePresence >
+      <AnimatePresence>
         {submitted && (
           <div className="modal-overlay" onClick={() => setSubmitted(false)}>
             <motion.div
@@ -280,9 +346,8 @@ export default function ContactUs() {
               </button>
             </motion.div>
           </div>
-        )
-        }
-      </AnimatePresence >
+        )}
+      </AnimatePresence>
     </>
   );
 }

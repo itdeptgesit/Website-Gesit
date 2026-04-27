@@ -7,10 +7,10 @@ import Link from "next/link";
 
 export default function CareerPage() {
     const textVariant = {
-        initial: { opacity: 0, y: 30, filter: 'blur(8px)' },
-        whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, margin: "-50px" },
-        transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+        transition: { duration: 0.8, ease: "easeOut" }
     };
 
     const staggerContainer = {
@@ -44,9 +44,9 @@ export default function CareerPage() {
 
                 <motion.h1
                     className="gs-hero-title"
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
                 >
                     Career
                 </motion.h1>
@@ -236,12 +236,12 @@ export default function CareerPage() {
                                             {item.icon}
                                         </div>
                                         <div className="space-y-1">
-                                            {item.header && <p className="text-[14px] text-slate-400 font-medium">{item.header}</p>}
-                                            {item.text && <p className="text-[17px] leading-relaxed text-slate-500 font-sans">{item.text}</p>}
+                                            {item.header && <motion.p variants={textVariant} className="text-[14px] text-slate-400 font-medium">{item.header}</motion.p>}
+                                            {item.text && <motion.p variants={textVariant} className="text-[17px] leading-relaxed text-slate-500 font-sans">{item.text}</motion.p>}
                                             {item.link && (
-                                                <a href={item.linkHref} className="text-2xl font-bold text-[#103065] hover:text-[#BC9C33] transition-colors block">
+                                                <motion.a variants={textVariant} href={item.linkHref} className="text-2xl font-bold text-[#103065] hover:text-[#BC9C33] transition-colors block">
                                                     {item.link}
-                                                </a>
+                                                </motion.a>
                                             )}
                                         </div>
                                     </motion.div>

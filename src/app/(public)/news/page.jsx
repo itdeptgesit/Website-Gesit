@@ -24,11 +24,21 @@ const NewsPage = () => {
     "/wp-content/uploads/2021/12/Palang-Merah-Indonesia-Terima-30-Unit-Ventilator-untuk-Pasien-COVID-19.jpeg"
   ];
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 15 },
+  const textVariant = {
+    initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.6, ease: "easeOut" }
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
+
+  const staggerContainer = {
+    initial: {},
+    whileInView: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1
+      }
+    }
   };
 
   const [newsItems, setNewsItems] = useState([]);
@@ -117,17 +127,16 @@ const NewsPage = () => {
 
 
             {/* Title */}
-            <motion.div
+            <motion.h1
               className="gs-hero-title"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
               style={{
                 lineHeight: "72px"
               }}>
               News
-            </motion.div>
+            </motion.h1>
 
             {/* Navigation arrows */}
             <div className="gs-hero-nav">
@@ -174,7 +183,10 @@ const NewsPage = () => {
         <section className="pt-24 md:pt-32 pb-8 bg-white">
           <div className="container mx-auto px-6 max-w-7xl">
             <motion.div
-              {...fadeIn}
+              variants={textVariant}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
               className="grid grid-cols-1 lg:grid-cols-2 shadow-2xl overflow-hidden rounded-[5px]"
             >
               {/* Image Side */}
@@ -190,28 +202,36 @@ const NewsPage = () => {
 
               {/* Content Side (Navy Box) */}
               <div className="bg-navy-deep p-12 lg:p-20 flex flex-col justify-between text-white space-y-12">
-                <div>
-                  <span className="text-[14px] font-bold uppercase tracking-[.4em] text-white/60 mb-8 block">
+                <motion.div
+                  variants={staggerContainer}
+                  initial="initial"
+                  whileInView="whileInView"
+                  viewport={{ once: true }}
+                >
+                  <motion.span variants={textVariant} className="text-[14px] font-bold uppercase tracking-[.4em] text-white/60 mb-8 block">
                     {featuredArticle?.date}
-                  </span>
-                  <h2
+                  </motion.span>
+                  <motion.h2
+                    variants={textVariant}
                     className="text-3xl md:text-5xl text-white leading-tight mb-12"
                     style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                   >
                     {featuredArticle?.title}
-                  </h2>
-                  <Link
-                    href={`/news/${featuredArticle?.slug || featuredArticle?.id}`}
-                    className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-navy-deep transition-all duration-300 group"
-                  >
-                    <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-                </div>
+                  </motion.h2>
+                  <motion.div variants={textVariant}>
+                    <Link
+                      href={`/news/${featuredArticle?.slug || featuredArticle?.id}`}
+                      className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-navy-deep transition-all duration-300 group"
+                    >
+                      <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </motion.div>
+                </motion.div>
 
-                <div className="pt-12 border-t border-white/10 mt-auto">
+                <motion.div variants={textVariant} className="pt-12 border-t border-white/10 mt-auto">
                   <p className="text-[16px] font-bold text-[#BC9C33] mb-2 uppercase tracking-widest">News</p>
                   <p className="text-[15px] font-medium text-white/80">by {featuredArticle?.author || 'Gesit'}</p>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -226,10 +246,10 @@ const NewsPage = () => {
               {otherArticles.slice(0, 3).map((item, idx) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
+                  transition={{ duration: 0.8, delay: idx * 0.15 }}
                   className="flex"
                 >
                   <Link
@@ -239,12 +259,13 @@ const NewsPage = () => {
                     <span className="text-[13px] font-bold uppercase tracking-[.3em] text-navy-deep/50 mb-10 block">
                       {item.date}
                     </span>
-                    <h4
+                    <motion.h4
+                      variants={textVariant}
                       className="text-2xl text-navy-deep leading-snug mb-12 group-hover:text-[#103065]/80 transition-colors"
                       style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
                       {item.title}
-                    </h4>
+                    </motion.h4>
                     <div className="mt-auto">
                       <div className="w-11 h-11 rounded-full border border-navy-deep/10 flex items-center justify-center group-hover:bg-[#103065] group-hover:text-white transition-all duration-300">
                         <ChevronRight size={18} />

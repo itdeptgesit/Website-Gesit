@@ -501,17 +501,6 @@ const PropertyPage = () => {
                     .project-section {
                         padding: 80px 0 !important;
                     }
-                    .hero-title {
-                        left: 0 !important;
-                        right: 0 !important;
-                        bottom: 50% !important;
-                        transform: translateY(50%) !important;
-                        text-align: center !important;
-                        width: 100% !important;
-                        font-size: 55px !important;
-                        padding: 0 20px !important;
-                        box-sizing: border-box !important;
-                    }
                     .hero-navigation {
                         display: none !important;
                     }

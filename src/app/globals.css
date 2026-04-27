@@ -666,15 +666,15 @@ a {
 /* Responsive Hero Title */
 .gs-hero-title {
   position: absolute;
-  bottom: 70px;
+  bottom: 50px;
   left: 60px;
   z-index: 10;
   font-family: 'Lora', serif;
   color: #fff;
-  font-size: 85px;
+  font-size: 60px;
   font-weight: 400;
   text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-  line-height: 88px;
+  line-height: 75px;
   pointer-events: none;
   width: auto;
   text-align: left;
@@ -698,22 +698,26 @@ a {
 /* Notebook (1024px - 1240px) */
 @media (max-width: 1240px) {
   .gs-hero-title {
-    font-size: 75px !important;
-    line-height: 78px !important;
+    font-size: 60px !important;
+    line-height: 65px !important;
   }
 }
 
-/* Tablet (778px - 1024px) */
+/* Tablet & Split View (778px - 1024px) */
 @media (max-width: 1024px) {
-  .gs-hero-title {
+  .gs-hero-section .gs-hero-title {
+    position: absolute !important;
     left: 20px !important;
-    right: 20px !important;
-    bottom: 50% !important;
-    transform: translateY(50%) !important;
-    font-size: 65px !important;
-    line-height: 70px !important;
-    text-align: center !important;
+    bottom: 60px !important;
+    transform: none !important;
+    font-size: 44px !important;
+    line-height: 65px !important;
+    font-weight: 400 !important;
+    text-align: left !important;
+    white-space: nowrap !important;
     width: auto !important;
+    margin: 0 !important;
+    text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5) !important;
   }
 }
 

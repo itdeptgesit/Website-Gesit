@@ -42,10 +42,10 @@ export default function Home() {
   }, []);
 
   const textVariant = {
-    initial: { opacity: 0, y: 30, filter: 'blur(8px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-50px" },
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.8, ease: "easeOut" }
   };
 
   const staggerContainer = {
@@ -119,9 +119,9 @@ export default function Home() {
           pointerEvents: 'none', textShadow: '0 4px 15px rgba(0,0,0,0.5)',
         }}>
           <motion.h1
-            initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
             style={{
               fontFamily: 'Lora, Georgia, serif', color: '#fff',
               fontSize: 'clamp(42px, 7vw, 85px)', fontWeight: 400,
@@ -167,36 +167,42 @@ export default function Home() {
 
               {/* 3. BUSINESS CARDS */}
               <section className="elementor-section elementor-top-section elementor-element elementor-element-4e02d40 elementor-section-stretched zs-custom-height elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="4e02d40" data-element_type="section" suppressHydrationWarning>
-                <div className="elementor-container elementor-column-gap-no">
+                <div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch' }}>
                   {[
                     { id: 'b35b078', widgetId: 'd64b48a', href: '/our-business/property', img: '/wp-content/uploads/2022/01/property-scaled-1.jpeg', title: 'Property', desc: 'Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.' },
                     { id: '4a6a044', widgetId: '0f06ba2', href: '/our-business/trading-services', img: '/wp-content/uploads/2022/01/trading_and_services-scaled-1.jpg', title: 'Trading & Services', desc: 'Leveraging local Indonesian expertise and broad international network to source and deliver high-quality products.' },
                     { id: '8f2780b', widgetId: '55da946', href: '/our-business/manufacturing', img: '/wp-content/uploads/2022/01/manufacturing-scaled-1.jpg', title: 'Manufacturing', desc: 'Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.' },
                     { id: '1055671', widgetId: 'd2b43ba', href: '/our-business/natural-resources', img: '/wp-content/uploads/2022/01/resources-scaled-1.jpeg', title: 'Natural Resources', desc: "Developing Indonesia's vast natural resources and continually expanding to other types of minerals and resources." },
                   ].map((biz, idx) => (
-                    <div key={biz.id} className={`elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-${biz.id}`} data-id={biz.id} data-element_type="column">
+                    <div key={biz.id} className={`elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-${biz.id}`} data-id={biz.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
                       <motion.div
                         className="elementor-widget-wrap elementor-element-populated"
-                        initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: idx * 0.15 }}
+                        variants={staggerContainer}
+                        initial="initial"
+                        whileInView="whileInView"
+                        viewport={{ once: true }}
+                        style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
                       >
                         <div className={`elementor-element elementor-element-${biz.widgetId} p-15 elementor-widget elementor-widget-thetrial_core_location_info`} data-id={biz.widgetId} data-element_type="widget" data-widget_type="thetrial_core_location_info.default">
                           <div className="elementor-widget-container">
-                            <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: 5, overflow: 'hidden' }}>
+                            <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: 5, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                               <div className="qodef-m-image">
                                 <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                               </div>
-                              <div className="qodef-m-content" style={{ backgroundColor: '#bc9c33' }}>
-                                <h5 className="qodef-m-title" style={{ color: '#ffffff' }}>
+                              <div className="qodef-m-content" style={{ backgroundColor: '#bc9c33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '300px', padding: '35px 25px' }}>
+                                <motion.h5 variants={textVariant} className="qodef-m-title" style={{ color: '#ffffff' }}>
                                   <Link href={biz.href} style={{ color: '#ffffff', textDecoration: 'none' }}>{biz.title}</Link>
-                                </h5>
-                                <p className="qodef-m-text" style={{ color: '#ffffff' }}>{biz.desc}</p>
-                                <Link href={biz.href} className="qodef-m-link qodef-button qodef-layout--textual" style={{ color: '#ffffff' }}>
-                                  <span className="qodef-m-link-text">Learn More</span>
-                                  <svg className="qodef-filled-arrow" xmlns="http://www.w3.org/2000/svg" width={22} height={22}>
-                                    <g fill="currentColor" stroke="currentColor"><circle cx={11} cy={11} r="10.5" /></g>
-                                    <path fill="#fff" d="M13.9 10.776l-3.775 3.775L9 13.426l2.651-2.65L9 8.125 10.125 7z" />
-                                  </svg>
-                                </Link>
+                                </motion.h5>
+                                <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#ffffff' }}>{biz.desc}</motion.p>
+                                <motion.div variants={textVariant} style={{ marginTop: 'auto' }}>
+                                  <Link href={biz.href} className="qodef-m-link qodef-button qodef-layout--textual" style={{ color: '#ffffff' }}>
+                                    <span className="qodef-m-link-text">Learn More</span>
+                                    <svg className="qodef-filled-arrow" xmlns="http://www.w3.org/2000/svg" width={22} height={22}>
+                                      <g fill="currentColor" stroke="currentColor"><circle cx={11} cy={11} r="10.5" /></g>
+                                      <path fill="#fff" d="M13.9 10.776l-3.775 3.775L9 13.426l2.651-2.65L9 8.125 10.125 7z" />
+                                    </svg>
+                                  </Link>
+                                </motion.div>
                               </div>
                             </div>
                           </div>
@@ -216,7 +222,10 @@ export default function Home() {
                       <div className="elementor-element elementor-element-a962264 elementor-widget elementor-widget-video" data-id="a962264" data-element_type="widget" data-widget_type="video.default">
                         <div className="elementor-widget-container">
                           <motion.div
-                            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1 }}
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: "easeOut" }}
                             className="e-hosted-video elementor-wrapper elementor-open-inline" style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
                             <video suppressHydrationWarning ref={videoRef} className="elementor-video" src="/wp-content/uploads/2021/08/csr-video.mp4" autoPlay muted loop playsInline preload="auto" style={{ width: '100%', display: 'block', borderRadius: 12 }} />

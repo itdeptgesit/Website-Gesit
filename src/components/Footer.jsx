@@ -87,9 +87,9 @@ export default function Footer() {
               <div className="qodef-grid qodef-layout--columns qodef-responsive--custom qodef-col-num--1">
                 <div className="qodef-grid-inner clear">
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link href="/" style={{ textDecoration: 'none' }}>
-                        <img src="/images/logo.png" alt="Gesit Logo" style={{ height: '55px', width: 'auto', display: 'block' }} />
+                        <img src="/images/logo.png" alt="Gesit Logo" style={{ height: '55px', width: 'auto', display: 'block', margin: '0 auto 30px' }} />
                       </Link>
                     </div>
                     <div id="text-3" className="widget widget_text" data-area="footer_bottom_area_column_1">

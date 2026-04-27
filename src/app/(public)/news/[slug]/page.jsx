@@ -74,18 +74,28 @@ export default function NewsDetailPage() {
 
                 <div className="container mx-auto max-w-6xl relative z-10">
                     {/* Breadcrumbs */}
-                    <nav className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-white mb-8 font-bold">
+                    <motion.nav
+                        className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-white mb-8 font-bold"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                    >
                         <Link href="/" className="text-white hover:text-gold transition-colors">Home</Link>
                         <span className="text-white/40">/</span>
                         <Link href="/news" className="text-white hover:text-gold transition-colors">News</Link>
                         <span className="text-white/40">/</span>
                         <span className="text-white/30 truncate max-w-[200px]">{post.title}</span>
-                    </nav>
+                    </motion.nav>
 
                     <div className="max-w-4xl">
-                        <span className="inline-block bg-[#bc9c33] text-white text-[10px] font-black px-3 py-1 rounded-[5px] uppercase tracking-tighter mb-6">
+                        <motion.span
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            className="inline-block bg-[#bc9c33] text-white text-[10px] font-black px-3 py-1 rounded-[5px] uppercase tracking-tighter mb-6"
+                        >
                             {post.category || 'NEWS'}
-                        </span>
+                        </motion.span>
 
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
@@ -155,7 +165,14 @@ export default function NewsDetailPage() {
 
 
                         {/* Body Content */}
-                        <div className="prose prose-lg max-w-none text-slate-700 text-[16px] md:text-[18px] leading-[1.8] news-content mb-16" style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1 }}
+                            className="prose prose-lg max-w-none text-slate-700 text-[16px] md:text-[18px] leading-[1.8] news-content mb-16"
+                            style={{ fontFamily: "'Source Sans Pro', sans-serif" }}
+                        >
                             {post.content ? (
                                 <div
                                     dangerouslySetInnerHTML={{ __html: post.content }}
@@ -165,7 +182,7 @@ export default function NewsDetailPage() {
                                     Content is not yet available for this article.
                                 </div>
                             )}
-                        </div>
+                        </motion.div>
 
 
                     </div>
@@ -175,7 +192,13 @@ export default function NewsDetailPage() {
                         <div className="sticky-sidebar space-y-10">
 
                             {/* Meta Info Box */}
-                            <div className="bg-slate-50 border border-slate-100 rounded-[5px] p-8 space-y-6 shadow-sm">
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="bg-slate-50 border border-slate-100 rounded-[5px] p-8 space-y-6 shadow-sm"
+                            >
                                 <div className="flex items-center gap-4 text-slate-600">
                                     <Calendar className="text-[#bc9c33]" size={20} />
                                     <div className="flex flex-col">
@@ -207,7 +230,7 @@ export default function NewsDetailPage() {
                                         <ShareButtons title={post.title} slug={post.slug} />
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
 
 
                         </div>
