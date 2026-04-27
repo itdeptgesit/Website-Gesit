@@ -73,13 +73,13 @@
 
 .contact-address-col,
 .contact-details-col {
-  width: 50%;
-  padding-right: 20px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .contact-details-col {
-  padding-left: 20px;
-  padding-right: 0;
+  padding-left: 0;
+  margin-bottom: 0;
 }
 
 .contact-info-label {
@@ -96,7 +96,7 @@
   font-family: "Source Sans Pro", sans-serif;
   font-size: 18px;
   font-weight: 400;
-  line-height: inherit;
+  line-height: 1.6;
 }
 
 .contact-info-text a {
@@ -116,6 +116,20 @@
   flex-shrink: 0;
   min-width: 20px;
   text-align: center;
+}
+
+.contact-address-link {
+  display: block !important;
+  line-height: 1.8;
+  margin-bottom: 0 !important;
+}
+
+.contact-address-link sup {
+  font-size: 0.6em;
+  vertical-align: super;
+  position: relative;
+  top: -0.2em;
+  margin-left: 1px;
 }
 
 .contact-form-wrapper {
