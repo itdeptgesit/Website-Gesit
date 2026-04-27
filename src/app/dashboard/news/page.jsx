@@ -62,7 +62,8 @@ export default function NewsDashboard() {
         category: 'News',
         author: 'Gesit',
         content: '',
-        video_url: ''
+        video_url: '',
+        source_url: ''
     });
 
     const [file, setFile] = useState(null);
@@ -153,7 +154,8 @@ export default function NewsDashboard() {
                 category: 'News',
                 author: 'Gesit',
                 content: '',
-                video_url: ''
+                video_url: '',
+                source_url: ''
             });
             setFile(null);
             setPreview(null);
@@ -177,7 +179,8 @@ export default function NewsDashboard() {
             category: article.category || 'News',
             author: article.author || 'Gesit',
             content: article.content || '',
-            video_url: article.video_url || ''
+            video_url: article.video_url || '',
+            source_url: article.source_url || ''
         });
         setFile(null);
         setPreview(article.image_url || null);
@@ -244,7 +247,7 @@ export default function NewsDashboard() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-4 border-t border-slate-100">
                                 <div className="space-y-2">
                                     <Label htmlFor="date" className="flex items-center gap-2 font-medium">
                                         <Calendar className="w-4 h-4 text-slate-400" /> Publish Date
@@ -273,6 +276,17 @@ export default function NewsDashboard() {
                                         id="author"
                                         value={formData.author}
                                         onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="source_url" className="flex items-center gap-2 font-medium">
+                                        <FileText className="w-4 h-4 text-slate-400" /> Source Link / Ref
+                                    </Label>
+                                    <Input
+                                        id="source_url"
+                                        placeholder="https://..."
+                                        value={formData.source_url}
+                                        onChange={(e) => setFormData({ ...formData, source_url: e.target.value })}
                                     />
                                 </div>
                             </div>

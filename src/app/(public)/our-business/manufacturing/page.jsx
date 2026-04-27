@@ -59,16 +59,16 @@ export default function ManufacturingPage() {
   }, []);
 
   const aluminumImages = [
-    "/wp-content/uploads/2022/03/3-e1646232593879.jpeg",
-    "/wp-content/uploads/2022/03/DSCF3418-edi-2-e1646233775296.jpeg",
-    "/wp-content/uploads/2022/01/alu_lr.jpeg"
+    "/business/manufacturing/3-e1646232593879.webp",
+    "/business/manufacturing/DSCF3418-edi-2-e1646233775296.webp",
+    "/business/manufacturing/alu_lr.webp"
   ];
 
   const packagingImages = [
-    "/wp-content/uploads/2021/09/manufacturing_steel_1.png",
-    "/wp-content/uploads/2021/09/manufacturing_steel_2.png",
-    "/wp-content/uploads/2022/01/plastic_packaging.jpeg",
-    "/wp-content/uploads/2022/01/steel.jpeg"
+    "/business/manufacturing/manufacturing_steel_1.webp",
+    "/business/manufacturing/manufacturing_steel_2.webp",
+    "/business/manufacturing/plastic_packaging.webp",
+    "/business/manufacturing/steel.webp"
   ];
 
   const circleBtn = {
@@ -120,9 +120,9 @@ export default function ManufacturingPage() {
               style={{ width: "100%", height: "100%" }}
             >
               {[
-                { url: "/wp-content/uploads/2021/11/hero_manufacturing.jpg", alt: "Manufacturing 1" },
-                { url: "/wp-content/uploads/2022/03/edit-1-scaled.jpg", alt: "Manufacturing 2" },
-                { url: "/wp-content/uploads/2022/01/manufacturing-scaled-1.jpg", alt: "Manufacturing 3" }
+                { url: "/hero/hero_manufacturing.webp", alt: "Manufacturing 1" },
+                { url: "/hero/edit-1-scaled.webp", alt: "Manufacturing 2" },
+                { url: "/hero/manufacturing-scaled-1.webp", alt: "Manufacturing 3" }
               ].map((slide, idx) => (
                 <SwiperSlide key={idx} style={{ position: "relative" }}>
 
@@ -210,7 +210,7 @@ export default function ManufacturingPage() {
 
               <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
                 <a
-                  href="/wp-content/uploads/2022/03/Company-Profile-Alakasa-Andalan Mitra-Sejati-2022.pdf"
+                  href="/business/manufacturing/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf"
                   download="AAMS-Brochure.pdf"
                   className="pill-button"
                 >
@@ -267,7 +267,7 @@ export default function ManufacturingPage() {
 
               <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
                 <a
-                  href="https://www.rheem-ina.com/"
+                  href="https://rheem.co.id/"
                   target="_blank" rel="noopener noreferrer"
                   className="pill-button"
                 >
@@ -309,7 +309,7 @@ export default function ManufacturingPage() {
             variants={imageVariant} initial="initial" whileInView="whileInView" viewport={{ once: true }}
             className="project-image-container"
           >
-            <Image src="/wp-content/uploads/2021/12/distillation-column.jpeg" alt="Alumina Refinery" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
+            <Image src="/business/manufacturing/distillation-column.webp" alt="Alumina Refinery" fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
           </motion.div>
         </div>
       </section>

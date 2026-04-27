@@ -18,10 +18,10 @@ import "swiper/css/navigation";
 const NewsPage = () => {
 
   const heroImages = [
-    "/wp-content/uploads/2021/12/Background-Handover-Daswin-alt-siang-1-1.jpeg",
-    "/wp-content/uploads/2021/12/30-Ventilator-untuk-Pemerintah-Provinsi-DKI.jpeg",
-    "/wp-content/uploads/2021/12/Gubernur-Kalbar-Terima-Bantuan-20-Unit-Non-Invasive-Ventilator.jpeg",
-    "/wp-content/uploads/2021/12/Palang-Merah-Indonesia-Terima-30-Unit-Ventilator-untuk-Pasien-COVID-19.jpeg"
+    "/news/Background-Handover-Daswin.jpeg",
+    "/news/30-Ventilator-DKI.jpeg",
+    "/news/Gubernur-Kalbar-Ventilator.jpeg",
+    "/news/PMI-Ventilator.jpeg"
   ];
 
   const textVariant = {

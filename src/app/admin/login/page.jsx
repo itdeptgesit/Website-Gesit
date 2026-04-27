@@ -237,8 +237,8 @@ export default function LoginPage() {
                                     <Label className="text-slate-600 font-semibold">Verification Code</Label>
                                     <Input
                                         required
-                                        placeholder="000000"
-                                        maxLength={6}
+                                        placeholder="00000000"
+                                        maxLength={8}
                                         value={mfaCode}
                                         onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, ''))}
                                         className="h-16 text-center text-2xl tracking-[0.5em] font-mono bg-slate-50 border-slate-200 focus:border-[#bc9c33] focus:ring-0"

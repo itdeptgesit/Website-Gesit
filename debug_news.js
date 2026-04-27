@@ -1,0 +1,20 @@
+const { createClient } = require('@supabase/supabase-js');
+const fs = require('fs');
+
+async function debug() {
+    const env = fs.readFileSync('.env.local', 'utf8');
+    const url = env.match(/NEXT_PUBLIC_SUPABASE_URL=(.*)/)[1].trim();
+    const key = env.match(/NEXT_PUBLIC_SUPABASE_ANON_KEY=(.*)/)[1].trim();
+
+    const supabase = createClient(url, key);
+    const { data, error } = await supabase.from('news').select('*').limit(5);
+
+    if (error) {
+        fs.writeFileSync('news_error.json', JSON.stringify(error, null, 2));
+    } else {
+        fs.writeFileSync('news_dump.json', JSON.stringify(data, null, 2));
+        console.log('Saved 5 items to news_dump.json');
+    }
+}
+
+debug();

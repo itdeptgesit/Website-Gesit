@@ -340,7 +340,7 @@
 
 		.elementor-5968 .elementor-element.elementor-element-b817b21:not(.elementor-motion-effects-element-type-background),
 		.elementor-5968 .elementor-element.elementor-element-b817b21>.elementor-motion-effects-container>.elementor-motion-effects-layer {
-			background: url("/wp-content/uploads/2021/10/video_thumbnail2.jpeg") 50% 50%;
+			background: url("/hero/video_thumbnail2.webp") 50% 50%;
 			background-size: cover;
 		}
 
@@ -490,7 +490,7 @@
 
 		.elementor-5968 .elementor-element.elementor-element-6f16504:not(.elementor-motion-effects-element-type-background)>.elementor-widget-wrap,
 		.elementor-5968 .elementor-element.elementor-element-6f16504>.elementor-widget-wrap>.elementor-motion-effects-container>.elementor-motion-effects-layer {
-			background-image: url("/wp-content/uploads/2021/09/hero_image_natural_1-2.png");
+			background-image: url("/hero/hero_image_natural_1-2.webp");
 			background-position: center center;
 			background-repeat: no-repeat;
 			background-size: cover;

@@ -99,9 +99,9 @@ const PropertyPage = () => {
                             style={{ width: "100%", height: "100%" }}
                         >
                             {[
-                                { url: "/wp-content/uploads/2021/09/hero_image_property_1-2.png", alt: "Property 1" },
-                                { url: "/wp-content/uploads/2021/09/hero_image_property_2-2.png", alt: "Property 2" },
-                                { url: "/wp-content/uploads/2021/09/hero_image_property_3-2.webp", alt: "Property 3" }
+                                { url: "/hero/hero_image_property_1-2.webp", alt: "Property 1" },
+                                { url: "/hero/hero_image_property_2-2.webp", alt: "Property 2" },
+                                { url: "/hero/hero_image_property_3-2.webp", alt: "Property 3" }
                             ].map((slide, idx) => (
                                 <SwiperSlide key={idx} style={{ position: "relative", overflow: "hidden" }}>
                                     <Image
@@ -214,9 +214,9 @@ const PropertyPage = () => {
                                         className="project-image-container"
                                     >
                                         <Swiper modules={[Autoplay]} slidesPerView={1} loop={true} autoplay={{ delay: 3000, disableOnInteraction: false }} style={{ width: '100%', height: '100%' }}>
-                                            {["trinity_01.jpg", "trinity_02.jpg", "trinity_03.jpg", "trinity_04.jpg", "trinity_05.jpg", "trinity_06.jpg"].map(img => (
+                                            {["trinity_01.webp", "trinity_02.webp", "trinity_03.webp", "trinity_04.webp", "trinity_05.webp", "trinity_06.webp"].map(img => (
                                                 <SwiperSlide key={img} style={{ width: '100%', height: '100%' }}>
-                                                    <img src={`/wp-content/uploads/2021/12/${img}`} alt="Trinity Tower" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                                                    <img src={`/business/property/${img}`} alt="Trinity Tower" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                                                 </SwiperSlide>
                                             ))}
                                         </Swiper>
@@ -233,9 +233,9 @@ const PropertyPage = () => {
                                         className="project-image-container"
                                     >
                                         <Swiper modules={[Autoplay]} slidesPerView={1} loop={true} autoplay={{ delay: 3000, disableOnInteraction: false }} style={{ width: '100%', height: '100%' }}>
-                                            {["property_jsl_2.png", "property_jsl_3.png"].map(img => (
+                                            {["property_jsl_2.webp", "property_jsl_3.webp"].map(img => (
                                                 <SwiperSlide key={img} style={{ width: '100%', height: '100%' }}>
-                                                    <img src={`/wp-content/uploads/2021/09/${img}`} alt="JS Luwansa" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                                                    <img src={`/business/property/${img}`} alt="JS Luwansa" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                                                 </SwiperSlide>
                                             ))}
                                         </Swiper>
@@ -286,9 +286,9 @@ const PropertyPage = () => {
                                         className="project-image-container"
                                     >
                                         <Swiper modules={[Autoplay]} slidesPerView={1} loop={true} autoplay={{ delay: 3000, disableOnInteraction: false }} style={{ width: '100%', height: '100%' }}>
-                                            {["property_PPHUI_Exterior_1.png", "property_PPHUI_Theater_2.png"].map(img => (
+                                            {["property_PPHUI_Exterior_1.webp", "property_PPHUI_Theater_2.webp"].map(img => (
                                                 <SwiperSlide key={img} style={{ width: '100%', height: '100%' }}>
-                                                    <img src={`/wp-content/uploads/2021/09/${img}`} alt="PPHUI" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                                                    <img src={`/business/property/${img}`} alt="PPHUI" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                                                 </SwiperSlide>
                                             ))}
                                         </Swiper>
@@ -305,7 +305,7 @@ const PropertyPage = () => {
                                         className="project-image-container"
                                     >
                                         <div style={{ width: '100%', height: '100%' }}>
-                                            <img src="/wp-content/uploads/2021/11/senayan-development-.jpg" alt="Senayan Development" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                                            <img src="/business/property/senayan-development-.webp" alt="Senayan Development" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                                         </div>
                                     </motion.div>
                                     {/* Text Container (Right) */}
@@ -350,7 +350,7 @@ const PropertyPage = () => {
                                         className="project-image-container"
                                     >
                                         <div style={{ width: '100%', height: '100%' }}>
-                                            <img src="/wp-content/uploads/2021/09/property_TOD_Rasuna_1.png" alt="TOD Rasuna" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                                            <img src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                                         </div>
                                     </motion.div>
                                 </div>

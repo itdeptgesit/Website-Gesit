@@ -7,10 +7,10 @@ import Image from 'next/image';
 
 /* ── Hero slides (from RevSlider rs-slides) ── */
 const heroSlides = [
-  { src: '/wp-content/uploads/2021/09/hero_image_property_3-2.png', alt: 'Property' },
-  { src: '/wp-content/uploads/2021/09/hero_image_trading_1-2.png', alt: 'Trading & Services' },
-  { src: '/wp-content/uploads/2021/11/hero_manufacturing.jpg', alt: 'Manufacturing' },
-  { src: '/wp-content/uploads/2021/11/hero_natural_resources.jpg', alt: 'Natural Resources' },
+  { src: '/hero/hero_image_property_3-2.webp', alt: 'Property' },
+  { src: '/hero/hero_image_trading_1-2.webp', alt: 'Trading & Services' },
+  { src: '/hero/hero_manufacturing.webp', alt: 'Manufacturing' },
+  { src: '/hero/hero_natural_resources.webp', alt: 'Natural Resources' },
 ];
 
 const SLIDE_DURATION = 6000; // ms per slide
@@ -66,7 +66,7 @@ export default function Home() {
         width: '100%',
         height: '100vh',
         overflow: 'hidden',
-        background: '#fff',
+        background: '#103065',
       }}>
         {/* Progress Bar */}
         <div style={{
@@ -169,10 +169,10 @@ export default function Home() {
               <section className="elementor-section elementor-top-section elementor-element elementor-element-4e02d40 elementor-section-stretched zs-custom-height elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="4e02d40" data-element_type="section" suppressHydrationWarning>
                 <div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch' }}>
                   {[
-                    { id: 'b35b078', widgetId: 'd64b48a', href: '/our-business/property', img: '/wp-content/uploads/2022/01/property-scaled-1.jpeg', title: 'Property', desc: 'Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.' },
-                    { id: '4a6a044', widgetId: '0f06ba2', href: '/our-business/trading-services', img: '/wp-content/uploads/2022/01/trading_and_services-scaled-1.jpg', title: 'Trading & Services', desc: 'Leveraging local Indonesian expertise and broad international network to source and deliver high-quality products.' },
-                    { id: '8f2780b', widgetId: '55da946', href: '/our-business/manufacturing', img: '/wp-content/uploads/2022/01/manufacturing-scaled-1.jpg', title: 'Manufacturing', desc: 'Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.' },
-                    { id: '1055671', widgetId: 'd2b43ba', href: '/our-business/natural-resources', img: '/wp-content/uploads/2022/01/resources-scaled-1.jpeg', title: 'Natural Resources', desc: "Developing Indonesia's vast natural resources and continually expanding to other types of minerals and resources." },
+                    { id: 'b35b078', widgetId: 'd64b48a', href: '/our-business/property', img: '/business/property/property-scaled-1.webp', title: 'Property', desc: 'Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.' },
+                    { id: '4a6a044', widgetId: '0f06ba2', href: '/our-business/trading-services', img: '/business/trading-services/trading_and_services-scaled-1.webp', title: 'Trading & Services', desc: 'Leveraging local Indonesian expertise and broad international network to source and deliver high-quality products.' },
+                    { id: '8f2780b', widgetId: '55da946', href: '/our-business/manufacturing', img: '/business/manufacturing/manufacturing-scaled-1.webp', title: 'Manufacturing', desc: 'Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.' },
+                    { id: '1055671', widgetId: 'd2b43ba', href: '/our-business/natural-resources', img: '/business/natural-resources/resources-scaled-1.webp', title: 'Natural Resources', desc: "Developing Indonesia's vast natural resources and continually expanding to other types of minerals and resources." },
                   ].map((biz, idx) => (
                     <div key={biz.id} className={`elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-${biz.id}`} data-id={biz.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
                       <motion.div
@@ -228,7 +228,7 @@ export default function Home() {
                             transition={{ duration: 1, ease: "easeOut" }}
                             className="e-hosted-video elementor-wrapper elementor-open-inline" style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <video suppressHydrationWarning ref={videoRef} className="elementor-video" src="/wp-content/uploads/2021/08/csr-video.mp4" autoPlay muted loop playsInline preload="auto" style={{ width: '100%', display: 'block', borderRadius: 12 }} />
+                            <video suppressHydrationWarning ref={videoRef} className="elementor-video" src="/video/csr-video.mp4" autoPlay muted loop playsInline preload="auto" style={{ width: '100%', display: 'block', borderRadius: 12 }} />
                           </motion.div>
                         </div>
                       </div>

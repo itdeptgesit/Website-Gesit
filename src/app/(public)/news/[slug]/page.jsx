@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import {
     ChevronLeft, ChevronRight, Calendar, Tag, Loader2,
     Facebook, Linkedin, Link as LinkIcon, Clock, Users,
-    Handshake, Heart, ShieldCheck, MessageSquare
+    Handshake, Heart, ShieldCheck, MessageSquare, FileText
 } from "lucide-react";
 import ShareButtons from './ShareButtons';
 
@@ -61,6 +61,11 @@ export default function NewsDetailPage() {
     const currentIndex = newsItems.findIndex((item) => item.id === post.id);
     const prevPost = currentIndex > 0 ? newsItems[currentIndex - 1] : null;
     const nextPost = currentIndex < newsItems.length - 1 ? newsItems[currentIndex + 1] : null;
+
+    // Find related news (same category, not current post)
+    const relatedNews = newsItems
+        .filter(item => item.id !== post.id && item.category === post.category)
+        .slice(0, 3);
 
     return (
         <div className="bg-white min-h-screen pb-24 font-sans text-slate-800 selection:bg-gold/30 selection:text-navy-deep">
@@ -127,8 +132,14 @@ export default function NewsDetailPage() {
                             {post.video_url ? (
                                 <div className="w-full h-full bg-black">
                                     {(() => {
+                                        const normalizeUrl = (url) => {
+                                            if (!url) return url;
+                                            return url.replace(/^https?:\/\/(dev\.)?gesit\.co\.id/i, '');
+                                        };
+                                        const cleanVideoUrl = normalizeUrl(post.video_url);
+
                                         const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-                                        const ytMatch = post.video_url.match(ytRegex);
+                                        const ytMatch = cleanVideoUrl.match(ytRegex);
                                         if (ytMatch) {
                                             return (
                                                 <iframe
@@ -139,14 +150,14 @@ export default function NewsDetailPage() {
                                                 />
                                             );
                                         }
-                                        if (post.video_url.match(/\.(mp4|webm|ogg)$/i)) {
-                                            return <video src={post.video_url} controls className="w-full h-full object-cover" />;
+                                        if (cleanVideoUrl.match(/\.(mp4|webm|ogg)$/i)) {
+                                            return <video src={cleanVideoUrl} controls className="w-full h-full object-cover" />;
                                         }
                                         // Fallback if URL is set but not recognized as video
                                         return (
                                             <div className="flex items-center justify-center h-full text-white/50 text-sm italic p-10 text-center">
                                                 Video link detected but format not supported for embed.<br />
-                                                <a href={post.video_url} target="_blank" className="text-gold underline mt-2 block">{post.video_url}</a>
+                                                <a href={cleanVideoUrl} target="_blank" className="text-gold underline mt-2 block">{cleanVideoUrl}</a>
                                             </div>
                                         );
                                     })()}
@@ -174,9 +185,26 @@ export default function NewsDetailPage() {
                             style={{ fontFamily: "'Source Sans Pro', sans-serif" }}
                         >
                             {post.content ? (
-                                <div
-                                    dangerouslySetInnerHTML={{ __html: post.content }}
-                                />
+                                <>
+                                    <div
+                                        dangerouslySetInnerHTML={{ __html: post.content }}
+                                    />
+                                    {post.source_url && (
+                                        <div className="mt-12 pt-8 border-t border-slate-100">
+                                            <div className="flex items-center gap-3 text-slate-500">
+                                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                                                    <FileText size={14} className="text-navy-deep" />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Source / Reference</span>
+                                                    <span className="text-navy-deep font-bold text-sm break-all">
+                                                        {post.source_url}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
                             ) : (
                                 <div className="text-slate-400 italic py-10 border-y border-slate-100 text-center">
                                     Content is not yet available for this article.
@@ -215,16 +243,8 @@ export default function NewsDetailPage() {
                                     </div>
                                 </div>
 
-                                <div className="flex items-center gap-4 text-slate-600 border-b border-slate-100 pb-6">
-                                    <Clock className="text-[#bc9c33]" size={20} />
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Reading Time</span>
-                                        <span className="text-sm font-bold text-navy-deep">2 min read</span>
-                                    </div>
-                                </div>
-
                                 {/* Share Section */}
-                                <div className="pt-2">
+                                <div className="!mt-6 pt-2 border-t border-slate-100">
                                     <h4 className="text-[11px] font-black text-navy-deep uppercase tracking-widest mb-4">Share Article</h4>
                                     <div className="flex gap-3">
                                         <ShareButtons title={post.title} slug={post.slug} />
@@ -232,61 +252,71 @@ export default function NewsDetailPage() {
                                 </div>
                             </motion.div>
 
+                            {/* Related News Box */}
+                            {relatedNews.length > 0 && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: 0.3 }}
+                                    className="flex flex-col pt-8"
+                                >
+                                    <h3 className="text-navy-deep font-black text-sm tracking-widest uppercase mb-6 flex items-center gap-2">
+                                        RELATED NEWS
+                                    </h3>
+
+                                    <div className="flex flex-col gap-6 w-full">
+                                        {relatedNews.map((item) => (
+                                            <Link href={`/news/${item.slug}`} key={item.id} className="group flex gap-4 items-start">
+                                                <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-200 mt-1">
+                                                    <Image
+                                                        src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                                                        alt={item.title}
+                                                        fill
+                                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col">
+                                                    <div className="flex items-center gap-2 mb-0.5">
+                                                        <span className="text-[10px] uppercase font-black text-[#bc9c33] tracking-widest leading-none">{item.category || 'NEWS'}</span>
+                                                        <span className="text-[10px] text-slate-400 font-bold leading-none">{item.date}</span>
+                                                    </div>
+                                                    <h4 className="text-sm font-bold text-navy-deep leading-tight group-hover:text-[#bc9c33] transition-colors line-clamp-3 mt-0">
+                                                        {item.title}
+                                                    </h4>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+
+                                    <Link href="/news" className="text-navy-deep font-bold text-xs flex items-center gap-2 mt-8 hover:text-gold transition-colors w-full">
+                                        View all news <ChevronRight size={14} />
+                                    </Link>
+                                </motion.div>
+                            )}
 
                         </div>
                     </aside>
                 </div>
 
                 {/* 3. NAVIGATION (PREV/NEXT) */}
-                <div className="mt-24 border-t border-slate-100 pt-16">
-                    <div className="flex items-center justify-between gap-4 mb-10 text-navy-deep font-black uppercase text-xs tracking-widest px-4">
-                        <div className="flex items-center gap-2"><ChevronLeft size={16} /> Prev News</div>
-                        <div className="flex items-center gap-2">Next News <ChevronRight size={16} /></div>
+                <div className="mt-24 border-t border-slate-100 pt-8 pb-16 flex justify-between items-center px-4">
+                    <div className="w-1/2 text-left">
+                        {prevPost && (
+                            <Link href={`/news/${prevPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black uppercase text-xs tracking-widest hover:text-[#bc9c33] transition-colors">
+                                <ChevronLeft size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" /> PREV NEWS
+                            </Link>
+                        )}
                     </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Prev Article */}
-                        <div className="w-full">
-                            {prevPost ? (
-                                <Link href={`/news/${prevPost.slug}`} className="flex gap-5 p-5 bg-white border border-slate-100 rounded-2xl hover:border-gold hover:shadow-xl transition-all group overflow-hidden h-full">
-                                    <div className="w-1/3 aspect-square shrink-0 rounded-xl overflow-hidden relative bg-slate-50">
-                                        <Image src={prevPost.image_url || prevPost.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'} alt="" fill className="object-cover group-hover:scale-110 transition-transform duration-700" shapes="120px" />
-                                    </div>
-                                    <div className="flex flex-col justify-center gap-2">
-                                        <div className="flex items-center gap-3">
-                                            <span className="text-[10px] font-black text-[#bc9c33] uppercase tracking-tighter">{prevPost.category || 'CSR'}</span>
-                                            <span className="text-[10px] text-slate-400 font-bold">{prevPost.date}</span>
-                                        </div>
-                                        <h4 className="text-sm md:text-base font-bold text-navy-deep group-hover:text-gold transition-colors line-clamp-3 leading-tight">{prevPost.title}</h4>
-                                    </div>
-                                </Link>
-                            ) : (
-                                <div className="h-full flex items-center justify-center p-8 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-400 text-xs italic">Awal dari kabar kami.</div>
-                            )}
-                        </div>
-
-                        {/* Next Article */}
-                        <div className="w-full">
-                            {nextPost ? (
-                                <Link href={`/news/${nextPost.slug}`} className="flex flex-row-reverse gap-5 p-5 bg-white border border-slate-100 rounded-2xl hover:border-gold hover:shadow-xl transition-all group overflow-hidden h-full">
-                                    <div className="w-1/3 aspect-square shrink-0 rounded-xl overflow-hidden relative bg-slate-50">
-                                        <Image src={nextPost.image_url || nextPost.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'} alt="" fill className="object-cover group-hover:scale-110 transition-transform duration-700" shapes="120px" />
-                                    </div>
-                                    <div className="flex flex-col justify-center gap-2 text-right">
-                                        <div className="flex items-center justify-end gap-3">
-                                            <span className="text-[10px] font-black text-[#bc9c33] uppercase tracking-tighter">{nextPost.category || 'NEWS'}</span>
-                                            <span className="text-[10px] text-slate-400 font-bold">{nextPost.date}</span>
-                                        </div>
-                                        <h4 className="text-sm md:text-base font-bold text-navy-deep group-hover:text-gold transition-colors line-clamp-3 leading-tight">{nextPost.title}</h4>
-                                    </div>
-                                </Link>
-                            ) : (
-                                <div className="h-full flex items-center justify-center p-8 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-slate-400 text-xs italic">Kabar terbaru telah ditampilkan.</div>
-                            )}
-                        </div>
+                    <div className="w-1/2 text-right">
+                        {nextPost && (
+                            <Link href={`/news/${nextPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black uppercase text-xs tracking-widest hover:text-[#bc9c33] transition-colors justify-end">
+                                NEXT NEWS <ChevronRight size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" />
+                            </Link>
+                        )}
                     </div>
                 </div>
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }

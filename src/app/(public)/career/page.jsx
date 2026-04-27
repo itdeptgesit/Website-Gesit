@@ -33,7 +33,7 @@ export default function CareerPage() {
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
                 >
                     <Image
-                        src="/wp-content/uploads/2021/12/career_hero_revise.jpg"
+                        src="/career/career_hero_revise.webp"
                         alt="Join Gesit Career"
                         fill
                         style={{ objectFit: "cover" }}
@@ -145,7 +145,7 @@ export default function CareerPage() {
                         >
                             {/* LinkedIn Card */}
                             <a
-                                href="https://www.linkedin.com/company/the-gesit-companies/jobs/"
+                                href="https://www.linkedin.com/company/the-gesit-companies"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-slate-100 flex flex-col transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-1"

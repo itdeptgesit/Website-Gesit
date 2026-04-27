@@ -103,7 +103,7 @@ export default function ContactUs() {
             style={{ width: "100%", height: "100%" }}
           >
             <img
-              src="/wp-content/uploads/2021/12/contact_us_hero_revise.jpg"
+              src="/hero/contact_us_hero_revise.webp"
               alt="Contact Us Hero"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />

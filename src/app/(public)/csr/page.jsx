@@ -34,33 +34,33 @@ const CSRPage = () => {
 
     /* ================= HERO IMAGES ================= */
     const heroSlides = [
-        { image: "/csr/cover1.jpeg", title: "Gesit Foundation" },
-        { image: "/csr/cover2.jpeg", title: "Healthcare & Education" },
-        { image: "/csr/cover3.jpeg", title: "Community Development" },
+        { image: "/csr/cover1.webp", title: "Gesit Foundation" },
+        { image: "/csr/cover2.webp", title: "Healthcare & Education" },
+        { image: "/csr/cover3.webp", title: "Community Development" },
     ];
 
     /* ================= GALLERY IMAGES ================= */
     const csrGalleryImages = [
-        "/csr/gallery/gallery1.jpeg",
-        "/csr/gallery/gallery2.jpeg",
-        "/csr/gallery/gallery3.jpeg",
-        "/csr/gallery/gallery4.jpeg",
-        "/csr/gallery/gallery5.jpeg",
-        "/csr/gallery/gallery6.jpeg",
-        "/csr/gallery/gallery7.jpeg",
-        "/csr/gallery/gallery8.jpeg",
-        "/csr/gallery/gallery9.jpeg",
-        "/csr/gallery/gallery10.jpeg",
-        "/csr/gallery/gallery11.jpeg",
-        "/csr/gallery/gallery12.jpg",
-        "/csr/gallery/gallery13.jpg",
-        "/csr/gallery/gallery14.jpg",
-        "/csr/gallery/gallery15.jpg",
-        "/csr/gallery/gallery16.jpg",
-        "/csr/gallery/gallery17.jpg",
-        "/csr/gallery/gallery18.jpg",
-        "/csr/gallery/gallery19.jpg",
-        "/csr/gallery/gallery20.jpg",
+        "/csr/gallery/gallery1.webp",
+        "/csr/gallery/gallery2.webp",
+        "/csr/gallery/gallery3.webp",
+        "/csr/gallery/gallery4.webp",
+        "/csr/gallery/gallery5.webp",
+        "/csr/gallery/gallery6.webp",
+        "/csr/gallery/gallery7.webp",
+        "/csr/gallery/gallery8.webp",
+        "/csr/gallery/gallery9.webp",
+        "/csr/gallery/gallery10.webp",
+        "/csr/gallery/gallery11.webp",
+        "/csr/gallery/gallery12.webp",
+        "/csr/gallery/gallery13.webp",
+        "/csr/gallery/gallery14.webp",
+        "/csr/gallery/gallery15.webp",
+        "/csr/gallery/gallery16.webp",
+        "/csr/gallery/gallery17.webp",
+        "/csr/gallery/gallery18.webp",
+        "/csr/gallery/gallery19.webp",
+        "/csr/gallery/gallery20.webp",
     ];
 
     /* ── Swiper refs for nav buttons ── */
@@ -88,17 +88,17 @@ const CSRPage = () => {
         {
             title: "Healthcare",
             desc: "We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.",
-            image: "/csr/Healthcare.jpeg"
+            image: "/csr/Healthcare.webp"
         },
         {
             title: "Environment & Cultural Outreach",
             desc: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.",
-            image: "/csr/Environment-Cultural-Outreach.jpeg"
+            image: "/csr/Environment-Cultural-Outreach.webp"
         },
         {
             title: "Education",
             desc: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.",
-            image: "/csr/Education.jpeg"
+            image: "/csr/Education.webp"
         }
     ];
 
@@ -259,7 +259,7 @@ const CSRPage = () => {
             </section>
 
             {/* ================= OVERVIEW ================= */}
-            <section className="elementor-element-fabe996" style={{ backgroundColor: '#fff', padding: '150px 0' }}>
+            <section className="elementor-element-fabe996" style={{ backgroundColor: '#e3eaf4', padding: '150px 0' }}>
                 <div className="elementor-container gs-overview-container">
                     <motion.div
                         variants={staggerContainer}

@@ -36,21 +36,21 @@ export default function NaturalResourcesPage() {
     const businessCards = [
         {
             title: "Nickel Mining",
-            image: "/wp-content/uploads/2021/12/nickel-mining-revise.jpeg"
+            image: "/business/natural-resources/nickel-mining-revise.webp"
         },
         {
             title: "Silica Sand Mining",
-            image: "/wp-content/uploads/2022/03/20220317_15075.jpeg"
+            image: "/business/natural-resources/20220317_15075.webp"
         },
         {
             title: "Alumina Refinery and Aluminum Smelter",
-            image: "/wp-content/uploads/2021/12/aluminium_smelter.jpg"
+            image: "/business/natural-resources/aluminium_smelter.webp"
         }
     ];
     const bauxiteImages = [
-        "/wp-content/uploads/2021/11/bauxite_mining.jpg",
-        "/wp-content/uploads/2021/09/natural_lds_bauxite_1.png",
-        "/wp-content/uploads/2021/09/natural_lds_bauxite_2.png"
+        "/business/natural-resources/bauxite_mining.webp",
+        "/business/natural-resources/natural_lds_bauxite_1.webp",
+        "/business/natural-resources/natural_lds_bauxite_2.webp"
     ];
 
     const [isMounted, setIsMounted] = useState(false);
@@ -114,9 +114,9 @@ export default function NaturalResourcesPage() {
                             style={{ width: "100%", height: "100%" }}
                         >
                             {[
-                                { url: "/wp-content/uploads/2021/11/hero_natural_resources.jpg", alt: "Natural Resources 1" },
-                                { url: "/wp-content/uploads/2021/09/natural_lds_bauxite_1-1.png", alt: "Natural Resources 2" },
-                                { url: "/wp-content/uploads/2021/09/hero_image_natural_2-2-1.png", alt: "Natural Resources 3" }
+                                { url: "/hero/hero_natural_resources.webp", alt: "Natural Resources 1" },
+                                { url: "/hero/natural_lds_bauxite_1-1.webp", alt: "Natural Resources 2" },
+                                { url: "/hero/hero_image_natural_2-2-1.webp", alt: "Natural Resources 3" }
                             ].map((slide, idx) => (
                                 <SwiperSlide key={idx} style={{ position: "relative" }}>
 

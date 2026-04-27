@@ -33,21 +33,21 @@ const imageVariant = {
     transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
 };
 const heroSlides = [
-    { image: '/wp-content/uploads/2021/09/hero_image_trading_1-2.png' },
-    { image: '/wp-content/uploads/2021/09/hero_image_trading_2-2.png' },
-    { image: '/wp-content/uploads/2021/09/hero_image_trading_3-2.png' },
+    { image: '/hero/hero_image_trading_1-2.webp' },
+    { image: '/hero/hero_image_trading_2-2.webp' },
+    { image: '/hero/hero_image_trading_3-2.webp' },
 ];
 
 /* ── Content gallery images ── */
 const tradingGallery = [
-    '/wp-content/uploads/2021/09/trading_natural_1.png',
-    '/wp-content/uploads/2021/09/trading_natural_2.png',
+    '/business/trading-services/trading_natural_1.webp',
+    '/business/trading-services/trading_natural_2.webp',
 ];
 
 const agencyGallery = [
-    '/wp-content/uploads/2021/11/agency-services-1-scaled.jpeg',
-    '/wp-content/uploads/2021/11/agency-services-2-scaled.jpeg',
-    '/wp-content/uploads/2021/11/agency-services-3.jpeg',
+    '/business/trading-services/agency-services-1-scaled.webp',
+    '/business/trading-services/agency-services-2-scaled.webp',
+    '/business/trading-services/agency-services-3.webp',
 ];
 
 export default function TradingServicesPage() {
@@ -118,9 +118,9 @@ export default function TradingServicesPage() {
                             style={{ width: "100%", height: "100%" }}
                         >
                             {[
-                                { url: "/wp-content/uploads/2021/09/hero_image_trading_1-2.png", alt: "Trading 1" },
-                                { url: "/wp-content/uploads/2021/09/hero_image_trading_2-2.png", alt: "Trading 2" },
-                                { url: "/wp-content/uploads/2021/09/hero_image_trading_3-2.png", alt: "Trading 3" }
+                                { url: "/hero/hero_image_trading_1-2.webp", alt: "Trading 1" },
+                                { url: "/hero/hero_image_trading_2-2.webp", alt: "Trading 2" },
+                                { url: "/hero/hero_image_trading_3-2.webp", alt: "Trading 3" }
                             ].map((slide, idx) => (
                                 <SwiperSlide key={idx} style={{ position: "relative" }}>
 
@@ -209,11 +209,6 @@ export default function TradingServicesPage() {
                                         >
                                             <motion.h2 variants={textVariant} className="project-title">Trading</motion.h2>
                                             <motion.p variants={textVariant} className="project-desc">The Gesit Companies has been in this business for over 30 years. We source and deliver a variety of products including Bauxite, Alumina, Calcinated Petroleum Coke, Aluminum Ingots, to domestic and international markets — Indonesia, China, South America and the Middle East.</motion.p>
-                                            <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
-                                                <a className="pill-button" href="/wp-content/uploads/2021/11/Trading-Services.pdf" download="Trading-Services.pdf">
-                                                    Download The Brochure
-                                                </a>
-                                            </motion.div>
                                         </motion.div>
                                     </div>
                                     {/* Image Container (Right) */}
@@ -256,11 +251,6 @@ export default function TradingServicesPage() {
                                         >
                                             <motion.h2 variants={textVariant} className="project-title">Agency Services</motion.h2>
                                             <motion.p variants={textVariant} className="project-desc">For over two decades, this division has provided its agency services to support the supply and distribution of products and technology used by banks and other consumers. Representative products include special currency paper and coins, high security technology to identify brand and documents, and disposal machines.</motion.p>
-                                            <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
-                                                <a className="pill-button" href="mailto:fitri@gesit.co.id" target="_self">
-                                                    Learn More
-                                                </a>
-                                            </motion.div>
                                         </motion.div>
                                     </div>
                                 </div>
