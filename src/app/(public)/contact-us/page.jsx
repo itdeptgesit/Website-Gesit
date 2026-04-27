@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import './contact.css';
 
 export default function ContactUs() {
@@ -10,13 +11,37 @@ export default function ContactUs() {
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
+    website: '', // Honeypot field
   });
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Full name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email format is invalid';
+    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+
+    // Turnstile validation
+    if (!turnstileToken) {
+      newErrors.turnstile = 'Please verify that you are a human';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
+
     setLoading(true);
     try {
       const res = await fetch('/api/contact', {
@@ -26,13 +51,16 @@ export default function ContactUs() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          message: formData.message
+          message: formData.message,
+          website: formData.website, // Honeypot
+          turnstileToken: turnstileToken
         })
       });
 
       if (res.ok) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', message: '', website: '' });
+        setTurnstileToken('');
       } else {
         alert("Failed to send message. Please try again later.");
       }
@@ -45,6 +73,21 @@ export default function ContactUs() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Restrict phone input to numbers and +
+    if (name === 'phone') {
+      const filteredValue = value.replace(/[^0-9+]/g, '');
+      setFormData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
+    }
+
+    // Restrict email input to valid email characters
+    if (name === 'email') {
+      const filteredValue = value.replace(/[^a-zA-Z0-9@._+-]/g, '');
+      setFormData(prev => ({ ...prev, [name]: filteredValue }));
+      return;
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
@@ -88,8 +131,11 @@ export default function ContactUs() {
                     href="https://www.google.com/maps/place/The+City+Tower/@-6.199216,106.8213135,17z/data=!4m12!1m6!3m5!1s0x2e69f41f2b24b18b:0xb5cb3eba60efb71e!2sThe+City+Tower!8m2!3d-6.1991991!4d106.8235192!3m4!1s0x2e69f41f2b24b18b:0xb5cb3eba60efb71e!8m2!3d-6.1991991!4d106.8235192"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="contact-address-link"
                   >
-                    The City Tower, 27th Floor Jl. M.H. Thamrin No 81 DKI Jakarta 10310 &ndash; Indonesia
+                    The City Tower, 27<sup>th</sup> Floor<br />
+                    Jl. M.H. Thamrin No 81<br />
+                    DKI Jakarta 10310 &ndash; Indonesia
                   </a>
                 </div>
               </div>
@@ -127,7 +173,19 @@ export default function ContactUs() {
                       onChange={handleChange}
                       disabled={loading}
                     />
+                    {errors.name && <span className="gesit-error-message">{errors.name}</span>}
                   </div>
+                </div>
+                {/* Honeypot field - Invisible to users */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex="-1"
+                    autoComplete="off"
+                  />
                 </div>
                 <div className="gesit-row">
                   <div className="w-50">
@@ -141,6 +199,7 @@ export default function ContactUs() {
                       onChange={handleChange}
                       disabled={loading}
                     />
+                    {errors.email && <span className="gesit-error-message">{errors.email}</span>}
                   </div>
                   <div className="w-50">
                     <input
@@ -153,6 +212,7 @@ export default function ContactUs() {
                       onChange={handleChange}
                       disabled={loading}
                     />
+                    {errors.phone && <span className="gesit-error-message">{errors.phone}</span>}
                   </div>
                 </div>
                 <div className="gesit-row">
@@ -169,6 +229,17 @@ export default function ContactUs() {
                   </div>
                 </div>
                 <div className="gesit-row">
+                  <div className="w-100 turnstile-wrapper">
+                    <Turnstile
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                      onSuccess={token => setTurnstileToken(token)}
+                      onError={() => setTurnstileToken('')}
+                      onExpire={() => setTurnstileToken('')}
+                    />
+                    {errors.turnstile && <span className="gesit-error-message">{errors.turnstile}</span>}
+                  </div>
+                </div>
+                <div className="gesit-row">
                   <div className="w-100">
                     <button type="submit" className="wpcf7-submit" disabled={loading}>
                       {loading ? 'Sending...' : 'Submit'}
@@ -179,11 +250,11 @@ export default function ContactUs() {
             </div>
 
           </div>
-        </div>
-      </section>
+        </div >
+      </section >
 
       {/* Success Modal */}
-      <AnimatePresence>
+      < AnimatePresence >
         {submitted && (
           <div className="modal-overlay" onClick={() => setSubmitted(false)}>
             <motion.div
@@ -209,8 +280,9 @@ export default function ContactUs() {
               </button>
             </motion.div>
           </div>
-        )}
-      </AnimatePresence>
+        )
+        }
+      </AnimatePresence >
     </>
   );
 }
