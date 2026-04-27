@@ -23,7 +23,13 @@ export async function generateMetadata() {
           images: data.og_image ? [data.og_image] : [],
         },
         icons: {
-          icon: '/logo-gesit.png',
+          icon: [
+            { url: '/logos/cropped-gesit-favicon-1-32x32-1.webp', sizes: '32x32', type: 'image/webp' },
+            { url: '/logos/cropped-gesit-favicon-1-192x192-1.webp', sizes: '192x192', type: 'image/webp' }
+          ],
+          apple: [
+            { url: '/logos/cropped-gesit-favicon-1-180x180-1.webp', sizes: '180x180', type: 'image/webp' },
+          ]
         },
       };
     }
@@ -39,7 +45,13 @@ export async function generateMetadata() {
     },
     description: 'The Gesit Companies are business leaders in the fields of Property, Trading & Service, Manufacturing, and Natural Resources in Indonesia.',
     icons: {
-      icon: '/logo-gesit.png',
+      icon: [
+        { url: '/logos/cropped-gesit-favicon-1-32x32-1.webp', sizes: '32x32', type: 'image/webp' },
+        { url: '/logos/cropped-gesit-favicon-1-192x192-1.webp', sizes: '192x192', type: 'image/webp' }
+      ],
+      apple: [
+        { url: '/logos/cropped-gesit-favicon-1-180x180-1.webp', sizes: '180x180', type: 'image/webp' },
+      ]
     },
   };
 }
