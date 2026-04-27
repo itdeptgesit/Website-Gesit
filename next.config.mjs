@@ -11,6 +11,7 @@ const nextConfig = {
       bodySizeLimit: '50mb',
     },
   },
+  serverExternalPackages: ['resend', '@react-email/render'],
   images: {
     remotePatterns: [
       {
