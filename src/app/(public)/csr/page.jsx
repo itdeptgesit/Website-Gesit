@@ -1,474 +1,351 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Navigation } from "swiper/modules";
-import { Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
 
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import { motion } from 'framer-motion';
 
-const textVariant = {
-    initial: { opacity: 0, y: 15 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.6, ease: "easeOut" }
-};
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
 
-const staggerContainer = {
-    initial: {},
-    whileInView: {
-        transition: {
-            staggerChildren: 0.2,
-            delayChildren: 0.1
-        }
-    }
-};
+const heroSlides = [
+	{ image: '/csr/cover1.webp' },
+	{ image: '/csr/cover2.webp' },
+	{ image: '/csr/cover3.webp' },
+];
 
-const CSRPage = () => {
-    const [openInitiative, setOpenInitiative] = useState("Healthcare");
+export default function CSRPage() {
+	const [isMounted, setIsMounted] = useState(false);
+	const [activeIdx, setActiveIdx] = useState(0);
+	const [prevEl, setPrevEl] = useState(null);
+	const [nextEl, setNextEl] = useState(null);
 
-    /* ================= HERO IMAGES ================= */
-    const heroSlides = [
-        { image: "/csr/cover1.webp", title: "Gesit Foundation" },
-        { image: "/csr/cover2.webp", title: "Healthcare & Education" },
-        { image: "/csr/cover3.webp", title: "Community Development" },
-    ];
+	const circleBtn = {
+		width: 60, height: 60, borderRadius: '50%',
+		border: '1px solid rgba(255,255,255,0.3)',
+		background: 'rgba(255,255,255,0.1)',
+		backdropFilter: 'blur(10px)',
+		WebkitBackdropFilter: 'blur(10px)',
+		display: 'flex', alignItems: 'center', justifyContent: 'center',
+		cursor: 'pointer', transition: 'all 0.3s ease',
+		color: '#fff',
+	};
 
-    /* ================= GALLERY IMAGES ================= */
-    const csrGalleryImages = [
-        "/csr/gallery/gallery1.webp",
-        "/csr/gallery/gallery2.webp",
-        "/csr/gallery/gallery3.webp",
-        "/csr/gallery/gallery4.webp",
-        "/csr/gallery/gallery5.webp",
-        "/csr/gallery/gallery6.webp",
-        "/csr/gallery/gallery7.webp",
-        "/csr/gallery/gallery8.webp",
-        "/csr/gallery/gallery9.webp",
-        "/csr/gallery/gallery10.webp",
-        "/csr/gallery/gallery11.webp",
-        "/csr/gallery/gallery12.webp",
-        "/csr/gallery/gallery13.webp",
-        "/csr/gallery/gallery14.webp",
-        "/csr/gallery/gallery15.webp",
-        "/csr/gallery/gallery16.webp",
-        "/csr/gallery/gallery17.webp",
-        "/csr/gallery/gallery18.webp",
-        "/csr/gallery/gallery19.webp",
-        "/csr/gallery/gallery20.webp",
-    ];
+	useEffect(() => {
+		setIsMounted(true);
+		document.body.classList.add('elementor-page', 'elementor-page-5490');
+		return () => {
+			document.body.classList.remove('elementor-page', 'elementor-page-5490');
+		};
+	}, []);
 
-    /* ── Swiper refs for nav buttons ── */
-    const [isMounted, setIsMounted] = useState(false);
-    const [activeIdx, setActiveIdx] = useState(0);
-    const [prevEl, setPrevEl] = useState(null);
-    const [nextEl, setNextEl] = useState(null);
+	// Initialize accordion after mount, once DOM is ready
+	useEffect(() => {
+		if (!isMounted) return;
+		const timer = setTimeout(() => {
+			const accordion = document.querySelector('.qodef-accordion');
+			if (!accordion) return;
+			const titles = accordion.querySelectorAll('.qodef-accordion-title');
+			const contents = accordion.querySelectorAll('.qodef-accordion-content');
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+			// open first by default
+			if (titles[0]) titles[0].classList.add('qodef--opened');
+			if (contents[0]) contents[0].style.display = 'block';
 
-    const circleBtn = {
-        width: 60, height: 60, borderRadius: "50%",
-        border: "1px solid rgba(255,255,255,0.3)",
-        background: "rgba(255,255,255,0.1)",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-        cursor: "pointer", transition: "all 0.3s ease",
-        color: "#fff",
-    };
+			titles.forEach((title, i) => {
+				title.style.cursor = 'pointer';
+				title.addEventListener('click', () => {
+					const isOpen = title.classList.contains('qodef--opened');
+					titles.forEach((t, j) => {
+						t.classList.remove('qodef--opened');
+						contents[j].style.display = 'none';
+					});
+					if (!isOpen) {
+						title.classList.add('qodef--opened');
+						contents[i].style.display = 'block';
+					}
+				});
+			});
+		}, 50);
+		return () => clearTimeout(timer);
+	}, [isMounted]);
 
-    const focusAreas = [
-        {
-            title: "Healthcare",
-            desc: "We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.",
-            image: "/csr/Healthcare.webp"
-        },
-        {
-            title: "Environment & Cultural Outreach",
-            desc: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.",
-            image: "/csr/Environment-Cultural-Outreach.webp"
-        },
-        {
-            title: "Education",
-            desc: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.",
-            image: "/csr/Education.webp"
-        }
-    ];
+	return (
+		<>
+			<link rel="stylesheet" media="all" href="/csr/css/style.css" />
+			<main id="qodef-page-content" className="qodef-grid qodef-layout--template ">
+				<div className="qodef-grid-inner clear">
+					<div className="qodef-grid-item qodef-page-content-section qodef-col--12">
+						<div data-elementor-type="wp-page" data-elementor-id="5490" className="elementor elementor-5490">
 
-    const initiatives = [
-        {
-            id: "healthcare",
-            title: "Healthcare",
-            content: [
-                {
-                    id: "healthcare-pandemic",
-                    subtitle: "Pandemic",
-                    items: [
-                        "Distributing ventilators and PPE to 128 Hospitals across in Indonesia",
-                        "Distributing food aid to people affected by COVID in 5 provinces in Indonesia"
-                    ]
-                },
-                {
-                    id: "healthcare-disaster",
-                    subtitle: "Natural Disaster",
-                    items: [
-                        "Rebuilding healthcare facilities and hospitals",
-                        "Donating food and other resources to victims of natural disasters, such as the volcanic eruption at Mount Merapi, Mentawai, the landslide at Puncak and the floods in Jakarta"
-                    ]
-                },
-                {
-                    id: "healthcare-equipment",
-                    subtitle: "Medical Equipment",
-                    items: [
-                        "Donating speedboat ambulances in West Kalimantan",
-                        "Providing ambulances for DKI Jakarta Region, in partnership with Red Cross Indonesia",
-                        "Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile"
-                    ]
-                }
-            ]
-        },
-        {
-            id: "environment",
-            title: "Environment & Cultural Outreach",
-            content: [
-                {
-                    id: "env-water",
-                    subtitle: "Environment",
-                    items: [
-                        "Developing water projects and clean water facilities in remote areas",
-                        "Creating and maintaining roads and open road access in some districts in Indonesia",
-                        "Collaborating with Yayasan Kebun Raya Indonesia in the conservation of endangered and rare botanical species in Kebun Raya Cibodas and Kebun Raya Bedugul, Bali",
-                        "Planting 1,000 trees in West Kalimantan Deforestation Areas"
-                    ]
-                },
-                {
-                    id: "env-culture",
-                    subtitle: "Cultural Outreach",
-                    items: [
-                        "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
-                        "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples"
-                    ]
-                }
-            ]
-        },
-        {
-            id: "education",
-            title: "Education",
-            content: [
-                {
-                    id: "edu-facilities",
-                    subtitle: "",
-                    items: [
-                        "Building, renovating, and providing school facilities for:",
-                        "- North Sumatera: Sekolah Mitra Inalum",
-                        "- Jakarta: Down Syndrome & Deaf School of Cempaka Putih",
-                        "- Jakarta: School of Yayasan Penyandang Anak Cacat",
-                        "- Fujian: Primary, Secondary School, Sport and Library in Normal University",
-                        "Providing over 300 university scholarships per year"
-                    ]
-                }
-            ]
-        }
-    ];
+							{/* ── HERO ── */}
+							<section className="gs-hero-section" style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+								{isMounted && (
+									<>
+										<Swiper
+											modules={[Autoplay, Navigation, EffectFade]}
+											effect="fade"
+											speed={1500}
+											autoplay={{ delay: 5000, disableOnInteraction: false }}
+											loop={true}
+											navigation={{ prevEl, nextEl }}
+											onBeforeInit={(swiper) => {
+												swiper.params.navigation.prevEl = prevEl;
+												swiper.params.navigation.nextEl = nextEl;
+											}}
+											onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
+											style={{ width: '100%', height: '100%' }}
+										>
+											{heroSlides.map((slide, idx) => (
+												<SwiperSlide key={idx} style={{ position: 'relative', overflow: 'hidden' }}>
+													<Image
+														src={slide.image}
+														alt="CSR Hero"
+														fill
+														style={{
+															objectFit: 'cover',
+															transform: idx === activeIdx ? 'scale(1.15)' : 'scale(1.05)',
+															transition: 'transform 10000ms ease-out',
+														}}
+														priority={idx === 0}
+													/>
+												</SwiperSlide>
+											))}
+										</Swiper>
+										<div className="gesit-hero-overlay" />
 
-    return (
-        <div className="bg-white min-h-screen">
+										<motion.h1
+											className="gs-hero-title"
+											initial={{ opacity: 0, y: 25 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ duration: 1.2, ease: 'easeOut', delay: 0.4 }}
+										>
+											Corporate Social Responsibility
+										</motion.h1>
 
-            <section className="gs-hero-section" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
-                {isMounted && (
-                    <>
-                        <Swiper
-                            modules={[Autoplay, Navigation, EffectFade]}
-                            effect="fade"
-                            speed={1500}
-                            autoplay={{ delay: 5000, disableOnInteraction: false }}
-                            loop={true}
-                            navigation={{
-                                prevEl,
-                                nextEl,
-                            }}
-                            onBeforeInit={(swiper) => {
-                                swiper.params.navigation.prevEl = prevEl;
-                                swiper.params.navigation.nextEl = nextEl;
-                            }}
-                            onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
-                            style={{ width: "100%", height: "100%" }}
-                        >
-                            {heroSlides.map((slide, idx) => (
-                                <SwiperSlide key={idx} style={{ position: "relative", overflow: "hidden" }}>
-                                    <Image
-                                        src={slide.image}
-                                        alt="CSR Hero"
-                                        fill
-                                        style={{
-                                            objectFit: 'cover',
-                                            transform: idx === activeIdx ? "scale(1.15)" : "scale(1.05)",
-                                            transition: "transform 10000ms ease-out"
-                                        }}
-                                        priority={idx === 0}
-                                    />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                        <div className="gesit-hero-overlay" />
+										<div className="gs-hero-nav hidden md:flex">
+											<button
+												ref={(node) => setPrevEl(node)}
+												className="gs-prev-csr"
+												style={circleBtn}
+												onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
+												onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
+											>
+												<svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092" style={{ transform: 'rotate(180deg)' }}><path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" /></svg>
+											</button>
+											<button
+												ref={(node) => setNextEl(node)}
+												className="gs-next-csr"
+												style={circleBtn}
+												onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
+												onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
+											>
+												<svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092"><path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" /></svg>
+											</button>
+										</div>
+									</>
+								)}
+							</section>
 
+							{/* ── OVERVIEW ── */}
+							<section className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="f7f2714" data-element_type="section" data-e-type="section" data-settings='{"background_background":"classic"}'>
+								<div className="elementor-container elementor-column-gap-no">
+									<div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3b9babf" data-id="3b9babf" data-element_type="column" data-e-type="column">
+										<div className="elementor-widget-wrap elementor-element-populated">
+											<div className="elementor-element elementor-element-4560131 elementor-widget elementor-widget-heading" data-id="4560131" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+												<div className="elementor-widget-container">
+													<h3 className="elementor-heading-title elementor-size-default">
+														Creating a positive effect on lives and communities by adding the most value and making a significant and lasting impact through Gesit Foundation.
+													</h3>
+												</div>
+											</div>
+											<div className="elementor-element elementor-element-2fef7e8 elementor-widget elementor-widget-heading" data-id="2fef7e8" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+												<div className="elementor-widget-container">
+													<span className="elementor-heading-title elementor-size-default">Our social investment programs focus on three areas: <strong>Healthcare, Environment &amp; Cultural Outreach,</strong> and <strong>Education.</strong></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 
-                        {/* CSR Static Title */}
-                        <motion.h1
-                            className="gs-hero-title"
-                            initial={{ opacity: 0, y: 25 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}>
-                            Corporate Social Responsibility
-                        </motion.h1>
+							{/* ── FOCUS AREAS ── */}
+							<section className="elementor-section elementor-top-section elementor-element elementor-element-861be59 elementor-section-stretched zs-custom-height no-button mobile-justify-center elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="861be59" data-element_type="section" data-e-type="section" data-settings='{"stretch_section":"section-stretched","background_background":"classic"}'>
+								<div className="elementor-container elementor-column-gap-no">
+									<div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc" data-id="2f9badc" data-element_type="column" data-e-type="column">
+										<div className="elementor-widget-wrap elementor-element-populated">
+											<div className="elementor-element elementor-element-7276c3b p-15 elementor-widget elementor-widget-thetrial_core_location_info" data-id="7276c3b" data-element_type="widget" data-e-type="widget" data-widget_type="thetrial_core_location_info.default">
+												<div className="elementor-widget-container">
+													<div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ overflow: 'hidden', height: '100%' }}>
+														<div className="qodef-m-image"> <img loading="lazy" decoding="async" width="753" height="597" src="/csr/images/healthcare-scaled-1.jpg" className="attachment-full size-full" alt="" style={{ display: 'block' }} /></div>
+														<div className="qodef-m-content" style={{ backgroundColor: "#BC9C33" }}>
+															<h5 className="qodef-m-title" style={{ color: "#FFFFFF" }}>Healthcare</h5>
+															<p className="qodef-m-text" style={{ color: "#FFFFFF" }}>We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d0ecfb1" data-id="d0ecfb1" data-element_type="column" data-e-type="column">
+										<div className="elementor-widget-wrap elementor-element-populated">
+											<div className="elementor-element elementor-element-36c4e72 p-15 elementor-widget elementor-widget-thetrial_core_location_info" data-id="36c4e72" data-element_type="widget" data-e-type="widget" data-widget_type="thetrial_core_location_info.default">
+												<div className="elementor-widget-container">
+													<div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ overflow: 'hidden', height: '100%' }}>
+														<div className="qodef-m-image"> <img loading="lazy" decoding="async" width="469" height="372" src="/csr/images/environment-scaled-1.jpg" className="attachment-full size-full" alt="" style={{ display: 'block' }} /></div>
+														<div className="qodef-m-content" style={{ backgroundColor: "#BC9C33" }}>
+															<h5 className="qodef-m-title" style={{ color: "#FFFFFF" }}>Environment &amp; Cultural Outreach</h5>
+															<p className="qodef-m-text" style={{ color: "#FFFFFF" }}>We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-df100c7" data-id="df100c7" data-element_type="column" data-e-type="column">
+										<div className="elementor-widget-wrap elementor-element-populated">
+											<div className="elementor-element elementor-element-d719d27 p-15 elementor-widget elementor-widget-thetrial_core_location_info" data-id="d719d27" data-element_type="widget" data-e-type="widget" data-widget_type="thetrial_core_location_info.default">
+												<div className="elementor-widget-container">
+													<div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ overflow: 'hidden', height: '100%' }}>
+														<div className="qodef-m-image"> <img loading="lazy" decoding="async" width="1707" height="1353" src="/csr/images/education-scaled-1.jpg" className="attachment-full size-full" alt="" style={{ display: 'block' }} /></div>
+														<div className="qodef-m-content" style={{ backgroundColor: "#BC9C33" }}>
+															<h5 className="qodef-m-title" style={{ color: "#FFFFFF" }}>Education</h5>
+															<p className="qodef-m-text" style={{ color: "#FFFFFF" }}>We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 
-                        {/* Navigation arrows (hidden on mobile via mobile-hidden) */}
-                        <div className="gs-hero-nav hidden md:flex">
-                            <button
-                                ref={(node) => setPrevEl(node)}
-                                className="gs-prev-csr"
-                                style={circleBtn}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092" style={{ transform: "rotate(180deg)" }}>
-                                    <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
-                                </svg>
-                            </button>
-                            <button
-                                ref={(node) => setNextEl(node)}
-                                className="gs-next-csr"
-                                style={circleBtn}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092">
-                                    <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
-                                </svg>
-                            </button>
-                        </div>
-                    </>
-                )}
-            </section>
+							{/* ── INITIATIVES HEADING ── */}
+							<section className="elementor-section elementor-top-section elementor-element elementor-element-98a76e5 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="98a76e5" data-element_type="section" data-e-type="section">
+								<div className="elementor-container elementor-column-gap-no">
+									<div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-362aa85" data-id="362aa85" data-element_type="column" data-e-type="column">
+										<div className="elementor-widget-wrap elementor-element-populated">
+											<div className="elementor-element elementor-element-b18024b elementor-widget elementor-widget-heading" data-id="b18024b" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+												<div className="elementor-widget-container">
+													<h2 className="elementor-heading-title elementor-size-default">Our CSR Initiatives &amp; Programs</h2>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 
-            {/* ================= OVERVIEW ================= */}
-            <section className="elementor-element-fabe996" style={{ backgroundColor: '#e3eaf4', padding: '150px 0' }}>
-                <div className="elementor-container gs-overview-container">
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="initial"
-                        whileInView="whileInView"
-                        viewport={{ once: true, margin: "-100px" }}
-                    >
-                        {/* Heading */}
-                        <div style={{ margin: '0 0 15px', padding: 0 }}>
-                            <motion.h2 variants={textVariant} className="gs-overview-heading" style={{
-                                color: '#103065',
-                                fontFamily: 'Lora, Georgia, serif',
-                                fontWeight: 400,
-                                textAlign: 'left',
-                                margin: 0
-                            }}>
-                                Creating a positive effect on lives and communities
-                                by adding the most value and making a significant
-                                and lasting impact through Gesit Foundation.
-                            </motion.h2>
-                        </div>
+							{/* ── ACCORDION (React state) ── */}
+							<CSRAccordion />
 
-                        {/* Description with Left Border */}
-                        <motion.div
-                            variants={textVariant}
-                            className="gs-overview-border-box"
-                            style={{
-                                padding: '0 0 0 40px',
-                                borderLeft: '2px solid #BC9C33',
-                                textAlign: 'left'
-                            }}>
-                            <p className="gs-overview-body" style={{
-                                color: '#103065',
-                                fontFamily: "'Source Sans Pro', sans-serif",
-                                fontWeight: 400,
-                                margin: 0
-                            }}>
-                                Our social investment programs focus on three areas: <strong className="font-extrabold">Healthcare,</strong> <strong className="font-extrabold">Environment & Cultural Outreach,</strong> and <strong className="font-extrabold">Education.</strong>
-                            </p>
-                        </motion.div>
-                    </motion.div>
-                </div>
-            </section>
+						</div>
+					</div>
+				</div>
+			</main>
+		</>
+	);
+}
 
-            {/* ================= FOCUS AREAS ================= */}
-            <section className="py-[120px] bg-[#103065]">
-                <div className="container mx-auto px-8 md:px-16 lg:px-24">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8 max-w-6xl mx-auto">
-                        {focusAreas.map((area, index) => (
-                            <motion.div
-                                key={area.title}
-                                variants={staggerContainer}
-                                initial="initial"
-                                whileInView="whileInView"
-                                viewport={{ once: true }}
-                                className="relative group flex flex-col items-start h-full"
-                            >
-                                {/* Top Image Section */}
-                                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[5px] shrink-0">
-                                    <Image
-                                        src={area.image}
-                                        fill
-                                        className="object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
-                                        alt={area.title}
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    />
-                                </div>
+const accordionItems = [
+	{
+		title: 'Healthcare',
+		content: (
+			<>
+				<b>Pandemic</b>
+				<ul style={{ listStyle: 'disc', paddingLeft: '1.5em' }}>
+					<li>Distributing ventilators and PPE to 128 Hospitals across in Indonesia</li>
+					<li>Distributing food aid to people affected by COVID in 5 provinces in Indonesia</li>
+				</ul>
+				<b>Natural Disaster</b>
+				<ul style={{ listStyle: 'disc', paddingLeft: '1.5em' }}>
+					<li>Rebuilding healthcare facilities and hospitals</li>
+					<li>Donating food and other resources to victims of natural disasters, such as the volcanic eruption at Mount Merapi, Mentawai, the landslide at Puncak and the floods in Jakarta</li>
+				</ul>
+				<b>Medical Equipment</b>
+				<ul style={{ listStyle: 'disc', paddingLeft: '1.5em' }}>
+					<li>Donating speedboat ambulances in West Kalimantan</li>
+					<li>Providing ambulances for DKI Jakarta Region, in partnership with Red Cross Indonesia</li>
+					<li>Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile</li>
+				</ul>
+			</>
+		),
+	},
+	{
+		title: 'Environment & Cultural Outreach',
+		content: (
+			<>
+				<p><b>Environment</b></p>
+				<ul style={{ listStyle: 'disc', paddingLeft: '1.5em' }}>
+					<li>Developing water projects and clean water facilities in remote areas</li>
+					<li>Creating and maintaining roads and open road access in some districts in Indonesia</li>
+					<li>Collaborating with Yayasan Kebun Raya Indonesia in the conservation of endangered and rare botanical species in Kebun Raya Cibodas and Kebun Raya Bedugul, Bali</li>
+					<li>Planting 1,000 trees in West Kalimantan Deforestation Areas</li>
+				</ul>
+				<p><b>Cultural Outreach</b></p>
+				<ul style={{ listStyle: 'disc', paddingLeft: '1.5em' }}>
+					<li>Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims</li>
+					<li>Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples</li>
+				</ul>
+			</>
+		),
+	},
+	{
+		title: 'Education',
+		content: (
+			<ul style={{ listStyle: 'disc', paddingLeft: '1.5em' }}>
+				<li>
+					Building, renovating, and providing school facilities for:<br />
+					- North Sumatera: Sekolah Mitra Inalum<br />
+					- Jakarta: Down Syndrome &amp; Deaf School of Cempaka Putih<br />
+					- Jakarta: School of Yayasan Penyandang Anak Cacat<br />
+					- Fujian: Primary, Secondary School, Sport and Library in Normal University
+				</li>
+				<li>Providing over 300 university scholarships per year</li>
+			</ul>
+		),
+	},
+];
 
-                                {/* Connecting Line Spacer & Interactive Drop Animation */}
-                                <div className="relative h-[40px] w-full flex justify-center shrink-0 z-40">
-                                    <div className="absolute top-[-32px] bottom-[-16px] w-[1px] bg-white z-20 pointer-events-none overflow-hidden group">
-                                        <div className="card-hover-line group-hover:bg-[#BC9C33] transition-colors duration-500 w-[1px] h-full absolute top-0 left-0"></div>
-                                    </div>
-                                </div>
+function CSRAccordion() {
+	const [openIdx, setOpenIdx] = useState(0);
+	return (
+		<section className="elementor-section elementor-top-section elementor-element elementor-element-7d3d939 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="7d3d939" data-element_type="section" data-e-type="section">
+			<div className="elementor-container elementor-column-gap-no">
+				<div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-913ffdb">
+					<div className="elementor-widget-wrap elementor-element-populated">
+						<div className="elementor-element elementor-element-45f5edd elementor-widget elementor-widget-thetrial_core_accordion">
+							<div className="elementor-widget-container">
+								<div className="qodef-shortcode qodef-m qodef-accordion qodef--init clear qodef-behavior--accordion qodef-layout--simple">
+									{accordionItems.map((item, i) => (
+										<div key={i}>
+											<h5
+												className={`qodef-accordion-title${openIdx === i ? ' qodef--opened ui-state-active' : ''}`}
+												onClick={() => setOpenIdx(openIdx === i ? -1 : i)}
+												style={{ cursor: 'pointer' }}
+											>
+												<span className="qodef-accordion-mark">
+													<span className="qodef-icon--plus">+</span>
+													<span className="qodef-icon--minus">-</span>
+												</span>{' '}
+												<span className="qodef-tab-title"> {item.title} </span>
+											</h5>
+											<div className="qodef-accordion-content" style={{ display: openIdx === i ? 'block' : 'none' }}>
+												<div className="qodef-accordion-content-inner">
+													{item.content}
+												</div>
+											</div>
+										</div>
+									))}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
+}
 
-                                {/* Bottom Info Box */}
-                                <div className="w-full bg-[#BC9C33] p-[32px] text-left relative z-10 min-h-[200px] flex flex-col items-start rounded-[5px] flex-1">
-                                    <motion.h3 variants={textVariant} className="text-white mb-[16px] leading-[1.2]" style={{ fontFamily: 'Georgia, Lora, serif', fontSize: '26px', fontWeight: 400 }}>{area.title}</motion.h3>
-
-                                    <motion.p variants={textVariant} className="text-white text-[15.5px] leading-[1.65]" style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 400 }}>
-                                        {area.desc.split('most importantly').map((part, i, arr) =>
-                                            i === arr.length - 1 ? part : <span key={i}>{part}<strong className="font-bold">most importantly</strong></span>
-                                        )}
-                                    </motion.p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ================= INITIATIVES ================= */}
-            <section className="py-[40px] pb-[100px] bg-white">
-                <div className="container mx-auto px-6 max-w-5xl">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="text-center mb-[50px] text-[#000]"
-                        style={{ fontFamily: 'Georgia, serif', fontSize: '42px', fontWeight: 400 }}
-                    >
-                        Our CSR Initiatives & Programs
-                    </motion.h2>
-
-                    <div className="flex flex-col">
-                        {initiatives.map((initiative, idx) => (
-                            <div key={initiative.title} id={initiative.id} className={`py-[24px] border-t border-solid border-[#cccccc] ${idx === initiatives.length - 1 ? 'border-b' : ''} scroll-mt-24`}>
-                                <button
-                                    onClick={() =>
-                                        setOpenInitiative(
-                                            openInitiative === initiative.title ? null : initiative.title
-                                        )
-                                    }
-                                    className="w-full flex items-center text-left transition-colors group bg-transparent border-none outline-none"
-                                >
-                                    {/* Icon */}
-                                    <div className={`w-[36px] h-[36px] rounded-full border border-solid border-[#BC9C33] flex flex-col items-center justify-center shrink-0 mr-[24px] transition-all duration-300 ${openInitiative === initiative.title ? 'bg-white text-[#BC9C33]' : 'bg-[#BC9C33] text-white'}`}>
-                                        {openInitiative === initiative.title ? <Minus size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
-                                    </div>
-                                    {/* Title */}
-                                    <span className="text-[25px] text-[#111]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
-                                </button>
-
-                                <AnimatePresence>
-                                    {openInitiative === initiative.title && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                                            className="overflow-hidden"
-                                        >
-                                            {/* Padding left matches icon width (36) + margin (24) = 60px */}
-                                            <div className="pl-[60px] pr-8 pb-[10px] pt-[4px]">
-                                                {initiative.content.map(block => (
-                                                    <div key={block.subtitle} className="mb-[24px] last:mb-0">
-                                                        {block.subtitle && (
-                                                            <h4 className="text-[20px] text-[#444] mb-[10px] mt-[16px]" style={{ fontFamily: 'Georgia, serif', fontWeight: 700 }}>
-                                                                {block.subtitle}
-                                                            </h4>
-                                                        )}
-                                                        <ul className="list-disc pl-[20px] space-y-[6px] marker:text-[#888]">
-                                                            {block.items.map((item, i) => {
-                                                                const isSubItem = item.startsWith("- ");
-                                                                const displayItem = isSubItem ? item.substring(2) : item;
-                                                                return (
-                                                                    <li key={i} className={`text-[19px] text-[#555] leading-[1.6] ${isSubItem ? 'list-none -ml-[8px]' : 'pl-[4px]'}`} style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 400 }}>
-                                                                        {isSubItem && <span className="mr-[8px]">-</span>}
-                                                                        {displayItem}
-                                                                    </li>
-                                                                );
-                                                            })}
-                                                        </ul>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ================= SMOOTH INFINITE SCROLL GALLERY ================= */}
-            <section className="py-24 bg-white overflow-hidden">
-                <div className="relative w-full">
-                    <div className="flex overflow-hidden relative">
-                        <motion.div
-                            className="flex gap-12 px-4 py-12 items-center"
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{
-                                ease: "linear",
-                                duration: 180,
-                                repeat: Infinity,
-                            }}
-                            style={{ width: "fit-content" }}
-                        >
-                            {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
-                                <div
-                                    key={index}
-                                    className="w-[450px] h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative"
-                                >
-                                    <Image
-                                        src={src}
-                                        alt={`CSR Gallery ${index}`}
-                                        fill
-                                        className="object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2.5s] ease-out"
-                                        sizes="450px"
-                                    />
-                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
-                                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-                                </div>
-                            ))}
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-            <style jsx global>{`
-                @media (max-width: 1024px) {
-                    .gs-hero-nav {
-                        display: none !important;
-                    }
-                }
-            `}</style>
-        </div>
-    );
-};
-
-export default CSRPage;

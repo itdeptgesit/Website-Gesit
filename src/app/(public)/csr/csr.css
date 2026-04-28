@@ -204,18 +204,29 @@
 
 		/* qodef location-info card styles */
 		.qodef-location-info .qodef-m-image {
+			aspect-ratio: 4 / 3;
 			overflow: hidden;
 			display: block;
 		}
 
 		.qodef-location-info .qodef-m-image img {
 			width: 100%;
-			height: auto;
+			height: 100%;
+			object-fit: cover;
 			display: block;
 		}
 
 		.qodef-location-info.qodef-layout--text-below .qodef-m-content {
 			padding: 20px 25px 30px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.qodef-location-info {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
 		}
 
 		.qodef-location-info .qodef-m-title {
@@ -236,7 +247,7 @@
 
 		/* equalize content heights (zs-custom-height JS behaviour) */
 		.zs-custom-height .qodef-location-info .qodef-m-content {
-			min-height: 200px;
+			min-height: 250px;
 		}
 
 		/* --- Section 98a76e5: Initiatives heading --- */

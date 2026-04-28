@@ -190,9 +190,9 @@ export default function Home() {
                                 <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                               </div>
                               <div className="qodef-m-content" style={{ backgroundColor: '#bc9c33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '300px', padding: '35px 25px' }}>
-                                <motion.h5 variants={textVariant} className="qodef-m-title" style={{ color: '#ffffff' }}>
+                                <motion.div variants={textVariant} role="heading" aria-level={3} className="qodef-m-title" style={{ color: '#ffffff', fontSize: '22px', fontWeight: 600 }}>
                                   <Link href={biz.href} style={{ color: '#ffffff', textDecoration: 'none' }}>{biz.title}</Link>
-                                </motion.h5>
+                                </motion.div>
                                 <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#ffffff' }}>{biz.desc}</motion.p>
                                 <motion.div variants={textVariant} style={{ marginTop: 'auto' }}>
                                   <Link href={biz.href} title={`Learn more about ${biz.title}`} className="qodef-m-link qodef-button qodef-layout--textual" style={{ color: '#ffffff' }}>
@@ -271,8 +271,8 @@ export default function Home() {
                       <div className="elementor-element elementor-element-b4752b6 elementor-widget elementor-widget-thetrial_core_section_title" data-id="b4752b6" data-element_type="widget" data-widget_type="thetrial_core_section_title.default">
                         <div className="elementor-widget-container">
                           <motion.div variants={textVariant} className="qodef-shortcode qodef-m qodef-section-title qodef-alignment--left">
-                            <h6 className="qodef-m-title">Gesit Foundation COVID-19 Vaccination Program</h6>
-                            <p className="qodef-m-text" style={{ marginTop: 5 }}>Participating in COVID control and distributing vaccines.</p>
+                            <div role="heading" aria-level={3} className="qodef-m-title" style={{ fontSize: '24px', fontWeight: 400, margin: 0, padding: 0, fontFamily: 'Georgia, Lora, serif', color: '#1e1e1e' }}>Gesit Foundation COVID-19 Vaccination Program</div>
+                            <p className="qodef-m-text" style={{ marginTop: 8, fontSize: '18px', color: '#555555', fontFamily: "'Source Sans Pro', sans-serif" }}>Participating in COVID control and distributing vaccines.</p>
                           </motion.div>
                         </div>
                       </div>
