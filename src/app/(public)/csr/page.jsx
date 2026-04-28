@@ -305,7 +305,7 @@ const CSRPage = () => {
             </section>
 
             {/* ================= FOCUS AREAS ================= */}
-            <section className="py-32 bg-navy-deep">
+            <section className="py-[120px] bg-[#103065]">
                 <div className="container mx-auto px-8 md:px-16 lg:px-24">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8 max-w-6xl mx-auto">
                         {focusAreas.map((area, index) => (
@@ -315,10 +315,10 @@ const CSRPage = () => {
                                 initial="initial"
                                 whileInView="whileInView"
                                 viewport={{ once: true }}
-                                className="relative group flex flex-col items-center h-full"
+                                className="relative group flex flex-col items-start h-full"
                             >
                                 {/* Top Image Section */}
-                                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[5px] shadow-2xl shrink-0">
+                                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[5px] shrink-0">
                                     <Image
                                         src={area.image}
                                         fill
@@ -326,25 +326,23 @@ const CSRPage = () => {
                                         alt={area.title}
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
-                                    <div className="absolute inset-0 bg-black/10"></div>
                                 </div>
 
                                 {/* Connecting Line Spacer & Interactive Drop Animation */}
                                 <div className="relative h-[40px] w-full flex justify-center shrink-0 z-40">
-                                    {/* Base static connecting line - Terhubung sempurna dari gambar ke kotak */}
-                                    <div className="absolute top-[-32px] bottom-[-16px] w-[1px] bg-white/30 z-20 pointer-events-none overflow-hidden group">
-
-                                        {/* Pure CSS Flawless Hover Shimmer - Jatuh dari atas ke bawah (HANYA SAAT HOVER) */}
-                                        <div className="card-hover-line"></div>
+                                    <div className="absolute top-[-32px] bottom-[-16px] w-[1px] bg-white z-20 pointer-events-none overflow-hidden group">
+                                        <div className="card-hover-line group-hover:bg-[#BC9C33] transition-colors duration-500 w-[1px] h-full absolute top-0 left-0"></div>
                                     </div>
                                 </div>
 
-                                {/* Bottom Info Box - Centered Content (Exact Home Parity) */}
-                                <div className="w-full bg-[#BC9C33] p-7 text-center shadow-xl relative z-10 min-h-[180px] flex flex-col items-center rounded-[5px] flex-1">
-                                    <motion.h3 variants={textVariant} className="text-white text-xl font-serif mb-4 leading-tight">{area.title}</motion.h3>
-                                    {/* Centered refined text per home styles */}
-                                    <motion.p variants={textVariant} className="text-white/90 text-[13.5px] font-light leading-relaxed tracking-wide">
-                                        {area.desc}
+                                {/* Bottom Info Box */}
+                                <div className="w-full bg-[#BC9C33] p-[32px] text-left relative z-10 min-h-[200px] flex flex-col items-start rounded-[5px] flex-1">
+                                    <motion.h3 variants={textVariant} className="text-white mb-[16px] leading-[1.2]" style={{ fontFamily: 'Georgia, Lora, serif', fontSize: '26px', fontWeight: 400 }}>{area.title}</motion.h3>
+
+                                    <motion.p variants={textVariant} className="text-white text-[15.5px] leading-[1.65]" style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 400 }}>
+                                        {area.desc.split('most importantly').map((part, i, arr) =>
+                                            i === arr.length - 1 ? part : <span key={i}>{part}<strong className="font-bold">most importantly</strong></span>
+                                        )}
                                     </motion.p>
                                 </div>
                             </motion.div>
@@ -354,43 +352,36 @@ const CSRPage = () => {
             </section>
 
             {/* ================= INITIATIVES ================= */}
-            <section className="py-24 bg-white">
+            <section className="py-[40px] pb-[100px] bg-white">
                 <div className="container mx-auto px-6 max-w-5xl">
                     <motion.h2
-                        variants={textVariant}
-                        initial="initial"
-                        whileInView="whileInView"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-center mb-20 text-[#000]"
-                        style={{ fontFamily: 'Georgia, serif', fontSize: '3rem', fontWeight: 400 }}
+                        transition={{ duration: 0.8 }}
+                        className="text-center mb-[50px] text-[#000]"
+                        style={{ fontFamily: 'Georgia, serif', fontSize: '42px', fontWeight: 400 }}
                     >
                         Our CSR Initiatives & Programs
                     </motion.h2>
 
-                    <div className="flex flex-col space-y-0">
-                        {initiatives.map((initiative) => (
-                            <div key={initiative.title} id={initiative.id} className="border-t border-slate-100 last:border-b scroll-mt-24">
+                    <div className="flex flex-col">
+                        {initiatives.map((initiative, idx) => (
+                            <div key={initiative.title} id={initiative.id} className={`py-[24px] border-t border-solid border-[#cccccc] ${idx === initiatives.length - 1 ? 'border-b' : ''} scroll-mt-24`}>
                                 <button
                                     onClick={() =>
                                         setOpenInitiative(
                                             openInitiative === initiative.title ? null : initiative.title
                                         )
                                     }
-                                    className="w-full py-8 flex items-center gap-6 text-left transition-all bg-transparent hover:bg-slate-50/50 group border-none"
+                                    className="w-full flex items-center text-left transition-colors group bg-transparent border-none outline-none"
                                 >
-                                    {/* Icon Container */}
-                                    <div className={`w-10 h-10 rounded-full border border-[#BC9C33] flex items-center justify-center shrink-0 transition-all duration-300 ${openInitiative === initiative.title ? 'bg-white text-[#BC9C33]' : 'bg-[#BC9C33] text-white shadow-md'}`}>
-                                        {openInitiative === initiative.title ? <Minus size={22} strokeWidth={1.5} /> : <Plus size={22} strokeWidth={1.5} />}
+                                    {/* Icon */}
+                                    <div className={`w-[36px] h-[36px] rounded-full border border-solid border-[#BC9C33] flex flex-col items-center justify-center shrink-0 mr-[24px] transition-all duration-300 ${openInitiative === initiative.title ? 'bg-white text-[#BC9C33]' : 'bg-[#BC9C33] text-white'}`}>
+                                        {openInitiative === initiative.title ? <Minus size={18} strokeWidth={1.5} /> : <Plus size={18} strokeWidth={1.5} />}
                                     </div>
-
                                     {/* Title */}
-                                    <motion.span
-                                        variants={textVariant}
-                                        className="text-[26px] md:text-[32px] text-[#222]"
-                                        style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
-                                    >
-                                        {initiative.title}
-                                    </motion.span>
+                                    <span className="text-[25px] text-[#111]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
                                 </button>
 
                                 <AnimatePresence>
@@ -399,26 +390,26 @@ const CSRPage = () => {
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+                                            transition={{ duration: 0.4, ease: "easeInOut" }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="pl-[4rem] md:pl-[5.5rem] pr-8 pb-12 pt-2">
-                                                {initiative.content.map((block, idx) => (
-                                                    <div key={idx} className="mb-8 last:mb-0">
+                                            {/* Padding left matches icon width (36) + margin (24) = 60px */}
+                                            <div className="pl-[60px] pr-8 pb-[10px] pt-[4px]">
+                                                {initiative.content.map(block => (
+                                                    <div key={block.subtitle} className="mb-[24px] last:mb-0">
                                                         {block.subtitle && (
-                                                            <h4 className="text-[20px] md:text-[22px] mb-4" style={{ fontFamily: 'Georgia, serif', fontWeight: 800, color: '#103065' }}>
+                                                            <h4 className="text-[20px] text-[#444] mb-[10px] mt-[16px]" style={{ fontFamily: 'Georgia, serif', fontWeight: 700 }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="space-y-3">
+                                                        <ul className="list-disc pl-[20px] space-y-[6px] marker:text-[#888]">
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
+                                                                const displayItem = isSubItem ? item.substring(2) : item;
                                                                 return (
-                                                                    <li key={i} className={`flex items-start gap-3 text-[17px] md:text-[19px] text-[#444] font-normal leading-relaxed ${isSubItem ? 'pl-8 text-slate-500' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
-                                                                        {!isSubItem ? (
-                                                                            <div className="w-1.5 h-1.5 rounded-full bg-[#BC9C33]/60 mt-[10px] shrink-0" />
-                                                                        ) : null}
-                                                                        <span className="flex-1">{item}</span>
+                                                                    <li key={i} className={`text-[19px] text-[#555] leading-[1.6] ${isSubItem ? 'list-none -ml-[8px]' : 'pl-[4px]'}`} style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 400 }}>
+                                                                        {isSubItem && <span className="mr-[8px]">-</span>}
+                                                                        {displayItem}
                                                                     </li>
                                                                 );
                                                             })}

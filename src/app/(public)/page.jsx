@@ -195,8 +195,8 @@ export default function Home() {
                                 </motion.h5>
                                 <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#ffffff' }}>{biz.desc}</motion.p>
                                 <motion.div variants={textVariant} style={{ marginTop: 'auto' }}>
-                                  <Link href={biz.href} aria-label={`Learn more about ${biz.title}`} className="qodef-m-link qodef-button qodef-layout--textual" style={{ color: '#ffffff' }}>
-                                    <span className="qodef-m-link-text">Learn More</span>
+                                  <Link href={biz.href} title={`Learn more about ${biz.title}`} className="qodef-m-link qodef-button qodef-layout--textual" style={{ color: '#ffffff' }}>
+                                    <span className="qodef-m-link-text">Learn More <span className="sr-only">about {biz.title}</span></span>
                                     <svg className="qodef-filled-arrow" xmlns="http://www.w3.org/2000/svg" width={22} height={22}>
                                       <g fill="currentColor" stroke="currentColor"><circle cx={11} cy={11} r="10.5" /></g>
                                       <path fill="#fff" d="M13.9 10.776l-3.775 3.775L9 13.426l2.651-2.65L9 8.125 10.125 7z" />
@@ -258,8 +258,8 @@ export default function Home() {
                       <div className="elementor-element elementor-element-5f5a1b0 btn-lora elementor-widget elementor-widget-thetrial_core_button" data-id="5f5a1b0" data-element_type="widget" data-widget_type="thetrial_core_button.default">
                         <div className="elementor-widget-container">
                           <motion.div variants={textVariant}>
-                            <Link href="/csr" aria-label="Read more about our CSR programs" className="qodef-shortcode qodef-m qodef-button qodef-layout--textual qodef-size--small qodef-html--link" style={{ color: '#bc9c33', fontSize: 16, fontWeight: 700 }}>
-                              <span className="qodef-m-text">Read More</span>
+                            <Link href="/csr" title="Read more about our CSR programs" className="qodef-shortcode qodef-m qodef-button qodef-layout--textual qodef-size--small qodef-html--link" style={{ color: '#bc9c33', fontSize: 16, fontWeight: 700 }}>
+                              <span className="qodef-m-text">Read More <span className="sr-only">about our CSR programs</span></span>
                               <svg className="qodef-filled-arrow" xmlns="http://www.w3.org/2000/svg" width={22} height={22}>
                                 <g fill="currentColor" stroke="currentColor"><circle cx={11} cy={11} r="10.5" /></g>
                                 <path fill="#fff" d="M13.9 10.776l-3.775 3.775L9 13.426l2.651-2.65L9 8.125 10.125 7z" />

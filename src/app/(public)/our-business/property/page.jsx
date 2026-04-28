@@ -204,7 +204,7 @@ const PropertyPage = () => {
                                                 <p className="project-info-text">Property Type : Office and Multifunction Area</p>
                                             </motion.div>
                                             <motion.div variants={textVariant}>
-                                                <a className="pill-button" href="https://trinitytower.co.id/" target="_blank" rel="noopener noreferrer">Learn More</a>
+                                                <a className="pill-button" href="https://trinitytower.co.id/" target="_blank" rel="noopener noreferrer" title="Learn more about Trinity Tower">Learn More <span className="sr-only">about Trinity Tower</span></a>
                                             </motion.div>
                                         </motion.div>
                                     </div>
@@ -253,7 +253,7 @@ const PropertyPage = () => {
                                                 <p className="project-info-text">Property Type : Hotel</p>
                                             </motion.div>
                                             <motion.div variants={textVariant}>
-                                                <a className="pill-button" href="https://www.jsluwansa.com/" target="_blank" rel="noopener noreferrer">Learn More</a>
+                                                <a className="pill-button" href="https://www.jsluwansa.com/" target="_blank" rel="noopener noreferrer" title="Learn more about JS Luwansa">Learn More <span className="sr-only">about JS Luwansa</span></a>
                                             </motion.div>
                                         </motion.div>
                                     </div>
@@ -276,7 +276,7 @@ const PropertyPage = () => {
                                                 <p className="project-info-text">Property Type : Office Space &amp; Concert Hall</p>
                                             </motion.div>
                                             <motion.div variants={textVariant}>
-                                                <a className="pill-button" href="mailto:fitri@gesit.co.id" target="_self">Learn More</a>
+                                                <a className="pill-button" href="mailto:fitri@gesit.co.id" target="_self" title="Contact us to learn more about PPHUI">Learn More <span className="sr-only">about PPHUI</span></a>
                                             </motion.div>
                                         </motion.div>
                                     </div>

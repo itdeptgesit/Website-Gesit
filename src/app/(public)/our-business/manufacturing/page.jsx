@@ -270,8 +270,9 @@ export default function ManufacturingPage() {
                   href="https://rheem.co.id/"
                   target="_blank" rel="noopener noreferrer"
                   className="pill-button"
+                  title="Learn more about Steel and Plastic Packaging"
                 >
-                  Learn More
+                  Learn More <span className="sr-only">about Steel and Plastic Packaging</span>
                 </a>
               </motion.div>
             </motion.div>
