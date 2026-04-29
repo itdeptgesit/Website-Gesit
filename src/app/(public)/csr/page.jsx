@@ -167,28 +167,22 @@ export default function CSRPage() {
 							</section>
 
 							{/* ── OVERVIEW ── */}
-							<section 
-								className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714" 
-								style={{ backgroundColor: '#F1F5F8', padding: '150px 0 100px 0' }}
+							<section className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="f7f2714" data-element_type="section" data-e-type="section" data-settings='{"background_background":"classic"}'
 							>
 								<div className="elementor-container elementor-column-gap-no">
-									<div className="elementor-column elementor-col-100">
+									<div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3b9babf" data-id="3b9babf" data-element_type="column" data-e-type="column">
 										<div className="elementor-widget-wrap elementor-element-populated">
-											{/* Shared Heading Class */}
-											<h3 className="gs-overview-heading" style={{ color: '#103065', fontFamily: 'Lora, Georgia, serif', fontWeight: 400, textAlign: 'left', marginBottom: '20px', lineHeight: '50px', fontSize: '35px', maxWidth: '824px' }}>
-												Creating a positive effect on lives and communities by
-												adding the most value and making a significant and lasting
-												impact through Gesit Foundation.
-											</h3>
-											
-											{/* Shared Border Box Class */}
-											<div className="gs-overview-border-box" style={{ paddingLeft: '30px', borderLeft: '3px solid #BC9C33' }}>
-												<span className="gs-overview-body" style={{ color: '#103065', fontFamily: "'Source Sans Pro', sans-serif", fontSize: '24px', fontWeight: 400, display: 'block', lineHeight: '34px' }}>
-													Our social investment programs focus on three areas:
-													<strong> Healthcare, Environment &amp; Cultural
-													Outreach,</strong> and <strong>
-													Education.</strong>
-												</span>
+											<div className="elementor-element elementor-element-4560131 elementor-widget elementor-widget-heading" data-id="4560131" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+												<div className="elementor-widget-container">
+													<h3 className="elementor-heading-title elementor-size-default">
+														Creating a positive effect on lives and communities by adding the most value and making a significant and lasting impact through Gesit Foundation.
+													</h3>
+												</div>
+											</div>
+											<div className="elementor-element elementor-element-2fef7e8 elementor-widget elementor-widget-heading" data-id="2fef7e8" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+												<div className="elementor-widget-container">
+													<span className="elementor-heading-title elementor-size-default">Our social investment programs focus on three areas: <strong>Healthcare, Environment &amp; Cultural Outreach,</strong> and <strong>Education.</strong></span>
+												</div>
 											</div>
 										</div>
 									</div>
