@@ -181,8 +181,8 @@ export default function CSRPage() {
 												impact through Gesit Foundation.
 											</h3>
 											
-											{/* The box itself is centered (margin: 0 auto), but text inside is left-aligned */}
-											<div className="gs-overview-border-box" style={{ paddingLeft: '30px', borderLeft: '3px solid #BC9C33', maxWidth: '700px', margin: '0 auto' }}>
+											{/* The box itself spans the container, text inside is left-aligned */}
+											<div className="gs-overview-border-box" style={{ paddingLeft: '30px', borderLeft: '3px solid #BC9C33' }}>
 												<span className="gs-overview-body" style={{ color: '#103065', fontFamily: "'Source Sans Pro', sans-serif", fontSize: '24px', fontWeight: 400, display: 'block', lineHeight: '34px', textAlign: 'left' }}>
 													Our social investment programs focus on three areas:<br/>
 													<strong>Healthcare, Environment &amp; Cultural
@@ -210,7 +210,7 @@ export default function CSRPage() {
 										to   { opacity: 1; transform: translateY(0); }
 									}
 								`}</style>
-								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch', maxWidth: '1200px', margin: '0 auto' }}>
+								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch' }}>
 									{/* Card 1: Healthcare */}
 									<div
 										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc"
@@ -227,7 +227,7 @@ export default function CSRPage() {
 												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
 											/>
 										</div>
-										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '36px' }}>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column' }}>
 											<div style={{
 												position: 'absolute',
 												left: '50%',
@@ -236,6 +236,7 @@ export default function CSRPage() {
 												height: '98px',
 												backgroundColor: '#ffffff',
 												transform: 'translateX(-50%)',
+												zIndex: 10
 											}} />
 											<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em' }}>Healthcare</h5>
 											<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0 }}>We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.</p>
@@ -258,7 +259,7 @@ export default function CSRPage() {
 												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
 											/>
 										</div>
-										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '36px' }}>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column' }}>
 											<div style={{
 												position: 'absolute',
 												left: '50%',
@@ -267,6 +268,7 @@ export default function CSRPage() {
 												height: '98px',
 												backgroundColor: '#ffffff',
 												transform: 'translateX(-50%)',
+												zIndex: 10
 											}} />
 											<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em' }}>Environment &amp; Cultural Outreach</h5>
 											<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0 }}>We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.</p>
@@ -289,7 +291,7 @@ export default function CSRPage() {
 												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
 											/>
 										</div>
-										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '36px' }}>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column' }}>
 											<div style={{
 												position: 'absolute',
 												left: '50%',
@@ -298,6 +300,7 @@ export default function CSRPage() {
 												height: '98px',
 												backgroundColor: '#ffffff',
 												transform: 'translateX(-50%)',
+												zIndex: 10
 											}} />
 											<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em' }}>Education</h5>
 											<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0 }}>We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.</p>
