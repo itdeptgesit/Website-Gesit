@@ -1,7 +1,7 @@
 'use client';
 
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
@@ -10,6 +10,8 @@ import { motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
+import './csr.css';
+
 
 const heroSlides = [
 	{ image: '/csr/cover1.webp' },
@@ -34,6 +36,8 @@ export default function CSRPage() {
 		color: '#fff',
 	};
 
+	const SLIDE_DURATION = 5000;
+
 	useEffect(() => {
 		setIsMounted(true);
 		document.body.classList.add('elementor-page', 'elementor-page-5490');
@@ -41,7 +45,6 @@ export default function CSRPage() {
 			document.body.classList.remove('elementor-page', 'elementor-page-5490');
 		};
 	}, []);
-
 	// Initialize accordion after mount, once DOM is ready
 	useEffect(() => {
 		if (!isMounted) return;
@@ -72,7 +75,6 @@ export default function CSRPage() {
 		}, 50);
 		return () => clearTimeout(timer);
 	}, [isMounted]);
-
 	return (
 		<>
 			<link rel="stylesheet" media="all" href="/csr/css/style.css" />
@@ -83,13 +85,27 @@ export default function CSRPage() {
 
 							{/* ── HERO ── */}
 							<section className="gs-hero-section" style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+								{/* Progress Bar */}
+								<div style={{
+									position: 'absolute', top: 0, left: 0, width: '100%', height: 4,
+									background: 'rgba(0,0,0,0.2)', zIndex: 40,
+								}}>
+									<motion.div
+										key={activeIdx}
+										initial={{ scaleX: 0 }}
+										animate={{ scaleX: 1 }}
+										transition={{ duration: SLIDE_DURATION / 1000, ease: 'linear' }}
+										style={{ originX: 0, height: '100%', background: '#BC9C33' }}
+									/>
+								</div>
+
 								{isMounted && (
 									<>
 										<Swiper
 											modules={[Autoplay, Navigation, EffectFade]}
 											effect="fade"
 											speed={1500}
-											autoplay={{ delay: 5000, disableOnInteraction: false }}
+											autoplay={{ delay: SLIDE_DURATION, disableOnInteraction: false }}
 											loop={true}
 											navigation={{ prevEl, nextEl }}
 											onBeforeInit={(swiper) => {
@@ -151,21 +167,28 @@ export default function CSRPage() {
 							</section>
 
 							{/* ── OVERVIEW ── */}
-							<section className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="f7f2714" data-element_type="section" data-e-type="section" data-settings='{"background_background":"classic"}'>
+							<section 
+								className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714" 
+								style={{ backgroundColor: '#F1F5F8', padding: '150px 0 100px 0' }}
+							>
 								<div className="elementor-container elementor-column-gap-no">
-									<div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3b9babf" data-id="3b9babf" data-element_type="column" data-e-type="column">
+									<div className="elementor-column elementor-col-100">
 										<div className="elementor-widget-wrap elementor-element-populated">
-											<div className="elementor-element elementor-element-4560131 elementor-widget elementor-widget-heading" data-id="4560131" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
-												<div className="elementor-widget-container">
-													<h3 className="elementor-heading-title elementor-size-default">
-														Creating a positive effect on lives and communities by adding the most value and making a significant and lasting impact through Gesit Foundation.
-													</h3>
-												</div>
-											</div>
-											<div className="elementor-element elementor-element-2fef7e8 elementor-widget elementor-widget-heading" data-id="2fef7e8" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
-												<div className="elementor-widget-container">
-													<span className="elementor-heading-title elementor-size-default">Our social investment programs focus on three areas: <strong>Healthcare, Environment &amp; Cultural Outreach,</strong> and <strong>Education.</strong></span>
-												</div>
+											{/* Shared Heading Class */}
+											<h3 className="gs-overview-heading" style={{ color: '#103065', fontFamily: 'Lora, Georgia, serif', fontWeight: 400, textAlign: 'left', marginBottom: '20px', lineHeight: '50px', fontSize: '35px', maxWidth: '824px' }}>
+												Creating a positive effect on lives and communities by
+												adding the most value and making a significant and lasting
+												impact through Gesit Foundation.
+											</h3>
+											
+											{/* Shared Border Box Class */}
+											<div className="gs-overview-border-box" style={{ paddingLeft: '30px', borderLeft: '3px solid #BC9C33' }}>
+												<span className="gs-overview-body" style={{ color: '#103065', fontFamily: "'Source Sans Pro', sans-serif", fontSize: '24px', fontWeight: 400, display: 'block', lineHeight: '34px' }}>
+													Our social investment programs focus on three areas:
+													<strong> Healthcare, Environment &amp; Cultural
+													Outreach,</strong> and <strong>
+													Education.</strong>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -174,52 +197,76 @@ export default function CSRPage() {
 
 							{/* ── FOCUS AREAS ── */}
 							<section className="elementor-section elementor-top-section elementor-element elementor-element-861be59 elementor-section-stretched zs-custom-height no-button mobile-justify-center elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="861be59" data-element_type="section" data-e-type="section" data-settings='{"stretch_section":"section-stretched","background_background":"classic"}'>
-								<div className="elementor-container elementor-column-gap-no">
-									<div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc" data-id="2f9badc" data-element_type="column" data-e-type="column">
-										<div className="elementor-widget-wrap elementor-element-populated">
-											<div className="elementor-element elementor-element-7276c3b p-15 elementor-widget elementor-widget-thetrial_core_location_info" data-id="7276c3b" data-element_type="widget" data-e-type="widget" data-widget_type="thetrial_core_location_info.default">
-												<div className="elementor-widget-container">
-													<div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ overflow: 'hidden', height: '100%' }}>
-														<div className="qodef-m-image"> <img loading="lazy" decoding="async" width="753" height="597" src="/csr/images/healthcare-scaled-1.jpg" className="attachment-full size-full" alt="" style={{ display: 'block' }} /></div>
-														<div className="qodef-m-content" style={{ backgroundColor: "#BC9C33" }}>
-															<h5 className="qodef-m-title" style={{ color: "#FFFFFF" }}>Healthcare</h5>
-															<p className="qodef-m-text" style={{ color: "#FFFFFF" }}>We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.</p>
-														</div>
-													</div>
-												</div>
+								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch' }}>
+									{/* Card 1: Healthcare */}
+									<motion.div 
+										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc group" 
+										style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true, margin: "-50px" }}
+										transition={{ duration: 0.6, delay: 0.1 }}
+									>
+										<div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '15px' }}>
+											{/* Image - fully rounded 5px */}
+											<div style={{ aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0, borderRadius: '5px' }}>
+												<img loading="lazy" decoding="async" src="/csr/images/healthcare-scaled-1.jpg" alt="Healthcare" className="group-hover:scale-110 transition-transform duration-700 ease-out" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+											</div>
+											{/* Golden content - fully rounded 5px, with 30px gap */}
+											<div style={{ backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', borderRadius: '5px', position: 'relative', marginTop: '30px' }}>
+												{/* White connector line — 98px height, animated */}
+												<div className="qodef-location-info-line-animated" />
+												<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em', position: 'relative', zIndex: 11 }}>Healthcare</h5>
+												<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0, position: 'relative', zIndex: 11 }}>We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.</p>
 											</div>
 										</div>
-									</div>
-									<div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d0ecfb1" data-id="d0ecfb1" data-element_type="column" data-e-type="column">
-										<div className="elementor-widget-wrap elementor-element-populated">
-											<div className="elementor-element elementor-element-36c4e72 p-15 elementor-widget elementor-widget-thetrial_core_location_info" data-id="36c4e72" data-element_type="widget" data-e-type="widget" data-widget_type="thetrial_core_location_info.default">
-												<div className="elementor-widget-container">
-													<div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ overflow: 'hidden', height: '100%' }}>
-														<div className="qodef-m-image"> <img loading="lazy" decoding="async" width="469" height="372" src="/csr/images/environment-scaled-1.jpg" className="attachment-full size-full" alt="" style={{ display: 'block' }} /></div>
-														<div className="qodef-m-content" style={{ backgroundColor: "#BC9C33" }}>
-															<h5 className="qodef-m-title" style={{ color: "#FFFFFF" }}>Environment &amp; Cultural Outreach</h5>
-															<p className="qodef-m-text" style={{ color: "#FFFFFF" }}>We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.</p>
-														</div>
-													</div>
-												</div>
+									</motion.div>
+									{/* Card 2: Environment */}
+									<motion.div 
+										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d0ecfb1 group" 
+										style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true, margin: "-50px" }}
+										transition={{ duration: 0.6, delay: 0.2 }}
+									>
+										<div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '15px' }}>
+											{/* Image - fully rounded 5px */}
+											<div style={{ aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0, borderRadius: '5px' }}>
+												<img loading="lazy" decoding="async" src="/csr/images/environment-scaled-1.jpg" alt="Environment" className="group-hover:scale-110 transition-transform duration-700 ease-out" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+											</div>
+											{/* Golden content - fully rounded 5px, with 30px gap */}
+											<div style={{ backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', borderRadius: '5px', position: 'relative', marginTop: '30px' }}>
+												{/* White connector line — 98px height, animated */}
+												<div className="qodef-location-info-line-animated" />
+												<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em', position: 'relative', zIndex: 11 }}>Environment &amp; Cultural Outreach</h5>
+												<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0, position: 'relative', zIndex: 11 }}>We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.</p>
 											</div>
 										</div>
-									</div>
-									<div className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-df100c7" data-id="df100c7" data-element_type="column" data-e-type="column">
-										<div className="elementor-widget-wrap elementor-element-populated">
-											<div className="elementor-element elementor-element-d719d27 p-15 elementor-widget elementor-widget-thetrial_core_location_info" data-id="d719d27" data-element_type="widget" data-e-type="widget" data-widget_type="thetrial_core_location_info.default">
-												<div className="elementor-widget-container">
-													<div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ overflow: 'hidden', height: '100%' }}>
-														<div className="qodef-m-image"> <img loading="lazy" decoding="async" width="1707" height="1353" src="/csr/images/education-scaled-1.jpg" className="attachment-full size-full" alt="" style={{ display: 'block' }} /></div>
-														<div className="qodef-m-content" style={{ backgroundColor: "#BC9C33" }}>
-															<h5 className="qodef-m-title" style={{ color: "#FFFFFF" }}>Education</h5>
-															<p className="qodef-m-text" style={{ color: "#FFFFFF" }}>We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.</p>
-														</div>
-													</div>
-												</div>
+									</motion.div>
+									{/* Card 3: Education */}
+									<motion.div 
+										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-df100c7 group" 
+										style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
+										initial={{ opacity: 0, y: 30 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true, margin: "-50px" }}
+										transition={{ duration: 0.6, delay: 0.3 }}
+									>
+										<div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '15px' }}>
+											{/* Image - fully rounded 5px */}
+											<div style={{ aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0, borderRadius: '5px' }}>
+												<img loading="lazy" decoding="async" src="/csr/images/education-scaled-1.jpg" alt="Education" className="group-hover:scale-110 transition-transform duration-700 ease-out" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
+											</div>
+											{/* Golden content - fully rounded 5px, with 30px gap */}
+											<div style={{ backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', borderRadius: '5px', position: 'relative', marginTop: '30px' }}>
+												{/* White connector line — 98px height, animated */}
+												<div className="qodef-location-info-line-animated" />
+												<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em', position: 'relative', zIndex: 11 }}>Education</h5>
+												<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0, position: 'relative', zIndex: 11 }}>We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.</p>
 											</div>
 										</div>
-									</div>
+									</motion.div>
 								</div>
 							</section>
 
@@ -320,9 +367,9 @@ function CSRAccordion() {
 							<div className="elementor-widget-container">
 								<div className="qodef-shortcode qodef-m qodef-accordion qodef--init clear qodef-behavior--accordion qodef-layout--simple">
 									{accordionItems.map((item, i) => (
-										<div key={i}>
+										<Fragment key={i}>
 											<h5
-												className={`qodef-accordion-title${openIdx === i ? ' qodef--opened ui-state-active' : ''}`}
+												className={`qodef-accordion-title${openIdx === i ? ' qodef--opened ui-state-active active' : ''}`}
 												onClick={() => setOpenIdx(openIdx === i ? -1 : i)}
 												style={{ cursor: 'pointer' }}
 											>
@@ -332,12 +379,12 @@ function CSRAccordion() {
 												</span>{' '}
 												<span className="qodef-tab-title"> {item.title} </span>
 											</h5>
-											<div className="qodef-accordion-content" style={{ display: openIdx === i ? 'block' : 'none' }}>
+											<div className={`qodef-accordion-content${openIdx === i ? ' open' : ''}`}>
 												<div className="qodef-accordion-content-inner">
 													{item.content}
 												</div>
 											</div>
-										</div>
+										</Fragment>
 									))}
 								</div>
 							</div>

@@ -149,50 +149,78 @@
 			background-size: 55% auto;
 		}
 
+		/* --- Section f7f2714: Overview --- */
+		.elementor-5490 .elementor-element.elementor-element-f7f2714:not(.elementor-motion-effects-element-type-background),
+		.elementor-5490 .elementor-element.elementor-element-f7f2714>.elementor-motion-effects-container>.elementor-motion-effects-layer {
+			background-color: #F1F5F8;
+		}
+
+		.elementor-5490 .elementor-element.elementor-element-f7f2714>.elementor-container {
+			max-width: 824px;
+		}
+
+		.elementor-5490 .elementor-element.elementor-element-f7f2714 {
+			transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+			padding: 100px 0 50px 0;
+		}
+
+		.elementor-5490 .elementor-element.elementor-element-f7f2714>.elementor-background-overlay {
+			transition: background .3s, border-radius .3s, opacity .3s;
+		}
+
 		/* h3 – "Creating a positive effect…" */
 		.elementor-5490 .elementor-element.elementor-element-4560131 .elementor-heading-title {
-			color: #103065;
 			font-family: "Lora", Sans-serif;
-			font-size: 28px;
 			font-weight: 400;
-			line-height: 1.63em;
+			line-height: 1.34em;
+			color: #103065;
 			text-align: center;
+			font-size: 35px;
+			margin: 0;
 		}
 
 		.elementor-5490 .elementor-element.elementor-element-4560131>.elementor-widget-container {
 			padding: 0;
-			max-width: 800px;
 			margin: 0 auto;
+			max-width: 824px;
 		}
 
 		/* span – "Our social investment programs…" */
-		.elementor-5490 .elementor-element.elementor-element-2fef7e8 .elementor-heading-title {
-			color: #103065;
-			font-family: "Source Sans Pro", Sans-serif;
-			font-size: 18px;
-			font-weight: 400;
-			line-height: 1.6em;
-			text-align: left;
-		}
-
 		.elementor-5490 .elementor-element.elementor-element-2fef7e8>.elementor-widget-container {
-			margin: 24px auto 0px auto;
-			padding: 10px 0px 10px 25px;
-			border-left: 2px solid #BC9C33;
+			padding: 0 0 0 40px;
+			border-style: solid;
+			border-width: 0 0 0 2px;
+			border-color: #BC9C33;
+			border-radius: 0 0 0 1px;
+			margin: 24px auto 0 auto;
 			max-width: 650px;
 		}
 
-		/* --- Section 861be59: Focus Areas (blue bg) --- */
+		.elementor-5490 .elementor-element.elementor-element-2fef7e8 .elementor-heading-title {
+			font-family: "Source Sans Pro", sans-serif;
+			font-size: 24px;
+			font-weight: 400;
+			line-height: 1.5em;
+			color: #103065;
+			text-align: left;
+			display: block;
+		}
+
+		/* --- Section 861be59: Focus Areas --- */
 		.elementor-5490 .elementor-element.elementor-element-861be59:not(.elementor-motion-effects-element-type-background),
 		.elementor-5490 .elementor-element.elementor-element-861be59>.elementor-motion-effects-container>.elementor-motion-effects-layer {
 			background-color: #103065;
 		}
 
+		.elementor-5490 .elementor-element.elementor-element-861be59>.elementor-container {
+			max-width: 1240px;
+		}
+
 		.elementor-5490 .elementor-element.elementor-element-861be59 {
-			transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
-			margin-top: 0px;
-			margin-bottom: 0px;
-			padding: 50px 0px 80px 0px;
+			transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+			margin-top: 0;
+			margin-bottom: 0;
+			padding: 150px 0;
 		}
 
 		/* p-15 padding for location info widget containers */
@@ -202,50 +230,87 @@
 			padding: 15px;
 		}
 
-		/* qodef location-info card styles */
+		/* qodef location-info card styles — !important to override legacy style.css */
+		.qodef-location-info {
+			display: flex !important;
+			flex-direction: column !important;
+			height: 100% !important;
+			border-radius: 5px !important;
+			overflow: hidden !important;
+		}
+
 		.qodef-location-info .qodef-m-image {
-			aspect-ratio: 4 / 3;
-			overflow: hidden;
-			display: block;
+			aspect-ratio: 4 / 3 !important;
+			overflow: hidden !important;
+			display: block !important;
+			width: 100% !important;
+			flex-shrink: 0 !important;
+			border-radius: 0 !important;
 		}
 
 		.qodef-location-info .qodef-m-image img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			display: block;
+			width: 100% !important;
+			height: 100% !important;
+			object-fit: cover !important;
+			display: block !important;
+			border-radius: 0 !important;
 		}
 
 		.qodef-location-info.qodef-layout--text-below .qodef-m-content {
-			padding: 20px 25px 30px;
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-		}
-
-		.qodef-location-info {
-			display: flex;
-			flex-direction: column;
-			height: 100%;
+			padding: 20px 25px 30px !important;
+			flex: 1 !important;
+			display: flex !important;
+			flex-direction: column !important;
+			border-radius: 0 !important;
 		}
 
 		.qodef-location-info .qodef-m-title {
-			font-family: "Lora", Sans-serif;
-			font-size: 20px;
-			font-weight: 400;
-			margin: 0 0 10px;
-			line-height: 1.3em;
+			font-family: "Lora", Sans-serif !important;
+			font-size: 20px !important;
+			font-weight: 400 !important;
+			margin: 0 0 10px !important;
+			line-height: 1.3em !important;
 		}
 
 		.qodef-location-info .qodef-m-text {
-			font-family: "Source Sans Pro", Sans-serif;
-			font-size: 16px;
-			font-weight: 300;
-			line-height: 1.6em;
-			margin: 0;
+			font-family: "Source Sans Pro", Sans-serif !important;
+			font-size: 16px !important;
+			font-weight: 300 !important;
+			line-height: 1.6em !important;
+			margin: 0 !important;
 		}
 
-		/* equalize content heights (zs-custom-height JS behaviour) */
+		/* ── Equalize card heights: stretch semua kolom ── */
+		.elementor-element-861be59 > .elementor-container {
+			align-items: stretch !important;
+			display: flex !important;
+		}
+
+		.elementor-element-861be59 .elementor-col-33 {
+			display: flex !important;
+			flex-direction: column !important;
+		}
+
+		.elementor-element-861be59 .elementor-widget-wrap {
+			flex: 1 !important;
+			display: flex !important;
+			flex-direction: column !important;
+		}
+
+		.elementor-element-861be59 .elementor-widget-container {
+			flex: 1 !important;
+			display: flex !important;
+			flex-direction: column !important;
+			padding: 15px !important;
+		}
+
+		.elementor-element-861be59 .qodef-shortcode {
+			flex: 1 !important;
+			display: flex !important;
+			flex-direction: column !important;
+		}
+
+		/* equalize content heights */
 		.zs-custom-height .qodef-location-info .qodef-m-content {
 			min-height: 250px;
 		}
@@ -310,13 +375,21 @@
 			background-color: #BC9C33;
 			color: #fff;
 			font-size: 18px;
-			line-height: 1;
+			line-height: 0;
 			transition: all 0.3s;
+		}
+
+		.qodef-accordion-mark span {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
 		}
 
 		.qodef-accordion-title.active .qodef-accordion-mark {
 			background-color: transparent;
-			border-color: rgba(188, 156, 51, 0.5);
+			border-color: #BC9C33;
 			color: #BC9C33;
 		}
 
@@ -450,3 +523,39 @@
 				padding: 20px 20px 60px 20px;
 			}
 		}
+
+/* --- CSR CARDS ANIMATIONS --- */
+@keyframes qode-line-from-top {
+    0% {
+        transform-origin: bottom;
+        transform: translateX(-50%) scaleY(1);
+    }
+    43% {
+        transform-origin: bottom;
+        transform: translateX(-50%) scaleY(0);
+    }
+    44% {
+        transform-origin: top;
+        transform: translateX(-50%) scaleY(0);
+    }
+    100% {
+        transform-origin: top;
+        transform: translateX(-50%) scaleY(1);
+    }
+}
+
+.qodef-location-info-line-animated {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease;
+    width: 1px;
+    height: 98px;
+    background-color: #ffffff;
+    z-index: 10;
+    top: -62px;
+}
+
+.group:hover .qodef-location-info-line-animated {
+    animation: qode-line-from-top 0.8s cubic-bezier(.25, .46, .45, .94) forwards;
+}
