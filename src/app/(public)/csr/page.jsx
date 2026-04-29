@@ -210,13 +210,13 @@ export default function CSRPage() {
 										to   { opacity: 1; transform: translateY(0); }
 									}
 								`}</style>
-								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch' }}>
+								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch', maxWidth: '1200px', margin: '0 auto' }}>
 									{/* Card 1: Healthcare */}
 									<div
 										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc"
-										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.2s both' }}
+										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.2s both', padding: '15px' }}
 									>
-										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
+										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0, borderRadius: '5px' }}>
 											<img
 												loading="lazy"
 												decoding="async"
@@ -227,7 +227,7 @@ export default function CSRPage() {
 												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
 											/>
 										</div>
-										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column' }}>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '30px', borderRadius: '5px' }}>
 											<div style={{
 												position: 'absolute',
 												left: '50%',
@@ -246,9 +246,9 @@ export default function CSRPage() {
 									{/* Card 2: Environment */}
 									<div
 										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d0ecfb1"
-										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.4s both' }}
+										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.4s both', padding: '15px' }}
 									>
-										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
+										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0, borderRadius: '5px' }}>
 											<img
 												loading="lazy"
 												decoding="async"
@@ -259,7 +259,7 @@ export default function CSRPage() {
 												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
 											/>
 										</div>
-										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column' }}>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '30px', borderRadius: '5px' }}>
 											<div style={{
 												position: 'absolute',
 												left: '50%',
@@ -278,9 +278,9 @@ export default function CSRPage() {
 									{/* Card 3: Education */}
 									<div
 										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-df100c7"
-										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.6s both' }}
+										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.6s both', padding: '15px' }}
 									>
-										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
+										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0, borderRadius: '5px' }}>
 											<img
 												loading="lazy"
 												decoding="async"
@@ -291,7 +291,7 @@ export default function CSRPage() {
 												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
 											/>
 										</div>
-										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column' }}>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '30px', borderRadius: '5px' }}>
 											<div style={{
 												position: 'absolute',
 												left: '50%',
