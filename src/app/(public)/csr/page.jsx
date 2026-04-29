@@ -167,22 +167,28 @@ export default function CSRPage() {
 							</section>
 
 							{/* ── OVERVIEW ── */}
-							<section className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="f7f2714" data-element_type="section" data-e-type="section" data-settings='{"background_background":"classic"}'
+							<section 
+								className="elementor-section elementor-top-section elementor-element elementor-element-f7f2714" 
+								style={{ backgroundColor: '#F1F5F8', padding: '120px 20px 100px 20px', display: 'flex', justifyContent: 'center' }}
 							>
-								<div className="elementor-container elementor-column-gap-no">
-									<div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3b9babf" data-id="3b9babf" data-element_type="column" data-e-type="column">
+								<div className="elementor-container elementor-column-gap-no" style={{ maxWidth: '850px', width: '100%', margin: '0 auto' }}>
+									<div className="elementor-column elementor-col-100">
 										<div className="elementor-widget-wrap elementor-element-populated">
-											<div className="elementor-element elementor-element-4560131 elementor-widget elementor-widget-heading" data-id="4560131" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
-												<div className="elementor-widget-container">
-													<h3 className="elementor-heading-title elementor-size-default">
-														Creating a positive effect on lives and communities by adding the most value and making a significant and lasting impact through Gesit Foundation.
-													</h3>
-												</div>
-											</div>
-											<div className="elementor-element elementor-element-2fef7e8 elementor-widget elementor-widget-heading" data-id="2fef7e8" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
-												<div className="elementor-widget-container">
-													<span className="elementor-heading-title elementor-size-default">Our social investment programs focus on three areas: <strong>Healthcare, Environment &amp; Cultural Outreach,</strong> and <strong>Education.</strong></span>
-												</div>
+											{/* Heading is centered */}
+											<h3 className="gs-overview-heading" style={{ color: '#103065', fontFamily: 'Lora, Georgia, serif', fontWeight: 400, textAlign: 'center', marginBottom: '40px', lineHeight: '50px', fontSize: '35px' }}>
+												Creating a positive effect on lives and communities by
+												adding the most value and making a significant and lasting
+												impact through Gesit Foundation.
+											</h3>
+											
+											{/* The box itself is centered (margin: 0 auto), but text inside is left-aligned */}
+											<div className="gs-overview-border-box" style={{ paddingLeft: '30px', borderLeft: '3px solid #BC9C33', maxWidth: '700px', margin: '0 auto' }}>
+												<span className="gs-overview-body" style={{ color: '#103065', fontFamily: "'Source Sans Pro', sans-serif", fontSize: '24px', fontWeight: 400, display: 'block', lineHeight: '34px', textAlign: 'left' }}>
+													Our social investment programs focus on three areas:<br/>
+													<strong>Healthcare, Environment &amp; Cultural
+													Outreach,</strong> and <strong>
+													Education.</strong>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -190,77 +196,113 @@ export default function CSRPage() {
 							</section>
 
 							{/* ── FOCUS AREAS ── */}
-							<section className="elementor-section elementor-top-section elementor-element elementor-element-861be59 elementor-section-stretched zs-custom-height no-button mobile-justify-center elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="861be59" data-element_type="section" data-e-type="section" data-settings='{"stretch_section":"section-stretched","background_background":"classic"}'>
-								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch' }}>
+							<section
+								className="elementor-section elementor-top-section elementor-element elementor-element-861be59 elementor-section-stretched zs-custom-height no-button mobile-justify-center elementor-section-boxed elementor-section-height-default qodef-elementor-content-no"
+								data-id="861be59"
+								data-element_type="section"
+								data-e-type="section"
+								data-settings='{"stretch_section":"section-stretched","background_background":"classic"}'
+								style={{ backgroundColor: '#103065' }}
+							>
+								<style>{`
+									@keyframes fadeInUpCard {
+										from { opacity: 0; transform: translateY(40px); }
+										to   { opacity: 1; transform: translateY(0); }
+									}
+								`}</style>
+								<div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', alignItems: 'stretch', maxWidth: '1200px', margin: '0 auto' }}>
 									{/* Card 1: Healthcare */}
-									<motion.div 
-										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc group" 
-										style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										viewport={{ once: true, margin: "-50px" }}
-										transition={{ duration: 0.6, delay: 0.1 }}
+									<div
+										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-2f9badc"
+										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.2s both' }}
 									>
-										<div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '15px' }}>
-											{/* Image - fully rounded 5px */}
-											<div style={{ aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0, borderRadius: '5px' }}>
-												<img loading="lazy" decoding="async" src="/csr/images/healthcare-scaled-1.jpg" alt="Healthcare" className="group-hover:scale-110 transition-transform duration-700 ease-out" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-											</div>
-											{/* Golden content - fully rounded 5px, with 30px gap */}
-											<div style={{ backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', borderRadius: '5px', position: 'relative', marginTop: '30px' }}>
-												{/* White connector line — 98px height, animated */}
-												<div className="qodef-location-info-line-animated" />
-												<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em', position: 'relative', zIndex: 11 }}>Healthcare</h5>
-												<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0, position: 'relative', zIndex: 11 }}>We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.</p>
-											</div>
+										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
+											<img
+												loading="lazy"
+												decoding="async"
+												src="/csr/images/healthcare-scaled-1.jpg"
+												alt="Healthcare"
+												style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 700ms ease-out' }}
+												onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
+												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+											/>
 										</div>
-									</motion.div>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '36px' }}>
+											<div style={{
+												position: 'absolute',
+												left: '50%',
+												top: '-62px',
+												width: '1px',
+												height: '98px',
+												backgroundColor: '#ffffff',
+												transform: 'translateX(-50%)',
+											}} />
+											<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em' }}>Healthcare</h5>
+											<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0 }}>We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.</p>
+										</div>
+									</div>
+
 									{/* Card 2: Environment */}
-									<motion.div 
-										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d0ecfb1 group" 
-										style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										viewport={{ once: true, margin: "-50px" }}
-										transition={{ duration: 0.6, delay: 0.2 }}
+									<div
+										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d0ecfb1"
+										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.4s both' }}
 									>
-										<div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '15px' }}>
-											{/* Image - fully rounded 5px */}
-											<div style={{ aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0, borderRadius: '5px' }}>
-												<img loading="lazy" decoding="async" src="/csr/images/environment-scaled-1.jpg" alt="Environment" className="group-hover:scale-110 transition-transform duration-700 ease-out" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-											</div>
-											{/* Golden content - fully rounded 5px, with 30px gap */}
-											<div style={{ backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', borderRadius: '5px', position: 'relative', marginTop: '30px' }}>
-												{/* White connector line — 98px height, animated */}
-												<div className="qodef-location-info-line-animated" />
-												<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em', position: 'relative', zIndex: 11 }}>Environment &amp; Cultural Outreach</h5>
-												<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0, position: 'relative', zIndex: 11 }}>We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.</p>
-											</div>
+										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
+											<img
+												loading="lazy"
+												decoding="async"
+												src="/csr/images/environment-scaled-1.jpg"
+												alt="Environment & Cultural Outreach"
+												style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 700ms ease-out' }}
+												onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
+												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+											/>
 										</div>
-									</motion.div>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '36px' }}>
+											<div style={{
+												position: 'absolute',
+												left: '50%',
+												top: '-62px',
+												width: '1px',
+												height: '98px',
+												backgroundColor: '#ffffff',
+												transform: 'translateX(-50%)',
+											}} />
+											<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em' }}>Environment &amp; Cultural Outreach</h5>
+											<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0 }}>We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.</p>
+										</div>
+									</div>
+
 									{/* Card 3: Education */}
-									<motion.div 
-										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-df100c7 group" 
-										style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-										initial={{ opacity: 0, y: 30 }}
-										whileInView={{ opacity: 1, y: 0 }}
-										viewport={{ once: true, margin: "-50px" }}
-										transition={{ duration: 0.6, delay: 0.3 }}
+									<div
+										className="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-df100c7"
+										style={{ display: 'flex', flexDirection: 'column', flex: 1, animation: 'fadeInUpCard 0.7s ease-out 0.6s both' }}
 									>
-										<div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '15px' }}>
-											{/* Image - fully rounded 5px */}
-											<div style={{ aspectRatio: '4/3', overflow: 'hidden', flexShrink: 0, borderRadius: '5px' }}>
-												<img loading="lazy" decoding="async" src="/csr/images/education-scaled-1.jpg" alt="Education" className="group-hover:scale-110 transition-transform duration-700 ease-out" style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-											</div>
-											{/* Golden content - fully rounded 5px, with 30px gap */}
-											<div style={{ backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', borderRadius: '5px', position: 'relative', marginTop: '30px' }}>
-												{/* White connector line — 98px height, animated */}
-												<div className="qodef-location-info-line-animated" />
-												<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em', position: 'relative', zIndex: 11 }}>Education</h5>
-												<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0, position: 'relative', zIndex: 11 }}>We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.</p>
-											</div>
+										<div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
+											<img
+												loading="lazy"
+												decoding="async"
+												src="/csr/images/education-scaled-1.jpg"
+												alt="Education"
+												style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 700ms ease-out' }}
+												onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
+												onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+											/>
 										</div>
-									</motion.div>
+										<div style={{ position: 'relative', backgroundColor: '#BC9C33', flex: 1, padding: '35px 40px', display: 'flex', flexDirection: 'column', marginTop: '36px' }}>
+											<div style={{
+												position: 'absolute',
+												left: '50%',
+												top: '-62px',
+												width: '1px',
+												height: '98px',
+												backgroundColor: '#ffffff',
+												transform: 'translateX(-50%)',
+											}} />
+											<h5 style={{ color: '#FFFFFF', fontFamily: '"Lora", serif', fontSize: '20px', fontWeight: 400, margin: '0 0 27px', lineHeight: '1.3em' }}>Education</h5>
+											<p style={{ color: '#FFFFFF', fontFamily: '"Source Sans Pro", sans-serif', fontSize: '16px', fontWeight: 300, lineHeight: '1.6em', margin: 0 }}>We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.</p>
+										</div>
+									</div>
 								</div>
 							</section>
 
