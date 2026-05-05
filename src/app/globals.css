@@ -724,8 +724,15 @@ a {
 /* Mobile (< 777px) */
 @media (max-width: 777px) {
   .gs-hero-title {
-    font-size: 55px !important;
-    line-height: 55px !important;
+    left: 50% !important;
+    bottom: 50% !important;
+    transform: translate(-50%, 50%) !important;
+    font-size: 32px !important;
+    line-height: 40px !important;
+    text-align: center !important;
+    white-space: normal !important;
+    width: 100% !important;
+    padding: 0 20px !important;
   }
 }
 

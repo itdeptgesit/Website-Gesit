@@ -178,8 +178,12 @@ export default function CSRPage() {
                                     <img
                                         src={src}
                                         alt={`CSR Hero ${index + 1}`}
-                                        className="w-full h-full object-cover animate-property-zoom"
-                                        style={{ transformOrigin: 'center' }}
+                                        className="w-full h-full object-cover"
+                                        style={{
+                                            transformOrigin: 'center',
+                                            transform: index === activeIndex ? "scale(1.15)" : "scale(1.05)",
+                                            transition: "transform 10000ms ease-out"
+                                        }}
                                         loading={index === 0 ? "eager" : "lazy"}
                                         decoding="async"
                                     />
@@ -204,30 +208,22 @@ export default function CSRPage() {
                     </div>
                 </div>
 
-                {/* "CSR" animated title */}
-                <motion.div
-                    className="absolute z-10 w-full px-6 text-center md:text-left md:w-auto md:px-0 top-[45%] -translate-y-1/2 md:top-auto md:bottom-[70px] md:left-[60px] md:translate-y-0 text-white"
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-                    style={{
-                        fontFamily: 'Lora, Georgia, serif',
-                        textShadow: '0px 0px 16px rgba(0, 0, 0, 0.3)',
-                        fontWeight: 400
-                    }}
+                {/* Hero title */}
+                <motion.h1
+                    className="gs-hero-title"
+                    initial={{ opacity: 0, y: 25 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                    style={{ lineHeight: "72px" }}
                 >
-                    <div className="w-[312px] h-[135px] mx-auto md:mx-0 md:w-auto md:h-auto flex items-center md:block">
-                        <h1 className="text-[45px] sm:text-5xl md:text-[60px] leading-tight md:leading-[88px] text-white w-full">
-                            Corporate Social<br className="md:hidden" /> Responsibility
-                        </h1>
-                    </div>
-                </motion.div>
+                    Corporate Social<br className="md:hidden" /> Responsibility
+                </motion.h1>
 
                 {/* Navigation arrows */}
-                <div className="hidden md:flex absolute bottom-[70px] right-[60px] z-10 gap-[15px]">
+                <div className="gs-hero-nav hidden md:flex">
                     <button
                         ref={(node) => setPrevEl(node)}
+                        className="gs-prev-news"
                         style={circleBtn}
                         onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
@@ -238,6 +234,7 @@ export default function CSRPage() {
                     </button>
                     <button
                         ref={(node) => setNextEl(node)}
+                        className="gs-next-news"
                         style={circleBtn}
                         onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
                         onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
@@ -358,14 +355,14 @@ export default function CSRPage() {
 
                     <div className="flex flex-col">
                         {initiatives.map((initiative) => (
-                                <div key={initiative.title} className="border-b border-slate-200 first:border-t">
+                                <div key={initiative.title} className="border-b border-slate-300 first:border-t">
                                     <button
                                         onClick={() =>
                                             setOpenInitiative(
                                                 openInitiative === initiative.title ? null : initiative.title
                                             )
                                         }
-                                        className="w-full py-2.5 flex items-center gap-4 text-left transition-colors group"
+                                        className="w-full py-2 flex items-center gap-4 text-left transition-colors group"
                                     >
                                         <div className={`w-8 h-8 rounded-full border-2 border-[#BC9C33] flex items-center justify-center shrink-0 transition-all ${openInitiative === initiative.title ? 'bg-transparent text-[#BC9C33]' : 'bg-[#BC9C33] text-white'}`}>
                                             {openInitiative === initiative.title ? <Minus size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
@@ -382,15 +379,16 @@ export default function CSRPage() {
                                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                                                 className="overflow-hidden"
                                             >
-                                                <div className="pl-8 md:pl-12 pr-4 md:pr-8 pb-4 pt-0">
-                                                    {initiative.content.map(block => (
-                                                        <div key={block.subtitle} className="mt-3 first:mt-0">
+                                                <div className="border-t border-slate-200 w-full" />
+                                                <div className="pl-6 md:pl-10 pr-4 md:pr-8 pb-2 pt-1">
+                                                    {initiative.content.map((block, idx) => (
+                                                        <div key={block.subtitle} className={`mt-2 ${idx !== 0 ? 'pt-1 border-t border-slate-100' : ''}`}>
                                                             {block.subtitle && (
                                                                 <h4 className="text-[18px] md:text-[19px] font-bold text-[#444] leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
                                                                     {block.subtitle}
                                                                 </h4>
                                                             )}
-                                                            <ul className="mt-1 space-y-0.5">
+                                                            <ul className="mt-0.5 space-y-0">
                                                                 {block.items.map((item, i) => {
                                                                     const isSubItem = item.startsWith("- ");
                                                                     return (
