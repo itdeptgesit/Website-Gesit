@@ -43,15 +43,22 @@ const NewsPage = () => {
 
   const [newsItems, setNewsItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
+        setLoading(true);
         const res = await fetch('/api/news');
         const data = await res.json();
-        if (res.ok) setNewsItems(data);
+        if (res.ok) {
+          setNewsItems(data);
+        } else {
+          setError(data.error || "Failed to fetch news");
+        }
       } catch (err) {
         console.error("Failed to fetch news:", err);
+        setError("Network error or server is down");
       } finally {
         setLoading(false);
       }
@@ -238,34 +245,61 @@ const NewsPage = () => {
         </section>
       )}
 
-      {/* ================= ARCHIVE GRID ================= */}
-      {newsItems.length > 1 && (
-        <section className="pt-12 pb-24 bg-white">
-          <div className="container mx-auto px-6 max-w-7xl relative z-30">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherArticles.slice(0, 3).map((item, idx) => (
+      {/* ================= NEWS GRID ================= */}
+      <section className="py-24 bg-white" id="news-archive">
+        <div className="container mx-auto px-6">
+          <motion.h2 {...textVariant} className="text-[32px] md:text-[44px] text-navy-deep mb-16 text-center" style={{ fontFamily: 'Georgia, serif' }}>
+            Latest Stories
+          </motion.h2>
+
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-20 gap-4" data-testid="news-loading">
+              <Loader2 className="w-12 h-12 text-[#BC9C33] animate-spin" />
+              <p className="text-navy-deep/60 animate-pulse font-medium">Fetching the latest news...</p>
+            </div>
+          ) : error ? (
+            <div className="bg-red-50 border border-red-100 rounded-2xl p-12 text-center max-w-2xl mx-auto" data-testid="news-error">
+              <h3 className="text-red-800 text-xl font-bold mb-2">Oops! Something went wrong</h3>
+              <p className="text-red-600 mb-6">{error}</p>
+              <button onClick={() => window.location.reload()} className="px-6 py-2 bg-red-800 text-white rounded-full hover:bg-red-900 transition-colors">
+                Try Again
+              </button>
+            </div>
+          ) : newsItems.length === 0 ? (
+            <div className="text-center py-32 bg-slate-50 rounded-3xl" data-testid="news-empty">
+              <div className="text-slate-300 mb-6 flex justify-center">
+                <svg className="w-20 h-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M14 2v4a2 2 0 002 2h4" />
+                </svg>
+              </div>
+              <h3 className="text-navy-deep text-2xl font-bold mb-2">No Stories Yet</h3>
+              <p className="text-navy-deep/60">Check back later for the latest updates from Gesit.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {otherArticles.map((item, index) => (
                 <motion.div
                   key={item.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: idx * 0.15 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="flex"
                 >
                   <Link
                     href={`/news/${item.slug || item.id}`}
-                    className="flex-1 bg-[#f0f4f9] p-12 md:p-14 flex flex-col items-start group hover:bg-[#e4ebf3] transition-all duration-500 min-h-[380px] rounded-[5px]"
+                    className="flex-1 bg-[#f0f4f9] p-10 md:p-12 flex flex-col items-start group hover:bg-[#e4ebf3] transition-all duration-500 min-h-[360px] rounded-[5px]"
                   >
-                    <span className="text-[13px] font-bold uppercase tracking-[.3em] text-navy-deep/50 mb-10 block">
-                      {item.date}
+                    <span className="text-[13px] font-bold uppercase tracking-[.3em] text-navy-deep/50 mb-8 block">
+                      {new Date(item.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                     </span>
-                    <motion.h4
-                      variants={textVariant}
-                      className="text-2xl text-navy-deep leading-snug mb-12 group-hover:text-[#103065]/80 transition-colors"
+                    <h3
+                      className="text-2xl text-navy-deep leading-snug mb-10 group-hover:text-[#BC9C33] transition-colors"
                       style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
                       {item.title}
-                    </motion.h4>
+                    </h3>
                     <div className="mt-auto">
                       <div className="w-11 h-11 rounded-full bg-white border border-navy-deep/5 flex items-center justify-center shadow-sm group-hover:bg-[#BC9C33] group-hover:text-white transition-all duration-300">
                         <ChevronRight size={20} strokeWidth={2.5} className="text-navy-deep group-hover:text-white" />
@@ -275,6 +309,7 @@ const NewsPage = () => {
                 </motion.div>
               ))}
             </div>
+          )}
 
             {/* See All Button */}
             <div className="mt-12 flex justify-start">
@@ -290,7 +325,6 @@ const NewsPage = () => {
             </div>
           </div>
         </section>
-      )}
 
       {/* ================= INFINITE SCROLL GALLERY ================= */}
       <section className="py-24 bg-[#BC9C33] overflow-hidden">

@@ -340,32 +340,28 @@ export default function CSRPage() {
             </section>
 
             {/* ================= INITIATIVES ================= */}
-            <section className="py-24 bg-white">
+            <section className="py-20 bg-white">
                 <div className="container mx-auto px-6 max-w-5xl">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1 }}
-                        className="text-center mb-10 text-[#000] text-[30px] md:text-[44px]"
+                    <h2
+                        className="text-center mb-12 text-[#000] text-[32px] md:text-[42px]"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
-                        Our CSR Initiatives &amp; Programs
-                    </motion.h2>
+                        Our CSR Initiatives & Programs
+                    </h2>
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col border-t border-slate-200">
                         {initiatives.map((initiative) => (
-                                <div key={initiative.title} className="border-b border-slate-300 first:border-t">
+                                <div key={initiative.title} className="border-b border-slate-200">
                                     <button
                                         onClick={() =>
                                             setOpenInitiative(
                                                 openInitiative === initiative.title ? null : initiative.title
                                             )
                                         }
-                                        className="w-full py-2 flex items-center gap-4 text-left transition-colors group"
+                                        className="w-full py-4 flex items-center gap-6 text-left transition-colors group"
                                     >
-                                        <div className={`w-8 h-8 rounded-full border-2 border-[#BC9C33] flex items-center justify-center shrink-0 transition-all ${openInitiative === initiative.title ? 'bg-transparent text-[#BC9C33]' : 'bg-[#BC9C33] text-white'}`}>
-                                            {openInitiative === initiative.title ? <Minus size={16} strokeWidth={2.5} /> : <Plus size={16} strokeWidth={2.5} />}
+                                        <div className={`w-8 h-8 rounded-full border border-[#BC9C33] flex items-center justify-center shrink-0 transition-all ${openInitiative === initiative.title ? 'bg-white text-[#BC9C33]' : 'bg-[#BC9C33] text-white'}`}>
+                                            {openInitiative === initiative.title ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} strokeWidth={2} />}
                                         </div>
                                         <span className="text-[20px] md:text-[24px] text-[#000]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
                                     </button>
@@ -379,22 +375,21 @@ export default function CSRPage() {
                                                 transition={{ duration: 0.3, ease: "easeInOut" }}
                                                 className="overflow-hidden"
                                             >
-                                                <div className="border-t border-slate-200 w-full" />
-                                                <div className="pl-6 md:pl-10 pr-4 md:pr-8 pb-2 pt-1">
-                                                    {initiative.content.map((block, idx) => (
-                                                        <div key={block.subtitle} className={`mt-2 ${idx !== 0 ? 'pt-1 border-t border-slate-100' : ''}`}>
+                                                <div className="pl-14 md:pl-20 pr-4 md:pr-8 pb-6 pt-0">
+                                                    {initiative.content.map((block) => (
+                                                        <div key={block.subtitle} className="mt-4 first:mt-0">
                                                             {block.subtitle && (
-                                                                <h4 className="text-[18px] md:text-[19px] font-bold text-[#444] leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+                                                                <h4 className="text-[17px] md:text-[18px] font-bold text-[#444] mb-1" style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
                                                                     {block.subtitle}
                                                                 </h4>
                                                             )}
-                                                            <ul className="mt-0.5 space-y-0">
+                                                            <ul className="space-y-1">
                                                                 {block.items.map((item, i) => {
                                                                     const isSubItem = item.startsWith("- ");
                                                                     return (
-                                                                        <li key={i} className={`flex items-start gap-2 text-[16px] md:text-[17px] text-[#555] font-normal leading-tight ${isSubItem ? 'pl-8' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
+                                                                        <li key={i} className={`flex items-start gap-2 text-[16px] md:text-[17px] text-[#666] font-normal leading-relaxed ${isSubItem ? 'pl-8' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
                                                                             {!isSubItem && (
-                                                                                <span className="text-[#888] font-bold">•</span>
+                                                                                <span className="text-[#888] mt-1.5 shrink-0">•</span>
                                                                             )}
                                                                             <span className="flex-1">{item}</span>
                                                                         </li>
