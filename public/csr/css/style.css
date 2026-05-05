@@ -25186,7 +25186,7 @@ section.qodef-elementor-content-grid.qodef-extended-grid--left>.elementor-contai
 
 @font-face {
     font-family: Georgia;
-    src: url(http://dev.gesit.co.id/wp-content/themes/thetrial/fonts/Georgia.ttf);
+    src: local("Georgia");
     font-weight: 400
 }
 

@@ -57,7 +57,7 @@ export default function Header() {
       <header id="qodef-page-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div id="qodef-page-header-inner">
           <Link href="/" className="gs-logo-link">
-            <img src="/images/only-logo.png" alt="Gesit Logo" />
+            <img src="/images/only-logo.png" alt="Gesit Logo" width="40" height="40" style={{ height: '40px', width: 'auto' }} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
 
@@ -92,7 +92,7 @@ export default function Header() {
       <header id="gs-custom-mobile-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div className="gs-mobile-header-inner">
           <Link href="/" className="gs-mobile-logo">
-            <img src="/images/only-logo.png" alt="Gesit Logo" />
+            <img src="/images/only-logo.png" alt="Gesit Logo" width="40" height="40" style={{ height: '40px', width: 'auto' }} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
           <div

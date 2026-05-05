@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -187,7 +187,7 @@ const NewsPage = () => {
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-2 shadow-2xl overflow-hidden rounded-[5px]"
+              className="grid grid-cols-1 lg:grid-cols-2 shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[5px]"
             >
               {/* Image Side */}
               <div className="relative aspect-[4/3] lg:aspect-auto h-full overflow-hidden bg-slate-100 min-h-[400px]">
@@ -221,9 +221,9 @@ const NewsPage = () => {
                   <motion.div variants={textVariant}>
                     <Link
                       href={`/news/${featuredArticle?.slug || featuredArticle?.id}`}
-                      className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-navy-deep transition-all duration-300 group"
+                      className="w-12 h-12 rounded-full bg-[#BC9C33] flex items-center justify-center hover:bg-white hover:text-navy-deep transition-all duration-300 group shadow-lg"
                     >
-                      <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
+                      <ChevronRight size={22} strokeWidth={2.5} className="text-white group-hover:text-navy-deep group-hover:translate-x-0.5 transition-all" />
                     </Link>
                   </motion.div>
                 </motion.div>
@@ -267,8 +267,8 @@ const NewsPage = () => {
                       {item.title}
                     </motion.h4>
                     <div className="mt-auto">
-                      <div className="w-11 h-11 rounded-full border border-navy-deep/10 flex items-center justify-center group-hover:bg-[#103065] group-hover:text-white transition-all duration-300">
-                        <ChevronRight size={18} />
+                      <div className="w-11 h-11 rounded-full bg-white border border-navy-deep/5 flex items-center justify-center shadow-sm group-hover:bg-[#BC9C33] group-hover:text-white transition-all duration-300">
+                        <ChevronRight size={20} strokeWidth={2.5} className="text-navy-deep group-hover:text-white" />
                       </div>
                     </div>
                   </Link>

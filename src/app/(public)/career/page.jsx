@@ -107,146 +107,45 @@ export default function CareerPage() {
                         viewport={{ once: true }}
                         className="text-center space-y-6"
                     >
-                        {/* Header Part */}
-                        <div>
-                            <motion.span
+                        {/* Join Our Team Section */}
+                        <div className="py-20 md:py-24">
+                            <motion.div
                                 variants={textVariant}
-                                className="text-[#BC9C33] font-bold uppercase tracking-[.4em] text-[11px] mb-2 block"
+                                className="text-center max-w-3xl mx-auto"
                             >
-                                Join Our Excellence
-                            </motion.span>
-                            <motion.h2
-                                variants={textVariant}
-                                className="text-4xl md:text-5xl text-[#103065] leading-tight mb-4"
-                                style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
-                            >
-                                We Grow Together
-                            </motion.h2>
-                            <motion.p
-                                variants={textVariant}
-                                className="text-lg leading-relaxed text-slate-500 max-w-3xl mx-auto"
-                                style={{ fontFamily: '"Source Sans Pro", sans-serif' }}
-                            >
-                                With a vision to become a leading Holding company in Indonesia, we are seeking high-potential candidates to join as part of The Gesit Companies.
-                            </motion.p>
-                        </div>
-
-                        <motion.p
-                            variants={textVariant}
-                            className="text-slate-500 font-medium pt-4"
-                        >
-                            Find and apply for our latest openings on:
-                        </motion.p>
-
-                        {/* Redirection Cards */}
-                        <motion.div
-                            variants={textVariant}
-                            className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 pb-12"
-                        >
-                            {/* LinkedIn Card */}
-                            <a
-                                href="https://www.linkedin.com/company/the-gesit-companies"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-slate-100 flex flex-col transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-1"
-                            >
-                                <div className="p-12 flex flex-col items-center justify-center flex-grow space-y-6">
-                                    <div className="relative w-48 h-12 flex items-center justify-center">
-                                        <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/LinkedIn_logo.svg/3840px-LinkedIn_logo.svg.png"
-                                            alt="LinkedIn"
-                                            className="max-w-full max-h-full object-contain"
-                                        />
-                                    </div>
-                                    <div className="flex items-center gap-2 text-slate-400 group-hover:text-[#0077b5] transition-colors">
-                                        <span className="text-[12px] font-bold uppercase tracking-widest">View our opportunities on LinkedIn</span>
-                                        <ExternalLink size={16} />
-                                    </div>
-                                </div>
-                                <div className="h-[5px] bg-[#0077b5]" />
-                            </a>
-
-                            {/* Jobstreet Card */}
-                            <a
-                                href="https://www.jobstreet.co.id/en/job-search/the-gesit-companies-jobs/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group bg-white rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.05)] overflow-hidden border border-slate-100 flex flex-col transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] hover:-translate-y-1"
-                            >
-                                <div className="p-12 flex flex-col items-center justify-center flex-grow space-y-6">
-                                    <div className="relative w-48 h-12 flex items-center justify-center">
-                                        <img
-                                            src="https://upload.wikimedia.org/wikipedia/commons/5/55/JOBSTREET_small_scale.png"
-                                            alt="Jobstreet"
-                                            className="max-w-full max-h-full object-contain"
-                                        />
-                                    </div>
-                                    <div className="flex items-center gap-2 text-slate-400 group-hover:text-[#e60278] transition-colors">
-                                        <span className="text-[12px] font-bold uppercase tracking-widest">View our opportunities on Jobstreet</span>
-                                        <ExternalLink size={16} />
-                                    </div>
-                                </div>
-                                <div className="h-[5px] bg-[#e60278]" />
-                            </a>
-                        </motion.div>
-
-                        {/* Disclaimer Section - Matching Mockup */}
-                        <div className="pt-8 border-t border-slate-100 max-w-3xl mx-auto">
-                            <motion.span
-                                variants={textVariant}
-                                className="text-[#BC9C33] font-bold uppercase tracking-[.4em] text-[11px] mb-2 block"
-                            >
-                                Important Information
-                            </motion.span>
-                            <motion.h3
-                                variants={textVariant}
-                                className="text-4xl text-[#103065] mb-6"
-                                style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
-                            >
-                                Please Note
-                            </motion.h3>
-
-                            <div className="space-y-0 text-left">
-                                {[
-                                    {
-                                        icon: <ShieldAlert className="text-[#BC9C33]" size={28} />,
-                                        text: "Job openings advertised on other channels may not be official openings. Please be wary of openings posted by unknown parties without our approval or acknowledgement."
-                                    },
-                                    {
-                                        icon: <div className="flex items-center justify-center w-7 h-7 border-2 border-[#BC9C33] rounded-full text-[#BC9C33] font-bold text-lg">$</div>,
-                                        text: "No fees will be charged for job applications, selection, and recruitment. Please be wary of anyone claiming to be an agent or representative of The Gesit Companies."
-                                    },
-                                    {
-                                        icon: <Mail className="text-[#BC9C33]" size={28} />,
-                                        header: "Further information:",
-                                        link: "recruitment@gesit.co.id",
-                                        linkHref: "mailto:recruitment@gesit.co.id"
-                                    },
-                                    {
-                                        icon: <FileText className="text-[#BC9C33]" size={28} />,
-                                        text: "Due to the large number of job applications we receive, we regret to inform you that only applications that pass the initial selection will be processed further."
-                                    }
-                                ].map((item, idx) => (
-                                    <motion.div
-                                        key={idx}
-                                        variants={textVariant}
-                                        className={`flex items-center gap-6 py-3 ${idx !== 3 ? 'border-b border-slate-100' : ''}`}
+                                <motion.span
+                                    className="text-[#BC9C33] font-bold uppercase tracking-[.4em] text-[12px] mb-6 block"
+                                >
+                                    Career Opportunities
+                                </motion.span>
+                                
+                                <motion.h2
+                                    className="text-4xl md:text-5xl text-[#103065] leading-tight mb-8"
+                                    style={{ fontFamily: 'Lora, Georgia, serif', fontWeight: 400 }}
+                                >
+                                    Join Our Team
+                                </motion.h2>
+                                
+                                <div className="w-16 h-[2px] bg-[#BC9C33] mx-auto mb-8"></div>
+                                
+                                <motion.p
+                                    className="text-lg md:text-[20px] leading-relaxed text-slate-500 mb-12"
+                                    style={{ fontFamily: '"Source Sans Pro", sans-serif' }}
+                                >
+                                    Interested in growing with us?<br />
+                                    Send your profile and introduction to our team.
+                                </motion.p>
+                                
+                                <motion.div>
+                                    <a
+                                        href="mailto:contact@gesit.co.id"
+                                        className="group inline-flex items-center justify-center gap-3 px-12 py-5 bg-transparent border border-[#103065] text-[#103065] rounded-full font-bold uppercase tracking-[.2em] text-[13px] hover:bg-[#103065] hover:text-white transition-all duration-300"
                                     >
-                                        <div className="w-16 h-16 rounded-full border border-slate-100 flex items-center justify-center shrink-0 bg-white shadow-sm">
-                                            {item.icon}
-                                        </div>
-                                        <div className="space-y-1">
-                                            {item.header && <motion.p variants={textVariant} className="text-[14px] text-slate-400 font-medium">{item.header}</motion.p>}
-                                            {item.text && <motion.p variants={textVariant} className="text-[17px] leading-relaxed text-slate-500 font-sans">{item.text}</motion.p>}
-                                            {item.link && (
-                                                <motion.a variants={textVariant} href={item.linkHref} className="text-2xl font-bold text-[#103065] hover:text-[#BC9C33] transition-colors block">
-                                                    {item.link}
-                                                </motion.a>
-                                            )}
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
+                                        <Mail size={18} className="group-hover:scale-110 transition-transform duration-300" />
+                                        contact@gesit.co.id
+                                    </a>
+                                </motion.div>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>
