@@ -111,14 +111,14 @@ export default function ContactUs() {
           <div className="gesit-hero-overlay" />
         </div>
 
-        <motion.div
-          className="contact-hero-title"
-          initial={{ opacity: 0, y: 30 }}
+        <motion.h1
+          className="gs-hero-title"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
         >
           Contact Us
-        </motion.div>
+        </motion.h1>
       </section>
 
       <section className="contact-section">

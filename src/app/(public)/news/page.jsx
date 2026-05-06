@@ -236,7 +236,7 @@ const NewsPage = () => {
                 </motion.div>
 
                 <motion.div variants={textVariant} className="pt-12 border-t border-white/10 mt-auto">
-                  <p className="text-[16px] font-bold text-[#BC9C33] mb-2 uppercase tracking-widest">News</p>
+                  <p className="text-[16px] font-bold text-white mb-2 uppercase tracking-widest">News</p>
                   <p className="text-[15px] font-medium text-white/80">by {featuredArticle?.author || 'Gesit'}</p>
                 </motion.div>
               </div>
@@ -246,11 +246,9 @@ const NewsPage = () => {
       )}
 
       {/* ================= NEWS GRID ================= */}
-      <section className="py-24 bg-white" id="news-archive">
-        <div className="container mx-auto px-6">
-          <motion.h2 {...textVariant} className="text-[32px] md:text-[44px] text-navy-deep mb-16 text-center" style={{ fontFamily: 'Georgia, serif' }}>
-            Latest Stories
-          </motion.h2>
+      <section className="py-8 md:py-12 bg-white" id="news-archive">
+        <div className="container mx-auto px-6 max-w-7xl">
+
 
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 gap-4" data-testid="news-loading">
@@ -287,25 +285,33 @@ const NewsPage = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="flex"
                 >
-                  <Link
-                    href={`/news/${item.slug || item.id}`}
-                    className="flex-1 bg-[#f0f4f9] p-10 md:p-12 flex flex-col items-start group hover:bg-[#e4ebf3] transition-all duration-500 min-h-[360px] rounded-[5px]"
-                  >
-                    <span className="text-[13px] font-bold uppercase tracking-[.3em] text-navy-deep/50 mb-8 block">
-                      {new Date(item.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                    </span>
-                    <h3
-                      className="text-2xl text-navy-deep leading-snug mb-10 group-hover:text-[#BC9C33] transition-colors"
-                      style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
+                    <Link
+                      href={`/news/${item.slug || item.id}`}
+                      className="flex-1 bg-[#deebf9] p-10 md:p-12 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
                     >
-                      {item.title}
-                    </h3>
-                    <div className="mt-auto">
-                      <div className="w-11 h-11 rounded-full bg-white border border-navy-deep/5 flex items-center justify-center shadow-sm group-hover:bg-[#BC9C33] group-hover:text-white transition-all duration-300">
-                        <ChevronRight size={20} strokeWidth={2.5} className="text-navy-deep group-hover:text-white" />
+                      <span className="text-[13px] font-bold uppercase tracking-widest text-navy-deep/50 mb-8 block">
+                        {new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </span>
+                      <h3
+                        className="text-[26px] text-black leading-[1.3] mb-8 transition-colors"
+                        style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
+                      >
+                        {item.title}
+                      </h3>
+                      
+                      <div className="mt-auto w-full">
+                        <div className="mb-8">
+                          <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-[#BC9C33] group-hover:border-[#BC9C33] group-hover:text-white transition-all duration-300">
+                            <ChevronRight size={18} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
+                          </div>
+                        </div>
+                        
+                        <div className="pt-8 border-t border-navy-deep/10 w-full">
+                          <p className="text-[13px] font-bold text-navy-deep/50 mb-1 uppercase tracking-widest">News</p>
+                          <p className="text-[15px] font-bold text-black">by {item.author || 'Gesit'}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
                 </motion.div>
               ))}
             </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ChevronDown } from 'lucide-react';
 
 export default function Header() {
   const pathname = usePathname();
@@ -92,7 +93,7 @@ export default function Header() {
       <header id="gs-custom-mobile-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div className="gs-mobile-header-inner">
           <Link href="/" className="gs-mobile-logo">
-            <img src="/images/only-logo.png" alt="Gesit Logo" width="40" height="40" style={{ height: '40px', width: 'auto' }} />
+            <img src="/images/only-logo.png" alt="Gesit Logo" width="45" height="45" style={{ height: '45px', width: 'auto' }} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
           <div
@@ -114,6 +115,7 @@ export default function Header() {
                 <>
                   <a
                     href="#"
+                    className="gs-mobile-parent-link"
                     onClick={(e) => {
                       e.preventDefault();
                       setOpenSubmenus(prev => ({
@@ -122,7 +124,10 @@ export default function Header() {
                       }));
                     }}
                   >
-                    {item.label} <span>{mounted && openSubmenus[item.label] ? '−' : '+'}</span>
+                    {item.label} 
+                    <span className={`gs-mobile-chevron ${mounted && openSubmenus[item.label] ? 'open' : ''}`}>
+                      <ChevronDown size={20} strokeWidth={2.5} />
+                    </span>
                   </a>
                   <ul className={`gs-mobile-submenu ${mounted && openSubmenus[item.label] ? 'gs-is-open' : ''}`}>
                     {item.children.map((child) => (

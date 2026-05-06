@@ -1,0 +1,110 @@
+/* 404 Page Styling */
+.gs-404-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #103065; /* Dark blue background to match brand and make header visible */
+    position: relative;
+    overflow: hidden;
+    padding: 120px 20px 80px;
+}
+
+/* Background Decoration */
+.gs-404-bg-logo {
+    position: absolute;
+    right: -10%;
+    bottom: -10%;
+    width: 40%;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gs-404-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+}
+
+.gs-404-number {
+    font-family: 'Lora', serif;
+    font-size: clamp(120px, 15vw, 220px);
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -5px;
+    position: relative;
+    display: inline-block;
+}
+
+.gs-404-number::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background-color: #bc9c33;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.gs-404-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(24px, 5vw, 42px);
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.gs-404-text {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.gs-404-button {
+    display: inline-block;
+    background-color: #bc9c33;
+    color: #ffffff;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 18px 40px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(188, 156, 51, 0.3);
+}
+
+.gs-404-button:hover {
+    background-color: #103065;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 48, 101, 0.4);
+    color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gs-404-wrapper {
+        min-height: 60vh;
+        padding: 80px 20px;
+    }
+    
+    .gs-404-text {
+        font-size: 16px;
+    }
+    
+    .gs-404-button {
+        padding: 15px 30px;
+        font-size: 14px;
+    }
+}

@@ -155,7 +155,7 @@ export default function Home() {
                       </div>
                       <div className="elementor-element elementor-element-ef90b6d elementor-widget elementor-widget-heading" data-id="ef90b6d" data-element_type="widget" data-widget_type="heading.default">
                         <div className="elementor-widget-container">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default text-white" style={{ fontSize: '24px', lineHeight: '1.5', fontWeight: 400, fontFamily: 'Georgia, Lora, serif' }}>
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default text-white" style={{ fontSize: '24px', lineHeight: '1.3', fontWeight: 400, fontFamily: 'Georgia, Lora, serif' }}>
                             At Gesit, we put the stakeholders first and we are committed to contribute and grow with Indonesia. We invest in our workforce, research, and innovation to create the best and most sustainable industry solutions, while remaining mindful of the environment and our impact.
                           </motion.p>
                         </div>

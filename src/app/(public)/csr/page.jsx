@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import { Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -30,6 +31,23 @@ export default function CSRPage() {
     useEffect(() => {
         setIsMounted(true);
     }, []);
+
+    const textVariant = {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.8, ease: "easeOut" }
+    };
+
+    const staggerContainer = {
+        initial: {},
+        whileInView: {
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1
+            }
+        }
+    };
 
     /* ================= HERO IMAGES ================= */
     const heroImages = [
@@ -210,13 +228,13 @@ export default function CSRPage() {
 
                 {/* Hero title */}
                 <motion.h1
-                    className="gs-hero-title"
+                    className="gs-hero-title gs-csr-hero-title"
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
                     style={{ lineHeight: "72px" }}
                 >
-                    Corporate Social<br className="md:hidden" /> Responsibility
+                    Corporate <br className="md:hidden" />Social<br className="md:hidden" /> Responsibility
                 </motion.h1>
 
                 {/* Navigation arrows */}
@@ -247,8 +265,8 @@ export default function CSRPage() {
             </section>
 
             {/* ================= OVERVIEW ================= */}
-            <section className="flex justify-center bg-[#e3eaf4] py-16 md:py-24 lg:py-[150px]">
-                <div className="max-w-5xl w-full mx-auto px-6 md:px-12">
+            <section className="flex justify-center bg-[#e3eaf4] py-16 md:py-[60px] lg:py-[150px]">
+                <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -258,27 +276,27 @@ export default function CSRPage() {
                     >
                         {/* Heading - Forced breaks to match your reference image exactly */}
                         <div className="mb-5">
-                            <h3 className="text-[22px] md:text-[31px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
+                            <h3 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#103065',
                                 fontFamily: 'Lora, serif',
                                 margin: 0,
                                 textAlign: 'left'
                             }}>
-                                Creating a positive effect on lives and communities<br className="hidden lg:block" />
-                                by adding the most value and making a significant<br className="hidden lg:block" />
+                                Creating a positive effect on lives and communities <br className="hidden lg:block" />
+                                by adding the most value and making a significant <br className="hidden lg:block" />
                                 and lasting impact through Gesit Foundation.
                             </h3>
                         </div>
 
                         {/* Description - Bold focus areas */}
                         <div style={{ paddingLeft: '24px', borderLeft: '2px solid #BC9C33' }}>
-                            <p className="text-[16px] md:text-[20px] lg:text-[23px] leading-relaxed" style={{
+                            <p className="text-[16px] md:text-[24px] lg:text-[23px] leading-relaxed md:leading-normal" style={{
                                 color: '#103065',
                                 fontFamily: "'Source Sans Pro', sans-serif",
                                 fontWeight: 400,
                                 margin: 0
                             }}>
-                                Our social investment programs focus on three areas: <strong className="font-extrabold">Healthcare,</strong><br className="hidden lg:block" />
+                                Our social investment programs focus on three areas: <strong className="font-extrabold">Healthcare, </strong><br className="hidden lg:block" />
                                 <strong className="font-extrabold">Environment &amp; Cultural Outreach,</strong> and <strong className="font-extrabold">Education.</strong>
                             </p>
                         </div>
@@ -286,58 +304,45 @@ export default function CSRPage() {
                 </div>
             </section>
 
-            {/* ================= FOCUS AREAS ================= */}
-            <section className="py-32 bg-[#103065]">
-                <div className="container mx-auto px-8 md:px-16 lg:px-24">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-8 max-w-6xl mx-auto">
-                        {focusAreas.map((area, index) => (
-                            <motion.div
-                                key={area.title}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                whileHover="hover"
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: index * 0.1 }}
-                                className="relative group flex flex-col items-center h-full"
-                            >
-                                {/* Top Image Section */}
-                                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[4px] shadow-2xl shrink-0">
-                                    <img
-                                        src={area.image}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
-                                        alt={area.title}
-                                    />
-                                    <div className="absolute inset-0 bg-black/10"></div>
+            <section suppressHydrationWarning className="elementor-section elementor-top-section elementor-element elementor-element-4b82676 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no bg-[#103065] py-16 md:py-24" data-id="4b82676" data-element_type="section">
+                <div className="elementor-container elementor-column-gap-no">
+                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-365869f" data-id="365869f" data-element_type="column" suppressHydrationWarning>
+                        <div className="elementor-widget-wrap elementor-element-populated">
+                            <section className="elementor-section elementor-inner-section elementor-element elementor-element-c7c8c1f elementor-section-full_width zs-custom-height no-button elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="c7c8c1f" data-element_type="section">
+                                <div className="elementor-container elementor-column-gap-extended flex-col lg:flex-row px-6 lg:px-0" style={{ display: 'flex', alignItems: 'stretch' }}>
+                                    {focusAreas.map((val, idx) => (
+                                        <div key={val.title} className="elementor-inner-column w-full lg:w-1/3 max-w-[420px] mx-auto lg:max-w-none" style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px', padding: '0 10px' }}>
+                                            <motion.div
+                                                className="elementor-widget-wrap elementor-element-populated"
+                                                variants={staggerContainer}
+                                                initial="initial"
+                                                whileInView="whileInView"
+                                                viewport={{ once: true }}
+                                                style={{ display: 'flex', flexDirection: 'column', width: '100%', flex: 1 }}
+                                            >
+                                                <div className="elementor-element elementor-element-98ea9bc p-15 text-left elementor-widget elementor-widget-thetrial_core_location_info" style={{ width: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                    <div className="elementor-widget-container" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                        <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                            <div className="qodef-m-image">
+                                                                <Image src={val.image} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                            </div>
+                                                            <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '200px', padding: '35px 25px' }}>
+                                                                <motion.h4 variants={textVariant} className="qodef-m-title" style={{ color: '#FFFFFF', marginBottom: '15px' }}>{val.title}</motion.h4>
+                                                                <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</motion.p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    ))}
                                 </div>
-
-                                {/* Connecting Line Spacer & Animated Overlay */}
-                                <div className="relative h-10 w-full flex justify-center shrink-0 z-40">
-                                    {/* Base subtle line - in front (z-20) */}
-                                    <div className="absolute top-[-32px] bottom-[-16px] w-[2.5px] bg-white/40 z-20 pointer-events-none"></div>
-
-                                    {/* Animated active line on hover - clearly in front (z-30) */}
-                                    <motion.div
-                                        variants={{
-                                            hover: { scaleY: 1, opacity: 1 }
-                                        }}
-                                        initial={{ scaleY: 0, opacity: 0 }}
-                                        transition={{ duration: 0.4, ease: "easeOut" }}
-                                        className="absolute top-[-32px] bottom-[-16px] w-[3px] bg-white z-30 pointer-events-none origin-top"
-                                    />
-                                </div>
-
-                                {/* Bottom Info Box */}
-                                <div className="w-full bg-[#BC9C33] p-8 text-left shadow-2xl relative z-10 min-h-[260px] flex flex-col items-start rounded-[4px] flex-1">
-                                    <h3 className="text-white text-2xl mb-6 leading-tight h-16 flex items-center" style={{ fontFamily: 'Georgia, serif' }}>{area.title}</h3>
-                                    <p className="text-white/95 text-sm font-light leading-relaxed tracking-wide flex-1">
-                                        {area.desc}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
+                            </section>
+                        </div>
                     </div>
                 </div>
             </section>
+
 
             {/* ================= INITIATIVES ================= */}
             <section className="py-20 bg-white">
@@ -349,60 +354,72 @@ export default function CSRPage() {
                         Our CSR Initiatives & Programs
                     </h2>
 
-                    <div className="flex flex-col border-t border-slate-200">
-                        {initiatives.map((initiative) => (
-                                <div key={initiative.title} className="border-b border-slate-200">
-                                    <button
-                                        onClick={() =>
-                                            setOpenInitiative(
-                                                openInitiative === initiative.title ? null : initiative.title
-                                            )
-                                        }
-                                        className="w-full py-4 flex items-center gap-6 text-left transition-colors group"
+                    <div className="flex flex-col">
+                        {initiatives.map((initiative, index) => (
+                            <div key={initiative.title} style={{ borderBottom: index !== initiatives.length - 1 ? '1px solid #E0E0E0' : 'none' }}>
+                                <button
+                                    onClick={() =>
+                                        setOpenInitiative(
+                                            openInitiative === initiative.title ? null : initiative.title
+                                        )
+                                    }
+                                    className="w-full py-6 flex items-center gap-6 text-left transition-colors group"
+                                >
+                                    <motion.div 
+                                        className="flex items-center justify-center shrink-0"
+                                        style={{ 
+                                            width: '32px', 
+                                            height: '32px', 
+                                            borderRadius: '50%', 
+                                            border: '1px solid #BC9C33',
+                                            backgroundColor: openInitiative === initiative.title ? '#FFFFFF' : '#BC9C33',
+                                            color: openInitiative === initiative.title ? '#BC9C33' : '#FFFFFF'
+                                        }}
+                                        animate={{ rotate: openInitiative === initiative.title ? 180 : 0 }}
+                                        transition={{ duration: 0.4, ease: "backOut" }}
                                     >
-                                        <div className={`w-8 h-8 rounded-full border border-[#BC9C33] flex items-center justify-center shrink-0 transition-all ${openInitiative === initiative.title ? 'bg-white text-[#BC9C33]' : 'bg-[#BC9C33] text-white'}`}>
-                                            {openInitiative === initiative.title ? <Minus size={14} strokeWidth={2} /> : <Plus size={14} strokeWidth={2} />}
-                                        </div>
-                                        <span className="text-[20px] md:text-[24px] text-[#000]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
-                                    </button>
+                                        {openInitiative === initiative.title ? <Minus size={16} strokeWidth={2} /> : <Plus size={16} strokeWidth={2} />}
+                                    </motion.div>
+                                    <span className="text-[20px] md:text-[24px] text-[#000]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
+                                </button>
 
-                                    <AnimatePresence>
-                                        {openInitiative === initiative.title && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.3, ease: "easeInOut" }}
-                                                className="overflow-hidden"
-                                            >
-                                                <div className="pl-14 md:pl-20 pr-4 md:pr-8 pb-6 pt-0">
-                                                    {initiative.content.map((block) => (
-                                                        <div key={block.subtitle} className="mt-4 first:mt-0">
-                                                            {block.subtitle && (
-                                                                <h4 className="text-[17px] md:text-[18px] font-bold text-[#444] mb-1" style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
-                                                                    {block.subtitle}
-                                                                </h4>
-                                                            )}
-                                                            <ul className="space-y-1">
-                                                                {block.items.map((item, i) => {
-                                                                    const isSubItem = item.startsWith("- ");
-                                                                    return (
-                                                                        <li key={i} className={`flex items-start gap-2 text-[16px] md:text-[17px] text-[#666] font-normal leading-relaxed ${isSubItem ? 'pl-8' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
-                                                                            {!isSubItem && (
-                                                                                <span className="text-[#888] mt-1.5 shrink-0">•</span>
-                                                                            )}
-                                                                            <span className="flex-1">{item}</span>
-                                                                        </li>
-                                                                    );
-                                                                })}
-                                                            </ul>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                                <AnimatePresence initial={false}>
+                                    {openInitiative === initiative.title && (
+                                        <motion.div
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="pl-14 md:pl-20 pr-4 md:pr-8 pb-8 pt-2">
+                                                {initiative.content.map((block) => (
+                                                    <div key={block.subtitle} className="mt-6 first:mt-0">
+                                                        {block.subtitle && (
+                                                            <h4 className="text-[17px] md:text-[18px] font-bold text-[#444] m-0 mb-2" style={{ fontFamily: "'Source Sans Pro', sans-serif", lineHeight: 1.2 }}>
+                                                                {block.subtitle}
+                                                            </h4>
+                                                        )}
+                                                        <ul className="space-y-2 m-0 p-0">
+                                                            {block.items.map((item, i) => {
+                                                                const isSubItem = item.startsWith("- ");
+                                                                return (
+                                                                    <li key={i} className={`flex items-start gap-2 text-[16px] md:text-[17px] text-[#666] font-normal leading-normal m-0 p-0 ${isSubItem ? 'pl-8' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
+                                                                        {!isSubItem && (
+                                                                            <span className="text-[#888] mt-1 shrink-0">•</span>
+                                                                        )}
+                                                                        <span className="flex-1">{item}</span>
+                                                                    </li>
+                                                                );
+                                                            })}
+                                                        </ul>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -413,7 +430,7 @@ export default function CSRPage() {
                 <div className="relative w-full">
                     <div className="flex overflow-hidden relative">
                         <motion.div
-                            className="flex gap-12 px-4 py-12 items-center"
+                            className="flex gap-6 md:gap-12 px-4 py-6 md:py-12 items-center"
                             animate={{ x: ["0%", "-50%"] }}
                             transition={{
                                 ease: "linear",
@@ -425,7 +442,7 @@ export default function CSRPage() {
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
                                 <div
                                     key={index}
-                                    className="w-[450px] h-[300px] shrink-0 rounded-xl overflow-hidden transition-all duration-700 group relative"
+                                    className="w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-xl overflow-hidden transition-all duration-700 group relative"
                                 >
                                     <img
                                         src={src}

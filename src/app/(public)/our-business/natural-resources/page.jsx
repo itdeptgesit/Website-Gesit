@@ -128,14 +128,14 @@ export default function NaturalResourcesPage() {
 
 
                         {/* Title */}
-                        <motion.div
+                        <motion.h1
                             className="gs-hero-title"
                             initial={{ opacity: 0, y: 15 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
                             Natural Resources
-                        </motion.div>
+                        </motion.h1>
 
                         {/* Navigation arrows */}
                         <div className="gs-hero-nav">

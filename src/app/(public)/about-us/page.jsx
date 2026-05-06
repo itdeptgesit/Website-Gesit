@@ -72,15 +72,14 @@ export default function AboutUs() {
                     <div className="elementor-widget-wrap elementor-element-populated">
                       <div className="elementor-element elementor-element-602e91a elementor-widget elementor-widget-heading" data-id="602e91a" data-element_type="widget" data-widget_type="heading.default">
                         <div className="elementor-widget-container">
-                          <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
+                          <motion.h1
+                            className="gs-hero-title"
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
-                            className="elementor-heading-title elementor-size-default"
-                            style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6)' }}
+                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
                           >
-                            About
-                          </motion.h2>
+                            About Us
+                          </motion.h1>
                         </div>
                       </div>
                     </div>
@@ -245,37 +244,39 @@ export default function AboutUs() {
                       initial="initial"
                       whileInView="whileInView"
                       viewport={{ once: true, margin: "-50px" }}
+                      style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', padding: '50px' }}
                     >
-                      <div className="elementor-element elementor-element-da6b8eb elementor-widget elementor-widget-heading" data-id="da6b8eb" data-element_type="widget">
+                      <div className="elementor-element elementor-element-da6b8eb elementor-widget elementor-widget-heading" data-id="da6b8eb" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default">Our Vision</motion.h6>
+                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: '0 0 10px 0' }}>Our Vision</motion.h6>
                         </div>
                       </div>
-                      <div className="elementor-element elementor-element-42b3dc3 elementor-widget elementor-widget-heading" data-id="42b3dc3" data-element_type="widget">
+                      <div className="elementor-element elementor-element-42b3dc3 elementor-widget elementor-widget-heading" data-id="42b3dc3" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default">To be
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: 0 }}>To be
                             a Group of Companies that are Recognized by Stakeholders as
                             Strategic First Choice Business Partner</motion.p>
                         </div>
                       </div>
-                      <motion.div variants={textVariant} className="elementor-element elementor-element-c47fca5 elementor-widget-divider--view-line elementor-widget elementor-widget-divider">
+                      <motion.div variants={textVariant} className="elementor-element elementor-element-c47fca5 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <div className="elementor-divider" style={{ borderTop: '1px solid #e5e5e5', margin: '20px 0', width: '100%', display: 'block' }}></div>
+                          <div className="elementor-divider" style={{ borderTop: '1px solid #e5e5e5', margin: '40px 0', width: '100%', display: 'block' }}></div>
                         </div>
                       </motion.div>
-                      <div className="elementor-element elementor-element-2cce4eb elementor-widget elementor-widget-heading" data-id="2cce4eb" data-element_type="widget">
+                      <div className="elementor-element elementor-element-2cce4eb elementor-widget elementor-widget-heading" data-id="2cce4eb" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default">Our Mission</motion.h6>
+                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: '0 0 10px 0' }}>Our Mission</motion.h6>
                         </div>
                       </div>
-                      <div className="elementor-element elementor-element-3c1aa17 elementor-widget elementor-widget-heading" data-id="3c1aa17" data-element_type="widget">
+                      <div className="elementor-element elementor-element-3c1aa17 elementor-widget elementor-widget-heading" data-id="3c1aa17" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default">To
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: 0 }}>To
                             Establish Resourceful Business Entities that Deliver
                             Sustainable Value to Stakeholders</motion.p>
                         </div>
                       </div>
                     </motion.div>
+
                   </div>
                 </div>
               </section>
