@@ -82,23 +82,22 @@ export default function DashboardLayout({ children }) {
             {/* --- PREMIUM SIDEBAR --- */}
             <aside
                 className={cn(
-                    "bg-[#0a1835] text-slate-300 transition-all duration-300 flex flex-col fixed inset-y-0 z-50 border-r border-[#152e50]",
+                    "bg-[#103065] text-slate-300 transition-all duration-300 flex flex-col fixed inset-y-0 z-50 border-r border-white/10",
                     isSidebarOpen ? "w-64" : "w-20"
                 )}
             >
                 {/* Sidebar Header */}
-                <div className="h-[72px] flex items-center px-6 border-b border-[#152e50] shrink-0 bg-[#07122a]">
-                    <div className="flex items-center gap-3">
+                <div className="h-[72px] flex items-center px-6 border-b border-white/10 shrink-0 bg-[#0c244b]">
+                    <div className="flex items-center gap-3 w-full">
                         <img
-                            src={isSidebarOpen ? "/logo-gesit.png" : "/favicon.ico"}
+                            src="/logo-gesit.webp"
                             alt="Gesit Logo"
-                            className={cn("object-contain", isSidebarOpen ? "h-8" : "h-6 w-6")}
-                            style={{ filter: 'brightness(0) invert(1)' }}
+                            className={cn("object-contain brightness-0 invert", isSidebarOpen ? "h-9" : "h-7 mx-auto")}
                         />
                         {isSidebarOpen && (
-                            <span className="font-bold text-lg text-white" style={{ fontFamily: 'Georgia, serif' }}>
-                                Gesit Portal
-                            </span>
+                            <div className="flex flex-col leading-tight">
+                                <span className="font-bold text-sm tracking-[0.2em] text-white uppercase">Gesit Portal</span>
+                            </div>
                         )}
                     </div>
                 </div>
@@ -115,15 +114,15 @@ export default function DashboardLayout({ children }) {
                                 key={item.name}
                                 href={item.href}
                                 className={cn(
-                                    "flex items-center gap-4 py-3 relative transition-all duration-200 group text-sm font-medium w-full",
+                                    "flex items-center gap-4 py-3 relative transition-all duration-200 group text-[13px] font-medium w-full",
                                     isActive
-                                        ? "text-white bg-[#152e50]/50"
-                                        : "text-slate-400 hover:bg-[#152e50]/30 hover:text-white"
+                                        ? "text-white bg-white/10"
+                                        : "text-slate-300 hover:bg-white/5 hover:text-white"
                                 )}
                             >
-                                {/* Active Indicator Bar */}
+                                {/* Active Indicator Bar (Removed Gold, using subtle indicator if needed) */}
                                 {isActive && (
-                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#bc9c33] rounded-r-sm"></div>
+                                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/20 rounded-r-sm"></div>
                                 )}
 
                                 <div className={cn(
@@ -132,14 +131,14 @@ export default function DashboardLayout({ children }) {
                                 )}>
                                     <item.icon className={cn(
                                         "w-[18px] h-[18px] shrink-0 transition-colors",
-                                        isActive ? "text-[#bc9c33]" : "group-hover:text-slate-300"
+                                        isActive ? "text-white" : "group-hover:text-white"
                                     )} />
                                     {isSidebarOpen && <span className="tracking-wide">{item.name}</span>}
                                 </div>
 
                                 {/* Tooltip for collapsed mode */}
                                 {!isSidebarOpen && (
-                                    <div className="fixed left-20 ml-2 px-3 py-1.5 bg-[#07122a] text-white text-xs rounded shadow-md border border-[#152e50] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                    <div className="fixed left-20 ml-2 px-3 py-1.5 bg-[#0c244b] text-white text-xs rounded shadow-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                                         {item.name}
                                     </div>
                                 )}
@@ -149,7 +148,7 @@ export default function DashboardLayout({ children }) {
                 </nav>
 
                 {/* Sidebar Footer User Profile */}
-                <div className="p-4 border-t border-[#152e50] bg-[#07122a]">
+                <div className="p-4 border-t border-white/10 bg-[#0c244b]">
                     <div className="flex items-center justify-between">
                         {isSidebarOpen && (
                             <div className="flex items-center gap-3 overflow-hidden pl-2">

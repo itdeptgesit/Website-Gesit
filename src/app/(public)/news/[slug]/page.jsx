@@ -11,6 +11,7 @@ import {
     Handshake, Heart, ShieldCheck, MessageSquare, FileText
 } from "lucide-react";
 import ShareButtons from './ShareButtons';
+import xss from 'xss';
 
 export default function NewsDetailPage() {
     const params = useParams();
@@ -74,7 +75,7 @@ export default function NewsDetailPage() {
             <section className="w-full bg-[#103065] pt-40 pb-20 px-6 relative overflow-hidden">
                 {/* Background Logo Overlay */}
                 <div className="absolute right-[-5%] bottom-[-10%] w-[40%] opacity-[0.03] pointer-events-none">
-                    <img src="/logo-gesit.png" alt="" className="w-full h-full object-contain brightness-0 invert" />
+                    <img src="/logos/logos.png" alt="" className="w-full h-full object-contain brightness-0 invert" />
                 </div>
 
                 <div className="container mx-auto max-w-6xl relative z-10">
@@ -187,7 +188,7 @@ export default function NewsDetailPage() {
                             {post.content ? (
                                 <>
                                     <div
-                                        dangerouslySetInnerHTML={{ __html: post.content }}
+                                        dangerouslySetInnerHTML={{ __html: xss(post.content) }}
                                     />
                                     {post.source_url && (
                                         <div className="mt-12 pt-8 border-t border-slate-100">

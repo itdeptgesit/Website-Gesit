@@ -16,7 +16,7 @@ export default function NotFound() {
                 <div className="gs-404-wrapper">
                     {/* Background Logo Overlay */}
                     <div className="gs-404-bg-logo">
-                        <img src="/logo-gesit.png" alt="" width="400" height="400" />
+                        <img src="/logos/logos.png" alt="" width="400" height="400" />
                     </div>
 
                     <div className="gs-404-container">

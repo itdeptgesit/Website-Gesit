@@ -93,16 +93,18 @@ export default function Home() {
               zIndex: 2,
             }}
           >
-            <img
+            <Image
               src={slide.src}
               alt={slide.alt}
+              fill
+              sizes="100vw"
               style={{
-                width: '100%', height: '100%', objectFit: 'cover',
-                objectPosition: 'center bottom', display: 'block',
+                objectFit: 'cover',
+                objectPosition: 'center bottom',
                 transform: i === activeIdx ? 'scale(1.1)' : 'scale(1)',
                 transition: 'transform 20000ms linear',
               }}
-              loading={i === 0 ? 'eager' : 'lazy'}
+              priority={i === 0}
             />
             <div style={{
               position: 'absolute', top: 0, left: 0, right: 0, height: '50%',
@@ -228,7 +230,7 @@ export default function Home() {
                             transition={{ duration: 1, ease: "easeOut" }}
                             className="e-hosted-video elementor-wrapper elementor-open-inline" style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <video suppressHydrationWarning ref={videoRef} className="elementor-video" src="/video/csr-video.mp4" autoPlay muted loop playsInline preload="auto" style={{ width: '100%', display: 'block', borderRadius: 12 }} />
+                            <video suppressHydrationWarning ref={videoRef} className="elementor-video" src="/video/csr-video.mp4" autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', borderRadius: 12 }} />
                           </motion.div>
                         </div>
                       </div>

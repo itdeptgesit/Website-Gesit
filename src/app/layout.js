@@ -1,4 +1,7 @@
 import './globals.css';
+import PageTracker from '@/components/PageTracker';
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { createClient } from '@/lib/supabase-server';
 
@@ -75,7 +78,7 @@ export default function RootLayout({ children }) {
     '@type': 'Organization',
     name: 'The Gesit Companies',
     url: 'https://gesit.co.id',
-    logo: 'https://gesit.co.id/logo-gesit.png',
+    logo: 'https://gesit.co.id/logos/logos.png',
     description: 'The Gesit Companies are business leaders in the fields of Property, Trading & Service, Manufacturing, and Natural Resources in Indonesia.',
     sameAs: [
       'https://www.linkedin.com/company/the-gesit-companies',
@@ -100,6 +103,9 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <PageTracker />
+        <Analytics />
+        <SpeedInsights />
         {children}
       </body>
     </html>

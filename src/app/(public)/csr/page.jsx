@@ -193,21 +193,21 @@ export default function CSRPage() {
                         {heroImages.map((src, index) => (
                             <SwiperSlide key={index}>
                                 <div className="relative h-full w-full overflow-hidden">
-                                    <img
+                                    <Image
                                         src={src}
                                         alt={`CSR Hero ${index + 1}`}
-                                        className="w-full h-full object-cover"
+                                        fill
+                                        sizes="100vw"
                                         style={{
+                                            objectFit: 'cover',
                                             transformOrigin: 'center',
                                             transform: index === activeIndex ? "scale(1.15)" : "scale(1.05)",
                                             transition: "transform 10000ms ease-out"
                                         }}
-                                        loading={index === 0 ? "eager" : "lazy"}
-                                        decoding="async"
+                                        priority={index === 0}
                                     />
-                                    {/* Gradient Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-b from-[#103065]/70 via-[#103065]/30 to-transparent" />
-                                    <div className="absolute inset-0 bg-black/10" />
+                                    {/* Standard Hero Overlay */}
+                                    <div className="gesit-hero-overlay" />
                                 </div>
                             </SwiperSlide>
                         ))}
@@ -309,9 +309,9 @@ export default function CSRPage() {
                     <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-365869f" data-id="365869f" data-element_type="column" suppressHydrationWarning>
                         <div className="elementor-widget-wrap elementor-element-populated">
                             <section className="elementor-section elementor-inner-section elementor-element elementor-element-c7c8c1f elementor-section-full_width zs-custom-height no-button elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="c7c8c1f" data-element_type="section">
-                                <div className="elementor-container elementor-column-gap-extended flex-col lg:flex-row px-6 lg:px-0" style={{ display: 'flex', alignItems: 'stretch' }}>
+                                <div className="elementor-container elementor-column-gap-extended flex flex-wrap justify-center px-6 lg:px-0">
                                     {focusAreas.map((val, idx) => (
-                                        <div key={val.title} className="elementor-inner-column w-full lg:w-1/3 max-w-[420px] mx-auto lg:max-w-none" style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px', padding: '0 10px' }}>
+                                        <div key={val.title} className="elementor-inner-column w-full md:w-1/2 lg:w-1/3 max-w-[420px] lg:max-w-none" style={{ display: 'flex', flexDirection: 'column', marginBottom: '40px', padding: '0 15px' }}>
                                             <motion.div
                                                 className="elementor-widget-wrap elementor-element-populated"
                                                 variants={staggerContainer}

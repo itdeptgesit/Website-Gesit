@@ -174,11 +174,11 @@ a {
 .gs-logo-link {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 4px;
 }
 
 .gs-logo-link img {
-  height: 48px;
+  height: 64px;
   width: auto;
   transition: all 0.4s ease;
   filter: brightness(1);
@@ -186,16 +186,22 @@ a {
 
 .gs-logo-text {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--gs-accent-gold);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   white-space: nowrap;
+  transition: all 0.4s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #qodef-page-header.gs-is-sticky .gs-logo-link img {
-  height: 38px;
+  height: 42px;
+}
+
+#qodef-page-header.gs-is-sticky .gs-logo-text {
+  font-size: 18px;
 }
 
 .qodef-header-navigation .menu {
@@ -212,9 +218,9 @@ a {
   letter-spacing: 0.8px;
   color: #fff;
   padding: 15px 0;
-
   position: relative;
   transition: color 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .gs-nav-link::after {
@@ -335,11 +341,11 @@ a {
 .gs-mobile-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
 }
 
 .gs-mobile-logo img {
-  height: 45px;
+  height: 48px;
   width: auto;
 }
 
@@ -670,14 +676,15 @@ a {
   width: 100% !important;
 }
 
-/* Standard Hero Overlay (Top-only gradient) */
+/* Standard Hero Overlay (Matching Home Page - Top 50% only) */
 .gesit-hero-overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg,
-      rgba(16, 48, 101, 0.6) 0%,
-      transparent 50%) !important;
-  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(rgba(16, 48, 101, 0.5) 0%, transparent 100%) !important;
+  z-index: 5;
   pointer-events: none;
 }
 

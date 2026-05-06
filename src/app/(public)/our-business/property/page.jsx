@@ -297,7 +297,7 @@ const PropertyPage = () => {
                             </section>
 
                             {/* SECTION 6: SENAYAN AVENUE — image left, text right breakout */}
-                            <section className="project-section" style={{ padding: '150px 0', backgroundColor: '#fcfcfc', overflow: 'hidden' }}>
+                            <section className="project-section" style={{ padding: '150px 0', backgroundColor: '#fff', overflow: 'hidden' }}>
                                 <div className="project-row image-left">
                                     {/* Image Container (Left Breakout) */}
                                     <motion.div

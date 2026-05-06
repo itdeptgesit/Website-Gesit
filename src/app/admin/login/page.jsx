@@ -113,7 +113,7 @@ export default function LoginPage() {
         <div className="min-h-screen flex w-full font-sans">
             {/* Left Panel - Brand Side (Hidden on Mobile) */}
             <div
-                className="hidden lg:flex flex-col justify-between w-[45%] text-white px-16 py-12 relative overflow-hidden"
+                className="hidden lg:flex flex-col justify-between w-[45%] text-white px-24 py-12 relative overflow-hidden"
                 style={{
                     backgroundImage: 'url(/hero/property.webp)',
                     backgroundSize: 'cover',
@@ -122,14 +122,14 @@ export default function LoginPage() {
                 }}
             >
                 {/* Overlay gradient - Deep Navy */}
-                <div className="absolute inset-0 bg-[#06142e]/85 z-0"></div>
+                <div className="absolute inset-0 bg-[#0a1b39]/90 z-0"></div>
 
                 {/* Content */}
                 <div className="relative z-10 w-full mt-4">
                     {/* Logo */}
                     <div className="mb-24">
                         <Image
-                            src="/logo-gesit.png"
+                            src="/logo-gesit.webp"
                             alt="The Gesit Companies"
                             width={160}
                             height={48}
@@ -138,18 +138,18 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <div className="max-w-md">
+                    <div className="max-w-xl">
                         <h2 className="text-[44px] leading-tight font-serif tracking-normal text-white mb-2">
-                            Empowering Your<br />
-                            <span className="text-[#BC9C33]">Business Vision</span>
+                            Advancing Global<br />
+                            <span className="text-[#BC9C33]">Business Excellence</span>
                         </h2>
 
                         <div className="w-12 h-[2px] bg-[#BC9C33] opacity-80 mb-8 mt-6"></div>
 
-                        <p className="text-[15px] text-slate-300 leading-relaxed font-light mb-20 pr-4">
-                            Welcome to the internal management portal.
-                            Access administrative tools, manage content,
-                            and oversee operations securely and efficiently.
+                        <p className="text-[15px] text-slate-300 leading-relaxed font-light mb-20">
+                            Welcome to the central administrative hub of The Gesit Companies. 
+                            This secure platform provides authorized personnel with advanced 
+                            tools to manage corporate assets and oversee global operations.
                         </p>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 mt-8">
@@ -158,8 +158,8 @@ export default function LoginPage() {
                                     <ShieldCheck className="w-5 h-5 text-[#BC9C33]" strokeWidth={1.5} />
                                 </div>
                                 <div>
-                                    <h4 className="text-[13px] font-bold mb-2 text-white">Secure Access</h4>
-                                    <p className="text-[11px] text-slate-400 leading-relaxed px-1">Enterprise-grade security<br />to protect your data.</p>
+                                    <h4 className="text-[13px] font-bold mb-2 text-white">Fortified Security</h4>
+                                    <p className="text-[11px] text-slate-400 leading-relaxed px-1">Protecting corporate intelligence<br />with enterprise-grade protocols.</p>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-4 items-center text-center">
@@ -167,8 +167,8 @@ export default function LoginPage() {
                                     <BarChart3 className="w-5 h-5 text-[#BC9C33]" strokeWidth={1.5} />
                                 </div>
                                 <div>
-                                    <h4 className="text-[13px] font-bold mb-2 text-white">Operational Efficiency</h4>
-                                    <p className="text-[11px] text-slate-400 leading-relaxed px-1">Streamline workflows<br />and improve productivity.</p>
+                                    <h4 className="text-[13px] font-bold mb-2 text-white">Operational Agility</h4>
+                                    <p className="text-[11px] text-slate-400 leading-relaxed px-1">Optimizing workflows to drive<br />organizational productivity.</p>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-4 items-center text-center">
@@ -176,8 +176,8 @@ export default function LoginPage() {
                                     <FileText className="w-5 h-5 text-[#BC9C33]" strokeWidth={1.5} />
                                 </div>
                                 <div>
-                                    <h4 className="text-[13px] font-bold mb-2 text-white">Data-Driven Decisions</h4>
-                                    <p className="text-[11px] text-slate-400 leading-relaxed px-1">Access insights and reports<br />in real time.</p>
+                                    <h4 className="text-[13px] font-bold mb-2 text-white">Strategic Insights</h4>
+                                    <p className="text-[11px] text-slate-400 leading-relaxed px-1">Harnessing real-time data to<br />inform high-level decisions.</p>
                                 </div>
                             </div>
                         </div>
@@ -200,23 +200,23 @@ export default function LoginPage() {
 
                 <div className="w-full max-w-[420px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-10 md:px-12 md:py-12 relative z-10 mx-6">
                     <div className="flex justify-center mb-6">
-                        <div className="w-14 h-14 rounded-full bg-[#f8fafc] border border-slate-100 flex items-center justify-center">
-                            <Lock className="w-5 h-5 text-[#1a365d]" strokeWidth={2} />
+                        <div className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center">
+                            <Lock className="w-5 h-5 text-[#103065]" strokeWidth={2} />
                         </div>
                     </div>
 
                     <div className="text-center mb-8">
-                        <h1 className="text-3xl font-serif text-[#1a365d] mb-4">
-                            Admin Login
+                        <h1 className="text-3xl font-serif text-[#103065] mb-4">
+                            Management Portal
                         </h1>
-                        <p className="text-[13px] text-slate-500 font-sans px-2">Enter your secure credentials to<br />access the dashboard system.</p>
+                        <p className="text-[13px] text-slate-500 font-sans px-2">Please provide your authorized credentials to<br />access the corporate management system.</p>
                     </div>
 
                     {!mfaRequired ? (
                         <form onSubmit={handleLogin} className="space-y-6">
                             <div className="space-y-5">
                                 <div className="space-y-2 text-left">
-                                    <Label htmlFor="email" className="text-[12px] font-bold text-[#1a365d] ml-1">Email Address</Label>
+                                    <Label htmlFor="email" className="text-[12px] font-bold text-[#103065] ml-1">Email Address</Label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <Mail className="h-[18px] w-[18px] text-slate-400" strokeWidth={1.5} />
@@ -233,7 +233,7 @@ export default function LoginPage() {
                                     </div>
                                 </div>
                                 <div className="space-y-2 text-left">
-                                    <Label htmlFor="password" className="text-[12px] font-bold text-[#1a365d] ml-1">Password</Label>
+                                    <Label htmlFor="password" className="text-[12px] font-bold text-[#103065] ml-1">Password</Label>
                                     <div className="relative">
                                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <Lock className="h-[18px] w-[18px] text-slate-400" strokeWidth={1.5} />
@@ -259,7 +259,7 @@ export default function LoginPage() {
 
                             <div className="flex items-center justify-between text-[12px] mt-2">
                                 <label className="flex items-center gap-2 cursor-pointer">
-                                    <input type="checkbox" className="w-[14px] h-[14px] rounded-[3px] border-slate-300 text-[#1a365d] focus:ring-[#1a365d]" />
+                                    <input type="checkbox" className="w-[14px] h-[14px] rounded-[3px] border-slate-300 text-[#103065] focus:ring-[#103065]" />
                                     <span className="text-slate-600 hover:text-slate-800 transition-colors">Remember me</span>
                                 </label>
                                 <a href="#" className="text-[#3b82f6] hover:text-[#2563eb] transition-colors">Forgot password?</a>
@@ -274,7 +274,7 @@ export default function LoginPage() {
 
                             <Button
                                 type="submit"
-                                className="w-full bg-[#0a1936] hover:bg-[#071328] text-white h-[48px] rounded-[8px] transition-all duration-300 shadow-[0_4px_14px_0_rgba(10,25,54,0.39)] hover:shadow-[0_6px_20px_rgba(10,25,54,0.23)] hover:-translate-y-[1px] flex items-center justify-center gap-2 text-[14px] font-medium mt-8"
+                                className="w-full bg-[#103065] hover:bg-[#0c244b] text-white h-[48px] rounded-[8px] transition-all duration-300 shadow-[0_4px_14px_0_rgba(16,48,101,0.3)] hover:shadow-[0_6px_20px_rgba(16,48,101,0.2)] hover:-translate-y-[1px] flex items-center justify-center gap-2 text-[14px] font-medium mt-8"
                                 disabled={loading}
                             >
                                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" strokeWidth={2} />}

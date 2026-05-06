@@ -119,7 +119,7 @@ const NewsPage = () => {
                     src={url}
                     alt={`News ${idx}`}
                     fill
-                    unoptimized
+                    sizes="100vw"
                     style={{
                       objectFit: "cover",
                       transform: idx === activeIdx ? "scale(1.15)" : "scale(1.05)",
@@ -130,6 +130,19 @@ const NewsPage = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
+            
+            {/* Gold Progress Bar - TOP */}
+            <div className="absolute top-0 left-0 w-full h-[4px] bg-black/20 z-40">
+              <motion.div
+                key={activeIdx}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 5, ease: "linear" }}
+                style={{ originX: 0 }}
+                className="h-full bg-[#BC9C33]"
+              />
+            </div>
+
             <div className="gesit-hero-overlay" />
 
 

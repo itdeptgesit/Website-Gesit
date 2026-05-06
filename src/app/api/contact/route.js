@@ -20,10 +20,11 @@ export async function POST(req) {
     const honeypot = json.website; // Hidden field
     const turnstileToken = json.turnstileToken;
 
-    // Anti-Spam Check: Honeypot
+    // Anti-Spam Check: Honeypot (Silent Drop)
     if (honeypot) {
-      console.warn("Spam detected: Honeypot field filled.");
-      return NextResponse.json({ error: 'Spam detected' }, { status: 400 });
+      console.warn("Spam detected: Honeypot field filled. Silently dropping.");
+      // Return 200 so the bot thinks it succeeded
+      return NextResponse.json({ success: true });
     }
 
     // Anti-Spam Check: Cloudflare Turnstile
