@@ -137,6 +137,10 @@ export default async function RootLayout({ children }) {
             }}
           />
         )}
+        {/* Preload Key Hero Images for Instant Display */}
+        <link rel="preload" href="/hero/hero_image_property_3-2.webp" as="image" type="image/webp" fetchpriority="high" />
+        <link rel="preload" href="/manufacturing/hero1.webp" as="image" type="image/webp" fetchpriority="high" />
+        <link rel="preload" href="/hero/hero_image_property_1-2.webp" as="image" type="image/webp" fetchpriority="high" />
       </head>
       <body suppressHydrationWarning>
         {/* Structured Data */}

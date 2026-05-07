@@ -105,7 +105,7 @@ export default function Home() {
                 transition: 'transform 20000ms linear',
               }}
               priority={i === 0}
-              {...(i === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+              {...(i === 0 ? { fetchPriority: "high", loading: "eager", unoptimized: true } : {})}
             />
             <div style={{
               position: 'absolute', top: 0, left: 0, right: 0, height: '50%',
