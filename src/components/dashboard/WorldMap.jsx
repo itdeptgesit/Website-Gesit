@@ -235,3 +235,4 @@ const WorldMap = ({ countries = [] }) => {
 };
 
 export default WorldMap;
+

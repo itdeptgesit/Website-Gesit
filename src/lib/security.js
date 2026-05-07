@@ -37,3 +37,4 @@ export function isValidLink(url) {
 export function safeJsonLd(data) {
     return JSON.stringify(data).replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
 }
+

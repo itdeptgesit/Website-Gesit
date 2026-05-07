@@ -52,3 +52,4 @@ export const goldSectionImages = [
     "/csr/Bantuan-30-Ventilator-dan-10-Ton-Beras-ke-Wali-Kota-Surabaya.jpeg",
     "/news/PMI-Ventilator.jpeg"
 ];
+

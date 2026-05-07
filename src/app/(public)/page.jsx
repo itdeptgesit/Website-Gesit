@@ -125,7 +125,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
             style={{
-              fontFamily: 'Lora, Georgia, serif', color: '#fff',
+              fontFamily: 'var(--font-serif)', color: '#fff',
               fontSize: 'clamp(42px, 7vw, 85px)', fontWeight: 400,
               lineHeight: 1.1, textAlign: 'center', margin: 0,
             }}
@@ -274,7 +274,7 @@ export default function Home() {
                         <div className="elementor-widget-container">
                           <motion.div variants={textVariant} className="qodef-shortcode qodef-m qodef-section-title qodef-alignment--left">
                             <div role="heading" aria-level={3} className="qodef-m-title" style={{ fontSize: '24px', fontWeight: 400, margin: 0, padding: 0, fontFamily: 'Georgia, Lora, serif', color: '#1e1e1e' }}>Gesit Foundation COVID-19 Vaccination Program</div>
-                            <p className="qodef-m-text" style={{ marginTop: 8, fontSize: '18px', color: '#555555', fontFamily: "'Source Sans Pro', sans-serif" }}>Participating in COVID control and distributing vaccines.</p>
+                            <p className="qodef-m-text" style={{ marginTop: 8, fontSize: '18px', color: '#555555', fontFamily: "var(--font-sans)" }}>Participating in COVID control and distributing vaccines.</p>
                           </motion.div>
                         </div>
                       </div>

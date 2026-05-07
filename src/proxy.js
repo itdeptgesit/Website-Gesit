@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { updateSession } from "@/lib/supabase-middleware";
 import { createServerClient } from "@supabase/ssr";
 
+// In-memory store for rate limiting
+const rateLimitMap = new Map();
+
 export async function proxy(request) {
     const path = request.nextUrl.pathname;
 
@@ -10,6 +13,30 @@ export async function proxy(request) {
     const isApi = path.startsWith('/api');
     const isMaintenancePage = path === '/maintenance';
     const isPublicRoute = !isAdmin && !isDashboard && !isApi && !isMaintenancePage;
+
+    // 0. Rate Limiting for API submissions (Contact/Career)
+    if (request.method === 'POST' && (path.includes('/api/contact') || path.includes('/api/career'))) {
+        const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
+        const now = Date.now();
+        const windowMs = 60 * 60 * 1000; // 1 hour
+        const limit = 3;
+        
+        const userLimit = rateLimitMap.get(ip) || { count: 0, startTime: now };
+        if (now - userLimit.startTime > windowMs) {
+            userLimit.count = 0;
+            userLimit.startTime = now;
+        }
+        
+        userLimit.count++;
+        rateLimitMap.set(ip, userLimit);
+        
+        if (userLimit.count > limit) {
+            return new NextResponse(
+                JSON.stringify({ error: 'Too many submissions. Please try again in an hour.' }),
+                { status: 429, headers: { 'Content-Type': 'application/json' } }
+            );
+        }
+    }
 
     // 1. Only run settings-based checks for Public Pages or Dashboard
     if (isPublicRoute || isDashboard || isMaintenancePage) {
@@ -73,3 +100,4 @@ export const config = {
         "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
     ],
 };
+

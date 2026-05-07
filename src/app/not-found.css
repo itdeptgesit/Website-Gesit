@@ -30,7 +30,7 @@
 }
 
 .gs-404-number {
-    font-family: 'Lora', serif;
+    font-family: var(--font-serif);
     font-size: clamp(120px, 15vw, 220px);
     font-weight: 700;
     line-height: 1;
@@ -54,7 +54,7 @@
 }
 
 .gs-404-title {
-    font-family: 'Lora', serif;
+    font-family: var(--font-serif);
     font-size: clamp(24px, 5vw, 42px);
     color: #ffffff;
     margin-top: 20px;
@@ -63,7 +63,7 @@
 }
 
 .gs-404-text {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: var(--font-sans);
     font-size: 18px;
     color: rgba(255, 255, 255, 0.7);
     max-width: 500px;
@@ -75,7 +75,7 @@
     display: inline-block;
     background-color: #bc9c33;
     color: #ffffff;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: var(--font-sans);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -108,3 +108,4 @@
         font-size: 14px;
     }
 }
+

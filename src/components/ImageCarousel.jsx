@@ -44,3 +44,4 @@ const ImageCarousel = ({ images, interval = 3000 }) => {
 };
 
 export default ImageCarousel;
+

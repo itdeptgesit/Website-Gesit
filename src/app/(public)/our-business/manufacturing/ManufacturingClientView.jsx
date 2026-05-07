@@ -86,11 +86,11 @@ const ProjectItem = ({ project, index }) => {
             >
                 <h3 className="text-[#1a1a1a] mb-4 text-4xl md:text-[3.2rem]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400, lineHeight: '1.2', maxWidth: '500px' }}>{project.title}</h3>
                 {project.subtitle && (
-                    <p className="text-[#1a1a1a] mb-8" style={{ fontFamily: 'Georgia, serif', fontSize: '1.25rem', fontStyle: 'italic' }}>
+                    <p className="text-[#444] mb-8" style={{ fontFamily: 'Georgia, serif', fontSize: '1.25rem', fontStyle: 'italic' }}>
                         {project.subtitle}
                     </p>
                 )}
-                <div className={`text-[#000] ${!project.subtitle ? 'mt-8' : ''} mb-12`} style={{ fontSize: '18px', fontWeight: 400, lineHeight: '1.6', fontFamily: "'Source Sans Pro', sans-serif", maxWidth: '440px' }}>
+                <div className={`text-[#000] ${!project.subtitle ? 'mt-8' : ''} mb-12`} style={{ fontSize: '18px', fontWeight: 400, lineHeight: '1.6', fontFamily: "var(--font-sans)", maxWidth: '440px' }}>
                     {project.desc.split('\n\n').map((p, i) => (
                         <p key={i} className="m-0 mb-4">{p}</p>
                     ))}
@@ -106,7 +106,7 @@ const ProjectItem = ({ project, index }) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center px-10 py-4 border border-[#103065] rounded-full text-[#103065] text-[16px] hover:bg-[#103065] hover:text-white transition-all duration-300 no-underline"
-                                style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 600 }}
+                                style={{ fontFamily: "var(--font-sans)", fontWeight: 600 }}
                             >
                                 Visit Website
                             </a>
@@ -118,7 +118,7 @@ const ProjectItem = ({ project, index }) => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center px-10 py-4 border border-[#103065] rounded-full text-[#103065] text-[16px] hover:bg-[#103065] hover:text-white transition-all duration-300 no-underline"
-                                    style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 600 }}
+                                    style={{ fontFamily: "var(--font-sans)", fontWeight: 600 }}
                                 >
                                     Download Brochure
                                 </a>
@@ -232,7 +232,7 @@ const ManufacturingClientView = () => {
                                 transition={{ duration: 1.2, ease: "easeOut" }}
                                 className="text-white text-5xl md:text-[65px] leading-tight drop-shadow-md text-center md:text-left"
                                 style={{
-                                    fontFamily: '"Lora", serif',
+                                    fontFamily: 'var(--font-serif)',
                                     fontWeight: 400,
                                     textShadow: '0 2px 20px rgba(0,0,0,0.5)',
                                 }}
@@ -264,7 +264,7 @@ const ManufacturingClientView = () => {
                         <div style={{ margin: '0 0 25px', padding: 0 }}>
                             <h2 className="text-[28px] font-normal" style={{
                                 color: '#333',
-                                fontFamily: '"Source Sans Pro", sans-serif',
+                                fontFamily: 'var(--font-sans)',
                                 margin: 0
                             }}>
                                 Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.
@@ -274,7 +274,7 @@ const ManufacturingClientView = () => {
                         <div>
                             <p className="text-[20px]" style={{
                                 color: '#666',
-                                fontFamily: '"Source Sans Pro", sans-serif',
+                                fontFamily: 'var(--font-sans)',
                                 fontWeight: 400,
                                 margin: 0
                             }}>
@@ -310,3 +310,4 @@ const ManufacturingClientView = () => {
 };
 
 export default ManufacturingClientView;
+

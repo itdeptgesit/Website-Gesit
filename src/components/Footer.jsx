@@ -73,7 +73,7 @@ export default function Footer() {
                           <a href="tel:+62213101601">Phone : +62 21 3101601</a>
                         </p>
                         <p>
-                          <a href="mailto:contact@gesit.co.id">Mail : contact@gesit.co.id</a>
+                          <a href="mailto:contact@gesit.co.id" style={{ textTransform: 'lowercase' }}>Mail : contact@gesit.co.id</a>
                         </p>
                       </div>
                     </div>
@@ -94,7 +94,7 @@ export default function Footer() {
                     </div>
                     <div id="text-3" className="widget widget_text" data-area="footer_bottom_area_column_1">
                       <div className="textwidget">
-                        <p className="qodef-shortcode qodef-m qodef-custom-font qodef-custom-font-4 qodef-layout--simple" style={{ fontFamily: '"Source Sans Pro", sans-serif', fontSize: 13, color: 'rgba(255,255,255,0.7)', textAlign: 'center', letterSpacing: '0.5px' }}>
+                        <p className="qodef-shortcode qodef-m qodef-custom-font qodef-custom-font-4 qodef-layout--simple" style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'rgba(255,255,255,0.7)', textAlign: 'center', letterSpacing: '0.5px' }}>
                           © 2026 THE GESIT COMPANIES. ALL RIGHTS RESERVED
                         </p>
                       </div>
@@ -161,3 +161,4 @@ export default function Footer() {
     </>
   );
 }
+

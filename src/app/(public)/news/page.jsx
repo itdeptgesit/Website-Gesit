@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, ChevronLeft, Loader2 } from "lucide-react";
+import { ArrowRight, ChevronRight, ChevronLeft, Loader2, Calendar, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -67,7 +67,7 @@ const NewsPage = () => {
   }, []);
 
   const featuredArticle = newsItems[0];
-  const otherArticles = newsItems.slice(1);
+  const otherArticles = newsItems.slice(1, 5); // Fetch up to 4 cards for the grid
 
   /* ── Swiper refs/buttons logic ── */
   const [isMounted, setIsMounted] = useState(false);
@@ -288,7 +288,7 @@ const NewsPage = () => {
               <p className="text-navy-deep/60">Check back later for the latest updates from Gesit.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
               {otherArticles.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -296,7 +296,7 @@ const NewsPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex"
+                  className={`flex ${index === 3 ? "xl:hidden" : ""}`}
                 >
                     <Link
                       href={`/news/${item.slug || item.id}`}
@@ -306,7 +306,7 @@ const NewsPage = () => {
                         {new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </span>
                       <h3
-                        className="text-[26px] text-black leading-[1.3] mb-8 transition-colors"
+                        className="text-[26px] text-navy-deep leading-[1.3] mb-8 group-hover:text-[#bc9c33] transition-colors"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                       >
                         {item.title}
@@ -331,17 +331,19 @@ const NewsPage = () => {
           )}
 
             {/* See All Button */}
-            <div className="mt-12 flex justify-start">
-              <Link
-                href="/news/archive"
-                className="flex items-center gap-3 group text-navy-deep font-bold uppercase tracking-[.3em] text-[11px]"
-              >
-                <span>See All</span>
-                <div className="w-8 h-8 rounded-full border border-navy-deep flex items-center justify-center group-hover:bg-navy-deep group-hover:text-white transition-all duration-300">
-                  <ArrowRight size={14} />
-                </div>
-              </Link>
-            </div>
+            {newsItems.length > 4 && (
+              <div className="mt-12 flex justify-start">
+                <Link
+                  href="/news/archive"
+                  className="flex items-center gap-3 group text-navy-deep font-bold uppercase tracking-[.3em] text-[11px]"
+                >
+                  <span>See All</span>
+                  <div className="w-8 h-8 rounded-full border border-navy-deep flex items-center justify-center group-hover:bg-navy-deep group-hover:text-white transition-all duration-300">
+                    <ArrowRight size={14} />
+                  </div>
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 
@@ -368,7 +370,7 @@ const NewsPage = () => {
                     src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                     alt={item.title || 'News Update'}
                     fill
-                    className="object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2.5s] ease-out"
+                    className="object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2500ms] ease-out"
                     sizes="450px"
                   />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
@@ -384,3 +386,4 @@ const NewsPage = () => {
 };
 
 export default NewsPage;
+

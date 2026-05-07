@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap');
+/* Typography Variables */
 
 @tailwind base;
 @tailwind components;
@@ -25,6 +25,14 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
   --radius: 0.5rem;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Source Sans 3', sans-serif;
+  --primary-navy: #103065;
+  --accent-gold: #BC9C33;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
 }
 
 .dark {
@@ -72,9 +80,16 @@ body {
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body.gs-no-scroll {
+  overflow: hidden !important;
+  height: 100% !important;
+  width: 100% !important;
+  position: fixed !important;
 }
 
 /* Force layout containers to not offset the hero */
@@ -178,7 +193,7 @@ a {
 }
 
 .gs-logo-link img {
-  height: 64px;
+  height: 48px;
   width: auto;
   transition: all 0.4s ease;
   filter: brightness(1);
@@ -190,14 +205,14 @@ a {
   font-weight: 700;
   color: var(--gs-accent-gold);
   letter-spacing: 1.5px;
-  text-transform: uppercase;
+  text-transform: none;
   white-space: nowrap;
   transition: all 0.4s ease;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #qodef-page-header.gs-is-sticky .gs-logo-link img {
-  height: 42px;
+  height: 44px;
 }
 
 #qodef-page-header.gs-is-sticky .gs-logo-text {
@@ -208,6 +223,15 @@ a {
   display: flex;
   list-style: none;
   gap: 25px;
+}
+
+@media (max-width: 1400px) {
+  .qodef-header-navigation .menu {
+    gap: 15px;
+  }
+  .gs-logo-text {
+    font-size: 18px;
+  }
 }
 
 .qodef-header-navigation .menu>li>a {
@@ -328,7 +352,7 @@ a {
   background: #103065;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
   #qodef-page-header {
     display: none !important;
   }

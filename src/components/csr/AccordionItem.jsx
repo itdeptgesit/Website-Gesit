@@ -26,7 +26,7 @@ const AccordionItem = ({ title, isOpen, onClick, children }) => {
                 </span>
 
                 {/* Title */}
-                <span className="text-[22px] font-semibold text-[#222]" style={{ fontFamily: '"Lora", serif' }}>
+                <span className="text-[22px] font-semibold text-[#222]" style={{ fontFamily: 'var(--font-serif)' }}>
                     {title}
                 </span>
             </button>
@@ -47,3 +47,4 @@ const AccordionItem = ({ title, isOpen, onClick, children }) => {
 };
 
 export default AccordionItem;
+

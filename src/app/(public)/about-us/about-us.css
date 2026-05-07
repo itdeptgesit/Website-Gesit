@@ -467,7 +467,7 @@
 
 		.elementor-5968 .elementor-element.elementor-element-e911eef .elementor-heading-title {
 			color: #103065;
-			font-family: "Source Sans Pro", Sans-serif;
+			font-family: var(--font-sans);
 			font-size: 19px;
 			font-weight: normal;
 			line-height: 1.47em;
@@ -483,7 +483,7 @@
 		.elementor-5968 .elementor-element.elementor-element-97290fa {
 			text-align: left;
 			color: var(--e-global-color-486263a);
-			font-family: "Source Sans Pro", Sans-serif;
+			font-family: var(--font-sans);
 			font-size: 19px;
 			font-weight: 400;
 		}
@@ -562,10 +562,10 @@
 
 		.elementor-5968 .elementor-element.elementor-element-42b3dc3 .elementor-heading-title {
 			color: #000000;
-			font-family: "Source Sans Pro", Sans-serif;
-			font-size: 25px;
+			font-family: var(--font-sans);
+			font-size: 26px;
 			font-weight: 400;
-			line-height: 30px;
+			line-height: 1.4;
 		}
 
 		.elementor-5968 .elementor-element.elementor-element-42b3dc3>.elementor-widget-container {
@@ -606,10 +606,10 @@
 
 		.elementor-5968 .elementor-element.elementor-element-3c1aa17 .elementor-heading-title {
 			color: #000000;
-			font-family: "Source Sans Pro", Sans-serif;
-			font-size: 25px;
+			font-family: var(--font-sans);
+			font-size: 26px;
 			font-weight: 400;
-			line-height: 30px;
+			line-height: 1.4;
 		}
 
 		.elementor-5968 .elementor-element.elementor-element-4b82676>.elementor-container {

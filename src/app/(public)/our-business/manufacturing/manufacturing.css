@@ -1,5 +1,5 @@
 .gesit-manufacturing-page {
-  font-family: "Lora", "Source Sans Pro", sans-serif;
+  font-family: "Lora", var(--font-sans);
   color: #000;
   background-color: #ffffff;
 }
@@ -47,7 +47,7 @@
 
 .gesit-hero-title {
   color: #fff;
-  font-family: "Lora", serif;
+  font-family: var(--font-serif);
   font-size: 65px;
   font-weight: 400;
   margin: 0;
@@ -74,7 +74,7 @@
 }
 
 .manufacturing-intro-main {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: var(--font-sans);
   font-size: 28px;
   line-height: 1.4;
   font-weight: 400;
@@ -83,7 +83,7 @@
 }
 
 .manufacturing-intro-sub {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: var(--font-sans);
   font-size: 20px;
   color: #666;
 }
@@ -164,7 +164,7 @@
 
 /* Text Content */
 .manufacturing-h2 {
-  font-family: "Lora", serif;
+  font-family: var(--font-serif);
   font-size: 36px;
   font-weight: 500;
   color: #333;
@@ -173,7 +173,7 @@
 }
 
 .manufacturing-h2-sub {
-  font-family: "Lora", serif;
+  font-family: var(--font-serif);
   font-size: 28px;
   font-weight: 500;
   color: #666;
@@ -182,7 +182,7 @@
 }
 
 .manufacturing-p {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.8;
   color: #000;
@@ -191,23 +191,24 @@
 
 /* Button */
 .manufacturing-btn {
-  display: inline-block;
-  font-family: "Source Sans Pro", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #333;
-  border: 1px solid #333;
+  text-transform: none;
+  color: #103065;
+  border: 1px solid #103065;
   padding: 15px 35px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
   background: transparent;
 }
 
 .manufacturing-btn:hover {
-  background-color: #333;
-  color: #fff;
+  background-color: #103065;
+  color: #fff !important;
 }
 
 /* Mobile Responsiveness */
@@ -228,3 +229,4 @@
     text-align: center;
   }
 }
+

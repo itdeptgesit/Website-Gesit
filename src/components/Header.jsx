@@ -28,6 +28,19 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('gs-no-scroll');
+    } else {
+      document.body.classList.remove('gs-no-scroll');
+    }
+
+    return () => {
+      document.body.classList.remove('gs-no-scroll');
+    };
+  }, [mobileMenuOpen]);
+
   const isActive = (path) => {
     if (path === '/') return pathname === '/';
     return pathname?.startsWith(path);
@@ -151,3 +164,4 @@ export default function Header() {
     </>
   );
 }
+

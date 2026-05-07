@@ -52,3 +52,4 @@ export default function PageTracker() {
 
     return null; // This component doesn't render anything
 }
+

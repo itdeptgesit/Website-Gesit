@@ -56,8 +56,8 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        serif: ['Georgia', 'serif'],
-        sans: ["'Source Sans Pro'", 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {

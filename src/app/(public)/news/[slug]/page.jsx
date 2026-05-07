@@ -304,15 +304,15 @@ export default function NewsDetailPage() {
                 <div className="mt-24 border-t border-slate-100 pt-8 pb-16 flex justify-between items-center px-4">
                     <div className="w-1/2 text-left">
                         {prevPost && (
-                            <Link href={`/news/${prevPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black uppercase text-xs tracking-widest hover:text-[#bc9c33] transition-colors">
-                                <ChevronLeft size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" /> PREV NEWS
+                            <Link href={`/news/${prevPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black text-xs tracking-widest hover:text-[#bc9c33] transition-colors">
+                                <ChevronLeft size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" /> Previous News
                             </Link>
                         )}
                     </div>
                     <div className="w-1/2 text-right">
                         {nextPost && (
-                            <Link href={`/news/${nextPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black uppercase text-xs tracking-widest hover:text-[#bc9c33] transition-colors justify-end">
-                                NEXT NEWS <ChevronRight size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" />
+                            <Link href={`/news/${nextPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black text-xs tracking-widest hover:text-[#bc9c33] transition-colors justify-end">
+                                Next News <ChevronRight size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" />
                             </Link>
                         )}
                     </div>

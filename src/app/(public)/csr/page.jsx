@@ -292,7 +292,7 @@ export default function CSRPage() {
                         <div style={{ paddingLeft: '24px', borderLeft: '2px solid #BC9C33' }}>
                             <p className="text-[16px] md:text-[24px] lg:text-[23px] leading-relaxed md:leading-normal" style={{
                                 color: '#103065',
-                                fontFamily: "'Source Sans Pro', sans-serif",
+                                fontFamily: "var(--font-sans)",
                                 fontWeight: 400,
                                 margin: 0
                             }}>
@@ -396,17 +396,17 @@ export default function CSRPage() {
                                                 {initiative.content.map((block) => (
                                                     <div key={block.subtitle} className="mt-6 first:mt-0">
                                                         {block.subtitle && (
-                                                            <h4 className="text-[17px] md:text-[18px] font-bold text-[#444] m-0 mb-2" style={{ fontFamily: "'Source Sans Pro', sans-serif", lineHeight: 1.2 }}>
+                                                            <h4 className="text-[20px] md:text-[22px] font-normal text-[#1a1a1a] m-0 mb-3" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="space-y-2 m-0 p-0">
+                                                        <ul className="space-y-4 m-0 p-0 mt-4">
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
                                                                 return (
-                                                                    <li key={i} className={`flex items-start gap-2 text-[16px] md:text-[17px] text-[#666] font-normal leading-normal m-0 p-0 ${isSubItem ? 'pl-8' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
+                                                                    <li key={i} className={`flex items-start gap-4 text-[18px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 p-0 ${isSubItem ? 'pl-10' : ''}`} style={{ fontFamily: "var(--font-sans)" }}>
                                                                         {!isSubItem && (
-                                                                            <span className="text-[#888] mt-1 shrink-0">•</span>
+                                                                            <span className="text-[#000] shrink-0" style={{ marginTop: '7px', fontSize: '10px', lineHeight: 1 }}>●</span>
                                                                         )}
                                                                         <span className="flex-1">{item}</span>
                                                                     </li>
@@ -447,7 +447,7 @@ export default function CSRPage() {
                                     <img
                                         src={src}
                                         alt={`CSR Gallery ${index}`}
-                                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2.5s] ease-out"
+                                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2500ms] ease-out"
                                     />
                                     <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
                                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />

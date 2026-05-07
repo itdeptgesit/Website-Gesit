@@ -1,39 +1,32 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase-server';
+import xss from 'xss';
 
 const normalizePath = (url) => {
     if (!url) return url;
-    // Handle legacy WordPress paths
     if (url.includes('wp-content/uploads/')) {
         const filename = url.split('/').pop();
         const ext = filename.split('.').pop().toLowerCase();
         if (['mp4', 'webm', 'ogg'].includes(ext)) {
             return `/video/${filename}`;
         } else if (['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(ext)) {
-            // Check if it's stored in /news or /images
             return `/news/${filename}`;
         }
     }
-    // Remove domain if it's internal
     return url.replace(/^https?:\/\/(dev\.)?gesit\.co\.id/i, '');
 };
 
 const normalizeNewsItem = (item) => {
     let normalizedContent = item.content || '';
-
-    // Normalize paths inside HTML content
     if (normalizedContent.includes('wp-content/uploads/')) {
-        // Replace video paths in content
         normalizedContent = normalizedContent.replace(
             /https?:\/\/(?:dev\.)?gesit\.co\.id\/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/([^"']+\.(?:mp4|webm|ogg))/gi,
             '/video/$1'
         );
-        // Replace image paths in content
         normalizedContent = normalizedContent.replace(
             /https?:\/\/(?:dev\.)?gesit\.co\.id\/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/([^"']+\.(?:jpg|jpeg|png|webp|gif))/gi,
             '/news/$1'
         );
-        // Catch-all for relative paths or others
         normalizedContent = normalizedContent.replace(
             /\/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/([^"']+\.(?:mp4|webm|ogg))/gi,
             '/video/$1'
@@ -52,6 +45,20 @@ const normalizeNewsItem = (item) => {
     };
 };
 
+// Security Helper
+async function isAuthorized(request, supabase) {
+    // 1. Check Session
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) return true;
+
+    // 2. Check Secret API Key (for external tools)
+    const apiKey = request.headers.get('x-api-key');
+    const validKey = process.env.GESIT_API_SECRET;
+    if (apiKey && validKey && apiKey === validKey) return true;
+
+    return false;
+}
+
 export async function GET() {
     try {
         const supabase = await createClient();
@@ -65,14 +72,24 @@ export async function GET() {
         const normalizedData = data.map(normalizeNewsItem);
         return NextResponse.json(normalizedData);
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("GET News Error:", error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
 
 export async function POST(request) {
     try {
         const supabase = await createClient();
+        if (!(await isAuthorized(request, supabase))) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
         const body = await request.json();
+        
+        // Input Sanitization
+        if (body.content) body.content = xss(body.content);
+        if (body.title) body.title = xss(body.title);
+
         const { data, error } = await supabase
             .from('news')
             .insert([body])
@@ -81,13 +98,18 @@ export async function POST(request) {
         if (error) throw error;
         return NextResponse.json(data[0]);
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("POST News Error:", error);
+        return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
     }
 }
 
 export async function PATCH(request) {
     try {
         const supabase = await createClient();
+        if (!(await isAuthorized(request, supabase))) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
 
@@ -96,6 +118,11 @@ export async function PATCH(request) {
         }
 
         const body = await request.json();
+        
+        // Input Sanitization
+        if (body.content) body.content = xss(body.content);
+        if (body.title) body.title = xss(body.title);
+
         const { data, error } = await supabase
             .from('news')
             .update(body)
@@ -105,13 +132,18 @@ export async function PATCH(request) {
         if (error) throw error;
         return NextResponse.json(data[0]);
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("PATCH News Error:", error);
+        return NextResponse.json({ error: 'Failed to update content' }, { status: 500 });
     }
 }
 
 export async function DELETE(request) {
     try {
         const supabase = await createClient();
+        if (!(await isAuthorized(request, supabase))) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
         const { searchParams } = new URL(request.url);
         const id = searchParams.get('id');
 
@@ -127,6 +159,8 @@ export async function DELETE(request) {
         if (error) throw error;
         return NextResponse.json({ success: true });
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("DELETE News Error:", error);
+        return NextResponse.json({ error: 'Deletion failed' }, { status: 500 });
     }
 }
+
