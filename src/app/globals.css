@@ -181,17 +181,18 @@ a {
   height: 48px;
   width: auto;
   transition: all 0.4s ease;
-  filter: brightness(1);
+  filter: brightness(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .gs-logo-text {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--gs-accent-gold);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #qodef-page-header.gs-is-sticky .gs-logo-link img {
@@ -339,12 +340,13 @@ a {
 }
 
 .gs-mobile-logo img {
-  height: 35px;
+  height: 40px;
   width: auto;
 }
 
 .gs-mobile-logo .gs-logo-text {
-  font-size: 16px;
+  font-size: 20px;
+  letter-spacing: 0.5px;
 }
 
 .gs-mobile-opener {
@@ -467,28 +469,55 @@ a {
 .gs-mobile-submenu {
   list-style: none;
   padding-left: 25px;
-  margin-top: 30px;
+  margin-top: 0;
+  margin-bottom: 0;
   max-height: 0;
+  opacity: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin 0.3s ease;
   border-left: 3px solid var(--gs-accent-gold);
 }
 
 .gs-mobile-submenu.gs-is-open {
   max-height: 500px;
+  opacity: 1;
+  margin-top: 15px;
   margin-bottom: 20px;
+  padding-top: 10px;
+  /* gives space between the top of exactly the gold line and the first item */
+  padding-bottom: 5px;
 }
 
 .gs-mobile-submenu li {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
+  transform: translateY(-8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gs-mobile-submenu li:last-child {
+  margin-bottom: 0;
 }
 
 .gs-mobile-submenu.gs-is-open li {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
+}
+
+.gs-mobile-submenu.gs-is-open li:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.gs-mobile-submenu.gs-is-open li:nth-child(2) {
+  transition-delay: 0.15s;
+}
+
+.gs-mobile-submenu.gs-is-open li:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.gs-mobile-submenu.gs-is-open li:nth-child(4) {
+  transition-delay: 0.25s;
 }
 
 .gs-mobile-submenu li a {
@@ -666,15 +695,15 @@ a {
 /* Responsive Hero Title */
 .gs-hero-title {
   position: absolute;
-  bottom: 70px;
+  bottom: 100px;
   left: 60px;
   z-index: 10;
   font-family: 'Lora', serif;
   color: #fff;
-  font-size: 85px;
+  font-size: 65px;
   font-weight: 400;
   text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-  line-height: 88px;
+  line-height: 72px;
   pointer-events: none;
   width: auto;
   text-align: left;
@@ -698,8 +727,8 @@ a {
 /* Notebook (1024px - 1240px) */
 @media (max-width: 1240px) {
   .gs-hero-title {
-    font-size: 75px !important;
-    line-height: 78px !important;
+    font-size: 55px !important;
+    line-height: 60px !important;
   }
 }
 
@@ -710,8 +739,8 @@ a {
     right: 20px !important;
     bottom: 50% !important;
     transform: translateY(50%) !important;
-    font-size: 65px !important;
-    line-height: 70px !important;
+    font-size: 48px !important;
+    line-height: 55px !important;
     text-align: center !important;
     width: auto !important;
   }
@@ -745,7 +774,7 @@ a {
 .gs-overview-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding: 0 40px;
 }
 
 @media (max-width: 768px) {
@@ -755,12 +784,12 @@ a {
 }
 
 .gs-overview-heading {
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1.4;
 }
 
 .gs-overview-body {
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -770,8 +799,8 @@ a {
 
 @media (max-width: 768px) {
   .gs-overview-heading {
-    font-size: 30px !important;
-    line-height: 38px !important;
+    font-size: 28px !important;
+    line-height: 36px !important;
   }
 
   .gs-overview-body {
@@ -962,4 +991,40 @@ a {
 .sticky-sidebar {
   position: sticky;
   top: 120px;
+}
+
+/* Align Hero Mission Text and Left Border */
+.elementor-215 .elementor-element.elementor-element-ef90b6d>.elementor-widget-container {
+  margin-left: -40px !important;
+}
+
+@media (max-width: 767px) {
+  .elementor-215 .elementor-element.elementor-element-ef90b6d>.elementor-widget-container {
+    margin-left: -20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   LCP Optimization & Animations
+   ═══════════════════════════════════════════════════════ */
+
+.gs-lcp-title {
+  opacity: 0;
+  animation: gsFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
+  will-change: transform, opacity;
+}
+
+@keyframes gsFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
 }

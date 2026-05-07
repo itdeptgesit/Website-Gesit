@@ -267,7 +267,8 @@ export default function NaturalResourcesPage() {
                                     boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
                                     overflow: "hidden",
                                     display: "flex",
-                                    flexDirection: "column"
+                                    flexDirection: "column",
+                                    borderRadius: "5px"
                                 }}
                             >
                                 <div style={{ position: "relative", width: "100%", paddingTop: "60%", overflow: "hidden" }}>

@@ -4,8 +4,8 @@ export default function Footer() {
   return (
     <>
       <div>
-        <footer id="qodef-page-footer" className="qodef--light-footer">
-          <div id="qodef-page-footer-top-area">
+        <footer id="qodef-page-footer" className="qodef--light-footer" style={{ border: 'none' }}>
+          <div id="qodef-page-footer-top-area" style={{ border: 'none' }}>
             <div id="qodef-page-footer-top-area-inner" className="qodef-content-grid">
               <div className="qodef-grid qodef-layout--columns qodef-responsive--custom qodef-col-num--3 qodef-col-num--768--1 qodef-col-num--680--1 qodef-col-num--480--1">
                 <div className="qodef-grid-inner clear">
@@ -82,14 +82,14 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <div id="qodef-page-footer-bottom-area">
+          <div id="qodef-page-footer-bottom-area" style={{ border: 'none' }}>
             <div id="qodef-page-footer-bottom-area-inner" className="qodef-content-grid">
               <div className="qodef-grid qodef-layout--columns qodef-responsive--custom qodef-col-num--1">
                 <div className="qodef-grid-inner clear">
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
                       <Link href="/" style={{ textDecoration: 'none' }}>
-                        <img src="/images/logo.png" alt="Gesit Logo" style={{ height: '55px', width: 'auto', display: 'block' }} />
+                        <img src="/images/logo.png" alt="The Gesit Companies logo" style={{ height: '55px', width: 'auto', display: 'block' }} />
                       </Link>
                     </div>
                     <div id="text-3" className="widget widget_text" data-area="footer_bottom_area_column_1">
@@ -157,7 +157,6 @@ export default function Footer() {
             </div>
           </div>
         </div></div>
-
     </>
   );
 }

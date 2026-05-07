@@ -41,12 +41,17 @@
 
 .contact-image-column {
   width: 50%;
-  min-height: 600px;
-  background-image: url('/wp-content/uploads/2021/12/contact_us_im.jpeg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  min-height: 550px;
+  display: flex;
+  overflow: hidden;
   border-radius: 5px;
+}
+
+.contact-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .contact-content-column {
@@ -58,11 +63,11 @@
 }
 
 .contact-heading-title {
-  color: #000000;
-  font-family: var(--e-global-typography-primary-font-family, "Lora"), sans-serif;
-  font-size: 36px;
+  color: #103065;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 42px;
   font-weight: 500;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .contact-info-row {
@@ -92,19 +97,19 @@
 }
 
 .contact-info-text {
-  color: #000000;
+  color: #444;
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: inherit;
+  line-height: 1.6;
 }
 
 .contact-info-text a {
   color: inherit;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
 }
 
 .contact-details-col .contact-info-text a {
@@ -140,31 +145,54 @@
 
 .wpcf7-form-control {
   width: 100%;
-  padding: 15px;
-  border: 1px solid #ddd;
-  background-color: #fafafa;
-  font-size: 14px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent !important;
+  font-size: 16px;
   font-family: inherit;
+  border-radius: 0;
+  transition: border-color 0.3s ease;
+}
+
+.wpcf7-form-control:focus {
+  outline: none;
+  border-bottom: 1px solid #103065;
 }
 
 .wpcf7-textarea {
-  min-height: 150px;
+  min-height: 200px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 4px;
   resize: vertical;
 }
 
+.wpcf7-textarea:focus {
+  border: 1px solid #103065;
+}
+
 .wpcf7-submit {
-  background-color: #BC9C33;
+  background-color: #103065;
   color: white;
   border: none;
-  padding: 15px 30px;
+  padding: 18px 30px;
   cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease;
+  font-weight: 700;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  border-radius: 50px;
+  width: 100%;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  margin-top: 20px;
 }
 
 .wpcf7-submit:hover {
-  background-color: #a3862b;
+  background-color: #1a4a8e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 48, 101, 0.2);
 }
 
 /* Responsiveness */

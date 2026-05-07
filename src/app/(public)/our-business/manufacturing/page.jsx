@@ -214,7 +214,7 @@ export default function ManufacturingPage() {
                   download="AAMS-Brochure.pdf"
                   className="pill-button"
                 >
-                  Download The Brochure
+                  Download The Brochure <span className="sr-only">for Alakasa Andalan Mitra Sejati</span>
                 </a>
               </motion.div>
             </motion.div>
@@ -267,11 +267,11 @@ export default function ManufacturingPage() {
 
               <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
                 <a
-                  href="https://www.rheem-ina.com/"
+                  href="https://rheem.co.id/"
                   target="_blank" rel="noopener noreferrer"
                   className="pill-button"
                 >
-                  Learn More
+                  Learn More <span className="sr-only">about Rheem Indonesia</span>
                 </a>
               </motion.div>
             </motion.div>
@@ -290,12 +290,11 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={textVariant} className="project-title">Alumina Refinery & Aluminum Smelter Development</motion.h2>
 
-              <div className="project-info-box">
-                <h6 className="project-info-title" style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '19px', color: '#000', fontWeight: 500, margin: 0 }}>
-                  Status : Under Development
-                </h6>
-                <p className="project-info-text">Project Phase : Development Cycle</p>
-              </div>
+              <motion.div variants={textVariant} style={{ marginBottom: '35px' }}>
+                <i style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '19px', color: '#000', fontWeight: 500, display: 'block' }}>
+                  Under Development
+                </i>
+              </motion.div>
 
               <motion.div variants={textVariant} className="project-desc">
                 <p>We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia&apos;s rich natural resources and logistical advantage.</p>

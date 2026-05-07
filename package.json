@@ -42,5 +42,12 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "htmltojsx": "^0.3.0"
-  }
+  },
+  "browserslist": [
+    "last 2 years",
+    "> 1%",
+    "not dead",
+    "not op_mini all",
+    "not ie 11"
+  ]
 }

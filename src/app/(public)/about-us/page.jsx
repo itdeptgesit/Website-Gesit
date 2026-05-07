@@ -57,7 +57,17 @@ export default function AboutUs() {
                 </div>
 
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
-                  <video suppressHydrationWarning className="elementor-background-video-hosted elementor-html5-video" autoPlay muted playsInline loop src="/wp-content/uploads/2021/10/about-us-video.mp4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <video
+                    suppressHydrationWarning
+                    className="elementor-background-video-hosted elementor-html5-video"
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                    preload="metadata"
+                    src="/wp-content/uploads/2021/10/about-us-video.mp4"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
                 </div>
 
                 {/* Overlay Gradient */}
@@ -232,7 +242,18 @@ export default function AboutUs() {
                             className="e-hosted-video elementor-wrapper elementor-open-inline"
                             style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <video suppressHydrationWarning className="elementor-video" src="/wp-content/uploads/2021/10/about-us-video.mp4" autoPlay loop muted playsInline preload="metadata" poster="/wp-content/uploads/2021/10/video_thumbnail2.jpeg" style={{ width: '100%', borderRadius: 12 }} />
+                            <video
+                              suppressHydrationWarning
+                              className="elementor-video"
+                              src="/wp-content/uploads/2021/10/about-us-video.mp4"
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              preload="none"
+                              poster="/wp-content/uploads/2021/10/video_thumbnail2.jpeg"
+                              style={{ width: '100%', borderRadius: 12 }}
+                            />
                           </motion.div>
                         </div>
                       </div>

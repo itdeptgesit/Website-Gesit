@@ -75,7 +75,13 @@ export default function ContactUs() {
 
       <section className="contact-section">
         <div className="contact-container">
-          <div className="contact-image-column" aria-label="Contact Gesit Image"></div>
+          <div className="contact-image-column">
+            <img
+              src="/wp-content/uploads/2021/12/contact_us_im.jpeg"
+              alt="Contact Gesit"
+              className="contact-main-image"
+            />
+          </div>
 
           <div className="contact-content-column">
             <h3 className="contact-heading-title">The Gesit Companies</h3>

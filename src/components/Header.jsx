@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
@@ -57,7 +58,7 @@ export default function Header() {
       <header id="qodef-page-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div id="qodef-page-header-inner">
           <Link href="/" className="gs-logo-link">
-            <img src="/images/only-logo.png" alt="Gesit Logo" />
+            <Image src="/logo-gesit.svg" alt="The Gesit Companies logo" width={150} height={180} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
 
@@ -92,7 +93,7 @@ export default function Header() {
       <header id="gs-custom-mobile-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div className="gs-mobile-header-inner">
           <Link href="/" className="gs-mobile-logo">
-            <img src="/images/only-logo.png" alt="Gesit Logo" />
+            <Image src="/logo-gesit.svg" alt="The Gesit Companies logo" width={150} height={180} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
           <div
