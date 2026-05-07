@@ -56,22 +56,9 @@
     "@testing-library/user-event": "^14.6.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-<<<<<<< HEAD
-    "htmltojsx": "^0.3.0"
-  },
-  "browserslist": [
-    "last 2 years",
-    "> 1%",
-    "not dead",
-    "not op_mini all",
-    "not ie 11"
-  ]
-}
-=======
-    "htmltojsx": "^0.2.2",
+    "htmltojsx": "^0.3.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0"
   }
 }
->>>>>>> f0b4ab81ee9d8c8620737ad97f28146bc3b4571e
