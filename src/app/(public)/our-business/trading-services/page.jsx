@@ -182,7 +182,6 @@ export default function TradingServicesPage() {
                             </svg>
                         </button>
                     </div>
-                )}  </>
                 )}
             </section>
 

@@ -163,6 +163,7 @@ export default function NaturalResourcesPage() {
                     Natural Resources
                 </motion.h1>
 
+                        {/* Navigation arrows - Only show when mounted */}
                         <div className="gs-hero-nav">
                             <button
                                 ref={(node) => setPrevEl(node)}
@@ -187,8 +188,6 @@ export default function NaturalResourcesPage() {
                                 </svg>
                             </button>
                         </div>
-                    </>
-                )}
             </section>
 
             {/* ── 2. GOLD INTRO — Synchronized with Manufacturing/CSR ── */}
