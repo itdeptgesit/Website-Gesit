@@ -101,6 +101,7 @@ const PropertyPage = () => {
                             style={{ objectFit: "cover" }} 
                             priority 
                             fetchPriority="high"
+                            sizes="100vw"
                         />
                     </div>
                 )}
@@ -133,6 +134,7 @@ const PropertyPage = () => {
                                     style={{ objectFit: "cover" }} 
                                     priority={idx === 0} 
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+                                    sizes="100vw"
                                 />
                             </SwiperSlide>
                         ))}
@@ -184,7 +186,7 @@ const PropertyPage = () => {
                         className="lg:pl-20"
                     >
                         <motion.div className="mb-5" variants={fadeInUp}>
-                            <h3 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
+                            <h3 className="text-[28px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#fff',
                                 fontFamily: 'Lora, serif',
                                 margin: 0,
@@ -246,7 +248,7 @@ const PropertyPage = () => {
                             {["trinity_01.webp", "trinity_02.webp", "trinity_03.webp", "trinity_04.webp", "trinity_05.webp", "trinity_06.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`Trinity Tower ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                                        <Image src={`/business/property/${img}`} alt={`Trinity Tower ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -273,7 +275,7 @@ const PropertyPage = () => {
                             {["property_jsl_2.webp", "property_jsl_3.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`JS Luwansa ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                                        <Image src={`/business/property/${img}`} alt={`JS Luwansa ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -341,7 +343,7 @@ const PropertyPage = () => {
                             {["property_PPHUI_Exterior_1.webp", "property_PPHUI_Theater_2.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`PPHUI ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                                        <Image src={`/business/property/${img}`} alt={`PPHUI ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -358,7 +360,7 @@ const PropertyPage = () => {
                         className="project-image-container"
                     >
                         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                            <Image src="/business/property/senayan-development-.webp" alt="Senayan Development" fill style={{ objectFit: 'cover' }} />
+                            <Image src="/business/property/senayan-development-.webp" alt="Senayan Development" fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
                         </div>
                     </motion.div>
 
@@ -406,7 +408,7 @@ const PropertyPage = () => {
                         className="project-image-container"
                     >
                         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                            <Image src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" fill style={{ objectFit: 'cover' }} />
+                            <Image src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
                         </div>
                     </motion.div>
                 </div>
@@ -511,13 +513,12 @@ const PropertyPage = () => {
                 .pill-button:active {
                     transform: scale(0.98);
                 }
- Riverside property page style override for pill-button fade effect
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 0px !important;
-                        padding: 0 !important;
+                        gap: 40px !important;
+                        padding: 0 20px !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -526,11 +527,12 @@ const PropertyPage = () => {
                         flex: 0 0 auto !important;
                         width: 100% !important;
                         max-width: 100% !important;
-                        height: 480px !important;
-                        border-radius: 0 !important;
+                        height: 320px !important;
+                        border-radius: 8px !important;
+                        margin: 0 !important;
                     }
                     .project-section {
-                        padding: 60px 0 !important;
+                        padding: 40px 0 !important;
                     }
                     .project-text-wrapper {
                         flex: 1 1 100% !important;
@@ -538,33 +540,37 @@ const PropertyPage = () => {
                         max-width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 20px 20px !important;
-                        box-sizing: border-box;
-                    }
-                    .project-text-content {
                         padding: 0 !important;
-                        max-width: 100% !important;
                     }
                     .project-text-content {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
+                        max-width: 100% !important;
+                    }
+                    .project-title {
+                        font-size: 32px !important;
+                        margin-bottom: 20px !important;
+                        text-align: center !important;
                     }
                     .project-desc {
-                        font-size: 18px !important;
-                        line-height: 1.7 !important;
+                        font-size: 16px !important;
+                        line-height: 1.6 !important;
                         text-align: center !important;
-                        margin-bottom: 30px !important;
+                        margin-bottom: 25px !important;
                     }
                     .project-desc p {
-                        margin-bottom: 15px !important;
+                        margin-bottom: 12px !important;
                     }
                     .project-info-box {
                         display: inline-block;
                         text-align: left !important;
-                        border-left: 4px solid #BC9C33 !important;
                         padding-left: 20px !important;
-                        margin: 20px auto 35px !important;
+                        margin: 10px auto 25px !important;
+                    }
+                    .pill-button {
+                        padding: 12px 30px !important;
+                        font-size: 12px !important;
                     }
                 }
             `}</style>
@@ -573,4 +579,3 @@ const PropertyPage = () => {
 };
 
 export default PropertyPage;
-
