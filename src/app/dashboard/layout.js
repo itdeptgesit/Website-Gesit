@@ -12,7 +12,6 @@ import {
     Menu,
     X,
     User,
-    Building2,
     Settings,
     Mail,
     ChevronDown,
@@ -74,15 +73,14 @@ export default function DashboardLayout({ children }) {
         { name: 'Global Settings', icon: Settings, href: '/dashboard/settings' },
     ];
 
-    // Helper to get active page name for header
     const activePageName = navItems.find(item => pathname === item.href)?.name || 'Overview';
 
     return (
         <div className="h-screen bg-[#f8f9fa] flex font-sans overflow-hidden">
-            {/* --- PREMIUM SIDEBAR --- */}
+            {/* --- PREMIUM SIDEBAR (Flex-based, no longer fixed to avoid stacking context issues) --- */}
             <aside
                 className={cn(
-                    "bg-[#103065] text-slate-300 transition-all duration-300 flex flex-col fixed inset-y-0 z-50 border-r border-white/10",
+                    "bg-[#103065] text-slate-300 transition-all duration-300 flex flex-col h-full border-r border-white/10 shrink-0 overflow-hidden",
                     isSidebarOpen ? "w-64" : "w-20"
                 )}
             >
@@ -103,7 +101,7 @@ export default function DashboardLayout({ children }) {
                 </div>
 
                 {/* Sidebar Navigation */}
-                <nav className="flex-1 py-6 flex flex-col gap-1 overflow-y-auto w-full">
+                <nav className="flex-1 py-6 flex flex-col gap-1 overflow-y-auto w-full scrollbar-hide">
                     <div className="px-6 mb-2">
                         {isSidebarOpen && <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">Main Menu</p>}
                     </div>
@@ -120,7 +118,6 @@ export default function DashboardLayout({ children }) {
                                         : "text-slate-300 hover:bg-white/5 hover:text-white"
                                 )}
                             >
-                                {/* Active Indicator Bar (Removed Gold, using subtle indicator if needed) */}
                                 {isActive && (
                                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/20 rounded-r-sm"></div>
                                 )}
@@ -133,12 +130,11 @@ export default function DashboardLayout({ children }) {
                                         "w-[18px] h-[18px] shrink-0 transition-colors",
                                         isActive ? "text-white" : "group-hover:text-white"
                                     )} />
-                                    {isSidebarOpen && <span className="tracking-wide">{item.name}</span>}
+                                    {isSidebarOpen && <span className="tracking-wide whitespace-nowrap">{item.name}</span>}
                                 </div>
 
-                                {/* Tooltip for collapsed mode */}
                                 {!isSidebarOpen && (
-                                    <div className="fixed left-20 ml-2 px-3 py-1.5 bg-[#0c244b] text-white text-xs rounded shadow-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                    <div className="fixed left-20 ml-2 px-3 py-1.5 bg-[#0c244b] text-white text-xs rounded shadow-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-[110]">
                                         {item.name}
                                     </div>
                                 )}
@@ -175,10 +171,7 @@ export default function DashboardLayout({ children }) {
             </aside>
 
             {/* --- MAIN CONTENT AREA --- */}
-            <main className={cn(
-                "flex-1 flex flex-col min-w-0 h-screen transition-[margin] duration-300",
-                isSidebarOpen ? "ml-64" : "ml-20"
-            )}>
+            <main className="flex-1 flex flex-col min-w-0 h-full relative">
                 {/* Clean Top Header */}
                 <header className="h-[72px] shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 z-40 shadow-sm/50">
                     <div className="flex items-center gap-4">
@@ -192,14 +185,12 @@ export default function DashboardLayout({ children }) {
                         </Button>
                         <div className="h-6 w-px bg-slate-200 hidden sm:block" />
 
-                        {/* Page Context Title */}
                         <div className="hidden sm:flex flex-col">
                             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Admin Section</span>
                             <span className="text-sm font-bold text-[#103065]">{activePageName}</span>
                         </div>
                     </div>
 
-                    {/* Right side tools */}
                     <div className="flex items-center gap-3 sm:gap-5">
                         <div className="hidden md:flex items-center relative">
                             <Search className="w-4 h-4 absolute left-3 text-slate-400" />
@@ -227,7 +218,7 @@ export default function DashboardLayout({ children }) {
                 </header>
 
                 {/* Page Content Container */}
-                <div className="p-4 sm:p-8 flex-1 overflow-x-hidden overflow-y-auto">
+                <div className="p-4 sm:p-8 flex-1 overflow-x-hidden overflow-y-auto bg-[#f8f9fa]">
                     <div className="max-w-7xl mx-auto w-full pb-8">
                         {children}
                     </div>
