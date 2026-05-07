@@ -160,26 +160,15 @@ const NewsPage = () => {
 
         <div className="gesit-hero-overlay" />
 
-        {/* Hero Content - Outside isMounted for instant display */}
-        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 30, textAlign: "center", padding: "0 20px" }}>
-          <div className="max-w-4xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-white text-5xl md:text-7xl lg:text-[100px] mb-8"
-              style={{ fontFamily: 'Lora, Georgia, serif', fontWeight: 400, textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
-            >
-              News
-            </motion.h1>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              style={{ width: "100px", height: "4px", backgroundColor: "#BC9C33", margin: "0 auto" }}
-            />
-          </div>
-        </div>
+        {/* Hero Content - Matching global .gs-hero-title positioning */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="gs-hero-title"
+        >
+          News
+        </motion.h1>
 
         {/* Navigation arrows - Only show when mounted */}
         {isMounted && (
