@@ -62,3 +62,4 @@ export async function compressImage(file, {
         img.src = url;
     });
 }
+

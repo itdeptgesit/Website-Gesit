@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { ChevronDown } from 'lucide-react';
 
 export default function Header() {
   const pathname = usePathname();
@@ -27,6 +28,19 @@ export default function Header() {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('gs-no-scroll');
+    } else {
+      document.body.classList.remove('gs-no-scroll');
+    }
+
+    return () => {
+      document.body.classList.remove('gs-no-scroll');
+    };
+  }, [mobileMenuOpen]);
 
   const isActive = (path) => {
     if (path === '/') return pathname === '/';
@@ -58,7 +72,7 @@ export default function Header() {
       <header id="qodef-page-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div id="qodef-page-header-inner">
           <Link href="/" className="gs-logo-link">
-            <Image src="/logo-gesit.svg" alt="The Gesit Companies logo" width={150} height={180} />
+            <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={150} height={40} style={{ width: 'auto', height: '40px' }} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
 
@@ -93,7 +107,7 @@ export default function Header() {
       <header id="gs-custom-mobile-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div className="gs-mobile-header-inner">
           <Link href="/" className="gs-mobile-logo">
-            <Image src="/logo-gesit.svg" alt="The Gesit Companies logo" width={150} height={180} />
+            <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={120} height={32} style={{ width: 'auto', height: '32px' }} />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
           <div
@@ -115,6 +129,7 @@ export default function Header() {
                 <>
                   <a
                     href="#"
+                    className="gs-mobile-parent-link"
                     onClick={(e) => {
                       e.preventDefault();
                       setOpenSubmenus(prev => ({
@@ -123,7 +138,10 @@ export default function Header() {
                       }));
                     }}
                   >
-                    {item.label} <span>{mounted && openSubmenus[item.label] ? '−' : '+'}</span>
+                    {item.label} 
+                    <span className={`gs-mobile-chevron ${mounted && openSubmenus[item.label] ? 'open' : ''}`}>
+                      <ChevronDown size={20} strokeWidth={2.5} />
+                    </span>
                   </a>
                   <ul className={`gs-mobile-submenu ${mounted && openSubmenus[item.label] ? 'gs-is-open' : ''}`}>
                     {item.children.map((child) => (

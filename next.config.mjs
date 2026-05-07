@@ -11,6 +11,7 @@ const nextConfig = {
       bodySizeLimit: '50mb',
     },
   },
+  serverExternalPackages: ['resend', '@react-email/render'],
   images: {
     remotePatterns: [
       {
@@ -30,6 +31,42 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://challenges.cloudflare.com https://dev.gesit.co.id; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://bbntlrtozsdqvelsxlhz.supabase.co https://res.cloudinary.com https://dev.gesit.co.id https://gesit.co.id https://blogger.googleusercontent.com https://*.googleusercontent.com https://upload.wikimedia.org; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://bbntlrtozsdqvelsxlhz.supabase.co https://challenges.cloudflare.com https://dev.gesit.co.id; frame-src 'self' https://www.youtube.com https://challenges.cloudflare.com; media-src 'self' https://bbntlrtozsdqvelsxlhz.supabase.co https://dev.gesit.co.id https://gesit.co.id;",
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+    ];
+  },
+  async rewrites() {
+    return [];
   },
 };
 

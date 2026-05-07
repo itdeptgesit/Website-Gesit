@@ -15,10 +15,10 @@ export default function AboutUs() {
   }, []);
 
   const textVariant = {
-    initial: { opacity: 0, y: 30, filter: 'blur(8px)' },
-    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, margin: "-50px" },
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.8, ease: "easeOut" }
   };
 
   const staggerContainer = {
@@ -57,17 +57,7 @@ export default function AboutUs() {
                 </div>
 
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
-                  <video
-                    suppressHydrationWarning
-                    className="elementor-background-video-hosted elementor-html5-video"
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    preload="metadata"
-                    src="/wp-content/uploads/2021/10/about-us-video.mp4"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
+                  <video suppressHydrationWarning className="elementor-background-video-hosted elementor-html5-video" autoPlay muted playsInline loop src="/video/about-us-video.mp4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
 
                 {/* Overlay Gradient */}
@@ -82,15 +72,14 @@ export default function AboutUs() {
                     <div className="elementor-widget-wrap elementor-element-populated">
                       <div className="elementor-element elementor-element-602e91a elementor-widget elementor-widget-heading" data-id="602e91a" data-element_type="widget" data-widget_type="heading.default">
                         <div className="elementor-widget-container">
-                          <motion.h2
-                            initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                            className="elementor-heading-title elementor-size-default"
-                            style={{ textShadow: '0 4px 15px rgba(0,0,0,0.6)' }}
+                          <motion.h1
+                            className="gs-hero-title"
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
                           >
-                            About
-                          </motion.h2>
+                            About Us
+                          </motion.h1>
                         </div>
                       </div>
                     </div>
@@ -242,18 +231,7 @@ export default function AboutUs() {
                             className="e-hosted-video elementor-wrapper elementor-open-inline"
                             style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <video
-                              suppressHydrationWarning
-                              className="elementor-video"
-                              src="/wp-content/uploads/2021/10/about-us-video.mp4"
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              preload="none"
-                              poster="/wp-content/uploads/2021/10/video_thumbnail2.jpeg"
-                              style={{ width: '100%', borderRadius: 12 }}
-                            />
+                            <video suppressHydrationWarning className="elementor-video" src="/video/about-us-video.mp4" autoPlay loop muted playsInline preload="metadata" poster="/video/video_thumbnail2.webp" style={{ width: '100%', borderRadius: 12 }} />
                           </motion.div>
                         </div>
                       </div>
@@ -266,37 +244,39 @@ export default function AboutUs() {
                       initial="initial"
                       whileInView="whileInView"
                       viewport={{ once: true, margin: "-50px" }}
+                      style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', padding: '50px' }}
                     >
-                      <div className="elementor-element elementor-element-da6b8eb elementor-widget elementor-widget-heading" data-id="da6b8eb" data-element_type="widget">
+                      <div className="elementor-element elementor-element-da6b8eb elementor-widget elementor-widget-heading" data-id="da6b8eb" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default">Our Vision</motion.h6>
+                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: '0 0 10px 0' }}>Our Vision</motion.h6>
                         </div>
                       </div>
-                      <div className="elementor-element elementor-element-42b3dc3 elementor-widget elementor-widget-heading" data-id="42b3dc3" data-element_type="widget">
+                      <div className="elementor-element elementor-element-42b3dc3 elementor-widget elementor-widget-heading" data-id="42b3dc3" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default">To be
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: 0 }}>To be
                             a Group of Companies that are Recognized by Stakeholders as
                             Strategic First Choice Business Partner</motion.p>
                         </div>
                       </div>
-                      <motion.div variants={textVariant} className="elementor-element elementor-element-c47fca5 elementor-widget-divider--view-line elementor-widget elementor-widget-divider">
+                      <motion.div variants={textVariant} className="elementor-element elementor-element-c47fca5 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <div className="elementor-divider" style={{ borderTop: '1px solid #e5e5e5', margin: '20px 0', width: '100%', display: 'block' }}></div>
+                          <div className="elementor-divider" style={{ borderTop: '1px solid #e5e5e5', margin: '40px 0', width: '100%', display: 'block' }}></div>
                         </div>
                       </motion.div>
-                      <div className="elementor-element elementor-element-2cce4eb elementor-widget elementor-widget-heading" data-id="2cce4eb" data-element_type="widget">
+                      <div className="elementor-element elementor-element-2cce4eb elementor-widget elementor-widget-heading" data-id="2cce4eb" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default">Our Mission</motion.h6>
+                          <motion.h6 variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: '0 0 10px 0' }}>Our Mission</motion.h6>
                         </div>
                       </div>
-                      <div className="elementor-element elementor-element-3c1aa17 elementor-widget elementor-widget-heading" data-id="3c1aa17" data-element_type="widget">
+                      <div className="elementor-element elementor-element-3c1aa17 elementor-widget elementor-widget-heading" data-id="3c1aa17" data-element_type="widget" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default">To
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default" style={{ margin: 0 }}>To
                             Establish Resourceful Business Entities that Deliver
                             Sustainable Value to Stakeholders</motion.p>
                         </div>
                       </div>
                     </motion.div>
+
                   </div>
                 </div>
               </section>
@@ -328,30 +308,31 @@ export default function AboutUs() {
                         </div>
                       </section>
                       <section className="elementor-section elementor-inner-section elementor-element elementor-element-c7c8c1f elementor-section-full_width zs-custom-height no-button elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="c7c8c1f" data-element_type="section">
-                        <div className="elementor-container elementor-column-gap-extended">
+                        <div className="elementor-container elementor-column-gap-extended" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch' }}>
                           {[
-                            { id: 'fabac30', img: '/wp-content/uploads/2022/01/integrity-scaled-1.jpeg', title: 'Integrity', desc: 'Think, Talk, Act Honestly and be Ethical​' },
-                            { id: 'b940250', img: '/wp-content/uploads/2022/01/respect-scaled-1.jpeg', title: 'Respect', desc: 'Be Empathetic, Listen to Others and Give an Ethical Response' },
-                            { id: '7e17c85', img: '/wp-content/uploads/2022/01/competency-scaled-1.jpeg', title: 'Competency', desc: 'Knowledgeable, Skillful and Right Attitude' },
-                            { id: 'ad7b5aa', img: '/wp-content/uploads/2022/01/passion-scaled-1.jpeg', title: 'Passion', desc: 'Strongly Engaged and Fully Accountable with Respective Job' }
+                            { id: 'fabac30', img: '/about/integrity-scaled-1.webp', title: 'Integrity', desc: 'Think, Talk, Act Honestly and be Ethical​' },
+                            { id: 'b940250', img: '/about/respect-scaled-1.webp', title: 'Respect', desc: 'Be Empathetic, Listen to Others and Give an Ethical Response' },
+                            { id: '7e17c85', img: '/about/competency-scaled-1.webp', title: 'Competency', desc: 'Knowledgeable, Skillful and Right Attitude' },
+                            { id: 'ad7b5aa', img: '/about/passion-scaled-1.webp', title: 'Passion', desc: 'Strongly Engaged and Fully Accountable with Respective Job' }
                           ].map((val, idx) => (
-                            <div key={val.id} className={`elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-${val.id}`} data-id={val.id} data-element_type="column">
+                            <div key={val.id} className={`elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-${val.id}`} data-id={val.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
                               <motion.div
                                 className="elementor-widget-wrap elementor-element-populated"
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                variants={staggerContainer}
+                                initial="initial"
+                                whileInView="whileInView"
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: idx * 0.15 }}
+                                style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
                               >
                                 <div className="elementor-element elementor-element-98ea9bc p-15 text-center elementor-widget elementor-widget-thetrial_core_location_info">
                                   <div className="elementor-widget-container">
-                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden' }}>
+                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                                       <div className="qodef-m-image">
                                         <Image src={val.img} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                       </div>
-                                      <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33' }}>
-                                        <h4 className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</h4>
-                                        <p className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</p>
+                                      <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '200px', padding: '35px 25px' }}>
+                                        <motion.h4 variants={textVariant} className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</motion.h4>
+                                        <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</motion.p>
                                       </div>
                                     </div>
                                   </div>
@@ -373,3 +354,4 @@ export default function AboutUs() {
     </>
   );
 }
+

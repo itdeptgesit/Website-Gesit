@@ -25,3 +25,4 @@ const FocusArea = ({ title, image, description }) => {
 };
 
 export default FocusArea;
+

@@ -86,11 +86,11 @@ const ProjectItem = ({ project, index }) => {
             >
                 <h3 className="text-[#1a1a1a] mb-4 text-4xl md:text-[3.2rem]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400, lineHeight: '1.2', maxWidth: '500px' }}>{project.title}</h3>
                 {project.subtitle && (
-                    <p className="text-[#1a1a1a] mb-8" style={{ fontFamily: 'Georgia, serif', fontSize: '1.25rem', fontStyle: 'italic' }}>
+                    <p className="text-[#444] mb-8" style={{ fontFamily: 'Georgia, serif', fontSize: '1.25rem', fontStyle: 'italic' }}>
                         {project.subtitle}
                     </p>
                 )}
-                <div className={`text-[#000] ${!project.subtitle ? 'mt-8' : ''} mb-12`} style={{ fontSize: '18px', fontWeight: 400, lineHeight: '1.6', fontFamily: "'Source Sans Pro', sans-serif", maxWidth: '440px' }}>
+                <div className={`text-[#000] ${!project.subtitle ? 'mt-8' : ''} mb-12`} style={{ fontSize: '18px', fontWeight: 400, lineHeight: '1.6', fontFamily: "var(--font-sans)", maxWidth: '440px' }}>
                     {project.desc.split('\n\n').map((p, i) => (
                         <p key={i} className="m-0 mb-4">{p}</p>
                     ))}
@@ -106,7 +106,7 @@ const ProjectItem = ({ project, index }) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center px-10 py-4 border border-[#103065] rounded-full text-[#103065] text-[16px] hover:bg-[#103065] hover:text-white transition-all duration-300 no-underline"
-                                style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 600 }}
+                                style={{ fontFamily: "var(--font-sans)", fontWeight: 600 }}
                             >
                                 Visit Website
                             </a>
@@ -118,9 +118,9 @@ const ProjectItem = ({ project, index }) => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center justify-center px-10 py-4 border border-[#103065] rounded-full text-[#103065] text-[16px] hover:bg-[#103065] hover:text-white transition-all duration-300 no-underline"
-                                    style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 600 }}
+                                    style={{ fontFamily: "var(--font-sans)", fontWeight: 600 }}
                                 >
-                                    Download Brochure
+                                    View Brochure
                                 </a>
                             </div>
                         )}
@@ -136,9 +136,9 @@ const ManufacturingClientView = () => {
 
     // Correct paths based on public folder mappings
     const heroImages = [
-        "/wp-content/uploads/2021/11/hero_manufacturing.jpg",
-        "/wp-content/uploads/2022/03/edit-1-scaled.jpg",
-        "/wp-content/uploads/2021/12/distillation-column.jpeg"
+        "/hero/hero_manufacturing.webp",
+        "/hero/edit-1-scaled.webp",
+        "/business/manufacturing/distillation-column.webp"
     ];
 
     const projects = [
@@ -146,21 +146,21 @@ const ManufacturingClientView = () => {
             title: "Aluminum Fabrication",
             desc: "The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market.\n\nWe have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum.",
             images: [
-                "/wp-content/uploads/2022/03/3-e1646232593879.jpeg",
-                "/wp-content/uploads/2022/03/DSCF3418-edi-2-e1646233775296.jpeg",
-                "/wp-content/uploads/2022/01/alu_lr.jpeg"
+                "/business/manufacturing/3-e1646232593879.webp",
+                "/business/manufacturing/DSCF3418-edi-2-e1646233775296.webp",
+                "/business/manufacturing/alu_lr.webp"
             ],
-            brochure: "/wp-content/uploads/2022/03/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf",
+            brochure: "/business/manufacturing/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf",
             reverse: true
         },
         {
             title: "Steel & Plastic Packaging",
             desc: "The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing.\n\nWe ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices).",
             images: [
-                "/wp-content/uploads/2021/09/manufacturing_steel_1.png",
-                "/wp-content/uploads/2021/09/manufacturing_steel_2.png",
-                "/wp-content/uploads/2022/01/plastic_packaging.jpeg",
-                "/wp-content/uploads/2022/01/steel.jpeg"
+                "/business/manufacturing/manufacturing_steel_1.png",
+                "/business/manufacturing/manufacturing_steel_2.png",
+                "/business/manufacturing/plastic_packaging.webp",
+                "/business/manufacturing/steel.webp"
             ],
             website: "https://rheem.co.id/",
             reverse: false
@@ -169,7 +169,7 @@ const ManufacturingClientView = () => {
             title: "Alumina Refinery & Aluminum Smelter Development",
             subtitle: "Under Development",
             desc: "We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia’s rich natural resources and logistical advantage.\n\nThe Gesit Companies will develop a 2-million-ton Alumina Refinery and upon completion, develop an Aluminum Smelter which will reach 1 million ton for the next phase.",
-            images: ["/wp-content/uploads/2021/12/distillation-column.jpeg"],
+            images: ["/business/manufacturing/distillation-column.webp"],
             reverse: true
         }
     ];
@@ -232,7 +232,7 @@ const ManufacturingClientView = () => {
                                 transition={{ duration: 1.2, ease: "easeOut" }}
                                 className="text-white text-5xl md:text-[65px] leading-tight drop-shadow-md text-center md:text-left"
                                 style={{
-                                    fontFamily: '"Lora", serif',
+                                    fontFamily: 'var(--font-serif)',
                                     fontWeight: 400,
                                     textShadow: '0 2px 20px rgba(0,0,0,0.5)',
                                 }}
@@ -264,7 +264,7 @@ const ManufacturingClientView = () => {
                         <div style={{ margin: '0 0 25px', padding: 0 }}>
                             <h2 className="text-[28px] font-normal" style={{
                                 color: '#333',
-                                fontFamily: '"Source Sans Pro", sans-serif',
+                                fontFamily: 'var(--font-sans)',
                                 margin: 0
                             }}>
                                 Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.
@@ -274,7 +274,7 @@ const ManufacturingClientView = () => {
                         <div>
                             <p className="text-[20px]" style={{
                                 color: '#666',
-                                fontFamily: '"Source Sans Pro", sans-serif',
+                                fontFamily: 'var(--font-sans)',
                                 fontWeight: 400,
                                 margin: 0
                             }}>
@@ -310,3 +310,4 @@ const ManufacturingClientView = () => {
 };
 
 export default ManufacturingClientView;
+

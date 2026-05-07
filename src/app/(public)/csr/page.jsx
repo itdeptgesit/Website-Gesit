@@ -1,77 +1,21 @@
 'use client';
-
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import { Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
-const textVariant = {
-    initial: { opacity: 0, y: 15 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-50px" },
-    transition: { duration: 0.6, ease: "easeOut" }
-};
-
-const staggerContainer = {
-    initial: {},
-    whileInView: {
-        transition: {
-            staggerChildren: 0.2,
-            delayChildren: 0.1
-        }
-    }
-};
-
-const CSRPage = () => {
-    const [openInitiative, setOpenInitiative] = useState("Healthcare");
-
-    /* ================= HERO IMAGES ================= */
-    const heroSlides = [
-        { image: "/csr/cover1.jpeg", title: "Gesit Foundation" },
-        { image: "/csr/cover2.jpeg", title: "Healthcare & Education" },
-        { image: "/csr/cover3.jpeg", title: "Community Development" },
-    ];
-
-    /* ================= GALLERY IMAGES ================= */
-    const csrGalleryImages = [
-        "/csr/gallery/gallery1.jpeg",
-        "/csr/gallery/gallery2.jpeg",
-        "/csr/gallery/gallery3.jpeg",
-        "/csr/gallery/gallery4.jpeg",
-        "/csr/gallery/gallery5.jpeg",
-        "/csr/gallery/gallery6.jpeg",
-        "/csr/gallery/gallery7.jpeg",
-        "/csr/gallery/gallery8.jpeg",
-        "/csr/gallery/gallery9.jpeg",
-        "/csr/gallery/gallery10.jpeg",
-        "/csr/gallery/gallery11.jpeg",
-        "/csr/gallery/gallery12.jpg",
-        "/csr/gallery/gallery13.jpg",
-        "/csr/gallery/gallery14.jpg",
-        "/csr/gallery/gallery15.jpg",
-        "/csr/gallery/gallery16.jpg",
-        "/csr/gallery/gallery17.jpg",
-        "/csr/gallery/gallery18.jpg",
-        "/csr/gallery/gallery19.jpg",
-        "/csr/gallery/gallery20.jpg",
-    ];
-
-    /* ── Swiper refs for nav buttons ── */
+export default function CSRPage() {
     const [isMounted, setIsMounted] = useState(false);
-    const [activeIdx, setActiveIdx] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [openInitiative, setOpenInitiative] = useState("Healthcare");
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
     const circleBtn = {
         width: 60, height: 60, borderRadius: "50%",
@@ -84,39 +28,88 @@ const CSRPage = () => {
         color: "#fff",
     };
 
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const textVariant = {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.8, ease: "easeOut" }
+    };
+
+    const staggerContainer = {
+        initial: {},
+        whileInView: {
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1
+            }
+        }
+    };
+
+    /* ================= HERO IMAGES ================= */
+    const heroImages = [
+        "/csr/images/csr_slider_1.jpg",
+        "/csr/images/HP3A763-scaled.jpg",
+        "/csr/images/HP3A783-scaled.jpg",
+    ];
+
+    /* ================= GALLERY IMAGES ================= */
+    const csrGalleryImages = [
+        "/csr/gallery/gallery1.webp",
+        "/csr/gallery/gallery2.webp",
+        "/csr/gallery/gallery3.webp",
+        "/csr/gallery/gallery4.webp",
+        "/csr/gallery/gallery5.webp",
+        "/csr/gallery/gallery6.webp",
+        "/csr/gallery/gallery7.webp",
+        "/csr/gallery/gallery8.webp",
+        "/csr/gallery/gallery9.webp",
+        "/csr/gallery/gallery10.webp",
+        "/csr/gallery/gallery11.webp",
+        "/csr/gallery/gallery12.webp",
+        "/csr/gallery/gallery13.webp",
+        "/csr/gallery/gallery14.webp",
+        "/csr/gallery/gallery15.webp",
+        "/csr/gallery/gallery16.webp",
+        "/csr/gallery/gallery17.webp",
+        "/csr/gallery/gallery18.webp",
+        "/csr/gallery/gallery19.webp",
+        "/csr/gallery/gallery20.webp",
+    ];
+
     const focusAreas = [
         {
             title: "Healthcare",
             desc: "We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.",
-            image: "/csr/Healthcare.jpeg"
+            image: "/csr/Healthcare.webp"
         },
         {
             title: "Environment & Cultural Outreach",
             desc: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.",
-            image: "/csr/Environment-Cultural-Outreach.jpeg"
+            image: "/csr/Environment-Cultural-Outreach.webp"
         },
         {
             title: "Education",
             desc: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.",
-            image: "/csr/Education.jpeg"
+            image: "/csr/Education.webp"
         }
     ];
 
     const initiatives = [
         {
-            id: "healthcare",
             title: "Healthcare",
             content: [
                 {
-                    id: "healthcare-pandemic",
                     subtitle: "Pandemic",
                     items: [
-                        "Participating in COVID control and distributing vaccines.",
+                        "Distributing ventilators and PPE to 128 Hospitals across in Indonesia",
                         "Distributing food aid to people affected by COVID in 5 provinces in Indonesia"
                     ]
                 },
                 {
-                    id: "healthcare-disaster",
                     subtitle: "Natural Disaster",
                     items: [
                         "Rebuilding healthcare facilities and hospitals",
@@ -124,7 +117,6 @@ const CSRPage = () => {
                     ]
                 },
                 {
-                    id: "healthcare-equipment",
                     subtitle: "Medical Equipment",
                     items: [
                         "Donating speedboat ambulances in West Kalimantan",
@@ -135,11 +127,9 @@ const CSRPage = () => {
             ]
         },
         {
-            id: "environment",
             title: "Environment & Cultural Outreach",
             content: [
                 {
-                    id: "env-water",
                     subtitle: "Environment",
                     items: [
                         "Developing water projects and clean water facilities in remote areas",
@@ -149,7 +139,6 @@ const CSRPage = () => {
                     ]
                 },
                 {
-                    id: "env-culture",
                     subtitle: "Cultural Outreach",
                     items: [
                         "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
@@ -159,11 +148,9 @@ const CSRPage = () => {
             ]
         },
         {
-            id: "education",
             title: "Education",
             content: [
                 {
-                    id: "edu-facilities",
                     subtitle: "",
                     items: [
                         "Building, renovating, and providing school facilities for:",
@@ -180,16 +167,29 @@ const CSRPage = () => {
 
     return (
         <div className="bg-white min-h-screen">
+            {/* 1. Cinematic Hero Section */}
+            <section className="relative h-screen flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    {/* Fallback Hero Image (Server-side rendered for instant loading) */}
+                    {!isMounted && (
+                        <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+                            <Image 
+                                src={heroImages[0]} 
+                                alt="CSR Hero" 
+                                fill 
+                                style={{ objectFit: "cover" }} 
+                                priority 
+                                fetchPriority="high"
+                            />
+                        </div>
+                    )}
 
-            <section className="gs-hero-section" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
-                {isMounted && (
-                    <>
+                    {isMounted && (
                         <Swiper
-                            modules={[Autoplay, Navigation, EffectFade]}
+                            modules={[Autoplay, EffectFade, Navigation]}
                             effect="fade"
-                            speed={1500}
-                            autoplay={{ delay: 5000, disableOnInteraction: false }}
-                            loop={true}
+                            speed={2000}
+                            autoplay={{ delay: 6000, disableOnInteraction: false }}
                             navigation={{
                                 prevEl,
                                 nextEl,
@@ -198,226 +198,233 @@ const CSRPage = () => {
                                 swiper.params.navigation.prevEl = prevEl;
                                 swiper.params.navigation.nextEl = nextEl;
                             }}
-                            onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
-                            style={{ width: "100%", height: "100%" }}
+                            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                            loop={true}
+                            className="h-full w-full"
                         >
-                            {heroSlides.map((slide, idx) => (
-                                <SwiperSlide key={idx} style={{ position: "relative", overflow: "hidden" }}>
-                                    <Image
-                                        src={slide.image}
-                                        alt="CSR Hero"
-                                        fill
-                                        style={{
-                                            objectFit: 'cover',
-                                            transform: idx === activeIdx ? "scale(1.15)" : "scale(1.05)",
-                                            transition: "transform 10000ms ease-out"
-                                        }}
-                                        priority={idx === 0}
-                                    />
+                            {heroImages.map((src, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className="relative h-full w-full overflow-hidden">
+                                        <Image
+                                            src={src}
+                                            alt={`CSR Hero ${index + 1}`}
+                                            fill
+                                            sizes="100vw"
+                                            style={{
+                                                objectFit: 'cover',
+                                                transformOrigin: 'center',
+                                                transform: index === activeIndex ? "scale(1.15)" : "scale(1.05)",
+                                                transition: "transform 10000ms ease-out"
+                                            }}
+                                            priority={index === 0}
+                                            {...(index === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+                                        />
+                                        {/* Standard Hero Overlay */}
+                                        <div className="gesit-hero-overlay" />
+                                    </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
-                        <div className="gesit-hero-overlay" />
+                    )}
 
-
-                        {/* CSR Static Title */}
+                    {/* Gold Progress Bar - TOP */}
+                    <div className="absolute top-0 left-0 w-full h-[4px] bg-black/20 z-40">
                         <motion.div
-                            className="gs-hero-title"
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
-                            Corporate Social Responsibility
-                        </motion.div>
+                            key={activeIndex}
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                            transition={{ duration: 6, ease: "linear" }}
+                            style={{ originX: 0 }}
+                            className="h-full bg-[#BC9C33]"
+                        />
+                    </div>
+                </div>
 
-                        {/* Navigation arrows (hidden on mobile via mobile-hidden) */}
-                        <div className="gs-hero-nav hidden md:flex">
-                            <button
-                                ref={(node) => setPrevEl(node)}
-                                className="gs-prev-csr"
-                                style={circleBtn}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092" style={{ transform: "rotate(180deg)" }}>
-                                    <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
-                                </svg>
-                            </button>
-                            <button
-                                ref={(node) => setNextEl(node)}
-                                className="gs-next-csr"
-                                style={circleBtn}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092">
-                                    <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
-                                </svg>
-                            </button>
-                        </div>
-                    </>
-                )}
+                <div className="gesit-hero-overlay z-10" />
+
+                {/* Hero title - Outside for instant display */}
+                <motion.h1
+                    className="gs-hero-title gs-csr-hero-title z-20"
+                    initial={{ opacity: 0, y: 25 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+                    style={{ lineHeight: "72px" }}
+                >
+                    Corporate <br className="md:hidden" />Social<br className="md:hidden" /> Responsibility
+                </motion.h1>
+
+                {/* Navigation arrows */}
+                <div className="gs-hero-nav hidden md:flex">
+                    <button
+                        ref={(node) => setPrevEl(node)}
+                        className="gs-prev-news"
+                        style={circleBtn}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092" style={{ transform: "rotate(180deg)" }}>
+                            <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
+                        </svg>
+                    </button>
+                    <button
+                        ref={(node) => setNextEl(node)}
+                        className="gs-next-news"
+                        style={circleBtn}
+                        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092">
+                            <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
+                        </svg>
+                    </button>
+                </div>
             </section>
 
             {/* ================= OVERVIEW ================= */}
-            <section className="py-[50px] md:py-[80px]" style={{ backgroundColor: '#e3eaf4' }}>
-                <div className="elementor-container gs-overview-container">
+            <section className="flex justify-center bg-[#e3eaf4] py-16 md:py-[60px] lg:py-[150px]">
+                <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
                     <motion.div
-                        variants={staggerContainer}
-                        initial="initial"
-                        whileInView="whileInView"
-                        viewport={{ once: true, margin: "-100px" }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="lg:pl-20"
                     >
-                        {/* Heading */}
-                        <div style={{ margin: '0 0 15px', padding: 0 }}>
-                            <motion.h2 variants={textVariant} className="gs-overview-heading" style={{
+                        {/* Heading - Forced breaks to match your reference image exactly */}
+                        <div className="mb-5">
+                            <h3 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#103065',
-                                fontFamily: 'Lora, Georgia, serif',
-                                fontWeight: 400,
-                                textAlign: 'left',
-                                margin: 0
-                            }}>
-                                Creating a positive effect on lives and communities
-                                by adding the most value and making a significant
-                                and lasting impact through Gesit Foundation.
-                            </motion.h2>
-                        </div>
-
-                        {/* Description with Left Border */}
-                        <motion.div
-                            variants={textVariant}
-                            className="gs-overview-border-box"
-                            style={{
-                                padding: '0 0 0 25px',
-                                borderLeft: '2px solid #BC9C33',
+                                fontFamily: 'Lora, serif',
+                                margin: 0,
                                 textAlign: 'left'
                             }}>
-                            <p className="gs-overview-body" style={{
+                                Creating a positive effect on lives and communities <br className="hidden lg:block" />
+                                by adding the most value and making a significant <br className="hidden lg:block" />
+                                and lasting impact through Gesit Foundation.
+                            </h3>
+                        </div>
+
+                        {/* Description - Bold focus areas */}
+                        <div style={{ paddingLeft: '24px', borderLeft: '2px solid #BC9C33' }}>
+                            <p className="text-[16px] md:text-[24px] lg:text-[23px] leading-relaxed md:leading-normal" style={{
                                 color: '#103065',
-                                fontFamily: "var(--font-source-sans), sans-serif",
+                                fontFamily: "var(--font-sans)",
                                 fontWeight: 400,
                                 margin: 0
                             }}>
-                                Our social investment programs focus on three areas where we believe Gesit will add the most value and make a significant and lasting impact: <strong className="font-extrabold">Healthcare,</strong> <strong className="font-extrabold">Environment & Cultural Outreach,</strong> and <strong className="font-extrabold">Education.</strong>
+                                Our social investment programs focus on three areas: <strong className="font-extrabold">Healthcare, </strong><br className="hidden lg:block" />
+                                <strong className="font-extrabold">Environment &amp; Cultural Outreach,</strong> and <strong className="font-extrabold">Education.</strong>
                             </p>
-                        </motion.div>
+                        </div>
                     </motion.div>
                 </div>
             </section>
 
-            {/* ================= FOCUS AREAS ================= */}
-            <section className="py-16 md:py-32 bg-navy-deep">
-                <div className="container mx-auto px-6 md:px-10 lg:px-12 w-full max-w-[1350px]">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-10 w-full mx-auto">
-                        {focusAreas.map((area, index) => (
-                            <motion.div
-                                key={area.title}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                whileHover="hover"
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: index * 0.1 }}
-                                className="relative group flex flex-col items-center h-full"
-                            >
-                                {/* Top Image Section */}
-                                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[5px] shadow-2xl shrink-0">
-                                    <Image
-                                        src={area.image}
-                                        fill
-                                        className="object-cover group-hover:scale-110 transition-transform duration-[2s] ease-out"
-                                        alt={area.title}
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                    />
-                                    <div className="absolute inset-0 bg-black/10"></div>
+            <section suppressHydrationWarning className="elementor-section elementor-top-section elementor-element elementor-element-4b82676 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no bg-[#103065] py-16 md:py-24" data-id="4b82676" data-element_type="section">
+                <div className="elementor-container elementor-column-gap-no">
+                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-365869f" data-id="365869f" data-element_type="column" suppressHydrationWarning>
+                        <div className="elementor-widget-wrap elementor-element-populated">
+                            <section className="elementor-section elementor-inner-section elementor-element elementor-element-c7c8c1f elementor-section-full_width zs-custom-height no-button elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="c7c8c1f" data-element_type="section">
+                                <div className="elementor-container elementor-column-gap-extended flex flex-wrap justify-center px-6 lg:px-0">
+                                    {focusAreas.map((val, idx) => (
+                                        <div key={val.title} className="elementor-inner-column w-full md:w-1/2 lg:w-1/3 max-w-[420px] lg:max-w-none" style={{ display: 'flex', flexDirection: 'column', marginBottom: '40px', padding: '0 15px' }}>
+                                            <motion.div
+                                                className="elementor-widget-wrap elementor-element-populated"
+                                                variants={staggerContainer}
+                                                initial="initial"
+                                                whileInView="whileInView"
+                                                viewport={{ once: true }}
+                                                style={{ display: 'flex', flexDirection: 'column', width: '100%', flex: 1 }}
+                                            >
+                                                <div className="elementor-element elementor-element-98ea9bc p-15 text-left elementor-widget elementor-widget-thetrial_core_location_info" style={{ width: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                    <div className="elementor-widget-container" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                        <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                                            <div className="qodef-m-image">
+                                                                <Image src={val.image} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                                            </div>
+                                                            <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '200px', padding: '35px 25px' }}>
+                                                                <motion.h4 variants={textVariant} className="qodef-m-title" style={{ color: '#FFFFFF', marginBottom: '15px' }}>{val.title}</motion.h4>
+                                                                <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</motion.p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </div>
+                                    ))}
                                 </div>
-
-                                {/* Connecting Line Spacer & Interactive Drop Animation */}
-                                <div className="relative h-[45px] w-full flex justify-center shrink-0 z-40">
-                                    {/* Base static connecting line - Terhubung sempurna dari gambar ke kotak dan masuk ke p-10 */}
-                                    <div className="absolute top-[-25px] h-[110px] w-[1px] bg-white/30 z-20 pointer-events-none overflow-hidden">
-                                        {/* Pure CSS Flawless Hover Shimmer */}
-                                        <div className="card-hover-line"></div>
-                                    </div>
-                                </div>
-
-                                {/* Bottom Info Box - Desktop Left Aligned */}
-                                <div className="w-full bg-[#BC9C33] pt-10 pb-10 px-8 xl:px-10 text-left shadow-xl relative z-10 min-h-[220px] flex flex-col justify-start items-start rounded-[5px] flex-1">
-                                    {/* Title Wrapper to guarantee exact equal height and avoid margin collapse */}
-                                    <div className="w-full h-[90px] flex flex-col justify-start">
-                                        <h3 className="text-white text-2xl font-serif leading-tight m-0 pb-2" style={{ fontFamily: 'Georgia, serif' }}>{area.title}</h3>
-                                    </div>
-                                    <p className="text-white text-[15px] font-normal leading-[1.7] m-0 w-full" style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
-                                        {area.desc}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
+                            </section>
+                        </div>
                     </div>
                 </div>
             </section>
 
+
             {/* ================= INITIATIVES ================= */}
-            <section className="pt-4 md:pt-16 pb-24 bg-white">
+            <section className="py-20 bg-white">
                 <div className="container mx-auto px-6 max-w-5xl">
-                    <motion.h2
-                        variants={textVariant}
-                        initial="initial"
-                        whileInView="whileInView"
-                        viewport={{ once: true }}
-                        className="text-center mb-5 md:mb-10 text-[#000] text-[24px] md:text-[36px]"
+                    <h2
+                        className="text-center mb-12 text-[#000] text-[32px] md:text-[42px]"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
                         Our CSR Initiatives & Programs
-                    </motion.h2>
+                    </h2>
 
-                    <div className="flex flex-col space-y-0">
-                        {initiatives.map((initiative) => (
-                            <div key={initiative.title} id={initiative.id} className="w-full border-t border-slate-300 last:border-b scroll-mt-24">
+                    <div className="flex flex-col">
+                        {initiatives.map((initiative, index) => (
+                            <div key={initiative.title} style={{ borderBottom: index !== initiatives.length - 1 ? '1px solid #E0E0E0' : 'none' }}>
                                 <button
                                     onClick={() =>
                                         setOpenInitiative(
                                             openInitiative === initiative.title ? null : initiative.title
                                         )
                                     }
-                                    className="w-full pt-8 pb-1 flex items-center gap-6 text-left transition-all bg-transparent hover:bg-slate-50/50 group border-none"
+                                    className="w-full py-6 flex items-center gap-6 text-left transition-colors group"
                                 >
-                                    {/* Icon Container */}
-                                    <div className={`w-10 h-10 rounded-full border border-[#BC9C33] flex items-center justify-center shrink-0 transition-all duration-300 ${openInitiative === initiative.title ? 'bg-white text-[#BC9C33]' : 'bg-[#BC9C33] text-white shadow-md'}`}>
-                                        {openInitiative === initiative.title ? <Minus size={22} strokeWidth={1.5} /> : <Plus size={22} strokeWidth={1.5} />}
-                                    </div>
-
-                                    {/* Title */}
-                                    <span className="text-[20px] md:text-[26px] text-[#222]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>
-                                        {initiative.title}
-                                    </span>
+                                    <motion.div 
+                                        className="flex items-center justify-center shrink-0"
+                                        style={{ 
+                                            width: '32px', 
+                                            height: '32px', 
+                                            borderRadius: '50%', 
+                                            border: '1px solid #BC9C33',
+                                            backgroundColor: openInitiative === initiative.title ? '#FFFFFF' : '#BC9C33',
+                                            color: openInitiative === initiative.title ? '#BC9C33' : '#FFFFFF'
+                                        }}
+                                        animate={{ rotate: openInitiative === initiative.title ? 180 : 0 }}
+                                        transition={{ duration: 0.4, ease: "backOut" }}
+                                    >
+                                        {openInitiative === initiative.title ? <Minus size={16} strokeWidth={2} /> : <Plus size={16} strokeWidth={2} />}
+                                    </motion.div>
+                                    <span className="text-[20px] md:text-[24px] text-[#000]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
                                 </button>
 
-                                <AnimatePresence>
+                                <AnimatePresence initial={false}>
                                     {openInitiative === initiative.title && (
                                         <motion.div
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+                                            transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="pl-[4rem] md:pl-[5.5rem] pr-6 md:pr-10 pb-6 pt-0">
-                                                {initiative.content.map((block, idx) => (
-                                                    <div key={idx} className="mb-5 last:mb-0">
+                                            <div className="pl-14 md:pl-20 pr-4 md:pr-8 pb-8 pt-2">
+                                                {initiative.content.map((block) => (
+                                                    <div key={block.subtitle} className="mt-6 first:mt-0">
                                                         {block.subtitle && (
-                                                            <h4 style={{ fontFamily: "'Source Sans Pro', sans-serif", fontWeight: 700, color: '#444', fontSize: '18px', letterSpacing: '0.3px', marginBottom: '8px' }}>
+                                                            <h4 className="text-[20px] md:text-[22px] font-normal text-[#1a1a1a] m-0 mb-3" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="space-y-1.5">
+                                                        <ul className="space-y-4 m-0 p-0 mt-4">
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
                                                                 return (
-                                                                    <li key={i} className={`flex items-start gap-2 text-[17px] font-normal leading-relaxed ${isSubItem ? 'pl-8' : ''}`} style={{ fontFamily: "'Source Sans Pro', sans-serif", color: '#444' }}>
-                                                                        {!isSubItem ? (
-                                                                            <div className="w-1.5 h-1.5 rounded-full bg-[#444] mt-[10px] shrink-0" />
-                                                                        ) : null}
-                                                                        <span className="flex-1 text-[#444]" style={{ color: '#444' }}>{item}</span>
+                                                                    <li key={i} className={`flex items-start gap-4 text-[18px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 p-0 ${isSubItem ? 'pl-10' : ''}`} style={{ fontFamily: "var(--font-sans)" }}>
+                                                                        {!isSubItem && (
+                                                                            <span className="text-[#000] shrink-0" style={{ marginTop: '7px', fontSize: '10px', lineHeight: 1 }}>●</span>
+                                                                        )}
+                                                                        <span className="flex-1">{item}</span>
                                                                     </li>
                                                                 );
                                                             })}
@@ -439,7 +446,7 @@ const CSRPage = () => {
                 <div className="relative w-full">
                     <div className="flex overflow-hidden relative">
                         <motion.div
-                            className="flex gap-12 px-4 py-12 items-center"
+                            className="flex gap-6 md:gap-12 px-4 py-6 md:py-12 items-center"
                             animate={{ x: ["0%", "-50%"] }}
                             transition={{
                                 ease: "linear",
@@ -451,14 +458,12 @@ const CSRPage = () => {
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
                                 <div
                                     key={index}
-                                    className="w-[450px] h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative"
+                                    className="w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-xl overflow-hidden transition-all duration-700 group relative"
                                 >
-                                    <Image
+                                    <img
                                         src={src}
                                         alt={`CSR Gallery ${index}`}
-                                        fill
-                                        className="object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2.5s] ease-out"
-                                        sizes="450px"
+                                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2500ms] ease-out"
                                     />
                                     <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
                                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
@@ -468,27 +473,6 @@ const CSRPage = () => {
                     </div>
                 </div>
             </section>
-            <style jsx global>{`
-                @media (max-width: 1024px) {
-                    .gs-hero-title {
-                        left: 0 !important;
-                        right: 0 !important;
-                        bottom: 50% !important;
-                        transform: translateY(50%) !important;
-                        text-align: center !important;
-                        width: 100% !important;
-                        font-size: 38px !important;
-                        padding: 0 20px !important;
-                        box-sizing: border-box !important;
-                    }
-                    .gs-hero-nav {
-                        display: none !important;
-                    }
-                }
-            `}</style>
         </div>
     );
-};
-
-export default CSRPage;
-
+}

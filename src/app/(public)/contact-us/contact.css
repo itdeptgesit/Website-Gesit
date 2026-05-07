@@ -18,7 +18,7 @@
   bottom: 70px;
   left: 60px;
   z-index: 10;
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--font-serif);
   color: #fff;
   font-size: clamp(45px, 8vw, 85px);
   font-weight: 400;
@@ -40,34 +40,30 @@
 }
 
 .contact-image-column {
-  width: 50%;
-  min-height: 550px;
-  display: flex;
-  overflow: hidden;
+  width: 550px;
+  height: 1012.63px;
+  background-image: url('/hero/contact_us_im.webp');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 5px;
-}
-
-.contact-main-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  flex-shrink: 0;
 }
 
 .contact-content-column {
-  width: 50%;
-  padding: 10%;
+  width: calc(100% - 550px);
+  padding: 60px 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .contact-heading-title {
-  color: #103065;
-  font-family: 'Lora', Georgia, serif;
-  font-size: 42px;
+  color: #000000;
+  font-family: var(--e-global-typography-primary-font-family, "Lora"), sans-serif;
+  font-size: 36px;
   font-weight: 500;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .contact-info-row {
@@ -76,20 +72,20 @@
   margin-bottom: 40px;
 }
 
-.contact-address-col,
-.contact-details-col {
-  width: 50%;
-  padding-right: 20px;
+.contact-address-col {
+  width: 65%;
+  margin-bottom: 0;
 }
 
 .contact-details-col {
+  width: 35%;
   padding-left: 20px;
-  padding-right: 0;
+  margin-bottom: 0;
 }
 
 .contact-info-label {
   color: #BC9C33;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 10px;
@@ -97,19 +93,25 @@
 }
 
 .contact-info-text {
-  color: #444;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 16px;
+  color: #000000;
+  font-family: var(--font-sans);
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
 }
 
 .contact-info-text a {
-  color: inherit;
+  color: #1e293b;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-info-text a:hover {
+  color: #BC9C33;
 }
 
 .contact-details-col .contact-info-text a {
@@ -123,8 +125,26 @@
   text-align: center;
 }
 
+.contact-address-link {
+  display: block !important;
+  line-height: 1.6;
+  margin-bottom: 0 !important;
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+.contact-address-link sup {
+  font-size: 0.65em;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+  margin-left: 0px;
+  font-weight: 600;
+}
+
 .contact-form-wrapper {
   margin-top: 20px;
+  padding-top: 0;
 }
 
 .gesit-contact-form .gesit-row {
@@ -145,54 +165,48 @@
 
 .wpcf7-form-control {
   width: 100%;
-  padding: 10px 0;
+  padding: 12px 0;
   border: none;
-  border-bottom: 1px solid #ccc;
-  background-color: transparent !important;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: transparent;
   font-size: 16px;
   font-family: inherit;
-  border-radius: 0;
+  color: #1e293b;
   transition: border-color 0.3s ease;
 }
 
 .wpcf7-form-control:focus {
   outline: none;
-  border-bottom: 1px solid #103065;
+  border-bottom-color: #BC9C33;
+}
+
+::placeholder {
+  color: #94a3b8;
+  opacity: 1;
 }
 
 .wpcf7-textarea {
-  min-height: 200px;
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-top: 10px;
-  border-radius: 4px;
+  min-height: 120px;
   resize: vertical;
-}
-
-.wpcf7-textarea:focus {
-  border: 1px solid #103065;
+  padding: 15px !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 5px !important;
 }
 
 .wpcf7-submit {
-  background-color: #103065;
+  background-color: #BC9C33;
   color: white;
   border: none;
-  padding: 18px 30px;
+  padding: 15px 30px;
   cursor: pointer;
-  font-weight: 700;
-  text-transform: capitalize;
-  letter-spacing: 0.5px;
-  border-radius: 50px;
-  width: 100%;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
 }
 
 .wpcf7-submit:hover {
-  background-color: #1a4a8e;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(16, 48, 101, 0.2);
+  background-color: #a3862b;
 }
 
 /* Responsiveness */
@@ -280,7 +294,7 @@
 }
 
 .modal-title {
-  font-family: 'Lora', serif;
+  font-family: var(--font-serif);
   font-size: 28px;
   color: #103065;
   margin-bottom: 15px;

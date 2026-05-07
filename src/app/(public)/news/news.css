@@ -82,7 +82,7 @@
 }
 
 .gesit-news-card-info {
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: var(--font-sans);
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1px;

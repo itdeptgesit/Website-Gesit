@@ -2,6 +2,8 @@ import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
+import { sanitizeInput } from '@/lib/security';
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -10,7 +12,33 @@ const supabase = createClient(
 
 export async function POST(req) {
   try {
-    const { name, email, phone, message } = await req.json();
+    const json = await req.json();
+    const name = sanitizeInput(json.name);
+    const email = sanitizeInput(json.email);
+    const phone = sanitizeInput(json.phone);
+    const message = sanitizeInput(json.message);
+    const honeypot = json.website; // Hidden field
+    const turnstileToken = json.turnstileToken;
+
+    // Anti-Spam Check: Honeypot (Silent Drop)
+    if (honeypot) {
+      console.warn("Spam detected: Honeypot field filled. Silently dropping.");
+      // Return 200 so the bot thinks it succeeded
+      return NextResponse.json({ success: true });
+    }
+
+    // Anti-Spam Check: Cloudflare Turnstile
+    if (process.env.TURNSTILE_SECRET_KEY) {
+      const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `secret=${process.env.TURNSTILE_SECRET_KEY}&response=${turnstileToken}`
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.success) {
+        return NextResponse.json({ error: 'Verification failed' }, { status: 400 });
+      }
+    }
 
     if (!name || !email || !phone) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -88,3 +116,4 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Failed to process inquiry' }, { status: 500 });
   }
 }
+

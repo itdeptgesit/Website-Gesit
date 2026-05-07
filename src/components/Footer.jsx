@@ -73,7 +73,7 @@ export default function Footer() {
                           <a href="tel:+62213101601">Phone : +62 21 3101601</a>
                         </p>
                         <p>
-                          <a href="mailto:contact@gesit.co.id">Mail : contact@gesit.co.id</a>
+                          <a href="mailto:contact@gesit.co.id" style={{ textTransform: 'lowercase' }}>Mail : contact@gesit.co.id</a>
                         </p>
                       </div>
                     </div>
@@ -87,14 +87,14 @@ export default function Footer() {
               <div className="qodef-grid qodef-layout--columns qodef-responsive--custom qodef-col-num--1">
                 <div className="qodef-grid-inner clear">
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link href="/" style={{ textDecoration: 'none' }}>
-                        <img src="/images/logo.png" alt="The Gesit Companies logo" style={{ height: '55px', width: 'auto', display: 'block' }} />
+                        <img src="/images/logo.png" alt="Gesit Logo" width="150" height="55" style={{ height: '55px', width: 'auto', display: 'block', margin: '0 auto 30px' }} />
                       </Link>
                     </div>
                     <div id="text-3" className="widget widget_text" data-area="footer_bottom_area_column_1">
                       <div className="textwidget">
-                        <p className="qodef-shortcode qodef-m qodef-custom-font qodef-custom-font-4 qodef-layout--simple" style={{ fontFamily: '"Source Sans Pro", sans-serif', fontSize: 13, color: 'rgba(255,255,255,0.7)', textAlign: 'center', letterSpacing: '0.5px' }}>
+                        <p className="qodef-shortcode qodef-m qodef-custom-font qodef-custom-font-4 qodef-layout--simple" style={{ fontFamily: 'var(--font-sans)', fontSize: 13, color: 'rgba(255,255,255,0.7)', textAlign: 'center', letterSpacing: '0.5px' }}>
                           © 2026 THE GESIT COMPANIES. ALL RIGHTS RESERVED
                         </p>
                       </div>

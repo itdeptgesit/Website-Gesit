@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Search, Plus, Users, Image as ImageIcon, Phone, RotateCcw, Zap, Globe, Loader2, ShieldCheck, Key, RefreshCw, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Search, Plus, Users, Image as ImageIcon, Phone, RotateCcw, Zap, Globe, Loader2, ShieldCheck, Key, RefreshCw, AlertCircle, Eye, EyeOff, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase-client';
 import { cn } from "@/lib/utils";
@@ -33,7 +33,10 @@ export default function HighFidelitySettingsPage() {
         contact_map_url: '',
         contact_address: '',
         maintenance_mode: false,
-        email_2fa_enabled: false
+        maintenance_until: null,
+        email_2fa_enabled: false,
+        ga_tracking_id: '',
+        fb_pixel_id: ''
     });
 
     useEffect(() => {
@@ -75,7 +78,9 @@ export default function HighFidelitySettingsPage() {
                     contact_map_url: globalSettings.contact_map_url || '',
                     contact_address: globalSettings.contact_address || '',
                     maintenance_mode: globalSettings.maintenance_mode || false,
-                    email_2fa_enabled: globalSettings.email_2fa_enabled || false
+                    email_2fa_enabled: globalSettings.email_2fa_enabled || false,
+                    ga_tracking_id: globalSettings.ga_tracking_id || '',
+                    fb_pixel_id: globalSettings.fb_pixel_id || ''
                 });
             }
 
@@ -171,21 +176,52 @@ export default function HighFidelitySettingsPage() {
     };
 
     // --- LOGIC: TOGGLE MAINTENANCE ---
+    const [maintenanceDuration, setMaintenanceDuration] = useState('none');
+
     const handleMaintenanceToggle = async () => {
         const newState = !identityData.maintenance_mode;
+        let until = null;
+
+        if (newState && maintenanceDuration !== 'none') {
+            const now = new Date();
+            const hours = maintenanceDuration === '1h' ? 1 : 
+                          maintenanceDuration === '3h' ? 3 : 
+                          maintenanceDuration === '6h' ? 6 : 
+                          maintenanceDuration === '12h' ? 12 : 
+                          maintenanceDuration === '1d' ? 24 : 0;
+            
+            if (hours > 0) {
+                until = new Date(now.getTime() + hours * 60 * 60 * 1000).toISOString();
+            }
+        }
+
         setSaving(true);
         try {
-            const { error } = await supabase.from('seo_settings').upsert({
-                ...identityData,
-                id: 1,
-                maintenance_mode: newState
-            }, { onConflict: 'id' });
-            if (error) throw error;
-            setIdentityData({ ...identityData, maintenance_mode: newState });
-            toast.success(`Maintenance Mode turned ${newState ? 'ON' : 'OFF'}`);
-            await recordLog('System Control', `Switched Maintenance Mode to ${newState ? 'ENABLED' : 'DISABLED'}`);
+            const { data, error } = await supabase.from('seo_settings')
+                .update({ 
+                    maintenance_mode: newState,
+                    maintenance_until: until 
+                })
+                .eq('id', 1)
+                .select()
+                .single();
+
+            if (error) {
+                console.error("Toggle Error Details:", JSON.stringify(error, null, 2));
+                throw new Error(error.message || error.details || error.hint || JSON.stringify(error));
+            }
+
+            setIdentityData({ 
+                ...identityData, 
+                maintenance_mode: data.maintenance_mode,
+                maintenance_until: data.maintenance_until 
+            });
+            
+            toast.success(`Maintenance Mode turned ${data.maintenance_mode ? 'ON' : 'OFF'}`);
+            await recordLog('System Control', `Switched Maintenance Mode to ${data.maintenance_mode ? 'ENABLED' : 'DISABLED'} (Until: ${until || 'N/A'})`);
         } catch (err) {
-            toast.error("Failed to toggle maintenance mode");
+            console.error("Toggle Catch:", err);
+            toast.error("Failed to toggle maintenance mode: " + (err?.message || "Unknown error"));
         } finally {
             setSaving(false);
         }
@@ -209,11 +245,9 @@ export default function HighFidelitySettingsPage() {
         const newState = !identityData.email_2fa_enabled;
         setSaving(true);
         try {
-            const { error } = await supabase.from('seo_settings').upsert({
-                ...identityData,
-                id: 1,
-                email_2fa_enabled: newState
-            }, { onConflict: 'id' });
+            const { error } = await supabase.from('seo_settings')
+                .update({ email_2fa_enabled: newState })
+                .eq('id', 1);
             if (error) throw error;
             setIdentityData({ ...identityData, email_2fa_enabled: newState });
             toast.success(`Email 2FA security ${newState ? 'Enabled' : 'Disabled'}`);
@@ -526,7 +560,7 @@ export default function HighFidelitySettingsPage() {
                                                 className="border-0 shadow-none h-12 focus-visible:ring-0 text-slate-700 bg-white"
                                                 value={identityData.logo_url}
                                                 onChange={e => setIdentityData({ ...identityData, logo_url: e.target.value })}
-                                                placeholder="/logo-gesit.png"
+                                                placeholder="/logos/logos.png"
                                             />
                                         </div>
                                     </div>
@@ -582,6 +616,34 @@ export default function HighFidelitySettingsPage() {
                                             placeholder="The City Tower, 27th Floor..."
                                         />
                                     </div>
+
+                                    {/* Analytics Integration */}
+                                    <div className="pt-6 border-t border-slate-100 mt-6 space-y-4">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <Zap className="w-4 h-4 text-amber-500" />
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Marketing & Analytics</span>
+                                        </div>
+                                        
+                                        <div className="space-y-3">
+                                            <label className="text-[11px] font-bold tracking-widest text-[#a8b1c5] uppercase">Google Analytics (GA4) ID</label>
+                                            <Input
+                                                className="bg-white border-slate-200 h-11 text-slate-700"
+                                                placeholder="G-XXXXXXXXXX"
+                                                value={identityData.ga_tracking_id}
+                                                onChange={e => setIdentityData({ ...identityData, ga_tracking_id: e.target.value })}
+                                            />
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <label className="text-[11px] font-bold tracking-widest text-[#a8b1c5] uppercase">Facebook Pixel ID</label>
+                                            <Input
+                                                className="bg-white border-slate-200 h-11 text-slate-700"
+                                                placeholder="123456789012345"
+                                                value={identityData.fb_pixel_id}
+                                                onChange={e => setIdentityData({ ...identityData, fb_pixel_id: e.target.value })}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="absolute right-8 top-8">
                                     <Button type="submit" disabled={saving} className="bg-[#1b365d] hover:bg-[#152e50] text-xs tracking-widest uppercase">
@@ -604,32 +666,72 @@ export default function HighFidelitySettingsPage() {
                                     </div>
                                 </div>
 
-                                <div className={`p-6 rounded-xl border-2 border-dashed transition-colors flex items-center justify-between gap-6 ${identityData.maintenance_mode ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-slate-200'}`}>
-                                    <div className="space-y-1">
-                                        <h4 className={`font-bold ${identityData.maintenance_mode ? 'text-red-700' : 'text-slate-800'}`}>
-                                            {identityData.maintenance_mode ? 'Maintenance Mode Active' : 'Website is Live'}
-                                        </h4>
-                                        <p className="text-xs text-slate-500 leading-relaxed max-w-[300px]">
-                                            {identityData.maintenance_mode
-                                                ? 'Public access is blocked. Visitors see a "Site Under Maintenance" page.'
-                                                : 'Public visitors can access all pages normally.'}
-                                        </p>
-                                    </div>
+                                <div className={`p-8 rounded-xl border-2 border-dashed transition-all ${identityData.maintenance_mode ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-slate-200'}`}>
+                                    <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                            <div className="space-y-1">
+                                                <h4 className={`text-lg font-bold ${identityData.maintenance_mode ? 'text-red-700' : 'text-slate-800'}`}>
+                                                    {identityData.maintenance_mode ? 'Maintenance Mode Active' : 'Website is Live'}
+                                                </h4>
+                                                <p className="text-xs text-slate-500 leading-relaxed max-w-md">
+                                                    {identityData.maintenance_mode
+                                                        ? `Public access is blocked. Visitors see a "Site Under Maintenance" page with a countdown until ${new Date(identityData.maintenance_until).toLocaleString()}.`
+                                                        : 'Public visitors can access all pages normally. Activate this mode when performing major updates.'}
+                                                </p>
+                                            </div>
 
-                                    <Button
-                                        type="button"
-                                        onClick={handleMaintenanceToggle}
-                                        disabled={saving}
-                                        className={cn(
-                                            "min-w-[120px] font-bold text-xs tracking-widest uppercase transition-all shadow-md",
-                                            identityData.maintenance_mode
-                                                ? "bg-red-600 hover:bg-red-700 text-white"
-                                                : "bg-[#1b365d] hover:bg-navy-deep text-white"
+                                            <Button
+                                                type="button"
+                                                onClick={handleMaintenanceToggle}
+                                                disabled={saving}
+                                                className={cn(
+                                                    "min-w-[140px] h-12 font-bold text-xs tracking-widest uppercase transition-all shadow-lg",
+                                                    identityData.maintenance_mode
+                                                        ? "bg-red-600 hover:bg-red-700 text-white"
+                                                        : "bg-[#1b365d] hover:bg-navy-deep text-white"
+                                                )}
+                                            >
+                                                {saving ? <Loader2 className="w-3 h-3 animate-spin mr-2" /> : null}
+                                                {identityData.maintenance_mode ? 'Deactivate Now' : 'Activate Mode'}
+                                            </Button>
+                                        </div>
+
+                                        {!identityData.maintenance_mode && (
+                                            <div className="pt-6 border-t border-slate-200/60">
+                                                <div className="flex items-center gap-2 mb-4">
+                                                    <Clock className="w-3.5 h-3.5 text-slate-400" />
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Set Maintenance Duration</span>
+                                                </div>
+                                                <div className="flex flex-wrap gap-3">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setMaintenanceDuration('none')}
+                                                        className={`px-4 py-2 rounded-lg text-xs font-bold transition-all border ${
+                                                            maintenanceDuration === 'none' 
+                                                            ? 'bg-[#bc9c33] border-[#bc9c33] text-white shadow-md' 
+                                                            : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300'
+                                                        }`}
+                                                    >
+                                                        No Timer
+                                                    </button>
+                                                    {['1h', '3h', '6h', '12h', '1d'].map((dur) => (
+                                                        <button
+                                                            key={dur}
+                                                            type="button"
+                                                            onClick={() => setMaintenanceDuration(dur)}
+                                                            className={`px-4 py-2 rounded-lg text-xs font-bold transition-all border ${
+                                                                maintenanceDuration === dur 
+                                                                ? 'bg-[#1b365d] border-[#1b365d] text-white shadow-md' 
+                                                                : 'bg-white border-slate-200 text-slate-500 hover:border-slate-300'
+                                                            }`}
+                                                        >
+                                                            {dur === '1d' ? '24 Hours' : dur.replace('h', ' Hours')}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         )}
-                                    >
-                                        {saving ? <Loader2 className="w-3 h-3 animate-spin mr-2" /> : null}
-                                        {identityData.maintenance_mode ? 'Deactivate' : 'Activate'}
-                                    </Button>
+                                    </div>
                                 </div>
 
                                 <div className="mt-6 flex items-start gap-2 px-1">
@@ -699,3 +801,4 @@ export default function HighFidelitySettingsPage() {
         </div>
     );
 }
+

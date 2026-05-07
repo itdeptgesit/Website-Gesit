@@ -24,3 +24,4 @@ export default function BodyClassHandler() {
 
     return null;
 }
+
