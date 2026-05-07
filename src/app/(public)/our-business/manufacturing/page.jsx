@@ -239,10 +239,11 @@ export default function ManufacturingPage() {
               <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
                 <a
                   href="/business/manufacturing/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf"
-                  download="AAMS-Brochure.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="pill-button"
                 >
-                  Download Brochure
+                  View Brochure
                 </a>
               </motion.div>
             </motion.div>

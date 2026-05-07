@@ -120,7 +120,7 @@ const ProjectItem = ({ project, index }) => {
                                     className="inline-flex items-center justify-center px-10 py-4 border border-[#103065] rounded-full text-[#103065] text-[16px] hover:bg-[#103065] hover:text-white transition-all duration-300 no-underline"
                                     style={{ fontFamily: "var(--font-sans)", fontWeight: 600 }}
                                 >
-                                    Download Brochure
+                                    View Brochure
                                 </a>
                             </div>
                         )}
