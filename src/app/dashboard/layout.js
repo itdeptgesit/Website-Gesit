@@ -171,7 +171,7 @@ export default function DashboardLayout({ children }) {
             </aside>
 
             {/* --- MAIN CONTENT AREA --- */}
-            <main className="flex-1 flex flex-col min-w-0 h-full relative">
+            <main className="flex-1 flex flex-col min-w-0 h-full">
                 {/* Clean Top Header */}
                 <header className="h-[72px] shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 z-40 shadow-sm/50">
                     <div className="flex items-center gap-4">
