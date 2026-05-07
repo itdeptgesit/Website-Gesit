@@ -72,7 +72,7 @@ export default function Header() {
       <header id="qodef-page-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div id="qodef-page-header-inner">
           <Link href="/" className="gs-logo-link">
-            <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={150} height={40} style={{ width: 'auto', height: '40px' }} />
+            <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={150} height={40} style={{ width: 'auto', height: '40px' }} priority />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
 

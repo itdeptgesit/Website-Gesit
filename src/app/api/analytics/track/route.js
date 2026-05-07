@@ -5,7 +5,6 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // Simple in-memory rate limiting cache to prevent DB flooding
-// Note: In serverless, this is per-instance, but still highly effective against basic bot floods.
 const rateLimitCache = new Map();
 
 export async function POST(request) {
@@ -16,16 +15,26 @@ export async function POST(request) {
         
         // Rate Limit: Allow only 1 hit per 10 seconds per IP
         if (ip !== 'unknown' && lastHit && (now - lastHit < 10000)) {
-            console.warn(`Analytics Rate Limit hit for IP: ${ip}. Request dropped.`);
             // Return 200 silently so the bot doesn't know it's blocked
-            return NextResponse.json({ success: true });
+            return NextResponse.json({ success: true, message: 'Rate limited' });
         }
         
         rateLimitCache.set(ip, now);
         // Clean up cache to prevent memory leak over time
         if (rateLimitCache.size > 1000) rateLimitCache.clear();
 
-        const { path, name } = await request.json();
+        // Safely parse JSON body
+        let body;
+        try {
+            const text = await request.text();
+            if (!text) return NextResponse.json({ success: true, message: 'Empty body' });
+            body = JSON.parse(text);
+        } catch (e) {
+            console.error('Failed to parse analytics body:', e.message);
+            return NextResponse.json({ success: true, message: 'Invalid JSON' });
+        }
+
+        const { path, name } = body;
         
         // Detect country from Vercel headers (fallback to 'Local Development' if localhost)
         const isLocal = request.headers.get('host')?.includes('localhost');
@@ -66,7 +75,7 @@ export async function POST(request) {
             await supabase.from('country_analytics').update({ visitor_count: (countryData?.visitor_count || 0) + 1, last_visit: new Date().toISOString() }).eq('country_code', countryCode);
         }
         
-        // 3. Log individual visit for historical analysis (Real-time filtering)
+        // 3. Log individual visit for historical analysis
         await supabase.from('traffic_logs').insert([{
             path,
             country_code: countryCode,
@@ -79,4 +88,3 @@ export async function POST(request) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
-

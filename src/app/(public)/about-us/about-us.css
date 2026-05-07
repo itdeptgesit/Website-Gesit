@@ -333,21 +333,6 @@
 			font-family: var(--e-global-typography-text-font-family), Sans-serif;
 			font-weight: var(--e-global-typography-text-font-weight);
 		}
-
-		.elementor-5968 .elementor-element.elementor-element-b817b21>.elementor-container {
-			min-height: 100vh;
-		}
-
-		.elementor-5968 .elementor-element.elementor-element-b817b21:not(.elementor-motion-effects-element-type-background),
-		.elementor-5968 .elementor-element.elementor-element-b817b21>.elementor-motion-effects-container>.elementor-motion-effects-layer {
-			background: url("/hero/video_thumbnail2.webp") 50% 50%;
-			background-size: cover;
-		}
-
-		.elementor-5968 .elementor-element.elementor-element-b817b21>.elementor-background-overlay {
-			display: none;
-		}
-
 		.elementor-5968 .elementor-element.elementor-element-b817b21 {
 			transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 			position: relative;

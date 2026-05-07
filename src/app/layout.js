@@ -1,5 +1,5 @@
 import './globals.css';
-import { Source_Sans_3, Lora } from 'next/font/google';
+import { Source_Sans_3, Lora, Cormorant_Garamond } from 'next/font/google';
 import localFont from 'next/font/local';
 import PageTracker from '@/components/PageTracker';
 import { Analytics } from "@vercel/analytics/react"
@@ -21,15 +21,23 @@ const lora = Lora({
   variable: '--font-lora',
 });
 
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal', 'italic']
+});
+
 const georgia = localFont({
   src: [
     {
-      path: '../../public/wp-content/themes/thetrial/fonts/Georgia.ttf',
+      path: '../../public/fonts/Georgia.ttf',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../../public/wp-content/themes/thetrial/fonts/Georgia-Bold.ttf',
+      path: '../../public/fonts/Georgia-Bold.ttf',
       weight: '700',
       style: 'normal',
     },
@@ -67,6 +75,7 @@ export default async function RootLayout({ children }) {
   let settings = null;
   try {
     const supabase = await createClient();
+    // Use a faster query and potentially cache results if possible in the future
     const { data } = await supabase.from('seo_settings').select('ga_tracking_id, fb_pixel_id').eq('id', 1).single();
     settings = data;
   } catch (e) {
@@ -99,11 +108,8 @@ export default async function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={`${sourceSans.variable} ${lora.variable} ${georgia.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sourceSans.variable} ${lora.variable} ${georgia.variable} ${cormorantGaramond.variable}`} suppressHydrationWarning>
       <head>
-        {/* Google Fonts */}
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet" />
-        
         {/* Google Analytics (GA4) - Dynamic */}
         {settings?.ga_tracking_id && (
           <>
@@ -141,8 +147,6 @@ export default async function RootLayout({ children }) {
           />
         )}
         {/* Preload Key Hero Images for Instant Display */}
-        <link rel="preload" href="/hero/hero_image_property_3-2.webp" as="image" type="image/webp" fetchpriority="high" />
-        <link rel="preload" href="/manufacturing/hero1.webp" as="image" type="image/webp" fetchpriority="high" />
         <link rel="preload" href="/hero/hero_image_property_1-2.webp" as="image" type="image/webp" fetchpriority="high" />
       </head>
       <body suppressHydrationWarning>
