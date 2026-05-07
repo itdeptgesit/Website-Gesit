@@ -89,6 +89,8 @@ export async function POST(request) {
         // Input Sanitization
         if (body.content) body.content = xss(body.content);
         if (body.title) body.title = xss(body.title);
+        if (body.meta_title) body.meta_title = xss(body.meta_title);
+        if (body.meta_description) body.meta_description = xss(body.meta_description);
 
         const { data, error } = await supabase
             .from('news')
@@ -122,6 +124,8 @@ export async function PATCH(request) {
         // Input Sanitization
         if (body.content) body.content = xss(body.content);
         if (body.title) body.title = xss(body.title);
+        if (body.meta_title) body.meta_title = xss(body.meta_title);
+        if (body.meta_description) body.meta_description = xss(body.meta_description);
 
         const { data, error } = await supabase
             .from('news')

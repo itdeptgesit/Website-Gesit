@@ -33,7 +33,9 @@ export default function HighFidelitySettingsPage() {
         contact_map_url: '',
         contact_address: '',
         maintenance_mode: false,
-        email_2fa_enabled: false
+        email_2fa_enabled: false,
+        ga_tracking_id: '',
+        fb_pixel_id: ''
     });
 
     useEffect(() => {
@@ -75,7 +77,9 @@ export default function HighFidelitySettingsPage() {
                     contact_map_url: globalSettings.contact_map_url || '',
                     contact_address: globalSettings.contact_address || '',
                     maintenance_mode: globalSettings.maintenance_mode || false,
-                    email_2fa_enabled: globalSettings.email_2fa_enabled || false
+                    email_2fa_enabled: globalSettings.email_2fa_enabled || false,
+                    ga_tracking_id: globalSettings.ga_tracking_id || '',
+                    fb_pixel_id: globalSettings.fb_pixel_id || ''
                 });
             }
 
@@ -581,6 +585,34 @@ export default function HighFidelitySettingsPage() {
                                             onChange={e => setIdentityData({ ...identityData, contact_address: e.target.value })}
                                             placeholder="The City Tower, 27th Floor..."
                                         />
+                                    </div>
+
+                                    {/* Analytics Integration */}
+                                    <div className="pt-6 border-t border-slate-100 mt-6 space-y-4">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <Zap className="w-4 h-4 text-amber-500" />
+                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Marketing & Analytics</span>
+                                        </div>
+                                        
+                                        <div className="space-y-3">
+                                            <label className="text-[11px] font-bold tracking-widest text-[#a8b1c5] uppercase">Google Analytics (GA4) ID</label>
+                                            <Input
+                                                className="bg-white border-slate-200 h-11 text-slate-700"
+                                                placeholder="G-XXXXXXXXXX"
+                                                value={identityData.ga_tracking_id}
+                                                onChange={e => setIdentityData({ ...identityData, ga_tracking_id: e.target.value })}
+                                            />
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <label className="text-[11px] font-bold tracking-widest text-[#a8b1c5] uppercase">Facebook Pixel ID</label>
+                                            <Input
+                                                className="bg-white border-slate-200 h-11 text-slate-700"
+                                                placeholder="123456789012345"
+                                                value={identityData.fb_pixel_id}
+                                                onChange={e => setIdentityData({ ...identityData, fb_pixel_id: e.target.value })}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="absolute right-8 top-8">

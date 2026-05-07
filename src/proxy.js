@@ -81,7 +81,8 @@ export async function proxy(request) {
     }
 
     // 2. Handle Auth Session updates ONLY for protected routes
-    if (isDashboard || isAdmin) {
+    // Ensure we don't block /admin/login itself
+    if ((isDashboard || isAdmin) && !path.startsWith('/admin/login')) {
         return await updateSession(request);
     }
 
