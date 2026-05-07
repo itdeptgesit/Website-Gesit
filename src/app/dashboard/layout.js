@@ -176,7 +176,7 @@ export default function DashboardLayout({ children }) {
 
             {/* --- MAIN CONTENT AREA --- */}
             <main className={cn(
-                "flex-1 flex flex-col transition-all duration-300 min-w-0 h-screen",
+                "flex-1 flex flex-col min-w-0 h-screen transition-[margin] duration-300",
                 isSidebarOpen ? "ml-64" : "ml-20"
             )}>
                 {/* Clean Top Header */}

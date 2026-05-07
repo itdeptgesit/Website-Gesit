@@ -21,8 +21,8 @@ import { cn } from '@/lib/utils';
 function ConfirmDeleteModal({ article, onConfirm, onCancel, loading }) {
     if (!article) return null;
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
-            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={onCancel} />
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onClick={onCancel} />
             <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 flex flex-col gap-5 animate-in fade-in zoom-in-95 duration-200">
                 <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shrink-0">
