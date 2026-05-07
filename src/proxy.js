@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server';
 import { updateSession } from "@/lib/supabase-middleware";
 import { createServerClient } from "@supabase/ssr";
 
-// In-memory store for rate limiting
-const rateLimitMap = new Map();
-
 export async function proxy(request) {
     const path = request.nextUrl.pathname;
 
@@ -14,31 +11,7 @@ export async function proxy(request) {
     const isMaintenancePage = path === '/maintenance';
     const isPublicRoute = !isAdmin && !isDashboard && !isApi && !isMaintenancePage;
 
-    // 0. Rate Limiting for API submissions (Contact/Career)
-    if (request.method === 'POST' && (path.includes('/api/contact') || path.includes('/api/career'))) {
-        const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
-        const now = Date.now();
-        const windowMs = 60 * 60 * 1000; // 1 hour
-        const limit = 3;
-        
-        const userLimit = rateLimitMap.get(ip) || { count: 0, startTime: now };
-        if (now - userLimit.startTime > windowMs) {
-            userLimit.count = 0;
-            userLimit.startTime = now;
-        }
-        
-        userLimit.count++;
-        rateLimitMap.set(ip, userLimit);
-        
-        if (userLimit.count > limit) {
-            return new NextResponse(
-                JSON.stringify({ error: 'Too many submissions. Please try again in an hour.' }),
-                { status: 429, headers: { 'Content-Type': 'application/json' } }
-            );
-        }
-    }
-
-    // 1. Only run settings-based checks for Public Pages or Dashboard
+    // 1. Database-driven checks (Maintenance & Security)
     if (isPublicRoute || isDashboard || isMaintenancePage) {
         try {
             const supabase = createServerClient(
@@ -47,41 +20,52 @@ export async function proxy(request) {
                 {
                     cookies: {
                         getAll() { return request.cookies.getAll(); },
-                        setAll() { /* Read only */ },
+                        setAll(cookiesToSet) {
+                            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+                        },
                     },
                 }
             );
 
-            const { data: settings } = await supabase.from('seo_settings')
-                .select('maintenance_mode, email_2fa_enabled')
+            const { data: settings, error: settingsError } = await supabase
+                .from('seo_settings')
+                .select('maintenance_mode, maintenance_until, email_2fa_enabled')
                 .eq('id', 1)
                 .single();
 
-            const isMaintenance = settings?.maintenance_mode === true;
-            const is2faEnabled = settings?.email_2fa_enabled === true;
+            // DEBUG LOG
+            console.log('[Proxy]', path, '| maintenance:', settings?.maintenance_mode, '| until:', settings?.maintenance_until);
 
-            // Maintenance Mode Redirection
-            if (isMaintenance && isPublicRoute) {
-                return NextResponse.redirect(new URL('/maintenance', request.url));
-            }
+            if (settings) {
+                const isMaintenance = settings.maintenance_mode === true;
+                const isExpired = settings.maintenance_until && new Date(settings.maintenance_until) < new Date();
+                const is2faEnabled = settings.email_2fa_enabled === true;
 
-            // Email 2FA Enforcement
-            const has2faCookie = request.cookies.get('admin_2fa_verified')?.value === 'true';
-            if (isDashboard && is2faEnabled && !has2faCookie) {
-                return NextResponse.redirect(new URL('/admin/login', request.url));
-            }
+                // Redirect public visitors to maintenance page only if active and NOT expired
+                if (isMaintenance && !isExpired && isPublicRoute) {
+                    console.log('[Proxy] REDIRECTING', path, '-> /maintenance');
+                    return NextResponse.redirect(new URL('/maintenance', request.url));
+                }
 
-            // If maintenance is OFF, don't allow access to the maintenance page
-            if (!isMaintenance && isMaintenancePage) {
-                return NextResponse.redirect(new URL('/', request.url));
+                // Redirect away from maintenance page if OFF or EXPIRED
+                if ((!isMaintenance || isExpired) && isMaintenancePage) {
+                    return NextResponse.redirect(new URL('/', request.url));
+                }
+
+                // 2FA Enforcement for Dashboard
+                if (isDashboard && is2faEnabled) {
+                    const has2faCookie = request.cookies.get('admin_2fa_verified')?.value === 'true';
+                    if (!has2faCookie) {
+                        return NextResponse.redirect(new URL('/admin/login', request.url));
+                    }
+                }
             }
         } catch (e) {
-            console.error("Middleware Safety Checks Failed:", e);
+            console.error("[Proxy] CRITICAL ERROR:", e.message);
         }
     }
 
-    // 2. Handle Auth Session updates ONLY for protected routes
-    // Ensure we don't block /admin/login itself
+    // 2. Handle Auth Session updates for protected routes
     if ((isDashboard || isAdmin) && !path.startsWith('/admin/login')) {
         return await updateSession(request);
     }
@@ -91,14 +75,6 @@ export async function proxy(request) {
 
 export const config = {
     matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico (favicon file)
-         * - any file with common image extensions
-         */
         "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
     ],
 };
-
