@@ -100,7 +100,10 @@ export default function TradingServicesPage() {
                         animate={{ scaleX: 1 }}
                         transition={{ duration: SLIDE_DURATION / 1000, ease: 'linear' }}
                         style={{ originX: 0, height: '100%', background: '#BC9C33' }}
-                    />                {/* Fallback Hero Image (Server-side rendered for instant loading) */}
+                    />
+                </div>
+
+                {/* Fallback Hero Image (Server-side rendered for instant loading) */}
                 {!isMounted && (
                     <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
                         <Image 
