@@ -103,45 +103,65 @@ export default function NaturalResourcesPage() {
                         style={{ originX: 0, height: '100%', background: '#BC9C33' }}
                     />
                 </div>
-                {isMounted && (
-                    <>
-                        <Swiper
-                            modules={[Autoplay, EffectFade, Navigation]}
-                            effect="fade"
-                            speed={1500}
-                            autoplay={{ delay: 5000, disableOnInteraction: false }}
-                            loop={true}
-                            navigation={{
-                                prevEl,
-                                nextEl,
-                            }}
-                            onBeforeInit={(swiper) => {
-                                swiper.params.navigation.prevEl = prevEl;
-                                swiper.params.navigation.nextEl = nextEl;
-                            }}
-                            onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
-                            style={{ width: "100%", height: "100%" }}
-                        >
-                            {[
-                                { url: "/hero/hero_natural_resources.webp", alt: "Natural Resources 1" },
-                                { url: "/hero/natural_lds_bauxite_1-1.webp", alt: "Natural Resources 2" },
-                                { url: "/hero/hero_image_natural_2-2-1.webp", alt: "Natural Resources 3" }
-                            ].map((slide, idx) => (
-                                <SwiperSlide key={idx} style={{ position: "relative" }}>
-                                    <Image src={slide.url} alt={slide.alt} fill style={{ objectFit: "cover" }} priority={idx === 0} />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                        <div className="gesit-hero-overlay" />
+                {/* Fallback Hero Image (Server-side rendered for instant loading) */}
+                {!isMounted && (
+                    <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+                        <Image 
+                            src="/hero/hero_natural_resources.webp" 
+                            alt="Natural Resources" 
+                            fill 
+                            style={{ objectFit: "cover" }} 
+                            priority 
+                            fetchPriority="high"
+                        />
+                    </div>
+                )}
 
-                        <motion.h1
-                            className="gs-hero-title"
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
-                            Natural Resources
-                        </motion.h1>
+                {isMounted && (
+                    <Swiper
+                        modules={[Autoplay, EffectFade, Navigation]}
+                        effect="fade"
+                        speed={1500}
+                        autoplay={{ delay: 5000, disableOnInteraction: false }}
+                        loop={true}
+                        navigation={{
+                            prevEl,
+                            nextEl,
+                        }}
+                        onBeforeInit={(swiper) => {
+                            swiper.params.navigation.prevEl = prevEl;
+                            swiper.params.navigation.nextEl = nextEl;
+                        }}
+                        onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
+                        style={{ width: "100%", height: "100%" }}
+                    >
+                        {[
+                            { url: "/hero/hero_natural_resources.webp", alt: "Natural Resources 1" },
+                            { url: "/hero/natural_lds_bauxite_1-1.webp", alt: "Natural Resources 2" },
+                            { url: "/hero/hero_image_natural_2-2-1.webp", alt: "Natural Resources 3" }
+                        ].map((slide, idx) => (
+                            <SwiperSlide key={idx} style={{ position: "relative" }}>
+                                <Image 
+                                    src={slide.url} 
+                                    alt={slide.alt} 
+                                    fill 
+                                    style={{ objectFit: "cover" }} 
+                                    priority={idx === 0} 
+                                    {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                )}
+                <div className="gesit-hero-overlay" />
+
+                <motion.h1
+                    className="gs-hero-title"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
+                    Natural Resources
+                </motion.h1>
 
                         <div className="gs-hero-nav">
                             <button

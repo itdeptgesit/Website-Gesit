@@ -59,6 +59,8 @@ export default function CareerPage() {
                         fill
                         style={{ objectFit: "cover" }}
                         priority
+                        fetchPriority="high"
+                        loading="eager"
                     />
                 </motion.div>
                 

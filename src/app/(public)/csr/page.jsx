@@ -165,53 +165,67 @@ export default function CSRPage() {
         }
     ];
 
-    if (!isMounted) return null;
-
     return (
         <div className="bg-white min-h-screen">
-
             {/* 1. Cinematic Hero Section */}
             <section className="relative h-screen flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <Swiper
-                        modules={[Autoplay, EffectFade, Navigation]}
-                        effect="fade"
-                        speed={2000}
-                        autoplay={{ delay: 6000, disableOnInteraction: false }}
-                        navigation={{
-                            prevEl,
-                            nextEl,
-                        }}
-                        onBeforeInit={(swiper) => {
-                            swiper.params.navigation.prevEl = prevEl;
-                            swiper.params.navigation.nextEl = nextEl;
-                        }}
-                        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                        loop={true}
-                        className="h-full w-full"
-                    >
-                        {heroImages.map((src, index) => (
-                            <SwiperSlide key={index}>
-                                <div className="relative h-full w-full overflow-hidden">
-                                    <Image
-                                        src={src}
-                                        alt={`CSR Hero ${index + 1}`}
-                                        fill
-                                        sizes="100vw"
-                                        style={{
-                                            objectFit: 'cover',
-                                            transformOrigin: 'center',
-                                            transform: index === activeIndex ? "scale(1.15)" : "scale(1.05)",
-                                            transition: "transform 10000ms ease-out"
-                                        }}
-                                        priority={index === 0}
-                                    />
-                                    {/* Standard Hero Overlay */}
-                                    <div className="gesit-hero-overlay" />
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                    {/* Fallback Hero Image (Server-side rendered for instant loading) */}
+                    {!isMounted && (
+                        <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+                            <Image 
+                                src={heroImages[0]} 
+                                alt="CSR Hero" 
+                                fill 
+                                style={{ objectFit: "cover" }} 
+                                priority 
+                                fetchPriority="high"
+                            />
+                        </div>
+                    )}
+
+                    {isMounted && (
+                        <Swiper
+                            modules={[Autoplay, EffectFade, Navigation]}
+                            effect="fade"
+                            speed={2000}
+                            autoplay={{ delay: 6000, disableOnInteraction: false }}
+                            navigation={{
+                                prevEl,
+                                nextEl,
+                            }}
+                            onBeforeInit={(swiper) => {
+                                swiper.params.navigation.prevEl = prevEl;
+                                swiper.params.navigation.nextEl = nextEl;
+                            }}
+                            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+                            loop={true}
+                            className="h-full w-full"
+                        >
+                            {heroImages.map((src, index) => (
+                                <SwiperSlide key={index}>
+                                    <div className="relative h-full w-full overflow-hidden">
+                                        <Image
+                                            src={src}
+                                            alt={`CSR Hero ${index + 1}`}
+                                            fill
+                                            sizes="100vw"
+                                            style={{
+                                                objectFit: 'cover',
+                                                transformOrigin: 'center',
+                                                transform: index === activeIndex ? "scale(1.15)" : "scale(1.05)",
+                                                transition: "transform 10000ms ease-out"
+                                            }}
+                                            priority={index === 0}
+                                            {...(index === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+                                        />
+                                        {/* Standard Hero Overlay */}
+                                        <div className="gesit-hero-overlay" />
+                                    </div>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    )}
 
                     {/* Gold Progress Bar - TOP */}
                     <div className="absolute top-0 left-0 w-full h-[4px] bg-black/20 z-40">
@@ -226,9 +240,11 @@ export default function CSRPage() {
                     </div>
                 </div>
 
-                {/* Hero title */}
+                <div className="gesit-hero-overlay z-10" />
+
+                {/* Hero title - Outside for instant display */}
                 <motion.h1
-                    className="gs-hero-title gs-csr-hero-title"
+                    className="gs-hero-title gs-csr-hero-title z-20"
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}

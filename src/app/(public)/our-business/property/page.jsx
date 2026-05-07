@@ -91,68 +91,88 @@ const PropertyPage = () => {
                         style={{ originX: 0, height: '100%', background: '#BC9C33' }}
                     />
                 </div>
+                {/* Fallback Hero Image (Server-side rendered for instant loading) */}
+                {!isMounted && (
+                    <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+                        <Image 
+                            src="/hero/hero_image_property_1-2.webp" 
+                            alt="Property" 
+                            fill 
+                            style={{ objectFit: "cover" }} 
+                            priority 
+                            fetchPriority="high"
+                        />
+                    </div>
+                )}
+
                 {isMounted && (
-                    <>
-                        <Swiper
-                            modules={[Autoplay, EffectFade, Navigation]}
-                            effect="fade"
-                            speed={1500}
-                            autoplay={{ delay: 5000, disableOnInteraction: false }}
-                            loop={true}
-                            navigation={{ prevEl, nextEl }}
-                            onBeforeInit={(swiper) => {
-                                swiper.params.navigation.prevEl = prevEl;
-                                swiper.params.navigation.nextEl = nextEl;
-                            }}
-                            onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
-                            style={{ width: "100%", height: "100%" }}
+                    <Swiper
+                        modules={[Autoplay, EffectFade, Navigation]}
+                        effect="fade"
+                        speed={1500}
+                        autoplay={{ delay: 5000, disableOnInteraction: false }}
+                        loop={true}
+                        navigation={{ prevEl, nextEl }}
+                        onBeforeInit={(swiper) => {
+                            swiper.params.navigation.prevEl = prevEl;
+                            swiper.params.navigation.nextEl = nextEl;
+                        }}
+                        onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
+                        style={{ width: "100%", height: "100%" }}
+                    >
+                        {[
+                            { url: "/hero/hero_image_property_1-2.webp", alt: "Property 1" },
+                            { url: "/hero/hero_image_property_2-2.webp", alt: "Property 2" },
+                            { url: "/hero/hero_image_property_3-2.webp", alt: "Property 3" }
+                        ].map((slide, idx) => (
+                            <SwiperSlide key={idx}>
+                                <Image 
+                                    src={slide.url} 
+                                    alt={slide.alt} 
+                                    fill 
+                                    style={{ objectFit: "cover" }} 
+                                    priority={idx === 0} 
+                                    {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                )}
+                <div className="gesit-hero-overlay" />
+
+                {/* Title - Outside isMounted for instant display */}
+                <motion.h1
+                    className="gs-hero-title"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
+                    Property
+                </motion.h1>
+
+                {/* Navigation arrows - Only show when mounted */}
+                {isMounted && (
+                    <div className="gs-hero-nav">
+                        <button
+                            ref={(node) => setPrevEl(node)}
+                            style={circleBtn}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
                         >
-                            {[
-                                { url: "/hero/hero_image_property_1-2.webp", alt: "Property 1" },
-                                { url: "/hero/hero_image_property_2-2.webp", alt: "Property 2" },
-                                { url: "/hero/hero_image_property_3-2.webp", alt: "Property 3" }
-                            ].map((slide, idx) => (
-                                <SwiperSlide key={idx}>
-                                    <Image src={slide.url} alt={slide.alt} fill style={{ objectFit: "cover" }} priority={idx === 0} />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                        <div className="gesit-hero-overlay" />
-
-                        {/* Title */}
-                        <motion.h1
-                            className="gs-hero-title"
-                            initial={{ opacity: 0, y: 15 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}>
-                            Property
-                        </motion.h1>
-
-                        {/* Navigation arrows */}
-                        <div className="gs-hero-nav">
-                            <button
-                                ref={(node) => setPrevEl(node)}
-                                style={circleBtn}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092" style={{ transform: "rotate(180deg)" }}>
-                                    <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
-                                </svg>
-                            </button>
-                            <button
-                                ref={(node) => setNextEl(node)}
-                                style={circleBtn}
-                                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092">
-                                    <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
-                                </svg>
-                            </button>
-                        </div>
-                    </>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092" style={{ transform: "rotate(180deg)" }}>
+                                <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
+                            </svg>
+                        </button>
+                        <button
+                            ref={(node) => setNextEl(node)}
+                            style={circleBtn}
+                            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 5.9 9.092">
+                                <path d="M5.9 4.546L1.354 9.092 0 7.738l3.192-3.192L0 1.354 1.354 0l3.125 3.125z" fill="currentColor" />
+                            </svg>
+                        </button>
+                    </div>
                 )}
             </section>
 

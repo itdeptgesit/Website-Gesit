@@ -94,69 +94,92 @@ const NewsPage = () => {
     <div className="bg-white min-h-screen text-navy-deep font-sans">
       {/* ================= HERO ================= */}
       <section style={{ position: "relative", width: "100%", height: "100vh", overflow: "hidden" }}>
+        {/* Fallback Hero Image (Server-side rendered for instant loading) */}
+        {!isMounted && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+            <Image 
+              src={heroImages[0]} 
+              alt="News" 
+              fill 
+              style={{ objectFit: "cover" }} 
+              priority 
+              fetchPriority="high"
+            />
+          </div>
+        )}
+
         {isMounted && (
-          <>
-            <Swiper
-              modules={[Autoplay, EffectFade, Navigation]}
-              effect="fade"
-              speed={1500}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
-              loop={true}
-              navigation={{
-                prevEl,
-                nextEl,
-              }}
-              onBeforeInit={(swiper) => {
-                swiper.params.navigation.prevEl = prevEl;
-                swiper.params.navigation.nextEl = nextEl;
-              }}
-              onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
-              style={{ width: "100%", height: "100%" }}
-            >
-              {heroImages.map((url, idx) => (
-                <SwiperSlide key={idx} style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
-                  <Image
-                    src={url}
-                    alt={`News ${idx}`}
-                    fill
-                    sizes="100vw"
-                    style={{
-                      objectFit: "cover",
-                      transform: idx === activeIdx ? "scale(1.15)" : "scale(1.05)",
-                      transition: "transform 10000ms ease-out"
-                    }}
-                    priority={idx === 0}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            
-            {/* Gold Progress Bar - TOP */}
-            <div className="absolute top-0 left-0 w-full h-[4px] bg-black/20 z-40">
-              <motion.div
-                key={activeIdx}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 5, ease: "linear" }}
-                style={{ originX: 0 }}
-                className="h-full bg-[#BC9C33]"
-              />
-            </div>
+          <Swiper
+            modules={[Autoplay, EffectFade, Navigation]}
+            effect="fade"
+            speed={1500}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            loop={true}
+            navigation={{
+              prevEl,
+              nextEl,
+            }}
+            onBeforeInit={(swiper) => {
+              swiper.params.navigation.prevEl = prevEl;
+              swiper.params.navigation.nextEl = nextEl;
+            }}
+            onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
+            style={{ width: "100%", height: "100%" }}
+          >
+            {heroImages.map((url, idx) => (
+              <SwiperSlide key={idx} style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+                <Image
+                  src={url}
+                  alt={`News ${idx}`}
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: "cover",
+                    transform: idx === activeIdx ? "scale(1.15)" : "scale(1.05)",
+                    transition: "transform 10000ms ease-out"
+                  }}
+                  priority={idx === 0}
+                  {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+        
+        {/* Gold Progress Bar - TOP */}
+        <div className="absolute top-0 left-0 w-full h-[4px] bg-black/20 z-40">
+          <motion.div
+            key={activeIdx}
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 5, ease: "linear" }}
+            style={{ originX: 0 }}
+            className="h-full bg-[#BC9C33]"
+          />
+        </div>
 
-            <div className="gesit-hero-overlay" />
+        <div className="gesit-hero-overlay" />
 
-
-            {/* Title */}
+        {/* Hero Content - Outside isMounted for instant display */}
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 30, textAlign: "center", padding: "0 20px" }}>
+          <div className="max-w-4xl">
             <motion.h1
-              className="gs-hero-title"
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-              style={{
-                lineHeight: "72px"
-              }}>
+              transition={{ duration: 0.8 }}
+              className="text-white text-5xl md:text-7xl lg:text-[100px] mb-8"
+              style={{ fontFamily: 'Lora, Georgia, serif', fontWeight: 400, textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
+            >
               News
             </motion.h1>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              style={{ width: "100px", height: "4px", backgroundColor: "#BC9C33", margin: "0 auto" }}
+            />
+          </div>
+        </div>
 
             {/* Navigation arrows */}
             <div className="gs-hero-nav">
