@@ -186,6 +186,21 @@ a {
   }
 }
 
+.gs-footer-logo {
+  height: 55px;
+  width: auto;
+  display: block;
+  margin: 0 auto 30px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .gs-footer-logo {
+    height: 40px;
+    margin-bottom: 20px;
+  }
+}
+
 .gs-logo-link {
   display: flex;
   align-items: center;

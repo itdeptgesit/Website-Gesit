@@ -89,7 +89,7 @@ export default function Footer() {
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <Link href="/" style={{ textDecoration: 'none' }}>
-                        <img src="/images/logo.png" alt="Gesit Logo" width="150" height="55" style={{ height: '55px', width: 'auto', display: 'block', margin: '0 auto 30px' }} />
+                        <img src="/images/logo.png" alt="Gesit Logo" width="150" height="55" className="gs-footer-logo" />
                       </Link>
                     </div>
                     <div id="text-3" className="widget widget_text" data-area="footer_bottom_area_column_1">
