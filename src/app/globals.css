@@ -175,20 +175,20 @@ a {
 
 @media (max-width: 768px) {
   #qodef-page-footer-top-area-inner {
-    padding: 60px 20px;
+    padding: 40px 20px;
   }
 
   #qodef-page-footer-top-area-inner .qodef-grid-inner {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 25px;
     text-align: center;
   }
 
   .qodef-widget-title,
   #qodef-page-footer-top-area-inner h5 {
     font-size: 18px !important;
-    margin-bottom: 15px !important;
+    margin-bottom: 10px !important;
   }
 
   #qodef-page-footer-top-area-inner p,
@@ -196,6 +196,7 @@ a {
   #qodef-page-footer-top-area-inner ul li a {
     font-size: 14px !important;
     line-height: 1.6 !important;
+    margin-bottom: 5px !important;
   }
 
   #qodef-page-footer-top-area-inner .menu {
