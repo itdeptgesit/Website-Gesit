@@ -41,10 +41,6 @@
 .contact-image-column {
   flex: 0 0 500px;
   height: 900px;
-  background-image: url('/hero/contact_us_im.webp');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
   border-radius: 4px;
   box-shadow: 0 30px 60px rgba(0,0,0,0.1);
 }
@@ -128,6 +124,11 @@
 
 .contact-form-wrapper {
   margin-top: 20px;
+}
+
+.turnstile-wrapper {
+  min-height: 65px;
+  margin-bottom: 10px;
 }
 
 .gesit-contact-form .gesit-row {

@@ -188,7 +188,7 @@ export default function Home() {
                       >
                         <div className={`elementor-element elementor-element-${biz.widgetId} p-15 elementor-widget elementor-widget-thetrial_core_location_info`} data-id={biz.widgetId} data-element_type="widget" data-widget_type="thetrial_core_location_info.default">
                           <div className="elementor-widget-container">
-                            <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled mx-6 md:mx-0" style={{ borderRadius: 5, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                            <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled gs-business-card mx-auto md:mx-0" style={{ borderRadius: 5, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                               <div className="qodef-m-image">
                                 <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                               </div>

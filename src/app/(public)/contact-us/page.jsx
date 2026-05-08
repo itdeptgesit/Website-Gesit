@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
@@ -100,12 +101,15 @@ export default function ContactUs() {
             initial={{ scale: 1 }}
             animate={{ scale: 1.15 }}
             transition={{ duration: 20, ease: "easeOut" }}
-            style={{ width: "100%", height: "100%" }}
+            className="w-full h-full relative"
           >
-            <img
+            <Image
               src="/hero/contact_us_hero_revise.webp"
               alt="Contact Us Hero"
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              fill
+              className="object-cover"
+              priority
+              fetchPriority="high"
             />
           </motion.div>
           <div className="gesit-hero-overlay" />
@@ -125,13 +129,21 @@ export default function ContactUs() {
         <div className="editorial-grain" />
         <div className="contact-container">
           <motion.div
-            className="contact-image-column"
+            className="contact-image-column relative overflow-hidden"
             aria-label="Contact Gesit Image"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-          ></motion.div>
+          >
+            <Image
+              src="/hero/contact_us_im.webp"
+              alt="The Gesit Companies Office"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1100px) 100vw, 500px"
+            />
+          </motion.div>
 
           <div className="contact-content-column">
             <motion.h3

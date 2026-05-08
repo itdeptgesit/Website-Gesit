@@ -199,19 +199,32 @@ const NewsPage = () => {
         )}
       </section>
 
-      {/* ================= LOADING / EMPTY STATE ================= */}
-      {(loading || newsItems.length === 0) && (
+      {/* ================= LOADING / SKELETON STATE ================= */}
+      {loading && (
+        <section className="pt-24 md:pt-32 pb-8 bg-white">
+          <div className="container mx-auto px-6 max-w-7xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 bg-slate-50 overflow-hidden rounded-[5px] animate-pulse">
+              <div className="aspect-[16/9] lg:aspect-auto bg-slate-200 min-h-[400px]"></div>
+              <div className="p-6 md:p-12 lg:p-20 space-y-8">
+                <div className="h-4 bg-slate-200 w-1/4 rounded"></div>
+                <div className="h-12 bg-slate-200 w-full rounded"></div>
+                <div className="h-12 bg-slate-200 w-full rounded"></div>
+                <div className="h-12 bg-slate-200 w-12 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ================= EMPTY STATE ================= */}
+      {!loading && newsItems.length === 0 && (
         <section className="pt-40 pb-20 bg-white text-center">
-          {loading ? (
-            <div className="flex justify-center"><Loader2 className="animate-spin text-navy-deep" size={40} /></div>
-          ) : (
-            <p className="text-slate-400 font-bold uppercase tracking-widest">No articles published yet.</p>
-          )}
+          <p className="text-slate-400 font-bold uppercase tracking-widest">No articles published yet.</p>
         </section>
       )}
 
       {/* ================= FEATURED NEWS ================= */}
-      {newsItems.length > 0 && (
+      {!loading && newsItems.length > 0 && (
         <section className="pt-24 md:pt-32 pb-8 bg-white">
           <div className="container mx-auto px-6 max-w-7xl">
             <motion.div

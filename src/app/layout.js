@@ -150,6 +150,7 @@ export default async function RootLayout({ children }) {
         <link rel="preload" href="/hero/hero_image_property_3-2.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/manufacturing/hero1.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/hero/hero_image_property_1-2.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/hero/contact_us_hero_revise.webp" as="image" type="image/webp" fetchPriority="high" />
       </head>
       <body suppressHydrationWarning>
         <Suspense fallback={null}>
