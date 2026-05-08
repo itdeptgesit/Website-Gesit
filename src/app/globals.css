@@ -296,7 +296,7 @@ a {
   height: 56px; /* Increased from 48px */
   width: auto;
   transition: all 0.4s ease;
-  filter: brightness(1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .gs-logo-text {
