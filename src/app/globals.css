@@ -175,35 +175,53 @@ a {
 
 @media (max-width: 768px) {
   #qodef-page-footer-top-area-inner {
-    padding: 40px 20px;
+    padding: 50px 24px;
   }
 
   #qodef-page-footer-top-area-inner .qodef-grid-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 30px 20px !important;
+    text-align: left !important;
+  }
+
+  /* Make Find Us (the 3rd item) span full width */
+  #qodef-page-footer-top-area-inner .qodef-grid-item:nth-child(3) {
+    grid-column: span 2;
     text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 30px;
+    margin-top: 10px;
   }
 
   .qodef-widget-title,
   #qodef-page-footer-top-area-inner h5 {
-    font-size: 18px !important;
-    margin-bottom: 10px !important;
+    font-family: 'Lora', serif !important;
+    font-size: 17px !important;
+    font-weight: 500 !important;
+    color: var(--gs-accent-gold) !important;
+    margin-bottom: 20px !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
   }
 
   #qodef-page-footer-top-area-inner p,
   #qodef-page-footer-top-area-inner a,
   #qodef-page-footer-top-area-inner ul li a {
     font-size: 14px !important;
-    line-height: 1.6 !important;
-    margin-bottom: 5px !important;
+    line-height: 1.8 !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    margin-bottom: 8px !important;
+    display: block;
   }
 
   #qodef-page-footer-top-area-inner .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    display: block !important;
+    list-style: none !important;
+  }
+
+  #qodef-page-footer-top-area-inner .menu li {
+    margin-bottom: 12px;
   }
 }
 
