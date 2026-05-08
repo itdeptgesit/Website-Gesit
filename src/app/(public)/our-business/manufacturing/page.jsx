@@ -8,22 +8,23 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
+/* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
+  initial: { opacity: 0, y: 60 },
   whileInView: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] }
+    transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
   },
   viewport: { once: true, margin: "-100px" }
 };
 
 const textVariant = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 40 },
   whileInView: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }
   },
   viewport: { once: true }
 };
@@ -32,19 +33,19 @@ const staggerContainer = {
   initial: {},
   whileInView: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.2,
       delayChildren: 0.1
     }
   }
 };
 
 const imageVariant = {
-  initial: { opacity: 0, scale: 1.05, filter: 'blur(10px)' },
+  initial: { opacity: 0, scale: 1.1, filter: 'blur(15px)' },
   whileInView: {
     opacity: 1,
     scale: 1,
     filter: 'blur(0px)',
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 1.8, ease: [0.16, 1, 0.3, 1] }
   },
   viewport: { once: true }
 };
@@ -100,7 +101,8 @@ export default function ManufacturingPage() {
   };
 
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div className="manufacturing-page-container">
+      <div className="editorial-grain" />
 
       {/* ── 1. HERO ── */}
       <section className="gs-hero-section" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
@@ -120,12 +122,12 @@ export default function ManufacturingPage() {
         {/* Fallback Hero Image (Server-side rendered for instant loading) */}
         {!isMounted && (
           <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
-            <Image 
-              src="/manufacturing/hero1.webp" 
-              alt="Manufacturing" 
-              fill 
-              style={{ objectFit: "cover" }} 
-              priority 
+            <Image
+              src="/manufacturing/hero1.webp"
+              alt="Manufacturing"
+              fill
+              style={{ objectFit: "cover" }}
+              priority
               fetchPriority="high"
             />
           </div>
@@ -154,12 +156,12 @@ export default function ManufacturingPage() {
               { url: "/manufacturing/hero2.webp", alt: "Manufacturing 2" }
             ].map((slide, idx) => (
               <SwiperSlide key={idx} style={{ position: "relative" }}>
-                <Image 
-                  src={slide.url} 
-                  alt={slide.alt} 
-                  fill 
-                  style={{ objectFit: "cover" }} 
-                  priority={idx === 0} 
+                <Image
+                  src={slide.url}
+                  alt={slide.alt}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  priority={idx === 0}
                   fetchPriority={idx === 0 ? "high" : "low"}
                 />
               </SwiperSlide>
@@ -250,13 +252,13 @@ export default function ManufacturingPage() {
               variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
               className="project-text-content"
             >
-              <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 5px' }}>Aluminum Fabrication</motion.h2>
+              <motion.h2 variants={fadeInUp} className="project-title">Aluminum Fabrication</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
                 <p>The Gesit Companies invests and manages its aluminum fabrication company <strong>Alakasa Andalan Mitra Sejati</strong> since its Joint Venture with Alcan Aluminum in 1972.</p>
-                <p>We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market. We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum.</p>
+                <p>We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market.</p>
               </motion.div>
 
-              <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
+              <motion.div variants={textVariant}>
                 <a
                   href="/business/manufacturing/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf"
                   target="_blank"
@@ -276,7 +278,7 @@ export default function ManufacturingPage() {
           >
             <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
               {aluminumImages.map((img, i) => (
-                <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === activeAlu ? 1 : 0, transition: 'opacity 1s ease-in-out', zIndex: i === activeAlu ? 10 : 0 }}>
+                <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === activeAlu ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: i === activeAlu ? 10 : 0 }}>
                   {(i === activeAlu || i === (activeAlu + 1) % aluminumImages.length) && (
                     <Image src={img} alt={`Aluminum ${i}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
                   )}
@@ -297,7 +299,7 @@ export default function ManufacturingPage() {
           >
             <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
               {packagingImages.map((img, i) => (
-                <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === activePackaging ? 1 : 0, transition: 'opacity 1s ease-in-out', zIndex: i === activePackaging ? 10 : 0 }}>
+                <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === activePackaging ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: i === activePackaging ? 10 : 0 }}>
                   {(i === activePackaging || i === (activePackaging + 1) % packagingImages.length) && (
                     <Image src={img} alt={`Packaging ${i}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
                   )}
@@ -312,20 +314,20 @@ export default function ManufacturingPage() {
               variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
               className="project-text-content"
             >
-              <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 5px' }}>Steel & Plastic Packaging</motion.h2>
+              <motion.h2 variants={fadeInUp} className="project-title">Steel & Plastic Packaging</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
                 <p>The Gesit Companies invests and manages its packaging company <strong>Rheem Indonesia</strong> since it was established by Rheem Australia in 1969.</p>
-                <p>The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing. We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices).</p>
+                <p>The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans.</p>
               </motion.div>
 
-              <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
+              <motion.div variants={textVariant}>
                 <a
                   href="https://rheem.co.id/"
                   target="_blank" rel="noopener noreferrer"
                   className="pill-button"
                   title="Learn more about Steel and Plastic Packaging"
                 >
-                  Learn More <span className="sr-only">about Steel and Plastic Packaging</span>
+                  Learn More
                 </a>
               </motion.div>
             </motion.div>
@@ -342,12 +344,8 @@ export default function ManufacturingPage() {
               variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
               className="project-text-content"
             >
-              <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 5px' }}>Alumina Refinery & Aluminum Smelter Development</motion.h2>
-              <motion.div className="project-info-box" variants={fadeInUp}>
-                <h6 className="project-info-title" style={{ fontFamily: 'var(--font-serif)', fontSize: '19px', color: '#444', fontWeight: 500, margin: '2px', fontStyle: 'italic' }}>
-                  Under Development
-                </h6>
-              </motion.div>
+              <motion.h2 variants={fadeInUp} className="project-title">Alumina Refinery</motion.h2>
+              <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 35px', fontWeight: 500 }}>Under Development</motion.h3>
 
               <motion.div variants={fadeInUp} className="project-desc">
                 <p>We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia&apos;s rich natural resources and logistical advantage.</p>
@@ -367,6 +365,23 @@ export default function ManufacturingPage() {
       </section>
 
       <style jsx global>{`
+                .manufacturing-page-container {
+                    position: relative;
+                    background: #fff;
+                }
+                
+                .editorial-grain {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    opacity: 0.04;
+                    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+                }
+
                 .project-row {
                     display: flex;
                     flex-wrap: wrap;
@@ -399,14 +414,14 @@ export default function ManufacturingPage() {
                     height: 680px;
                     position: relative;
                     overflow: hidden;
-                    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-                    border-radius: 5px;
+                    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+                    border-radius: 4px;
                 }
 
                 .project-title {
-                    font-family: var(--font-serif);
+                    font-family: Lora, Georgia, serif;
                     color: #222;
-                    font-size: clamp(38px, 6vw, 44px);
+                    font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
                     font-weight: 500;
                     margin: 0 0 35px;
@@ -414,27 +429,16 @@ export default function ManufacturingPage() {
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: clamp(16px, 1.8vw, 18px);
-                    line-height: 1.9;
-                    color: #333;
+                    font-size: 18px;
+                    line-height: 1.8;
+                    color: #444;
                     margin-bottom: 45px;
-                    letter-spacing: 0.01em;
                     text-align: justify;
                 }
                 .project-desc p {
                     margin-bottom: 25px;
                 }
-                .project-info-box {
-                    padding: 0;
-                    border-left: none;
-                    margin-bottom: 45px;
-                }
-                .project-info-text {
-                    font-family: var(--font-sans);
-                    font-size: 16.5px;
-                    color: #666;
-                    margin: 8px 0 0 0;
-                }
+
                 .pill-button {
                     display: inline-flex;
                     align-items: center;
@@ -455,15 +459,12 @@ export default function ManufacturingPage() {
                     background-color: #103065;
                     color: #fff !important;
                 }
-                .pill-button:active {
-                    transform: scale(0.98);
-                }
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 0px !important;
-                        padding: 0 !important;
+                        gap: 40px !important;
+                        padding: 0 24px !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -471,69 +472,26 @@ export default function ManufacturingPage() {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
-                        max-width: 100% !important;
-                        height: 480px !important;
-                        border-radius: 0 !important;
+                        height: clamp(300px, 50vh, 480px) !important;
+                        border-radius: 8px !important;
                     }
                     .project-section {
-                        padding: 60px 0 !important;
+                        padding: 80px 0 !important;
                     }
                     .project-text-wrapper {
-                        flex: 1 1 100% !important;
                         width: 100% !important;
-                        max-width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 20px 20px !important;
-                        box-sizing: border-box;
+                        padding: 0 !important;
                     }
                     .project-text-content {
-                        padding: 0 !important;
                         max-width: 100% !important;
-                    }
-                    .project-info-box {
-                        display: inline-block;
-                        text-align: center !important;
-                        border-left: none !important;
-                        padding: 0 !important;
-                        margin: 20px auto 35px !important;
-                    }
-                    .project-text-content {
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                     }
-                    .hero-navigation {
-                        display: none !important;
-                    }
                     .project-desc {
-                        font-size: 18px !important;
-                        line-height: 1.7 !important;
                         text-align: center !important;
-                        margin-bottom: 30px !important;
-                    }
-                    .project-desc p {
-                        margin-bottom: 15px !important;
-                    }
-                    .elementor-element-fabe996 {
-                        padding: 60px 0 !important;
-                    }
-                    .elementor-element-fabe996 .elementor-container {
-                        padding: 0 30px !important;
-                    }
-                    .elementor-element-fabe996 h3 {
-                        font-size: 30px !important;
-                        text-align: left !important;
-                        margin-bottom: 30px !important;
-                    }
-                    .elementor-element-fabe996 div[style*="borderLeft"] {
-                        padding-left: 20px !important;
-                        border-left-width: 2px !important;
-                    }
-                    .elementor-element-fabe996 span {
-                        font-size: 16px !important;
-                        text-align: left !important;
-                        line-height: 1.6 !important;
                     }
                 }
             `}</style>

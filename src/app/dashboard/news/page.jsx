@@ -347,10 +347,22 @@ export default function NewsDashboard() {
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <Label className="text-[10px] font-bold text-slate-500 uppercase">Author / Source</Label>
+                                    <Label className="text-[10px] font-bold text-slate-500 uppercase">Author / Publication</Label>
                                     <div className="relative">
                                         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
                                         <Input className="pl-10 text-sm" value={formData.author} onChange={e => setFormData({ ...formData, author: e.target.value })} />
+                                    </div>
+                                </div>
+                                <div className="space-y-2 pt-2 border-t">
+                                    <Label className="text-[10px] font-bold text-slate-500 uppercase">Source News Link</Label>
+                                    <div className="relative">
+                                        <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
+                                        <Input 
+                                            placeholder="https://source-news-link.com" 
+                                            className="pl-10 text-sm" 
+                                            value={formData.source_url} 
+                                            onChange={e => setFormData({ ...formData, source_url: e.target.value })} 
+                                        />
                                     </div>
                                 </div>
                             </CardContent>
@@ -401,7 +413,7 @@ export default function NewsDashboard() {
     }
 
     return (
-        <div className="space-y-8 pb-20">
+        <div className="space-y-8 pb-20" style={{ fontFamily: "'Source Sans Pro', sans-serif" }}>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                 <div className="space-y-1">
                     <h1 className="text-3xl font-bold tracking-tight text-[#1b365d]" style={{ fontFamily: 'Georgia, serif' }}>News Management</h1>
@@ -497,7 +509,7 @@ export default function NewsDashboard() {
                                                         <img src={item.image_url || '/placeholder.jpg'} alt="" className="w-full h-full object-cover" />
                                                     </div>
                                                     <div className="space-y-1">
-                                                        <h4 className="font-bold text-slate-800 text-sm line-clamp-1">{item.title}</h4>
+                                                        <h4 className="font-bold text-[#1b365d] text-[15px] leading-snug line-clamp-2">{item.title}</h4>
                                                         <div className="flex items-center gap-3 text-[11px] text-slate-400 font-medium">
                                                             <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {item.date}</span>
                                                             <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" /> {item.author}</span>

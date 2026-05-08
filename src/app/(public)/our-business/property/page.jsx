@@ -8,23 +8,23 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
-/* ── Animation Variants (Standardized) ── */
+/* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
-    initial: { opacity: 0, y: 40 },
+    initial: { opacity: 0, y: 60 },
     whileInView: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] }
+        transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
     },
     viewport: { once: true, margin: "-100px" }
 };
 
 const textVariant = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 40 },
     whileInView: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+        transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }
     },
     viewport: { once: true }
 };
@@ -33,19 +33,28 @@ const staggerContainer = {
     initial: {},
     whileInView: {
         transition: {
-            staggerChildren: 0.1,
+            staggerChildren: 0.2,
             delayChildren: 0.1
         }
     }
 };
 
 const imageVariant = {
-    initial: { opacity: 0, scale: 1.05, filter: 'blur(10px)' },
+    initial: { opacity: 0, scale: 1.1, filter: 'blur(15px)' },
     whileInView: {
         opacity: 1,
         scale: 1,
         filter: 'blur(0px)',
-        transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+        transition: { duration: 1.8, ease: [0.16, 1, 0.3, 1] }
+    },
+    viewport: { once: true }
+};
+
+const editorialReveal = {
+    initial: { clipPath: 'inset(100% 0% 0% 0%)' },
+    whileInView: {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        transition: { duration: 1.5, ease: [0.77, 0, 0.175, 1] }
     },
     viewport: { once: true }
 };
@@ -75,7 +84,9 @@ const PropertyPage = () => {
     };
 
     return (
-        <div style={{ backgroundColor: "#fff" }}>
+        <div className="property-page-container">
+            <div className="editorial-grain" />
+
             {/* ── 1. HERO SECTION ── */}
             <section className="gs-hero-section" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
                 {/* Progress Bar */}
@@ -94,12 +105,12 @@ const PropertyPage = () => {
                 {/* Fallback Hero Image (Server-side rendered for instant loading) */}
                 {!isMounted && (
                     <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
-                        <Image 
-                            src="/hero/hero_image_property_1-2.webp" 
-                            alt="Property" 
-                            fill 
-                            style={{ objectFit: "cover" }} 
-                            priority 
+                        <Image
+                            src="/hero/hero_image_property_1-2.webp"
+                            alt="Property"
+                            fill
+                            style={{ objectFit: "cover" }}
+                            priority
                             fetchPriority="high"
                             sizes="100vw"
                         />
@@ -127,12 +138,12 @@ const PropertyPage = () => {
                             { url: "/hero/hero_image_property_3-2.webp", alt: "Property 3" }
                         ].map((slide, idx) => (
                             <SwiperSlide key={idx}>
-                                <Image 
-                                    src={slide.url} 
-                                    alt={slide.alt} 
-                                    fill 
-                                    style={{ objectFit: "cover" }} 
-                                    priority={idx === 0} 
+                                <Image
+                                    src={slide.url}
+                                    alt={slide.alt}
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                    priority={idx === 0}
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
                                     sizes="100vw"
                                 />
@@ -218,7 +229,7 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 35px' }}>Trinity Tower</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">Trinity Tower</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>Completed in 2021, the Trinity Tower is a Premium Grade A office tower constructed by Shimizu Construction located in the heart of Jakarta&apos;s Golden Triangle.</p>
                                 <p>It spans over 50 floors with a total of 140,000m<sup>2</sup> in built up area. It has a separate 9-floor structure for food, retail, and tenant parking facility</p>
@@ -227,7 +238,7 @@ const PropertyPage = () => {
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
                                 <p className="project-info-text">Property Type : Office and Multifunction Area</p>
                             </motion.div>
-                            <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
+                            <motion.div variants={textVariant}>
                                 <a className="pill-button" href="https://trinitytower.co.id/" target="_blank" rel="noopener noreferrer">Learn More</a>
                             </motion.div>
                         </motion.div>
@@ -287,7 +298,7 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 35px' }}>JS Luwansa</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">JS Luwansa</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>JS Luwansa Hotel and Convention Center is located in Jakarta&apos;s Golden Triangle, Jakarta&apos;s fastest growing and exclusive business district. Conveniently located in close proximity to major embassies, shopping malls and the toll way.</p>
                                 <p>JS Luwansa Hotel and Convention Center is the perfect place for discerning business travelers who need a strategic base to support their business activities from a location within close proximity to the rest of Jakarta.</p>
@@ -296,7 +307,7 @@ const PropertyPage = () => {
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
                                 <p className="project-info-text">Property Type : Hotel</p>
                             </motion.div>
-                            <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
+                            <motion.div variants={textVariant}>
                                 <a className="pill-button" href="https://www.jsluwansa.com/" target="_blank" rel="noopener noreferrer">Learn More</a>
                             </motion.div>
                         </motion.div>
@@ -312,17 +323,16 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 35px' }}>PPHUI Building & Usmar Ismail Hall</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">PPHUI Building</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>Usmar Ismail Hall is an important part of the PPHUI building, which includes a 6,400 m<sup>2</sup> office space and state of the art cinema and concert hall located in CBD Jakarta.</p>
-                                <p>The Usmar Ismail Concert Hall has been designed with an exclusive interior, comfortable seating arrangement and modern lighting. The design concept ensures the ultimate enjoyment experience for the audience of each presented program.</p>
-                                <p>This is the first Integrated Cinema and Concert Hall in Indonesia.</p>
+                                <p>The Usmar Ismail Concert Hall has been designed with an exclusive interior, comfortable seating arrangement and modern lighting.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
                                 <p className="project-info-text">Property Type : Office Space & Concert Hall</p>
                             </motion.div>
-                            <motion.div variants={textVariant} style={{ marginTop: '45px' }}>
+                            <motion.div variants={textVariant}>
                                 <a className="pill-button" href="mailto:fitri@gesit.co.id">Learn More</a>
                             </motion.div>
                         </motion.div>
@@ -369,7 +379,7 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 5px' }}>Senayan Development</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">Senayan Development</motion.h2>
                             <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 35px', fontWeight: 500 }}>Under Development</motion.h3>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>This development boasts a world-class international standard and comprises over 180 rooms with 1,500 m<sup>2</sup> of multifunction & ballroom space.</p>
@@ -391,10 +401,10 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 5px' }}>TOD Rasuna Development</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">TOD Rasuna Development</motion.h2>
                             <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 35px', fontWeight: 500 }}>Under Development</motion.h3>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>This TOD development within inner Jakarta&apos;s Golden Triangle will combine retail, residential, and a world-class theater space together into one – enabling ease of mobility for tenants and reducing on-street traffic.</p>
+                                <p>This TOD development within inner Jakarta&apos;s Golden Triangle will combine retail, residential, and a world-class theater space together into one.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -415,6 +425,24 @@ const PropertyPage = () => {
             </section>
 
             <style jsx global>{`
+                .property-page-container {
+                    position: relative;
+                    background: #fff;
+                }
+                
+                /* Subtle Grain texture remains for premium feel */
+                .editorial-grain {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    opacity: 0.04;
+                    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+                }
+
                 .project-row {
                     display: flex;
                     flex-wrap: wrap;
@@ -447,14 +475,14 @@ const PropertyPage = () => {
                     height: 680px;
                     position: relative;
                     overflow: hidden;
-                    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-                    border-radius: 5px;
+                    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+                    border-radius: 4px;
                 }
 
                 .project-title {
                     font-family: Lora, Georgia, serif;
                     color: #222;
-                    font-size: clamp(38px, 6vw, 44px);
+                    font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
                     font-weight: 500;
                     margin: 0 0 35px;
@@ -462,11 +490,10 @@ const PropertyPage = () => {
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: clamp(16px, 1.8vw, 18px);
-                    line-height: 1.9;
-                    color: #333;
+                    font-size: 18px;
+                    line-height: 1.8;
+                    color: #444;
                     margin-bottom: 45px;
-                    letter-spacing: 0.01em;
                     text-align: justify;
                 }
                 .project-desc p {
@@ -510,15 +537,22 @@ const PropertyPage = () => {
                     background-color: #103065;
                     color: #fff !important;
                 }
+<<<<<<< HEAD
                 .pill-button:active {
                     transform: scale(0.98);
                 }
+=======
+>>>>>>> a9bfb7c (Refinement: News detail source styling and editorial refactor for business pages)
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
                         gap: 40px !important;
+<<<<<<< HEAD
                         padding: 0 20px !important;
+=======
+                        padding: 0 24px !important;
+>>>>>>> a9bfb7c (Refinement: News detail source styling and editorial refactor for business pages)
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -526,6 +560,7 @@ const PropertyPage = () => {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
+<<<<<<< HEAD
                         max-width: 100% !important;
                         height: 320px !important;
                         border-radius: 8px !important;
@@ -533,16 +568,22 @@ const PropertyPage = () => {
                     }
                     .project-section {
                         padding: 40px 0 !important;
+=======
+                        height: clamp(300px, 50vh, 480px) !important;
+                        border-radius: 8px !important;
+                    }
+                    .project-section {
+                        padding: 80px 0 !important;
+>>>>>>> a9bfb7c (Refinement: News detail source styling and editorial refactor for business pages)
                     }
                     .project-text-wrapper {
-                        flex: 1 1 100% !important;
                         width: 100% !important;
-                        max-width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
                         padding: 0 !important;
                     }
                     .project-text-content {
+                        max-width: 100% !important;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
@@ -563,7 +604,6 @@ const PropertyPage = () => {
                         margin-bottom: 12px !important;
                     }
                     .project-info-box {
-                        display: inline-block;
                         text-align: left !important;
                         padding-left: 20px !important;
                         margin: 10px auto 25px !important;

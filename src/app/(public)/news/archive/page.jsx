@@ -170,7 +170,7 @@ const NewsArchivePage = () => {
                       <div className="flex items-center gap-4 text-[11px] font-bold text-navy-deep/40 uppercase tracking-widest mb-6">
                         <div className="flex items-center gap-1.5">
                           <Calendar size={12} className="text-[#bc9c33]" />
-                          {new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </div>
                       </div>
 

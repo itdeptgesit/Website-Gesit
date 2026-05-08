@@ -123,8 +123,13 @@ export default function Header() {
 
       <div className={`gs-mobile-overlay ${mounted && mobileMenuOpen ? 'gs-is-open' : ''}`} suppressHydrationWarning>
         <ul className="gs-mobile-menu">
-          {menuItems.map((item) => (
-            <li key={item.label}>
+          {menuItems.map((item, index) => (
+            <li 
+              key={item.label} 
+              style={{ 
+                transitionDelay: mobileMenuOpen ? `${index * 0.08 + 0.2}s` : '0s' 
+              }}
+            >
               {item.hasChildren ? (
                 <>
                   <a
@@ -140,12 +145,17 @@ export default function Header() {
                   >
                     {item.label} 
                     <span className={`gs-mobile-chevron ${mounted && openSubmenus[item.label] ? 'open' : ''}`}>
-                      <ChevronDown size={20} strokeWidth={2.5} />
+                      <ChevronDown size={22} strokeWidth={1.5} />
                     </span>
                   </a>
                   <ul className={`gs-mobile-submenu ${mounted && openSubmenus[item.label] ? 'gs-is-open' : ''}`}>
-                    {item.children.map((child) => (
-                      <li key={child.label}>
+                    {item.children.map((child, cIdx) => (
+                      <li 
+                        key={child.label}
+                        style={{ 
+                          transitionDelay: openSubmenus[item.label] ? `${cIdx * 0.05}s` : '0s' 
+                        }}
+                      >
                         <Link href={child.href} onClick={() => setMobileMenuOpen(false)}>
                           {child.label}
                         </Link>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { Bold, Italic, Underline, List, ListOrdered, Image as ImageIcon, Video, Link2, Film } from 'lucide-react';
+import { Bold, Italic, Underline, List, ListOrdered, Image as ImageIcon, Video, Link2, Film, Plus } from 'lucide-react';
 import { compressImage } from '@/lib/compressImage';
 
 const ToolbarBtn = ({ onClick, title, children, active }) => (
@@ -25,17 +25,39 @@ export default function ContentEditor({ value, onChange }) {
     const [uploadingVideo, setUploadingVideo] = useState(false);
     const [videoUploadProgress, setVideoUploadProgress] = useState(0);
 
-    const exec = (command, val = null) => {
-        editorRef.current?.focus();
-        // Small delay to ensure focus is restored if the browser was slow
-        setTimeout(() => {
-            if (val) {
-                document.execCommand(command, false, val);
-            } else {
-                document.execCommand(command, false, null);
-            }
-            syncContent();
-        }, 0);
+    const exec = (command, value = null) => {
+        if (!editorRef.current) return;
+        editorRef.current.focus();
+        document.execCommand(command, false, value);
+        syncContent();
+    };
+
+    const handleEditorClick = (e) => {
+        // If clicking the empty space at the bottom, ensure we have a paragraph to type in
+        if (e.target === editorRef.current) {
+            addParagraph();
+        }
+    };
+
+    const addParagraph = () => {
+        if (!editorRef.current) return;
+        editorRef.current.focus();
+        const p = document.createElement('p');
+        p.innerHTML = '<br>';
+        editorRef.current.appendChild(p);
+        
+        // Scroll to the new paragraph
+        p.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+        // Set cursor to the new paragraph
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.setStart(p, 0);
+        range.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        
+        syncContent();
     };
 
     const [editorHtml, setEditorHtml] = useState(value || '');
@@ -60,52 +82,69 @@ export default function ContentEditor({ value, onChange }) {
 
     const handleKeyUp = () => syncContent();
 
+    const [promptConfig, setPromptConfig] = useState({ open: false, type: '', value: '', title: '' });
+
     const insertLink = () => {
         const selection = window.getSelection();
         const selectedText = selection ? selection.toString() : '';
-
-        const url = prompt('Enter URL:', selectedText.startsWith('http') ? selectedText : 'https://');
-        if (!url) return;
-
-        if (selectedText.length > 0) {
-            exec('createLink', url);
-        } else {
-            const html = `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#bc9c33;text-decoration:underline;cursor:pointer">${url}</a>`;
-            exec('insertHTML', html);
-        }
+        setPromptConfig({
+            open: true,
+            type: 'link',
+            title: 'Insert Link',
+            value: selectedText.startsWith('http') ? selectedText : 'https://'
+        });
     };
 
     const linkVideo = () => {
-        const url = prompt('Masukkan URL video (YouTube, Vimeo, atau link .mp4):');
-        if (!url) return;
+        setPromptConfig({
+            open: true,
+            type: 'video',
+            title: 'Insert Video URL',
+            value: ''
+        });
+    };
 
-        let html = '';
-        const isDirectVideo = /\.(mp4|webm|ogg)$/i.test(url);
+    const handlePromptConfirm = () => {
+        const { type, value } = promptConfig;
+        setPromptConfig({ ...promptConfig, open: false });
+        if (!value) return;
 
-        if (isDirectVideo) {
-            html = `<div class="video-container" style="margin:1.5rem 0;border-radius:8px;overflow:hidden;background:#000;box-shadow:0 10px 30px -10px rgba(0,0,0,0.3)"><video src="${url}" controls style="width:100%;height:auto;display:block"></video></div>`;
-        } else {
-            // High-fidelity YouTube Regex (matches long, short, mobile, shorts, and embed URLs)
-            const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
-            const ytMatch = url.match(ytRegex);
-            const videoId = ytMatch ? ytMatch[1] : null;
-
-            if (videoId) {
-                const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-                html = `<div class="video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:12px;box-shadow:0 20px 40px -15px rgba(0,0,0,0.4)"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
-            } else if (url.includes('vimeo.com')) {
-                const vimeoId = url.split('/').pop().split('?')[0];
-                html = `<div class="video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:12px;box-shadow:0 20px 40px -15px rgba(0,0,0,0.4)"><iframe src="https://player.vimeo.com/video/${vimeoId}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+        if (type === 'link') {
+            const selection = window.getSelection();
+            const selectedText = selection ? selection.toString() : '';
+            if (selectedText.length > 0) {
+                exec('createLink', value);
             } else {
-                // Generic Link fallback
-                html = `<div style="margin:1.5rem 0;padding:1rem;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;text-align:center"><a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#bc9c33;font-weight:bold;text-decoration:underline">${url}</a></div>`;
+                const html = `<a href="${value}" target="_blank" rel="noopener noreferrer" style="color:#bc9c33;text-decoration:underline;cursor:pointer">${value}</a>`;
+                exec('insertHTML', html);
             }
-        }
+        } else if (type === 'video') {
+            let html = '';
+            const isDirectVideo = /\.(mp4|webm|ogg)$/i.test(value);
 
-        if (html) {
-            editorRef.current?.focus();
-            document.execCommand('insertHTML', false, html);
-            syncContent();
+            if (isDirectVideo) {
+                html = `<div class="video-container" style="margin:1.5rem 0;border-radius:8px;overflow:hidden;background:#000;box-shadow:0 10px 30px -10px rgba(0,0,0,0.3)"><video src="${value}" controls style="width:100%;height:auto;display:block"></video></div>`;
+            } else {
+                const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+                const ytMatch = value.match(ytRegex);
+                const videoId = ytMatch ? ytMatch[1] : null;
+
+                if (videoId) {
+                    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                    html = `<div class="video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:12px;box-shadow:0 20px 40px -15px rgba(0,0,0,0.4)"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+                } else if (value.includes('vimeo.com')) {
+                    const vimeoId = value.split('/').pop().split('?')[0];
+                    html = `<div class="video-wrapper" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin:1.5rem 0;border-radius:12px;box-shadow:0 20px 40px -15px rgba(0,0,0,0.4)"><iframe src="https://player.vimeo.com/video/${vimeoId}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+                } else {
+                    html = `<div style="margin:1.5rem 0;padding:1rem;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;text-align:center"><a href="${value}" target="_blank" rel="noopener noreferrer" style="color:#bc9c33;font-weight:bold;text-decoration:underline">${value}</a></div>`;
+                }
+            }
+
+            if (html) {
+                editorRef.current?.focus();
+                document.execCommand('insertHTML', false, html + '<p><br></p>');
+                syncContent();
+            }
         }
     };
 
@@ -148,10 +187,9 @@ export default function ContentEditor({ value, onChange }) {
                             const data = JSON.parse(xhr.responseText);
                             if (editorRef.current) {
                                 const videoHtml = `<div class="video-container" style="margin:1.5rem 0;border-radius:8px;overflow:hidden;background:#f8fafc;border:1px solid #e2e8f0;box-shadow:0 4px 20px -5px rgba(0,0,0,0.2)"><video src="${data.url}" controls style="width:100%;height:auto;display:block"></video></div><p><br></p>`;
-                                editorRef.current.innerHTML += videoHtml;
-                                const updatedHtml = editorRef.current.innerHTML;
-                                setEditorHtml(updatedHtml);
-                                onChange(updatedHtml);
+                                editorRef.current.focus();
+                                document.execCommand('insertHTML', false, videoHtml);
+                                syncContent();
                             }
                             resolve();
                         } else {
@@ -198,7 +236,7 @@ export default function ContentEditor({ value, onChange }) {
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error);
 
-                const html = `<figure style="margin:1.5rem 0;text-align:center"><img src="${data.url}" alt="Inserted image" style="max-width:100%;border-radius:8px;height:auto"/></figure>`;
+                const html = `<figure style="margin:1.5rem 0;text-align:center"><img src="${data.url}" alt="Inserted image" style="max-width:100%;border-radius:8px;height:auto"/></figure><p><br></p>`;
                 editorRef.current?.focus();
                 document.execCommand('insertHTML', false, html);
                 syncContent();
@@ -221,6 +259,43 @@ export default function ContentEditor({ value, onChange }) {
 
     return (
         <div className="border rounded-lg overflow-hidden bg-white shadow-sm relative">
+            {/* Custom Prompt Modal */}
+            {promptConfig.open && (
+                <div className="absolute inset-0 z-30 bg-white/60 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="bg-white rounded-xl shadow-2xl border border-slate-200 w-full max-w-sm p-6 animate-in fade-in zoom-in-95 duration-200">
+                        <h3 className="text-sm font-bold text-slate-800 uppercase tracking-widest mb-4">{promptConfig.title}</h3>
+                        <div className="space-y-4">
+                            <input
+                                autoFocus
+                                type="text"
+                                className="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-md text-sm focus:outline-none focus:border-navy-deep"
+                                placeholder={promptConfig.type === 'video' ? 'Paste YouTube or MP4 link...' : 'https://...'}
+                                value={promptConfig.value}
+                                onChange={(e) => setPromptConfig({ ...promptConfig, value: e.target.value })}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handlePromptConfirm();
+                                    if (e.key === 'Escape') setPromptConfig({ ...promptConfig, open: false });
+                                }}
+                            />
+                            <div className="flex justify-end gap-2">
+                                <button
+                                    onClick={() => setPromptConfig({ ...promptConfig, open: false })}
+                                    className="px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-600"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handlePromptConfirm}
+                                    className="px-4 py-2 bg-navy-deep text-white text-xs font-bold uppercase tracking-widest rounded-md hover:bg-slate-800"
+                                >
+                                    Insert
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Video Upload Progress Overlay */}
             {uploadingVideo && (
                 <div className="absolute inset-0 z-20 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center gap-4 rounded-lg">
@@ -255,6 +330,36 @@ export default function ContentEditor({ value, onChange }) {
                 </select>
 
                 <Divider />
+
+                {/* Font Family */}
+                <select
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onChange={(e) => exec('fontName', e.target.value)}
+                    className="h-8 px-2 text-[11px] border border-slate-200 rounded bg-white text-slate-700 cursor-pointer hover:border-slate-300 transition-colors max-w-[100px]"
+                >
+                    <option value="'Source Sans Pro', sans-serif">Sans Serif</option>
+                    <option value="Lora, serif">Lora (Serif)</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="'Courier New', monospace">Monospace</option>
+                </select>
+
+                {/* Font Size */}
+                <select
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onChange={(e) => exec('fontSize', e.target.value)}
+                    className="h-8 px-2 text-[11px] border border-slate-200 rounded bg-white text-slate-700 cursor-pointer hover:border-slate-300 transition-colors"
+                    defaultValue="3"
+                >
+                    <option value="1">10px</option>
+                    <option value="2">13px</option>
+                    <option value="3">16px</option>
+                    <option value="4">18px</option>
+                    <option value="5">24px</option>
+                    <option value="6">32px</option>
+                    <option value="7">48px</option>
+                </select>
+
+                <Divider />
                 <ToolbarBtn onClick={() => exec('bold')} title="Bold (Ctrl+B)"><Bold size={14} /></ToolbarBtn>
                 <ToolbarBtn onClick={() => exec('italic')} title="Italic (Ctrl+I)"><Italic size={14} /></ToolbarBtn>
                 <ToolbarBtn onClick={() => exec('underline')} title="Underline (Ctrl+U)"><Underline size={14} /></ToolbarBtn>
@@ -278,6 +383,10 @@ export default function ContentEditor({ value, onChange }) {
                         : <Film size={14} />
                     }
                 </ToolbarBtn>
+                <Divider />
+                <ToolbarBtn onClick={addParagraph} title="Add New Paragraph at Bottom">
+                    <Plus size={14} />
+                </ToolbarBtn>
             </div>
 
             {/* Editable Content Area */}
@@ -288,12 +397,25 @@ export default function ContentEditor({ value, onChange }) {
                 onKeyUp={handleKeyUp}
                 onBlur={syncContent}
                 onInput={syncContent}
-                className="min-h-[380px] p-5 text-[15px] text-slate-700 leading-relaxed focus:outline-none prose max-w-none"
-                style={{ minHeight: '380px' }}
+                onClick={handleEditorClick}
+                onKeyDown={(e) => {
+                    if (e.key === 'Tab') {
+                        e.preventDefault();
+                        exec('insertHTML', '&nbsp;&nbsp;&nbsp;&nbsp;');
+                    }
+                }}
+                className="min-h-[500px] p-8 outline-none prose prose-slate max-w-none prose-p:my-4 prose-p:min-h-[1.5em] prose-img:rounded-lg prose-headings:font-serif"
+                style={{ 
+                    fontFamily: "'Source Sans Pro', sans-serif",
+                    fontSize: '16px'
+                }}
                 data-placeholder="Mulai tulis konten artikel di sini..."
             />
 
-            <style jsx>{`
+            <style jsx global>{`
+                .prose p { min-height: 1.5em; cursor: text; }
+                .video-container { position: relative; z-index: 1; margin: 1.5rem 0; }
+                .video-container::after { content: ''; display: block; clear: both; }
                 [contenteditable]:empty:before {
                     content: attr(data-placeholder);
                     color: #94a3b8;

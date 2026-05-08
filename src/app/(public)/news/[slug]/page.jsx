@@ -185,33 +185,60 @@ export default function NewsDetailPage() {
                             className="prose prose-lg max-w-none text-slate-700 text-[16px] md:text-[18px] leading-[1.8] news-content mb-16"
                             style={{ fontFamily: "'Source Sans Pro', sans-serif" }}
                         >
+                            <style jsx global>{`
+                                .news-content p, 
+                                .news-content span, 
+                                .news-content font,
+                                .news-content div {
+                                    font-family: 'Source Sans Pro', sans-serif !important;
+                                    font-size: 16px !important;
+                                    line-height: 1.8 !important;
+                                    color: #334155 !important;
+                                    text-align: justify !important;
+                                }
+                                .news-content h1, 
+                                .news-content h2, 
+                                .news-content h3, 
+                                .news-content h4 {
+                                    font-family: 'Lora', serif !important;
+                                    color: #103065 !important;
+                                    margin-top: 2rem !important;
+                                    margin-bottom: 1rem !important;
+                                    text-align: left !important;
+                                }
+                                .news-content img { border-radius: 8px; margin: 2rem auto; }
+                            `}</style>
                             {post.content ? (
-                                <>
-                                    <div
-                                        dangerouslySetInnerHTML={{ __html: xss(post.content) }}
-                                    />
-                                    {post.source_url && (
-                                        <div className="mt-12 pt-8 border-t border-slate-100">
-                                            <div className="flex items-center gap-3 text-slate-500">
-                                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-                                                    <FileText size={14} className="text-navy-deep" />
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Source / Reference</span>
-                                                    <span className="text-navy-deep font-bold text-sm break-all">
-                                                        {post.source_url}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: xss(post.content) }}
+                                />
                             ) : (
                                 <div className="text-slate-400 italic py-10 border-y border-slate-100 text-center">
                                     Content is not yet available for this article.
                                 </div>
                             )}
                         </motion.div>
+
+                        {post.source_url && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                className="mt-[-2rem] mb-16 pt-8 border-t border-slate-100"
+                            >
+                                <div className="flex items-center gap-3 text-slate-500">
+                                    <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
+                                        <FileText size={14} className="text-navy-deep" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-[9px] uppercase font-medium tracking-widest text-slate-400 leading-tight">Source / Reference</span>
+                                        <span className="text-navy-deep font-normal text-xs break-all leading-normal">
+                                            {post.source_url}
+                                        </span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
 
 
                     </div>

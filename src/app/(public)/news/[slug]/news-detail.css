@@ -222,3 +222,32 @@
         padding: 0 20px;
     }
 }
+
+/* News Content Typography & Justification */
+.news-content p, 
+.news-content span, 
+.news-content font,
+.news-content div {
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+    color: #334155 !important;
+    text-align: justify !important;
+}
+
+.news-content h1, 
+.news-content h2, 
+.news-content h3, 
+.news-content h4 {
+    font-family: 'Lora', serif !important;
+    color: #103065 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+    text-align: left !important;
+}
+
+.news-content img {
+    border-radius: 8px;
+    margin: 2rem auto;
+    display: block;
+}

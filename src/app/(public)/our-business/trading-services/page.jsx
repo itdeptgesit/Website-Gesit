@@ -9,23 +9,23 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 
-/* ── Animation Variants (Standardized) ── */
+/* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
-    initial: { opacity: 0, y: 40 },
+    initial: { opacity: 0, y: 60 },
     whileInView: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] }
+        transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
     },
     viewport: { once: true, margin: "-100px" }
 };
 
 const textVariant = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 40 },
     whileInView: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+        transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }
     },
     viewport: { once: true }
 };
@@ -34,19 +34,19 @@ const staggerContainer = {
     initial: {},
     whileInView: {
         transition: {
-            staggerChildren: 0.1,
+            staggerChildren: 0.2,
             delayChildren: 0.1
         }
     }
 };
 
 const imageVariant = {
-    initial: { opacity: 0, scale: 1.05, filter: 'blur(10px)' },
+    initial: { opacity: 0, scale: 1.1, filter: 'blur(15px)' },
     whileInView: {
         opacity: 1,
         scale: 1,
         filter: 'blur(0px)',
-        transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
+        transition: { duration: 1.8, ease: [0.16, 1, 0.3, 1] }
     },
     viewport: { once: true }
 };
@@ -86,7 +86,8 @@ export default function TradingServicesPage() {
     };
 
     return (
-        <div style={{ backgroundColor: "#fff" }}>
+        <div className="trading-services-page-container">
+            <div className="editorial-grain" />
             {/* ── 1. HERO SECTION ── */}
             <section className="gs-hero-section" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
                 {/* Progress Bar */}
@@ -106,12 +107,12 @@ export default function TradingServicesPage() {
                 {/* Fallback Hero Image (Server-side rendered for instant loading) */}
                 {!isMounted && (
                     <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
-                        <Image 
-                            src="/hero/hero_image_trading_1-2.webp" 
-                            alt="Trading" 
-                            fill 
-                            style={{ objectFit: "cover" }} 
-                            priority 
+                        <Image
+                            src="/hero/hero_image_trading_1-2.webp"
+                            alt="Trading"
+                            fill
+                            style={{ objectFit: "cover" }}
+                            priority
                             fetchPriority="high"
                         />
                     </div>
@@ -138,12 +139,12 @@ export default function TradingServicesPage() {
                             { url: "/hero/hero_image_trading_3-2.webp", alt: "Trading 3" }
                         ].map((slide, idx) => (
                             <SwiperSlide key={idx}>
-                                <Image 
-                                    src={slide.url} 
-                                    alt={slide.alt} 
-                                    fill 
-                                    style={{ objectFit: "cover" }} 
-                                    priority={idx === 0} 
+                                <Image
+                                    src={slide.url}
+                                    alt={slide.alt}
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                    priority={idx === 0}
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
                                 />
                             </SwiperSlide>
@@ -299,6 +300,23 @@ export default function TradingServicesPage() {
             </section>
 
             <style jsx global>{`
+                .trading-services-page-container {
+                    position: relative;
+                    background: #fff;
+                }
+                
+                .editorial-grain {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    opacity: 0.04;
+                    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+                }
+
                 .project-row {
                     display: flex;
                     flex-wrap: wrap;
@@ -331,14 +349,14 @@ export default function TradingServicesPage() {
                     height: 680px;
                     position: relative;
                     overflow: hidden;
-                    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-                    border-radius: 5px;
+                    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+                    border-radius: 4px;
                 }
 
                 .project-title {
                     font-family: Lora, Georgia, serif;
                     color: #222;
-                    font-size: clamp(38px, 6vw, 44px);
+                    font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
                     font-weight: 500;
                     margin: 0 0 35px;
@@ -346,30 +364,21 @@ export default function TradingServicesPage() {
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: clamp(16px, 1.8vw, 18px);
-                    line-height: 1.9;
-                    color: #333;
+                    font-size: 18px;
+                    line-height: 1.8;
+                    color: #444;
                     margin-bottom: 45px;
-                    letter-spacing: 0.01em;
                     text-align: justify;
                 }
                 .project-desc p {
                     margin-bottom: 25px;
                 }
-                
-                .gs-hero-section { height: 100vh; }
-                .gesit-hero-overlay {
-                    position: absolute; inset: 0;
-                    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
-                    z-index: 5;
-                    pointer-events: none;
-                }
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 0px !important;
-                        padding: 0 !important;
+                        gap: 40px !important;
+                        padding: 0 24px !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -377,43 +386,29 @@ export default function TradingServicesPage() {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
-                        max-width: 100% !important;
-                        height: 480px !important;
-                        border-radius: 0 !important;
+                        height: clamp(300px, 50vh, 480px) !important;
+                        border-radius: 8px !important;
                     }
                     .project-section {
-                        padding: 60px 0 !important;
+                        padding: 80px 0 !important;
                     }
                     .project-text-wrapper {
-                        flex: 1 1 100% !important;
                         width: 100% !important;
-                        max-width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 20px 20px !important;
-                        box-sizing: border-box;
-                    }
-                    .project-text-content {
                         padding: 0 !important;
-                        max-width: 100% !important;
                     }
                     .project-text-content {
+                        max-width: 100% !important;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                     }
                     .project-desc {
-                        font-size: 18px !important;
-                        line-height: 1.7 !important;
                         text-align: center !important;
-                        margin-bottom: 30px !important;
-                    }
-                    .project-desc p {
-                        margin-bottom: 15px !important;
                     }
                 }
             `}</style>
         </div>
     );
 }
-

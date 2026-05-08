@@ -8,45 +8,46 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 
+/* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] }
-  },
-  viewport: { once: true, margin: "-100px" }
+    initial: { opacity: 0, y: 60 },
+    whileInView: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
+    },
+    viewport: { once: true, margin: "-100px" }
 };
 
 const textVariant = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-  },
-  viewport: { once: true }
+    initial: { opacity: 0, y: 40 },
+    whileInView: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }
+    },
+    viewport: { once: true }
 };
 
 const staggerContainer = {
-  initial: {},
-  whileInView: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1
+    initial: {},
+    whileInView: {
+        transition: {
+            staggerChildren: 0.2,
+            delayChildren: 0.1
+        }
     }
-  }
 };
 
 const imageVariant = {
-  initial: { opacity: 0, scale: 1.05, filter: 'blur(10px)' },
-  whileInView: { 
-    opacity: 1, 
-    scale: 1, 
-    filter: 'blur(0px)',
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] }
-  },
-  viewport: { once: true }
+    initial: { opacity: 0, scale: 1.1, filter: 'blur(15px)' },
+    whileInView: {
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        transition: { duration: 1.8, ease: [0.16, 1, 0.3, 1] }
+    },
+    viewport: { once: true }
 };
 
 export default function NaturalResourcesPage() {
@@ -87,7 +88,8 @@ export default function NaturalResourcesPage() {
     };
 
     return (
-        <div style={{ backgroundColor: "#fff" }}>
+        <div className="natural-resources-page-container">
+            <div className="editorial-grain" />
 
             {/* ── 1. HERO ── */}
             <section className="gs-hero-section" style={{ position: "relative", width: "100%", overflow: "hidden" }}>
@@ -106,12 +108,12 @@ export default function NaturalResourcesPage() {
                 {/* Fallback Hero Image (Server-side rendered for instant loading) */}
                 {!isMounted && (
                     <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
-                        <Image 
-                            src="/hero/hero_natural_resources.webp" 
-                            alt="Natural Resources" 
-                            fill 
-                            style={{ objectFit: "cover" }} 
-                            priority 
+                        <Image
+                            src="/hero/hero_natural_resources.webp"
+                            alt="Natural Resources"
+                            fill
+                            style={{ objectFit: "cover" }}
+                            priority
                             fetchPriority="high"
                         />
                     </div>
@@ -141,12 +143,12 @@ export default function NaturalResourcesPage() {
                             { url: "/hero/hero_image_natural_2-2-1.webp", alt: "Natural Resources 3" }
                         ].map((slide, idx) => (
                             <SwiperSlide key={idx} style={{ position: "relative" }}>
-                                <Image 
-                                    src={slide.url} 
-                                    alt={slide.alt} 
-                                    fill 
-                                    style={{ objectFit: "cover" }} 
-                                    priority={idx === 0} 
+                                <Image
+                                    src={slide.url}
+                                    alt={slide.alt}
+                                    fill
+                                    style={{ objectFit: "cover" }}
+                                    priority={idx === 0}
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
                                 />
                             </SwiperSlide>
@@ -215,6 +217,7 @@ export default function NaturalResourcesPage() {
                 </div>
             </section>
 
+
             {/* ── 3. BAUXITE MINING – Synchronized Layout ── */}
             <section className="project-section" style={{ padding: '150px 0', overflow: 'hidden' }}>
                 <div className="project-row image-right">
@@ -224,15 +227,13 @@ export default function NaturalResourcesPage() {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title" style={{ color: '#222' }}>Bauxite Mining</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">Bauxite Mining</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>The Gesit Companies have 6 bauxite concessions of about 75,000 Ha along the Kapuas River in West Kalimantan.</p>
                             </motion.div>
 
-                            <motion.div className="project-info-box" variants={fadeInUp} style={{ borderLeft: '2px solid #BC9C33', paddingLeft: '25px' }}>
-                                <h6 className="project-info-title" style={{ fontFamily: 'Lora, serif', fontSize: '19px', color: '#000', fontWeight: 500, margin: 0 }}>
-                                    Location : West Kalimantan, Indonesia
-                                </h6>
+                            <motion.div className="project-info-box" variants={fadeInUp}>
+                                <h6 className="project-info-title">Location : West Kalimantan, Indonesia</h6>
                             </motion.div>
                         </motion.div>
                     </div>
@@ -267,27 +268,24 @@ export default function NaturalResourcesPage() {
             </section>
 
             {/* ── 4. NEW BUSINESS DEVELOPMENT – Refined Cards ── */}
-            <section style={{ backgroundColor: "#fff", padding: "120px 0" }}>
-                <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 60px" }}>
+            <section style={{ backgroundColor: "#fff" }} className="py-16 md:py-32">
+                <div className="max-w-7xl mx-auto px-6 md:px-[60px]">
                     <motion.h2
                         variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }}
                         style={{
                             fontFamily: "Lora, serif",
                             color: "#222",
-                            fontSize: 'clamp(32px, 5vw, 42px)',
+                            fontSize: 'clamp(28px, 5vw, 42px)',
                             fontWeight: 400,
-                            marginBottom: 80,
+                            marginBottom: '40px',
                             textAlign: "center"
                         }}
+                        className="md:mb-20"
                     >
                         New Business Development
                     </motion.h2>
 
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-                        gap: 35
-                    }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[35px]">
                         {businessCards.map((card, i) => (
                             <motion.div
                                 key={i}
@@ -347,17 +345,21 @@ export default function NaturalResourcesPage() {
             </section>
 
             <style jsx global>{`
-                .gs-hero-section { height: 100vh; }
-                .gesit-hero-overlay {
-                    position: absolute; inset: 0;
-                    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
-                    z-index: 10;
+                .natural-resources-page-container {
+                    position: relative;
+                    background: #fff;
                 }
-                .gs-hero-nav {
-                    position: absolute;
-                    bottom: 50px; right: 50px;
-                    display: flex; gap: 20px;
-                    z-index: 30;
+                
+                .editorial-grain {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    opacity: 0.04;
+                    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
                 }
 
                 .project-row {
@@ -387,14 +389,14 @@ export default function NaturalResourcesPage() {
                     height: 680px;
                     position: relative;
                     overflow: hidden;
-                    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-                    border-radius: 5px;
+                    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+                    border-radius: 4px;
                 }
 
                 .project-title {
                     font-family: Lora, Georgia, serif;
                     color: #222;
-                    font-size: clamp(38px, 6vw, 44px);
+                    font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
                     font-weight: 500;
                     margin: 0 0 35px;
@@ -402,25 +404,31 @@ export default function NaturalResourcesPage() {
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: clamp(16px, 1.8vw, 18px);
-                    line-height: 1.9;
-                    color: #333;
+                    font-size: 18px;
+                    line-height: 1.8;
+                    color: #444;
                     margin-bottom: 45px;
-                    letter-spacing: 0.01em;
                     text-align: justify;
                 }
                 .project-desc p { margin-bottom: 25px; }
                 .project-info-box {
-                    padding: 0;
-                    border-left: none;
+                    padding: 4px 0 4px 35px;
+                    border-left: 2px solid #BC9C33;
                     margin-bottom: 45px;
+                }
+                .project-info-title {
+                    font-family: Lora, Georgia, serif;
+                    font-size: 19px;
+                    color: #222;
+                    font-weight: 500;
+                    margin: 0;
                 }
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 0px !important;
-                        padding: 0 !important;
+                        gap: 40px !important;
+                        padding: 0 24px !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -428,44 +436,30 @@ export default function NaturalResourcesPage() {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
-                        max-width: 100% !important;
-                        height: 480px !important;
-                        border-radius: 0 !important;
+                        height: clamp(300px, 50vh, 480px) !important;
+                        border-radius: 8px !important;
                     }
                     .project-section {
-                        padding: 60px 0 !important;
+                        padding: 80px 0 !important;
                     }
                     .project-text-wrapper {
-                        flex: 1 1 100% !important;
                         width: 100% !important;
-                        max-width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 20px 20px !important;
-                        box-sizing: border-box;
+                        padding: 0 !important;
                     }
                     .project-text-content {
-                        padding: 0 !important;
                         max-width: 100% !important;
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                     }
-                    .project-info-box {
-                        display: inline-block;
-                        text-align: center !important;
-                        border-left: none !important;
-                        padding: 0 !important;
-                        margin: 20px auto 35px !important;
-                    }
                     .project-desc {
-                        font-size: 18px !important;
-                        line-height: 1.7 !important;
                         text-align: center !important;
-                        margin-bottom: 30px !important;
                     }
-                    .project-desc p {
-                        margin-bottom: 15px !important;
+                    .project-info-box {
+                        text-align: left !important;
+                        margin: 0 auto 35px !important;
                     }
                 }
             `}</style>

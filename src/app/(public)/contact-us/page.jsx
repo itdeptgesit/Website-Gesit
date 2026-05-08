@@ -122,6 +122,7 @@ export default function ContactUs() {
       </section>
 
       <section className="contact-section">
+        <div className="editorial-grain" />
         <div className="contact-container">
           <motion.div
             className="contact-image-column"
@@ -146,10 +147,10 @@ export default function ContactUs() {
             <div className="contact-info-row">
               <motion.div
                 className="contact-address-col"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
                 <p className="contact-info-label">Address</p>
                 <div className="contact-info-text">
@@ -168,10 +169,10 @@ export default function ContactUs() {
 
               <motion.div
                 className="contact-details-col"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
                 <p className="contact-info-label">Contact</p>
                 <div className="contact-info-text">

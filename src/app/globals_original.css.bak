@@ -1,4 +1,4 @@
-/* Typography Variables */
+﻿/* Typography Variables */
 
 @tailwind base;
 @tailwind components;
@@ -369,25 +369,12 @@ a {
 }
 
 .gs-mobile-logo img {
-  height: 32px;
+  height: 48px;
   width: auto;
 }
 
 .gs-mobile-logo .gs-logo-text {
-  font-size: 18px;
-}
-
-@media (max-width: 480px) {
-  .gs-mobile-logo img {
-    height: 28px;
-  }
-  .gs-mobile-logo .gs-logo-text {
-    font-size: 14px;
-    letter-spacing: 0.5px;
-  }
-  .gs-mobile-header-inner {
-    padding: 0 15px;
-  }
+  font-size: 22px;
 }
 
 .gs-mobile-opener {
@@ -403,23 +390,21 @@ a {
 }
 
 .gs-mobile-opener span {
-  width: 24px;
-  height: 1.5px;
+  width: 20px;
+  height: 2px;
   background: #ffffff;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   display: block;
   transform-origin: center;
   position: absolute;
 }
 
 .gs-mobile-opener span:nth-child(1) {
-  top: 10px;
+  top: 8px;
 }
 
 .gs-mobile-opener span:nth-child(2) {
-  top: 16px;
-  width: 18px;
-  right: 4px;
+  top: 15px;
 }
 
 .gs-mobile-opener span:nth-child(3) {
@@ -429,17 +414,16 @@ a {
 /* Transform hamburger to X when open */
 .gs-mobile-opener.gs-is-open span:nth-child(1) {
   transform: rotate(45deg);
-  top: 16px;
+  top: 15px;
 }
 
 .gs-mobile-opener.gs-is-open span:nth-child(2) {
   opacity: 0;
-  transform: translateX(10px);
 }
 
 .gs-mobile-opener.gs-is-open span:nth-child(3) {
   transform: rotate(-45deg);
-  top: 16px;
+  top: 15px;
 }
 
 /* Mobile Overlay Fix */
@@ -483,15 +467,15 @@ a {
 }
 
 .gs-mobile-menu>li {
-  margin-bottom: 25px;
+  margin-bottom: 35px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(30px);
+  transition: all 0.4s ease;
 }
 
 .gs-mobile-overlay.gs-is-open .gs-mobile-menu>li {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .gs-mobile-menu>li>a {
@@ -504,14 +488,11 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.3s ease;
 }
 
 .gs-mobile-menu>li>a:hover {
   color: var(--gs-accent-gold);
-  padding-left: 5px;
 }
 
 .gs-mobile-chevron {
@@ -555,7 +536,7 @@ a {
 
 .gs-mobile-submenu.gs-is-open li {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .gs-mobile-submenu li a {
@@ -578,9 +559,9 @@ a {
   color: var(--gs-accent-gold);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
    Hero Section Responsive Styles (Slider Revolution Parity)
-   ═══════════════════════════════════════════════════════ */
+   ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ */
 
 /* Desktop (> 1024px) */
 .gs-hero-section {
@@ -612,9 +593,9 @@ a {
   }
 }
 
-/* ═══════════════════════════════════════════════════════
+/* ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
    Existing Styles
-   ═══════════════════════════════════════════════════════ */
+   ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ */
 
 /* Desktop Hero */
 .elementor-element-22eaa17 {
@@ -677,7 +658,7 @@ a {
   background: var(--gs-accent-gold);
 }
 
-/* Trading & Services Hero – guaranteed full bleed */
+/* Trading & Services Hero ΓÇô guaranteed full bleed */
 .ts-hero {
   position: relative !important;
   width: 100% !important;
@@ -711,7 +692,7 @@ a {
   animation: ts-hero-progress 5s linear forwards;
 }
 
-/* ── Swiper EffectFade: force slides to fill their container ── */
+/* ΓöÇΓöÇ Swiper EffectFade: force slides to fill their container ΓöÇΓöÇ */
 .swiper-fade .swiper-slide,
 .swiper-fade .swiper-slide>div,
 .swiper-fade .swiper-slide>div>img {

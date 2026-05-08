@@ -233,7 +233,7 @@ const NewsPage = () => {
               </div>
 
               {/* Content Side (Navy Box) */}
-              <div className="bg-navy-deep p-12 lg:p-20 flex flex-col justify-between text-white space-y-12">
+              <div className="bg-navy-deep p-6 md:p-12 lg:p-20 flex flex-col justify-between text-white space-y-8 md:space-y-12">
                 <motion.div
                   variants={staggerContainer}
                   initial="initial"
@@ -241,12 +241,12 @@ const NewsPage = () => {
                   viewport={{ once: true }}
                 >
                   <motion.span variants={textVariant} className="text-[14px] font-bold uppercase tracking-[.4em] text-white/60 mb-8 block">
-                    {featuredArticle?.date}
+                    {featuredArticle?.date || (featuredArticle?.created_at ? new Date(featuredArticle.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '')}
                   </motion.span>
                   <motion.h2
                     variants={textVariant}
                     className="text-3xl md:text-5xl text-white leading-tight mb-12"
-                    style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
+                    style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
                   >
                     {featuredArticle?.title}
                   </motion.h2>
@@ -296,11 +296,11 @@ const NewsPage = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M14 2v4a2 2 0 002 2h4" />
                 </svg>
               </div>
-              <h3 className="text-navy-deep text-2xl font-bold mb-2">No Stories Yet</h3>
+              <h3 className="text-navy-deep text-xl md:text-2xl font-bold mb-2">No Stories Yet</h3>
               <p className="text-navy-deep/60">Check back later for the latest updates from Gesit.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
               {otherArticles.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -312,14 +312,14 @@ const NewsPage = () => {
                 >
                     <Link
                       href={`/news/${item.slug || item.id}`}
-                      className="flex-1 bg-[#deebf9] p-10 md:p-12 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
+                      className="flex-1 bg-[#deebf9] p-6 md:p-12 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
                     >
                       <span className="text-[13px] font-bold uppercase tracking-widest text-navy-deep/50 mb-8 block">
-                        {new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </span>
                       <h3
                         className="text-[26px] text-navy-deep leading-[1.3] mb-8 group-hover:text-[#bc9c33] transition-colors"
-                        style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
+                        style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
                       >
                         {item.title}
                       </h3>

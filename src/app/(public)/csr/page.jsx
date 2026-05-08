@@ -248,7 +248,7 @@ export default function CSRPage() {
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
-                    style={{ lineHeight: "72px" }}
+                    style={{ lineHeight: "1.2" }}
                 >
                     Corporate <br className="md:hidden" />Social<br className="md:hidden" /> Responsibility
                 </motion.h1>
@@ -408,7 +408,7 @@ export default function CSRPage() {
                                             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="pl-14 md:pl-20 pr-4 md:pr-8 pb-8 pt-2">
+                                            <div className="pl-8 md:pl-20 pr-4 md:pr-8 pb-8 pt-2">
                                                 {initiative.content.map((block) => (
                                                     <div key={block.subtitle} className="mt-6 first:mt-0">
                                                         {block.subtitle && (

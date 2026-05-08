@@ -1,11 +1,11 @@
-'use client';
+﻿'use client';
 import { useEffect, useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-/* ── Hero slides (from RevSlider rs-slides) ── */
+/* ΓöÇΓöÇ Hero slides (from RevSlider rs-slides) ΓöÇΓöÇ */
 const heroSlides = [
   { src: '/hero/hero_image_property_3-2.webp', alt: 'Property' },
   { src: '/hero/hero_image_trading_1-2.webp', alt: 'Trading & Services' },
@@ -150,15 +150,15 @@ export default function Home() {
                       variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                     >
                       <div className="elementor-element elementor-element-6102ad3 elementor-widget elementor-widget-heading" data-id="6102ad3" data-element_type="widget" data-widget_type="heading.default">
-                        <div className="elementor-widget-container px-6 md:px-0">
+                        <div className="elementor-widget-container">
                           <motion.h2 variants={textVariant} className="elementor-heading-title elementor-size-default">
-                            Over 50 Years of Investing in <br className="hidden md:inline" /> the Development of Indonesia
+                            Over 50 Years of Investing in <br /> the Development of Indonesia
                           </motion.h2>
                         </div>
                       </div>
                       <div className="elementor-element elementor-element-ef90b6d elementor-widget elementor-widget-heading" data-id="ef90b6d" data-element_type="widget" data-widget_type="heading.default">
-                        <div className="elementor-widget-container px-6 md:px-0">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default text-white" style={{ fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: '1.3', fontWeight: 400, fontFamily: 'Georgia, Lora, serif' }}>
+                        <div className="elementor-widget-container">
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default text-white" style={{ fontSize: '24px', lineHeight: '1.3', fontWeight: 400, fontFamily: 'Georgia, Lora, serif' }}>
                             At Gesit, we put the stakeholders first and we are committed to contribute and grow with Indonesia. We invest in our workforce, research, and innovation to create the best and most sustainable industry solutions, while remaining mindful of the environment and our impact.
                           </motion.p>
                         </div>
@@ -170,14 +170,14 @@ export default function Home() {
 
               {/* 3. BUSINESS CARDS */}
               <section className="elementor-section elementor-top-section elementor-element elementor-element-4e02d40 elementor-section-stretched zs-custom-height elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="4e02d40" data-element_type="section" suppressHydrationWarning>
-                <div className="elementor-container elementor-column-gap-no flex flex-col md:flex-row" style={{ alignItems: 'stretch' }}>
+                <div className="elementor-container elementor-column-gap-no" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch' }}>
                   {[
                     { id: 'b35b078', widgetId: 'd64b48a', href: '/our-business/property', img: '/business/property/property-scaled-1.webp', title: 'Property', desc: 'Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.' },
                     { id: '4a6a044', widgetId: '0f06ba2', href: '/our-business/trading-services', img: '/business/trading-services/trading_and_services-scaled-1.webp', title: 'Trading & Services', desc: 'Leveraging local Indonesian expertise and broad international network to source and deliver high-quality products.' },
                     { id: '8f2780b', widgetId: '55da946', href: '/our-business/manufacturing', img: '/business/manufacturing/manufacturing-scaled-1.webp', title: 'Manufacturing', desc: 'Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.' },
                     { id: '1055671', widgetId: 'd2b43ba', href: '/our-business/natural-resources', img: '/business/natural-resources/resources-scaled-1.webp', title: 'Natural Resources', desc: "Developing Indonesia's vast natural resources and continually expanding to other types of minerals and resources." },
                   ].map((biz, idx) => (
-                    <div key={biz.id} className={`elementor-column w-full md:w-1/4 elementor-top-column elementor-element elementor-element-${biz.id}`} data-id={biz.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
+                    <div key={biz.id} className={`elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-${biz.id}`} data-id={biz.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
                       <motion.div
                         className="elementor-widget-wrap elementor-element-populated"
                         variants={staggerContainer}
@@ -188,12 +188,12 @@ export default function Home() {
                       >
                         <div className={`elementor-element elementor-element-${biz.widgetId} p-15 elementor-widget elementor-widget-thetrial_core_location_info`} data-id={biz.widgetId} data-element_type="widget" data-widget_type="thetrial_core_location_info.default">
                           <div className="elementor-widget-container">
-                            <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled mx-6 md:mx-0" style={{ borderRadius: 5, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                            <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: 5, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                               <div className="qodef-m-image">
                                 <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                               </div>
                               <div className="qodef-m-content" style={{ backgroundColor: '#bc9c33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '300px', padding: '35px 25px' }}>
-                                <motion.div variants={textVariant} role="heading" aria-level={3} className="qodef-m-title" style={{ color: '#ffffff', fontSize: '26px', fontWeight: 600 }}>
+                                <motion.div variants={textVariant} role="heading" aria-level={3} className="qodef-m-title" style={{ color: '#ffffff', fontSize: '22px', fontWeight: 600 }}>
                                   <Link href={biz.href} style={{ color: '#ffffff', textDecoration: 'none' }}>{biz.title}</Link>
                                 </motion.div>
                                 <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#ffffff' }}>{biz.desc}</motion.p>
@@ -219,8 +219,8 @@ export default function Home() {
               {/* 4. CSR VIDEO SECTION */}
               <section className="elementor-section elementor-top-section elementor-element elementor-element-69cfa11 elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no elementor-section-stretched" data-id="69cfa11" data-element_type="section">
                 <div className="elementor-container elementor-column-gap-no">
-                  {/* LEFT – Video */}
-                  <div className="elementor-column w-full md:w-1/2 elementor-top-column elementor-element elementor-element-40a7e5e" data-id="40a7e5e" data-element_type="column">
+                  {/* LEFT ΓÇô Video */}
+                  <div className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-40a7e5e" data-id="40a7e5e" data-element_type="column">
                     <div className="elementor-widget-wrap elementor-element-populated">
                       <div className="elementor-element elementor-element-a962264 elementor-widget elementor-widget-video" data-id="a962264" data-element_type="widget" data-widget_type="video.default">
                         <div className="elementor-widget-container">
@@ -238,8 +238,8 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* RIGHT – Text */}
-                  <div className="elementor-column w-full md:w-1/2 elementor-top-column elementor-element elementor-element-849ada0" data-id="849ada0" data-element_type="column">
+                  {/* RIGHT ΓÇô Text */}
+                  <div className="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-849ada0" data-id="849ada0" data-element_type="column">
                     <motion.div
                       className="elementor-widget-wrap elementor-element-populated"
                       variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
