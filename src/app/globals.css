@@ -475,6 +475,7 @@ a {
 
 .gs-mobile-logo .gs-logo-text {
   font-size: 18px;
+  letter-spacing: 2.5px;
 }
 
 @media (max-width: 480px) {
@@ -483,7 +484,7 @@ a {
   }
   .gs-mobile-logo .gs-logo-text {
     font-size: 14px;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
   }
   .gs-mobile-header-inner {
     padding: 0 15px;
