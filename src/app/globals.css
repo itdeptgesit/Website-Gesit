@@ -304,7 +304,7 @@ a {
   font-size: 22px;
   font-weight: 700;
   color: var(--gs-accent-gold);
-  letter-spacing: 1.5px;
+  letter-spacing: 2.5px;
   text-transform: none;
   white-space: nowrap;
   transition: all 0.4s ease;
