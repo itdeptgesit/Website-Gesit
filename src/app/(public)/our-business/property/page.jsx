@@ -537,22 +537,15 @@ const PropertyPage = () => {
                     background-color: #103065;
                     color: #fff !important;
                 }
-<<<<<<< HEAD
                 .pill-button:active {
                     transform: scale(0.98);
                 }
-=======
->>>>>>> a9bfb7c (Refinement: News detail source styling and editorial refactor for business pages)
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
                         gap: 40px !important;
-<<<<<<< HEAD
                         padding: 0 20px !important;
-=======
-                        padding: 0 24px !important;
->>>>>>> a9bfb7c (Refinement: News detail source styling and editorial refactor for business pages)
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -560,21 +553,13 @@ const PropertyPage = () => {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
-<<<<<<< HEAD
                         max-width: 100% !important;
-                        height: 320px !important;
+                        height: 380px !important;
                         border-radius: 8px !important;
                         margin: 0 !important;
                     }
                     .project-section {
                         padding: 40px 0 !important;
-=======
-                        height: clamp(300px, 50vh, 480px) !important;
-                        border-radius: 8px !important;
-                    }
-                    .project-section {
-                        padding: 80px 0 !important;
->>>>>>> a9bfb7c (Refinement: News detail source styling and editorial refactor for business pages)
                     }
                     .project-text-wrapper {
                         width: 100% !important;
