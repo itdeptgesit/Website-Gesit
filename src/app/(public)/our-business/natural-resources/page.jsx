@@ -229,7 +229,7 @@ export default function NaturalResourcesPage() {
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">Bauxite Mining</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>The Gesit Companies have 6 bauxite concessions of about 75,000 Ha along the Kapuas River in West Kalimantan.</p>
+                                <p>The Gesit Companies have 6&nbsp;bauxite concessions of about 75,000&nbsp;Ha along the Kapuas River in West Kalimantan.</p>
                             </motion.div>
 
                             <motion.div className="project-info-box" variants={fadeInUp}>
@@ -463,9 +463,10 @@ export default function NaturalResourcesPage() {
                         text-align: center !important;
                     }
                     .project-desc {
-                        font-size: 19px !important;
+                        font-size: 18px !important;
                         line-height: 1.6 !important;
                         text-align: justify !important;
+                        hyphens: auto;
                     }
                     .project-info-box {
                         text-align: left !important;

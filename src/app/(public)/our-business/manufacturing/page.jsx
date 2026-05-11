@@ -478,9 +478,10 @@ export default function ManufacturingPage() {
                         text-align: center !important;
                     }
                     .project-desc {
-                        font-size: 19px !important;
+                        font-size: 18px !important;
                         line-height: 1.6 !important;
                         text-align: justify !important;
+                        hyphens: auto;
                     }
                 }
             `}</style>

@@ -231,7 +231,7 @@ const PropertyPage = () => {
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">Trinity Tower</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>Completed in 2021, the Trinity Tower is a Premium Grade A office tower constructed by Shimizu Construction located in the heart of Jakarta's Golden Triangle. It spans over 50 floors with a total of 140,000 m² in built up area. It has a separate 9-floor structure for food, retail, and tenant parking facility.</p>
+                                <p>Completed in 2021, the Trinity Tower is a&nbsp;Premium Grade&nbsp;A office tower constructed by Shimizu Construction located in the heart of&nbsp;Jakarta's Golden Triangle. It spans over 50 floors with a&nbsp;total of 140,000&nbsp;m² in built up area. It has a&nbsp;separate 9-floor structure for food, retail, and tenant parking facility.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -558,9 +558,10 @@ const PropertyPage = () => {
                         text-align: center !important;
                     }
                     .project-desc {
-                        font-size: 19px !important;
+                        font-size: 18px !important;
                         line-height: 1.6 !important;
                         text-align: justify !important;
+                        hyphens: auto;
                         margin-bottom: 25px !important;
                     }
                     .project-desc p {

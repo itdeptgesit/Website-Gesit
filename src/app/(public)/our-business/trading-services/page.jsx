@@ -231,7 +231,7 @@ export default function TradingServicesPage() {
                         >
                             <motion.h2 variants={fadeInUp} className="project-title" style={{ margin: '0 0 35px' }}>Trading</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>The Gesit Companies has been in this business for over 30 years. We source and deliver a variety of products including Bauxite, Alumina, Calcinated Petroleum Coke, Aluminum Ingots, to domestic and international markets — Indonesia, China, South America and the Middle East.</p>
+                                <p>The Gesit Companies has been in this business for over 30 years. We source and deliver a&nbsp;variety of products including Bauxite, Alumina, Calcinated Petroleum Coke, Aluminum Ingots, to domestic and international markets — Indonesia, China, South America and the Middle East.</p>
                             </motion.div>
                         </motion.div>
                     </div>
@@ -413,9 +413,10 @@ export default function TradingServicesPage() {
                         text-align: center !important;
                     }
                     .project-desc {
-                        font-size: 19px !important;
+                        font-size: 18px !important;
                         line-height: 1.6 !important;
                         text-align: justify !important;
+                        hyphens: auto;
                     }
                 }
             `}</style>
