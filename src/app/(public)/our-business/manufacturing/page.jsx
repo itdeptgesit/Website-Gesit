@@ -254,8 +254,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Aluminum Fabrication</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its aluminum fabrication company <strong>Alakasa Andalan Mitra Sejati</strong> since its Joint Venture with Alcan Aluminum in 1972.</p>
-                <p>We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market.</p>
+                <p>The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market. We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum.</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
@@ -316,8 +315,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Steel & Plastic Packaging</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its packaging company <strong>Rheem Indonesia</strong> since it was established by Rheem Australia in 1969.</p>
-                <p>The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans.</p>
+                <p>The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing. We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices).</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
@@ -344,8 +342,8 @@ export default function ManufacturingPage() {
               variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
               className="project-text-content"
             >
-              <motion.h2 variants={fadeInUp} className="project-title">Alumina Refinery</motion.h2>
-              <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 35px', fontWeight: 500 }}>Under Development</motion.h3>
+              <motion.h2 variants={fadeInUp} className="project-title" style={{ marginBottom: '10px' }}>Alumina Refinery & Aluminum Smelter Development</motion.h2>
+              <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 30px', fontWeight: 500 }}>Under Development</motion.h3>
 
               <motion.div variants={fadeInUp} className="project-desc">
                 <p>We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia&apos;s rich natural resources and logistical advantage.</p>
