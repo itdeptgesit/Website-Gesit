@@ -67,24 +67,14 @@ export default function AboutUs() {
                   zIndex: 5,
                 }} />
 
-                <div className="elementor-container elementor-column-gap-no">
-                  <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5663682 title-desktop-bottom" data-id={5663682} data-element_type="column">
-                    <div className="elementor-widget-wrap elementor-element-populated">
-                      <div className="elementor-element elementor-element-602e91a elementor-widget elementor-widget-heading" data-id="602e91a" data-element_type="widget" data-widget_type="heading.default">
-                        <div className="elementor-widget-container">
-                          <motion.h1
-                            className="gs-hero-title"
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-                          >
-                            About Us
-                          </motion.h1>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <motion.h1
+                  className="gs-hero-title gs-about-hero-title"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                >
+                  About
+                </motion.h1>
               </section>
 
               {/* Tagline Paragraph Section */}
@@ -260,7 +250,7 @@ export default function AboutUs() {
                       </div>
                       <motion.div variants={textVariant} className="elementor-element elementor-element-c47fca5 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" style={{ marginBottom: 0 }}>
                         <div className="elementor-widget-container">
-                          <div className="elementor-divider" style={{ borderTop: '1px solid #e5e5e5', margin: '40px 0', width: '100%', display: 'block' }}></div>
+                          <div className="elementor-divider" style={{ borderTop: '1px solid #e5e5e5', margin: '20px 0', width: '100%', display: 'block' }}></div>
                         </div>
                       </motion.div>
                       <div className="elementor-element elementor-element-2cce4eb elementor-widget elementor-widget-heading" data-id="2cce4eb" data-element_type="widget" style={{ marginBottom: 0 }}>
@@ -331,8 +321,8 @@ export default function AboutUs() {
                                         <Image src={val.img} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                                       </div>
                                       <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '200px', padding: '35px 25px' }}>
-                                        <motion.h4 variants={textVariant} className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</motion.h4>
-                                        <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</motion.p>
+                                        <h4 className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</h4>
+                                        <p className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</p>
                                       </div>
                                     </div>
                                   </div>

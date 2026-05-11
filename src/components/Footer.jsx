@@ -87,7 +87,7 @@ export default function Footer() {
               <div className="qodef-grid qodef-layout--columns qodef-responsive--custom qodef-col-num--1">
                 <div className="qodef-grid-inner clear">
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                       <Link href="/" className="gs-footer-logo-link">
                         <img src="/logos/logos.png" alt="The Gesit Companies logo" className="gs-footer-logo-img" />
                         <span className="gs-footer-logo-text" style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '2px', color: '#bc9c33' }}>THE GESIT COMPANIES</span>
@@ -95,7 +95,7 @@ export default function Footer() {
                     </div>
                     <div id="text-3" className="widget widget_text" data-area="footer_bottom_area_column_1">
                       <div className="textwidget">
-                        <p className="qodef-shortcode qodef-m qodef-custom-font qodef-custom-font-4 qodef-layout--simple gs-copyright-text" style={{ fontFamily: 'var(--font-sans)', fontSize: 12, color: 'rgba(255,255,255,0.6)', textAlign: 'center', letterSpacing: '3px', fontWeight: 400 }}>
+                        <p className="qodef-shortcode qodef-m qodef-custom-font qodef-custom-font-4 qodef-layout--simple gs-copyright-text" style={{ fontFamily: 'var(--font-sans)', fontSize: 12, color: '#FFFFFF', textAlign: 'center', letterSpacing: '1.5px', fontWeight: 500 }}>
                           © 2026 THE GESIT COMPANIES. ALL RIGHTS RESERVED
                         </p>
                       </div>

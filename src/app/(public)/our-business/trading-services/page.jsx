@@ -190,8 +190,8 @@ export default function TradingServicesPage() {
             </section>
 
             {/* ── 2. GOLD INTRO ── */}
-            <section className="flex justify-center bg-[#BC9C33] py-16 md:py-[60px] lg:py-[150px]">
-                <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
+            <section className="flex justify-center bg-[#BC9C33] gs-gold-intro-section">
+                <div className="max-w-5xl w-full mx-auto px-6 md:px-[70px] lg:px-12">
                     <motion.div
                         variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                         className="lg:pl-20"
@@ -355,18 +355,18 @@ export default function TradingServicesPage() {
 
                 .project-title {
                     font-family: Lora, Georgia, serif;
-                    color: #222;
+                    color: #000000;
                     font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
-                    font-weight: 500;
+                    font-weight: 400;
                     margin: 0 0 35px;
                     letter-spacing: -0.01em;
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: 18px;
+                    font-size: 20px;
                     line-height: 1.8;
-                    color: #444;
+                    color: #000000;
                     margin-bottom: 45px;
                     text-align: justify;
                 }
@@ -377,8 +377,9 @@ export default function TradingServicesPage() {
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 40px !important;
-                        padding: 0 24px !important;
+                        gap: 0 !important;
+                        padding: 0 !important;
+                        max-width: 100% !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -386,17 +387,18 @@ export default function TradingServicesPage() {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
-                        height: clamp(300px, 50vh, 480px) !important;
-                        border-radius: 8px !important;
+                        height: auto !important;
+                        aspect-ratio: 975 / 652 !important;
+                        border-radius: 0 !important;
                     }
                     .project-section {
-                        padding: 80px 0 !important;
+                        padding: 0 !important;
                     }
                     .project-text-wrapper {
                         width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 0 !important;
+                        padding: 45px 40px 80px 40px !important;
                     }
                     .project-text-content {
                         max-width: 100% !important;
@@ -404,8 +406,16 @@ export default function TradingServicesPage() {
                         flex-direction: column;
                         align-items: center;
                     }
-                    .project-desc {
+                    .project-title {
+                        font-size: 42px !important;
+                        line-height: 50px !important;
+                        margin-bottom: 25px !important;
                         text-align: center !important;
+                    }
+                    .project-desc {
+                        font-size: 19px !important;
+                        line-height: 1.6 !important;
+                        text-align: justify !important;
                     }
                 }
             `}</style>

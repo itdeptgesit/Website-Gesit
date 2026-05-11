@@ -281,8 +281,8 @@ export default function CSRPage() {
             </section>
 
             {/* ================= OVERVIEW ================= */}
-            <section className="flex justify-center bg-[#e3eaf4] py-16 md:py-[60px] lg:py-[150px]">
-                <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
+            <section className="flex justify-center bg-[#e3eaf4] py-[60px]">
+                <div className="max-w-5xl w-full mx-auto px-[40px]">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}

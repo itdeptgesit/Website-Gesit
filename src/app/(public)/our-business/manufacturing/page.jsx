@@ -210,8 +210,8 @@ export default function ManufacturingPage() {
       </section>
 
       {/* ── 2. GOLD INTRO — Synchronized with CSR page layout ── */}
-      <section className="flex justify-center bg-[#BC9C33] py-16 md:py-[60px] lg:py-[150px]">
-        <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
+      <section className="bg-[#BC9C33] gs-gold-intro-section">
+        <div className="max-w-5xl w-full mx-auto px-6 md:px-[70px] lg:px-12">
           <motion.div
             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
             className="lg:pl-20"
@@ -244,7 +244,7 @@ export default function ManufacturingPage() {
       </section>
 
       {/* ── 3. ALUMINUM FABRICATION – text LEFT, images RIGHT ── */}
-      <section className="project-section" style={{ padding: '150px 0', overflow: 'hidden' }}>
+      <section className="project-section" style={{ overflow: 'hidden' }}>
         <div className="project-row image-right">
           {/* Text Container (Left) */}
           <div className="project-text-wrapper left">
@@ -254,7 +254,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Aluminum Fabrication</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market. We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum.</p>
+                <p>The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market. We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as&nbsp;a&nbsp;leader in Manufacturing and Fabricating Aluminum.</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
@@ -315,7 +315,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Steel & Plastic Packaging</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing. We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices).</p>
+                <p>The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build&nbsp;a&nbsp;packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing. We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices).</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
@@ -343,11 +343,11 @@ export default function ManufacturingPage() {
               className="project-text-content"
             >
               <motion.h2 variants={fadeInUp} className="project-title" style={{ marginBottom: '10px' }}>Alumina Refinery & Aluminum Smelter Development</motion.h2>
-              <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 30px', fontWeight: 500 }}>Under Development</motion.h3>
+              <motion.h3 variants={fadeInUp} className="gs-project-subtitle">Under Development</motion.h3>
 
               <motion.div variants={fadeInUp} className="project-desc">
                 <p>We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia&apos;s rich natural resources and logistical advantage.</p>
-                <p>The Gesit Companies will develop a 2-million-ton Alumina Refinery and upon completion, develop an Aluminum Smelter which will reach 1 million ton for the next phase.</p>
+                <p>The Gesit Companies will develop&nbsp;a&nbsp;2-million-ton Alumina Refinery and upon completion, develop an Aluminum Smelter which will reach 1 million ton for the next phase.</p>
               </motion.div>
             </motion.div>
           </div>
@@ -418,18 +418,18 @@ export default function ManufacturingPage() {
 
                 .project-title {
                     font-family: Lora, Georgia, serif;
-                    color: #222;
+                    color: #000000;
                     font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
-                    font-weight: 500;
+                    font-weight: 400;
                     margin: 0 0 35px;
                     letter-spacing: -0.01em;
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: 18px;
+                    font-size: 19px;
                     line-height: 1.8;
-                    color: #444;
+                    color: #000000;
                     margin-bottom: 45px;
                     text-align: justify;
                 }
@@ -437,32 +437,14 @@ export default function ManufacturingPage() {
                     margin-bottom: 25px;
                 }
 
-                .pill-button {
-                    display: inline-flex;
-                    align-items: center;
-                    color: #103065;
-                    background-color: transparent;
-                    border: 1.5px solid #103065;
-                    border-radius: 50px;
-                    padding: 14px 42px;
-                    font-family: var(--font-sans);
-                    font-size: 13.5px;
-                    font-weight: 600;
-                    text-transform: none;
-                    letter-spacing: 1.5px;
-                    text-decoration: none;
-                    transition: all 0.3s ease-in-out;
-                }
-                .pill-button:hover {
-                    background-color: #103065;
-                    color: #fff !important;
-                }
+
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 40px !important;
-                        padding: 0 24px !important;
+                        gap: 0 !important;
+                        padding: 0 !important;
+                        max-width: 100% !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -470,17 +452,18 @@ export default function ManufacturingPage() {
                     .project-image-container {
                         flex: 0 0 auto !important;
                         width: 100% !important;
-                        height: clamp(300px, 50vh, 480px) !important;
-                        border-radius: 8px !important;
+                        height: auto !important;
+                        aspect-ratio: 975 / 652 !important;
+                        border-radius: 0 !important;
                     }
                     .project-section {
-                        padding: 80px 0 !important;
+                        padding: 0 !important;
                     }
                     .project-text-wrapper {
                         width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 0 !important;
+                        padding: 45px 40px 80px 40px !important;
                     }
                     .project-text-content {
                         max-width: 100% !important;
@@ -488,8 +471,16 @@ export default function ManufacturingPage() {
                         flex-direction: column;
                         align-items: center;
                     }
-                    .project-desc {
+                    .project-title {
+                        font-size: 42px !important;
+                        line-height: 50px !important;
+                        margin-bottom: 25px !important;
                         text-align: center !important;
+                    }
+                    .project-desc {
+                        font-size: 19px !important;
+                        line-height: 1.6 !important;
+                        text-align: justify !important;
                     }
                 }
             `}</style>

@@ -190,8 +190,8 @@ const PropertyPage = () => {
             </section>
 
             {/* ── 2. GOLD INTRO ── */}
-            <section className="flex justify-center bg-[#BC9C33] py-16 md:py-[60px] lg:py-[150px]">
-                <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
+            <section className="bg-[#BC9C33] gs-gold-intro-section">
+                <div className="max-w-5xl w-full mx-auto px-6 md:px-[70px] lg:px-12">
                     <motion.div
                         variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                         className="lg:pl-20"
@@ -231,8 +231,7 @@ const PropertyPage = () => {
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">Trinity Tower</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>Completed in 2021, the Trinity Tower is a Premium Grade A office tower constructed by Shimizu Construction located in the heart of Jakarta&apos;s Golden Triangle.</p>
-                                <p>It spans over 50 floors with a total of 140,000m<sup>2</sup> in built up area. It has a separate 9-floor structure for food, retail, and tenant parking facility</p>
+                                <p>Completed in 2021, the Trinity Tower is a Premium Grade A office tower constructed by Shimizu Construction located in the heart of Jakarta's Golden Triangle. It spans over 50 floors with a total of 140,000 m² in built up area. It has a separate 9-floor structure for food, retail, and tenant parking facility.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -300,8 +299,7 @@ const PropertyPage = () => {
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">JS Luwansa</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>JS Luwansa Hotel and Convention Center is located in Jakarta&apos;s Golden Triangle, Jakarta&apos;s fastest growing and exclusive business district. Conveniently located in close proximity to major embassies, shopping malls and the toll way.</p>
-                                <p>JS Luwansa Hotel and Convention Center is the perfect place for discerning business travelers who need a strategic base to support their business activities from a location within close proximity to the rest of Jakarta.</p>
+                                <p>JS Luwansa Hotel and Convention Center is located in Jakarta&apos;s Golden Triangle, Jakarta&apos;s fastest growing and exclusive business district. Conveniently located in close proximity to major embassies, shopping malls and the toll way. JS Luwansa Hotel and Convention Center is the perfect place for discerning business travelers who need a&nbsp;strategic base to support their business activities from&nbsp;a&nbsp;location within close proximity to the rest of Jakarta.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -323,10 +321,9 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title">PPHUI Building</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title">PPHUI Building & Usmar Ismail Hall</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>Usmar Ismail Hall is an important part of the PPHUI building, which includes a 6,400 m<sup>2</sup> office space and state of the art cinema and concert hall located in CBD Jakarta.</p>
-                                <p>The Usmar Ismail Concert Hall has been designed with an exclusive interior, comfortable seating arrangement and modern lighting.</p>
+                                <p>Usmar Ismail Hall is an important part of the PPHUI building, which includes a&nbsp;6,400 m<sup>2</sup> office space and state of the art cinema and concert hall located in CBD Jakarta. The Usmar Ismail Concert Hall has been designed with an exclusive interior, comfortable seating arrangement and modern lighting. The design concept ensures the ultimate enjoyment experience for the audience of each presented program. This is the first Integrated Cinema and Concert Hall in Indonesia.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -380,9 +377,9 @@ const PropertyPage = () => {
                             className="project-text-content"
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">Senayan Development</motion.h2>
-                            <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 35px', fontWeight: 500 }}>Under Development</motion.h3>
+                            <motion.h3 variants={fadeInUp} className="gs-project-subtitle">Under Development</motion.h3>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>This development boasts a world-class international standard and comprises over 180 rooms with 1,500 m<sup>2</sup> of multifunction & ballroom space.</p>
+                                <p>This development boasts a&nbsp;world-class international standard and comprises over 180 rooms with 1,500 m<sup>2</sup> of multifunction & ballroom space.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -402,9 +399,9 @@ const PropertyPage = () => {
                             className="project-text-content"
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">TOD Rasuna Development</motion.h2>
-                            <motion.h3 variants={fadeInUp} style={{ fontFamily: 'Lora, serif', fontSize: '24px', fontStyle: 'italic', color: '#444', margin: '0 0 35px', fontWeight: 500 }}>Under Development</motion.h3>
+                            <motion.h3 variants={fadeInUp} className="gs-project-subtitle">Under Development</motion.h3>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>This TOD development within inner Jakarta&apos;s Golden Triangle will combine retail, residential, and a world-class theater space together into one.</p>
+                                <p>This TOD development within inner Jakarta&apos;s Golden Triangle will combine retail, residential, and a&nbsp;world-class theater space together into one  – enabling ease of mobility for tenants and reducing on-street traffic.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
@@ -481,18 +478,18 @@ const PropertyPage = () => {
 
                 .project-title {
                     font-family: Lora, Georgia, serif;
-                    color: #222;
+                    color: #000000;
                     font-size: clamp(32px, 5vw, 44px);
                     line-height: 1.25;
-                    font-weight: 500;
+                    font-weight: 400;
                     margin: 0 0 35px;
                     letter-spacing: -0.01em;
                 }
                 .project-desc {
                     font-family: var(--font-sans);
-                    font-size: 18px;
+                    font-size: 19px;
                     line-height: 1.8;
-                    color: #444;
+                    color: #000000;
                     margin-bottom: 45px;
                     text-align: justify;
                 }
@@ -506,46 +503,25 @@ const PropertyPage = () => {
                 }
                 .project-info-title {
                     font-family: Lora, Georgia, serif;
-                    font-size: 19px;
+                    font-size: 20px;
                     color: #222;
                     font-weight: 500;
                     margin: 0;
                 }
                 .project-info-text {
                     font-family: var(--font-sans);
-                    font-size: 16.5px;
+                    font-size: 17.5px;
                     color: #666;
                     margin: 8px 0 0 0;
                 }
-                .pill-button {
-                    display: inline-flex;
-                    align-items: center;
-                    color: #103065;
-                    background-color: transparent;
-                    border: 1.5px solid #103065;
-                    border-radius: 50px;
-                    padding: 14px 42px;
-                    font-family: var(--font-sans);
-                    font-size: 13.5px;
-                    font-weight: 600;
-                    text-transform: none;
-                    letter-spacing: 1.5px;
-                    text-decoration: none;
-                    transition: all 0.3s ease-in-out;
-                }
-                .pill-button:hover {
-                    background-color: #103065;
-                    color: #fff !important;
-                }
-                .pill-button:active {
-                    transform: scale(0.98);
-                }
+
 
                 @media (max-width: 1024px) {
                     .project-row {
                         flex-direction: column !important;
-                        gap: 40px !important;
-                        padding: 0 20px !important;
+                        gap: 0 !important;
+                        padding: 0 !important;
+                        max-width: 100% !important;
                     }
                     .project-row.image-right {
                         flex-direction: column-reverse !important;
@@ -554,18 +530,19 @@ const PropertyPage = () => {
                         flex: 0 0 auto !important;
                         width: 100% !important;
                         max-width: 100% !important;
-                        height: 380px !important;
-                        border-radius: 8px !important;
+                        height: auto !important;
+                        aspect-ratio: 975 / 652 !important;
+                        border-radius: 0 !important;
                         margin: 0 !important;
                     }
                     .project-section {
-                        padding: 40px 0 !important;
+                        padding: 0 !important;
                     }
                     .project-text-wrapper {
                         width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 0 !important;
+                        padding: 45px 40px 80px 40px !important;
                     }
                     .project-text-content {
                         max-width: 100% !important;
@@ -575,14 +552,15 @@ const PropertyPage = () => {
                         max-width: 100% !important;
                     }
                     .project-title {
-                        font-size: 32px !important;
-                        margin-bottom: 20px !important;
+                        font-size: 42px !important;
+                        line-height: 50px !important;
+                        margin-bottom: 25px !important;
                         text-align: center !important;
                     }
                     .project-desc {
-                        font-size: 16px !important;
+                        font-size: 19px !important;
                         line-height: 1.6 !important;
-                        text-align: center !important;
+                        text-align: justify !important;
                         margin-bottom: 25px !important;
                     }
                     .project-desc p {
@@ -591,12 +569,10 @@ const PropertyPage = () => {
                     .project-info-box {
                         text-align: left !important;
                         padding-left: 20px !important;
-                        margin: 10px auto 25px !important;
+                        margin: 10px 0 25px !important;
+                        align-self: flex-start !important;
                     }
-                    .pill-button {
-                        padding: 12px 30px !important;
-                        font-size: 12px !important;
-                    }
+
                 }
             `}</style>
         </div>

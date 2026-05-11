@@ -840,13 +840,17 @@ a {
   z-index: 10;
   font-family: 'Lora', serif;
   color: #fff;
-  font-size: 60px;
+  font-size: 85px;
   font-weight: 400;
   text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
-  line-height: 75px;
+  line-height: 1.1;
   pointer-events: none;
   width: auto;
   text-align: left;
+}
+
+.gs-about-hero-title {
+  font-size: 85px !important;
 }
 
 /* Smooth Zoom-in (Ken Burns) Animation */
@@ -867,8 +871,8 @@ a {
 /* Notebook (1024px - 1240px) */
 @media (max-width: 1240px) {
   .gs-hero-title {
-    font-size: 60px !important;
-    line-height: 65px !important;
+    font-size: 85px !important;
+    line-height: 1.1 !important;
   }
 }
 
@@ -876,46 +880,69 @@ a {
 @media (max-width: 1024px) {
   .gs-hero-title {
     position: absolute !important;
-    left: 50% !important;
-    bottom: 50% !important;
-    transform: translate(-50%, 50%) !important;
-    font-size: 64px !important;
-    line-height: 65px !important;
+    left: 25px !important;
+    bottom: 50px !important;
+    transform: none !important;
+    font-size: 66px !important;
+    line-height: 1.1 !important;
     font-weight: 400 !important;
-    text-align: center !important;
-    white-space: nowrap !important;
-    width: 100% !important;
+    text-align: left !important;
+    white-space: normal !important;
+    width: auto !important;
     margin: 0 !important;
     text-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5) !important;
   }
   .gs-csr-hero-title {
-    left: 20px !important;
+    left: 25px !important;
     bottom: 60px !important;
     transform: none !important;
     text-align: left !important;
-    font-size: 47px !important;
+    font-size: 42px !important;
+    line-height: 1.1 !important;
+  }
+  .gs-about-hero-title {
+    left: 50% !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    width: 100% !important;
+    font-size: 65px !important;
   }
 }
 
 /* Mobile (< 777px) */
 @media (max-width: 777px) {
   .gs-hero-title {
+    left: 20px !important;
+    bottom: 40px !important;
+    transform: none !important;
+    font-size: 42px !important;
+    line-height: 1.1 !important;
+    text-align: left !important;
+    white-space: normal !important;
+    width: auto !important;
+    padding: 0 !important;
+  }
+  .gs-csr-hero-title {
+    left: 20px !important;
+    bottom: 50px !important;
+    transform: none !important;
+    text-align: left !important;
+    font-size: 32px !important;
+    line-height: 1.1 !important;
+  }
+  .gs-about-hero-title {
     left: 50% !important;
-    bottom: 50% !important;
-    transform: translate(-50%, 50%) !important;
-    font-size: 45px !important;
-    line-height: 40px !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translate(-50%, -50%) !important;
     text-align: center !important;
     white-space: normal !important;
     width: 100% !important;
     padding: 0 20px !important;
-  }
-  .gs-csr-hero-title {
-    left: 50% !important;
-    bottom: 50% !important;
-    transform: translate(-50%, 50%) !important;
-    text-align: center !important;
-    line-height: 1.2 !important;
+    font-size: 45px !important;
   }
 }
 
@@ -1157,3 +1184,70 @@ a {
   position: sticky;
   top: 120px;
 }
+
+/* Standardized Gold Intro Section Padding */
+.gs-gold-intro-section {
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+@media (max-width: 1024px) {
+  .gs-gold-intro-section {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+  }
+  .gs-gold-intro-section + .project-section {
+    padding-top: 0 !important;
+    margin-top: -1px !important;
+  }
+}
+
+@media (max-width: 777px) {
+  .gs-gold-intro-section {
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+}
+
+/* Shared UI Components - Pill Button */
+.pill-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: auto;
+  margin: 0;
+  color: #103065;
+  background-color: transparent;
+  border: 1px solid #103065;
+  border-radius: 50px;
+  padding: 16px 52px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  line-height: 2em;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: none;
+  outline: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.pill-button:hover {
+  background-color: #103065;
+  color: #fff !important;
+}
+
+.gs-project-subtitle {
+  font-family: 'Lora', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: #444;
+  margin-top: -15px;
+  margin-bottom: 35px;
+  font-weight: 500;
+  display: block;
+}
+
+
