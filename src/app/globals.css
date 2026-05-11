@@ -85,11 +85,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.gs-no-scroll,
 body.gs-no-scroll {
   overflow: hidden !important;
   height: 100% !important;
-  width: 100% !important;
-  position: fixed !important;
 }
 
 /* Force layout containers to not offset the hero */
@@ -448,7 +447,8 @@ a {
   transition: background 0.3s ease;
 }
 
-#gs-custom-mobile-header.gs-is-sticky .gs-mobile-header-inner {
+#gs-custom-mobile-header.gs-is-sticky .gs-mobile-header-inner,
+#gs-custom-mobile-header.gs-menu-open .gs-mobile-header-inner {
   background: #103065;
 }
 

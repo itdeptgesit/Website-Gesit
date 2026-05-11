@@ -32,12 +32,15 @@ export default function Header() {
   // Lock scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
+      document.documentElement.classList.add('gs-no-scroll');
       document.body.classList.add('gs-no-scroll');
     } else {
+      document.documentElement.classList.remove('gs-no-scroll');
       document.body.classList.remove('gs-no-scroll');
     }
 
     return () => {
+      document.documentElement.classList.remove('gs-no-scroll');
       document.body.classList.remove('gs-no-scroll');
     };
   }, [mobileMenuOpen]);
@@ -104,7 +107,7 @@ export default function Header() {
         </div>
       </header>
 
-      <header id="gs-custom-mobile-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
+      <header id="gs-custom-mobile-header" className={`${isSticky ? 'gs-is-sticky' : ''} ${mounted && mobileMenuOpen ? 'gs-menu-open' : ''}`} suppressHydrationWarning>
         <div className="gs-mobile-header-inner">
           <Link href="/" className="gs-mobile-logo">
             <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={120} height={32} className="gs-mobile-logo-img" />

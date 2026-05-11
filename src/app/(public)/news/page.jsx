@@ -225,57 +225,67 @@ const NewsPage = () => {
 
       {/* ================= FEATURED NEWS ================= */}
       {!loading && newsItems.length > 0 && (
-        <section className="pt-24 md:pt-32 pb-8 bg-white">
+        <section className="pt-24 md:pt-32 bg-white">
           <div className="container mx-auto px-6 max-w-7xl">
             <motion.div
               variants={textVariant}
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-2 shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[5px]"
+              className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[5px]"
             >
-              {/* Image Side */}
-              <div className="relative aspect-[4/3] lg:aspect-auto h-full overflow-hidden bg-slate-100 min-h-[400px]">
+              {/* Image Side - Balanced Landscape */}
+              <div className="relative aspect-[16/9] lg:aspect-auto h-full overflow-hidden bg-slate-100 min-h-[350px] lg:min-h-[480px]">
                 <Image
                   src={featuredArticle?.image_url || featuredArticle?.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                   alt={featuredArticle?.title || 'News Update'}
                   fill
                   className="object-cover hover:scale-105 transition duration-1000"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 65vw"
+                  priority
                 />
               </div>
 
               {/* Content Side (Navy Box) */}
-              <div className="bg-navy-deep p-6 md:p-12 lg:p-20 flex flex-col justify-between text-white space-y-8 md:space-y-12">
+              <div className="bg-navy-deep p-10 md:p-12 flex flex-col justify-between text-white">
                 <motion.div
                   variants={staggerContainer}
                   initial="initial"
                   whileInView="whileInView"
                   viewport={{ once: true }}
+                  className="flex flex-col h-full"
                 >
-                  <motion.span variants={textVariant} className="text-[14px] font-bold uppercase tracking-[.4em] text-white/60 mb-8 block">
+                  <motion.span 
+                    variants={textVariant} 
+                    className="text-[14px] font-medium uppercase tracking-[.2em] text-white/60 mb-8 block"
+                    style={{ fontFamily: 'var(--font-source-sans), sans-serif' }}
+                  >
                     {featuredArticle?.date || (featuredArticle?.created_at ? new Date(featuredArticle.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '')}
                   </motion.span>
-                  <motion.h2
-                    variants={textVariant}
-                    className="text-3xl md:text-5xl text-white leading-tight mb-12"
-                    style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
-                  >
-                    {featuredArticle?.title}
-                  </motion.h2>
-                  <motion.div variants={textVariant}>
-                    <Link
-                      href={`/news/${featuredArticle?.slug || featuredArticle?.id}`}
-                      className="w-12 h-12 rounded-full bg-[#BC9C33] flex items-center justify-center hover:bg-white hover:text-navy-deep transition-all duration-300 group shadow-lg"
+                  
+                  <div className="flex-grow flex flex-col justify-center">
+                    <motion.h2
+                      variants={textVariant}
+                      className="text-2xl md:text-3xl lg:text-[38px] text-white leading-[1.2] mb-8"
+                      style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
                     >
-                      <ChevronRight size={22} strokeWidth={2.5} className="text-white group-hover:text-navy-deep group-hover:translate-x-0.5 transition-all" />
-                    </Link>
-                  </motion.div>
-                </motion.div>
+                      {featuredArticle?.title}
+                    </motion.h2>
+                    
+                    <motion.div variants={textVariant}>
+                      <Link
+                        href={`/news/${featuredArticle?.slug || featuredArticle?.id}`}
+                        className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-navy-deep transition-all duration-300 group"
+                      >
+                        <ChevronRight size={18} strokeWidth={2} className="text-white group-hover:text-navy-deep group-hover:translate-x-0.5 transition-all" />
+                      </Link>
+                    </motion.div>
+                  </div>
 
-                <motion.div variants={textVariant} className="pt-12 border-t border-white/10 mt-auto">
-                  <p className="text-[16px] font-bold text-white mb-2 uppercase tracking-widest">News</p>
-                  <p className="text-[15px] font-medium text-white/80">by {featuredArticle?.author || 'Gesit'}</p>
+                  <motion.div variants={textVariant} className="pt-8 mt-8 border-t border-white/10">
+                    <p className="text-[14px] font-normal text-white mb-1 uppercase tracking-widest">News</p>
+                    <p className="text-[14px] font-bold text-white">by {featuredArticle?.author || 'Gesit'}</p>
+                  </motion.div>
                 </motion.div>
               </div>
             </motion.div>
@@ -284,7 +294,7 @@ const NewsPage = () => {
       )}
 
       {/* ================= NEWS GRID ================= */}
-      <section className="py-8 md:py-12 bg-white" id="news-archive">
+      <section className="pt-8 pb-12 bg-white" id="news-archive">
         <div className="container mx-auto px-6 max-w-7xl">
 
 
@@ -323,33 +333,39 @@ const NewsPage = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`flex ${index === 3 ? "xl:hidden" : ""}`}
                 >
-                    <Link
-                      href={`/news/${item.slug || item.id}`}
-                      className="flex-1 bg-[#deebf9] p-6 md:p-12 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
-                    >
-                      <span className="text-[13px] font-bold uppercase tracking-widest text-navy-deep/50 mb-8 block">
-                        {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
-                      </span>
-                      <h3
-                        className="text-[26px] text-navy-deep leading-[1.3] mb-8 group-hover:text-[#bc9c33] transition-colors"
-                        style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
+                      <Link
+                        href={`/news/${item.slug || item.id}`}
+                        className="flex-1 bg-[#deebf9] p-10 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
                       >
-                        {item.title}
-                      </h3>
-                      
-                      <div className="mt-auto w-full">
-                        <div className="mb-8">
-                          <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-[#BC9C33] group-hover:border-[#BC9C33] group-hover:text-white transition-all duration-300">
-                            <ChevronRight size={18} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
-                          </div>
+                        <span 
+                          className="text-[13px] font-medium uppercase tracking-[.1em] text-navy-deep/50 mb-8 block"
+                          style={{ fontFamily: 'var(--font-source-sans), sans-serif' }}
+                        >
+                          {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </span>
+                        
+                        <div className="flex-grow">
+                          <h3
+                            className="text-[24px] md:text-[26px] text-navy-deep leading-[1.3] mb-8 group-hover:text-[#bc9c33] transition-colors"
+                            style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
+                          >
+                            {item.title}
+                          </h3>
                         </div>
                         
-                        <div className="pt-8 border-t border-navy-deep/10 w-full">
-                          <p className="text-[13px] font-bold text-navy-deep/50 mb-1 uppercase tracking-widest">News</p>
-                          <p className="text-[15px] font-bold text-black">by {item.author || 'Gesit'}</p>
+                        <div className="mt-auto w-full">
+                          <div className="mb-10">
+                            <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-[#BC9C33] group-hover:border-[#BC9C33] transition-all duration-300">
+                              <ChevronRight size={16} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
+                            </div>
+                          </div>
+                          
+                          <div className="pt-8 border-t border-navy-deep/10 w-full">
+                            <p className="text-[13px] font-normal text-navy-deep/50 mb-1 uppercase tracking-widest">News</p>
+                            <p className="text-[14px] font-bold text-black">by {item.author || 'Gesit'}</p>
+                          </div>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
                 </motion.div>
               ))}
             </div>
@@ -357,14 +373,14 @@ const NewsPage = () => {
 
             {/* See All Button */}
             {newsItems.length > 4 && (
-              <div className="mt-12 flex justify-start">
+              <div className="mt-8 flex justify-start">
                 <Link
                   href="/news/archive"
-                  className="flex items-center gap-3 group text-navy-deep font-bold uppercase tracking-[.3em] text-[11px]"
+                  className="flex items-center gap-3 group text-navy-deep font-black uppercase tracking-[.3em] text-[11px]"
                 >
                   <span>See All</span>
                   <div className="w-8 h-8 rounded-full border border-navy-deep flex items-center justify-center group-hover:bg-navy-deep group-hover:text-white transition-all duration-300">
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} strokeWidth={3} />
                   </div>
                 </Link>
               </div>
