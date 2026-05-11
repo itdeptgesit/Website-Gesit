@@ -116,7 +116,7 @@ export default function ContactUs() {
         </div>
 
         <motion.h1
-          className="gs-hero-title"
+          className="gs-hero-title gs-contact-hero-title"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
