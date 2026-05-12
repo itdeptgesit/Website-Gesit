@@ -127,7 +127,7 @@ export default function Home() {
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
             style={{
               fontFamily: 'var(--font-serif)', color: '#fff',
-              fontSize: 'clamp(42px, 7vw, 85px)', fontWeight: 400,
+              fontSize: 'clamp(52px, 7vw, 85px)', fontWeight: 400,
               lineHeight: 1.1, textAlign: 'center', margin: 0,
             }}
           >
@@ -158,7 +158,7 @@ export default function Home() {
                       </div>
                       <div className="elementor-element elementor-element-ef90b6d elementor-widget elementor-widget-heading" data-id="ef90b6d" data-element_type="widget" data-widget_type="heading.default">
                         <div className="elementor-widget-container px-6 md:px-0">
-                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default text-white" style={{ fontSize: 'clamp(18px, 2vw, 24px)', lineHeight: '1.3', fontWeight: 400, fontFamily: 'Georgia, Lora, serif' }}>
+                          <motion.p variants={textVariant} className="elementor-heading-title elementor-size-default text-white gs-home-tagline">
                             At Gesit, we put the stakeholders first and we are committed to contribute and grow with Indonesia. We invest in our workforce, research, and innovation to create the best and most sustainable industry solutions, while remaining mindful of the environment and our impact.
                           </motion.p>
                         </div>

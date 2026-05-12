@@ -292,7 +292,7 @@ export default function CSRPage() {
                     >
                         {/* Heading - Forced breaks to match your reference image exactly */}
                         <div className="mb-5">
-                            <h3 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
+                            <h3 className="text-[36px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#103065',
                                 fontFamily: 'Lora, serif',
                                 margin: 0,
@@ -364,7 +364,7 @@ export default function CSRPage() {
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6 max-w-5xl">
                     <h2
-                        className="text-center mb-12 text-[#000] text-[32px] md:text-[42px]"
+                        className="text-center mb-12 text-[#000] text-[38px] md:text-[42px]"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
                         Our CSR Initiatives & Programs
