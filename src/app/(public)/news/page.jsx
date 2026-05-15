@@ -232,28 +232,28 @@ const NewsPage = () => {
               initial="initial"
               whileInView="whileInView"
               viewport={{ once: true }}
-              className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[5px]"
+              className="gs-news-featured-card grid grid-cols-1 lg:grid-cols-[2fr_1fr] shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[5px]"
             >
               {/* Image Side - Balanced Landscape */}
-              <div className="relative aspect-[16/9] lg:aspect-auto h-full overflow-hidden bg-slate-100 min-h-[350px] lg:min-h-[480px]">
+              <div className="gs-news-featured-image relative aspect-[16/9] lg:aspect-auto h-full overflow-hidden bg-slate-100 min-h-[350px] lg:min-h-[480px]">
                 <Image
                   src={featuredArticle?.image_url || featuredArticle?.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                   alt={featuredArticle?.title || 'News Update'}
                   fill
-                  className="object-cover hover:scale-105 transition duration-1000"
+                  className="gs-news-featured-img object-cover hover:scale-105 transition duration-1000"
                   sizes="(max-width: 1024px) 100vw, 65vw"
                   priority
                 />
               </div>
 
               {/* Content Side (Navy Box) */}
-              <div className="bg-navy-deep p-10 md:p-12 flex flex-col justify-between text-white">
+              <div className="gs-news-featured-content bg-navy-deep p-10 md:p-12 flex flex-col justify-between text-white">
                 <motion.div
                   variants={staggerContainer}
                   initial="initial"
                   whileInView="whileInView"
                   viewport={{ once: true }}
-                  className="flex flex-col h-full"
+                  className="gs-news-featured-inner flex flex-col h-full"
                 >
                   <motion.span 
                     variants={textVariant} 
@@ -263,7 +263,7 @@ const NewsPage = () => {
                     {featuredArticle?.date || (featuredArticle?.created_at ? new Date(featuredArticle.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '')}
                   </motion.span>
                   
-                  <div className="flex-grow flex flex-col justify-center">
+                  <div className="gs-news-featured-main flex-grow flex flex-col justify-center">
                     <motion.h2
                       variants={textVariant}
                       className="text-2xl md:text-3xl lg:text-[38px] text-white leading-[1.2] mb-8"
@@ -282,9 +282,9 @@ const NewsPage = () => {
                     </motion.div>
                   </div>
 
-                  <motion.div variants={textVariant} className="pt-8 mt-8 border-t border-white/10">
-                    <p className="text-[14px] font-normal text-white mb-1 uppercase tracking-widest">News</p>
-                    <p className="text-[14px] font-bold text-white">by {featuredArticle?.author || 'Gesit'}</p>
+                  <motion.div variants={textVariant} className="gs-news-card-meta gs-news-card-meta-featured pt-8 mt-8 border-t border-white/10">
+                    <p className="gs-news-card-category text-[13px] font-semibold text-white/75 mb-1 uppercase tracking-[.22em]">News</p>
+                    <p className="gs-news-card-author text-[13px] font-semibold text-white/95">by {featuredArticle?.author || 'Gesit'}</p>
                   </motion.div>
                 </motion.div>
               </div>
@@ -323,7 +323,7 @@ const NewsPage = () => {
               <p className="text-navy-deep/60">Check back later for the latest updates from Gesit.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+            <div className="gs-news-grid-list grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
               {otherArticles.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -335,7 +335,7 @@ const NewsPage = () => {
                 >
                       <Link
                         href={`/news/${item.slug || item.id}`}
-                        className="flex-1 bg-[#deebf9] p-10 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
+                        className="gs-news-grid-card flex-1 bg-[#deebf9] p-10 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
                       >
                         <span 
                           className="text-[13px] font-medium uppercase tracking-[.1em] text-navy-deep/50 mb-8 block"
@@ -360,9 +360,9 @@ const NewsPage = () => {
                             </div>
                           </div>
                           
-                          <div className="pt-8 border-t border-navy-deep/10 w-full">
-                            <p className="text-[13px] font-normal text-navy-deep/50 mb-1 uppercase tracking-widest">News</p>
-                            <p className="text-[14px] font-bold text-black">by {item.author || 'Gesit'}</p>
+                          <div className="gs-news-card-meta pt-8 border-t border-navy-deep/10 w-full">
+                            <p className="gs-news-card-category text-[13px] font-semibold text-navy-deep/55 mb-1 uppercase tracking-[.22em]">News</p>
+                            <p className="gs-news-card-author text-[13px] font-semibold text-navy-deep">by {item.author || 'Gesit'}</p>
                           </div>
                         </div>
                       </Link>
@@ -373,13 +373,13 @@ const NewsPage = () => {
 
             {/* See All Button */}
             {newsItems.length > 4 && (
-              <div className="mt-8 flex justify-start">
+              <div className="gs-news-see-all-row mt-8 flex justify-start">
                 <Link
                   href="/news/archive"
-                  className="flex items-center gap-3 group text-navy-deep font-black uppercase tracking-[.3em] text-[11px]"
+                  className="gs-news-see-all-link flex items-center gap-3 group text-navy-deep font-black uppercase tracking-[.3em] text-[11px]"
                 >
                   <span>See All</span>
-                  <div className="w-8 h-8 rounded-full border border-navy-deep flex items-center justify-center group-hover:bg-navy-deep group-hover:text-white transition-all duration-300">
+                  <div className="gs-news-see-all-icon w-8 h-8 rounded-full border border-navy-deep flex items-center justify-center group-hover:bg-navy-deep group-hover:text-white transition-all duration-300">
                     <ArrowRight size={14} strokeWidth={3} />
                   </div>
                 </Link>
@@ -389,34 +389,37 @@ const NewsPage = () => {
         </section>
 
       {/* ================= INFINITE SCROLL GALLERY ================= */}
-      <section className="py-24 bg-[#BC9C33] overflow-hidden">
+      <section className="gs-news-gallery-section py-24 bg-[#BC9C33] overflow-hidden">
         <div className="relative w-full">
-          <div className="flex overflow-hidden relative">
+          <div className="gs-news-gallery-window flex overflow-hidden relative">
             <motion.div
-              className="flex gap-12 px-4 py-12 items-center"
+              className="gs-news-gallery-track flex gap-6 md:gap-10 px-4 py-6 md:py-12 items-center"
               animate={{ x: ["0%", "-50%"] }}
               transition={{
                 ease: "linear",
-                duration: 120,
+                duration: 95,
                 repeat: Infinity,
+                repeatType: "loop",
               }}
               style={{ width: "fit-content" }}
             >
-              {newsItems.length > 0 && [...newsItems, ...newsItems, ...newsItems].map((item, index) => (
-                <div
+              {newsItems.length > 0 && [...newsItems, ...newsItems].map((item, index) => (
+                <motion.div
                   key={`gallery-scroll-${index}`}
-                  className="w-[450px] h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative bg-white"
+                  className="gs-news-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative bg-white"
+                  whileHover={{ y: -10, scale: 1.025 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Image
                     src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                     alt={item.title || 'News Update'}
                     fill
-                    className="object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2500ms] ease-out"
-                    sizes="450px"
+                    className="object-cover grayscale-[10%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out"
+                    sizes="(max-width: 768px) 280px, 450px"
                   />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                </div>
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                </motion.div>
               ))}
             </motion.div>
           </div>

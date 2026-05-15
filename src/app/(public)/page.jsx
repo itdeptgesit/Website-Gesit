@@ -170,14 +170,14 @@ export default function Home() {
 
               {/* 3. BUSINESS CARDS */}
               <section className="elementor-section elementor-top-section elementor-element elementor-element-4e02d40 elementor-section-stretched zs-custom-height elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="4e02d40" data-element_type="section" suppressHydrationWarning>
-                <div className="elementor-container elementor-column-gap-no flex flex-col md:flex-row" style={{ alignItems: 'stretch' }}>
+                <div className="elementor-container elementor-column-gap-no flex flex-col md:flex-row gs-business-grid top: 1657px; left: 397px; width: 292.75px; height: 231.906px;" style={{ alignItems: 'stretch' }}>
                   {[
                     { id: 'b35b078', widgetId: 'd64b48a', href: '/our-business/property', img: '/business/property/property-scaled-1.webp', title: 'Property', desc: 'Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.' },
                     { id: '4a6a044', widgetId: '0f06ba2', href: '/our-business/trading-services', img: '/business/trading-services/trading_and_services-scaled-1.webp', title: 'Trading & Services', desc: 'Leveraging local Indonesian expertise and broad international network to source and deliver high-quality products.' },
                     { id: '8f2780b', widgetId: '55da946', href: '/our-business/manufacturing', img: '/business/manufacturing/manufacturing-scaled-1.webp', title: 'Manufacturing', desc: 'Serving important industrial sectors, delivering high-quality products, and establishing strong long-term partnership.' },
                     { id: '1055671', widgetId: 'd2b43ba', href: '/our-business/natural-resources', img: '/business/natural-resources/resources-scaled-1.webp', title: 'Natural Resources', desc: "Developing Indonesia's vast natural resources and continually expanding to other types of minerals and resources." },
                   ].map((biz, idx) => (
-                    <div key={biz.id} className={`elementor-column w-full md:w-1/4 elementor-top-column elementor-element elementor-element-${biz.id}`} data-id={biz.id} data-element_type="column" style={{ display: 'flex', marginBottom: '20px' }}>
+                    <div key={biz.id} className={`elementor-column w-full md:w-1/4 elementor-top-column elementor-element elementor-element-${biz.id} gs-business-column`} data-id={biz.id} data-element_type="column" style={{ display: 'flex' }}>
                       <motion.div
                         className="elementor-widget-wrap elementor-element-populated"
                         variants={staggerContainer}
@@ -192,7 +192,7 @@ export default function Home() {
                               <div className="qodef-m-image">
                                 <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                               </div>
-                              <div className="qodef-m-content" style={{ backgroundColor: '#bc9c33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '300px', padding: '35px 25px' }}>
+                              <div className="qodef-m-content gs-business-card-content" style={{ backgroundColor: '#bc9c33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
                                 <motion.div variants={textVariant} role="heading" aria-level={3} className="qodef-m-title" style={{ color: '#ffffff', fontSize: '26px', fontWeight: 600 }}>
                                   <Link href={biz.href} style={{ color: '#ffffff', textDecoration: 'none' }}>{biz.title}</Link>
                                 </motion.div>

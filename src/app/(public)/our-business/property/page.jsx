@@ -108,6 +108,7 @@ const PropertyPage = () => {
                         <Image
                             src="/hero/hero_image_property_1-2.webp"
                             alt="Property"
+                            className="gs-hero-zoom-image"
                             fill
                             style={{ objectFit: "cover" }}
                             priority
@@ -141,6 +142,7 @@ const PropertyPage = () => {
                                 <Image
                                     src={slide.url}
                                     alt={slide.alt}
+                                    className="gs-hero-zoom-image"
                                     fill
                                     style={{ objectFit: "cover" }}
                                     priority={idx === 0}
@@ -531,7 +533,7 @@ const PropertyPage = () => {
                         width: 100% !important;
                         max-width: 100% !important;
                         height: auto !important;
-                        aspect-ratio: 975 / 652 !important;
+                        aspect-ratio: 922 / 652 !important;
                         border-radius: 0 !important;
                         margin: 0 !important;
                     }
@@ -542,7 +544,7 @@ const PropertyPage = () => {
                         width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 45px 40px 80px 40px !important;
+                        padding: 50px 40px 80px 40px !important;
                     }
                     .project-text-content {
                         max-width: 100% !important;

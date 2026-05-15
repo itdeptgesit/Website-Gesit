@@ -320,7 +320,7 @@ export default function CSRPage() {
                 </div>
             </section>
 
-            <section suppressHydrationWarning className="elementor-section elementor-top-section elementor-element elementor-element-4b82676 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no bg-[#103065] py-16 md:py-24" data-id="4b82676" data-element_type="section">
+            <section suppressHydrationWarning className="elementor-section elementor-top-section elementor-element elementor-element-4b82676 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no bg-[#103065] py-16 md:py-24 gs-csr-focus-section" data-id="4b82676" data-element_type="section">
                 <div className="elementor-container elementor-column-gap-no">
                     <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-365869f" data-id="365869f" data-element_type="column" suppressHydrationWarning>
                         <div className="elementor-widget-wrap elementor-element-populated">
@@ -416,13 +416,13 @@ export default function CSRPage() {
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="space-y-4 m-0 p-0 mt-4">
+                                                        <ul className="gs-csr-initiative-list space-y-2 m-0 p-0 mt-4">
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
                                                                 return (
-                                                                    <li key={i} className={`flex items-start gap-4 text-[18px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 p-0 ${isSubItem ? 'pl-10' : ''}`} style={{ fontFamily: "var(--font-sans)" }}>
+                                                                    <li key={i} className={`gs-csr-initiative-item flex items-start gap-4 text-[18px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 py-2 pr-3 ${isSubItem ? 'pl-12' : 'pl-2'}`} style={{ fontFamily: "var(--font-sans)" }}>
                                                                         {!isSubItem && (
-                                                                            <span className="text-[#000] shrink-0" style={{ marginTop: '7px', fontSize: '10px', lineHeight: 1 }}>●</span>
+                                                                            <span className="text-[#000] shrink-0" style={{ marginTop: '9px', fontSize: '10px', lineHeight: 1 }}>●</span>
                                                                         )}
                                                                         <span className="flex-1">{item}</span>
                                                                     </li>
@@ -442,32 +442,35 @@ export default function CSRPage() {
             </section>
 
             {/* ================= SMOOTH INFINITE SCROLL GALLERY ================= */}
-            <section className="py-24 bg-white overflow-hidden">
+            <section className="gs-csr-gallery-section py-24 bg-white overflow-hidden">
                 <div className="relative w-full">
-                    <div className="flex overflow-hidden relative">
+                    <div className="gs-csr-gallery-window flex overflow-hidden relative">
                         <motion.div
-                            className="flex gap-6 md:gap-12 px-4 py-6 md:py-12 items-center"
+                            className="gs-csr-gallery-track flex gap-6 md:gap-10 px-4 py-6 md:py-12 items-center"
                             animate={{ x: ["0%", "-50%"] }}
                             transition={{
                                 ease: "linear",
-                                duration: 180,
+                                duration: 95,
                                 repeat: Infinity,
+                                repeatType: "loop",
                             }}
                             style={{ width: "fit-content" }}
                         >
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
-                                <div
+                                <motion.div
                                     key={index}
-                                    className="w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-xl overflow-hidden transition-all duration-700 group relative"
+                                    className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-xl overflow-hidden transition-all duration-700 group relative"
+                                    whileHover={{ y: -10, scale: 1.025 }}
+                                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                                 >
                                     <img
                                         src={src}
                                         alt={`CSR Gallery ${index}`}
-                                        className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[2500ms] ease-out"
+                                        className="w-full h-full object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out"
                                     />
                                     <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
-                                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-                                </div>
+                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                                </motion.div>
                             ))}
                         </motion.div>
                     </div>

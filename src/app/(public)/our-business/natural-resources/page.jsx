@@ -111,6 +111,7 @@ export default function NaturalResourcesPage() {
                         <Image
                             src="/hero/hero_natural_resources.webp"
                             alt="Natural Resources"
+                            className="gs-hero-zoom-image"
                             fill
                             style={{ objectFit: "cover" }}
                             priority
@@ -146,6 +147,7 @@ export default function NaturalResourcesPage() {
                                 <Image
                                     src={slide.url}
                                     alt={slide.alt}
+                                    className="gs-hero-zoom-image"
                                     fill
                                     style={{ objectFit: "cover" }}
                                     priority={idx === 0}
@@ -268,7 +270,7 @@ export default function NaturalResourcesPage() {
             </section>
 
             {/* ── 4. NEW BUSINESS DEVELOPMENT – Refined Cards ── */}
-            <section style={{ backgroundColor: "#fff" }} className="py-16 md:py-32">
+            <section style={{ backgroundColor: "#fff" }} className="natural-business-section py-16 md:py-32">
                 <div className="max-w-7xl mx-auto px-6 md:px-[60px]">
                     <motion.h2
                         variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }}
@@ -285,7 +287,7 @@ export default function NaturalResourcesPage() {
                         New Business Development
                     </motion.h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[35px]">
+                    <div className="natural-business-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[35px]">
                         {businessCards.map((card, i) => (
                             <motion.div
                                 key={i}
@@ -438,7 +440,7 @@ export default function NaturalResourcesPage() {
                         flex: 0 0 auto !important;
                         width: 100% !important;
                         height: auto !important;
-                        aspect-ratio: 975 / 652 !important;
+                        aspect-ratio: 922 / 652 !important;
                         border-radius: 0 !important;
                     }
                     .project-section {
@@ -448,7 +450,7 @@ export default function NaturalResourcesPage() {
                         width: 100% !important;
                         justify-content: center !important;
                         text-align: center !important;
-                        padding: 45px 40px 80px 40px !important;
+                        padding: 50px 40px 80px 40px !important;
                     }
                     .project-text-content {
                         max-width: 100% !important;
@@ -472,6 +474,40 @@ export default function NaturalResourcesPage() {
                         text-align: left !important;
                         margin: 0 0 35px !important;
                         align-self: flex-start !important;
+                    }
+
+                    .natural-business-grid {
+                        grid-template-columns: repeat(3, 251px) !important;
+                        gap: 30px !important;
+                        justify-content: center !important;
+                    }
+
+                    .natural-business-section {
+                        padding-top: 40px !important;
+                        padding-bottom: 40px !important;
+                    }
+
+                    .natural-business-grid > div {
+                        width: 251px !important;
+                    }
+
+                    .natural-business-grid > div > div:first-child {
+                        width: 251px !important;
+                        height: 142px !important;
+                        padding-top: 0 !important;
+                    }
+
+                    .natural-business-grid > div > div:last-child {
+                        width: 251px !important;
+                        height: 60px !important;
+                        min-height: 60px !important;
+                        flex-grow: 0 !important;
+                        padding: 8px 14px !important;
+                    }
+
+                    .natural-business-grid h4 {
+                        font-size: 19px !important;
+                        line-height: 1.15 !important;
                     }
                 }
             `}</style>

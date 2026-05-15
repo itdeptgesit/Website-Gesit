@@ -78,8 +78,8 @@ export default function CareerPage() {
             </section>
 
             {/* 2. GOLD INTRO — Synchronized with Manufacturing layout ── */}
-            <section className="flex justify-center bg-[#BC9C33] py-16 md:py-[60px] lg:py-[150px]">
-                <div className="max-w-5xl w-full mx-auto px-6 md:px-[40px] lg:px-12">
+            <section className="flex justify-center items-center bg-[#BC9C33] py-16 md:py-0 md:h-[412px] lg:h-auto lg:py-[150px]">
+                <div className="w-full mx-auto px-6 md:max-w-[922px] md:px-[77px] lg:max-w-5xl lg:px-12">
                     <motion.div
                         variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                         className="lg:pl-20"
@@ -97,7 +97,7 @@ export default function CareerPage() {
                         </motion.div>
 
                         {/* Description */}
-                        <motion.div style={{ paddingLeft: '24px', borderLeft: '2px solid rgba(255,255,255,0.7)' }} variants={fadeInUp}>
+                        <motion.div className="pl-[24px] md:pl-[40px]" style={{ borderLeft: '2px solid rgba(255,255,255,0.7)' }} variants={fadeInUp}>
                             <p className="text-[16px] md:text-[24px] lg:text-[23px] leading-relaxed md:leading-normal" style={{
                                 color: '#fff',
                                 fontFamily: "var(--font-sans)",
