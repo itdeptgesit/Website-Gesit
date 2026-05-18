@@ -1,6 +1,7 @@
-# 🏢 Gesit Companies Corporate Web Application
+# 🏢 Gesit Companies Corporate Company Profile Website
 
-A premium, high-performance corporate web application for **Gesit Companies** engineered with **Next.js 16 (App Router)**, **Supabase**, **Cloudinary**, and **Framer Motion**. Designed for editorial-grade visual excellence, lightning-fast loading speeds, and robust backend operations.
+A premium, high-performance corporate company profile website for **Gesit Companies** engineered with **Next.js 16 (App Router)**, **Supabase**, **Cloudinary**, and **Framer Motion**. Designed for editorial-grade visual excellence, lightning-fast loading speeds, and robust backend operations.
+
 
 ---
 
