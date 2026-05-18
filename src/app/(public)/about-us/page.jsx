@@ -56,8 +56,22 @@ export default function AboutUs() {
                   />
                 </div>
 
+                {/* Preload hero video poster image to optimize LCP */}
+                <link rel="preload" href="/video/video_thumbnail2.webp" as="image" fetchPriority="high" />
+
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
-                  <video suppressHydrationWarning className="elementor-background-video-hosted elementor-html5-video" autoPlay muted playsInline loop src="/video/about-us-video.mp4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <video 
+                    suppressHydrationWarning 
+                    className="elementor-background-video-hosted elementor-html5-video" 
+                    autoPlay 
+                    muted 
+                    playsInline 
+                    loop 
+                    preload="auto"
+                    poster="/video/video_thumbnail2.webp"
+                    src="/video/about-us-video.mp4" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  />
                 </div>
 
                 {/* Overlay Gradient */}
