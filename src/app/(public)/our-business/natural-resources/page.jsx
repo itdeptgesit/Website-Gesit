@@ -204,7 +204,7 @@ export default function NaturalResourcesPage() {
                         className="lg:pl-20"
                     >
                         {/* Heading */}
-                        <motion.div className="mb-5" variants={fadeInUp}>
+                        <motion.div className="mb-5 lg:max-w-[824px] w-full" variants={fadeInUp}>
                             <h3 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#fff',
                                 fontFamily: 'Lora, serif',

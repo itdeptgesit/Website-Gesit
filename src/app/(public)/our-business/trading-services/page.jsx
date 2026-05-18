@@ -198,7 +198,7 @@ export default function TradingServicesPage() {
                         variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                         className="lg:pl-20"
                     >
-                        <motion.div className="mb-5" variants={fadeInUp}>
+                        <motion.div className="mb-5 lg:max-w-[824px] w-full" variants={fadeInUp}>
                             <h3 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#fff',
                                 fontFamily: 'Lora, serif',
