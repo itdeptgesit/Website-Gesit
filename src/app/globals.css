@@ -1510,6 +1510,11 @@ a {
   width: 100%;
 }
 
+/* Natural Resources Gold Intro Section (1905x465 Desktop Height) */
+.gs-gold-intro-section.natural-resources {
+  min-height: 465px;
+}
+
 @media (max-width: 1024px) {
   .gs-gold-intro-section {
     min-height: auto;

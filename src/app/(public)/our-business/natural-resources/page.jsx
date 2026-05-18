@@ -197,7 +197,7 @@ export default function NaturalResourcesPage() {
             </section>
 
             {/* ── 2. GOLD INTRO — Synchronized with Manufacturing/CSR ── */}
-            <section className="bg-[#BC9C33] gs-gold-intro-section">
+            <section className="bg-[#BC9C33] gs-gold-intro-section natural-resources">
                 <div className="max-w-[824px] w-full mx-auto px-6 md:px-[70px] lg:px-0">
                     <motion.div
                         variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
