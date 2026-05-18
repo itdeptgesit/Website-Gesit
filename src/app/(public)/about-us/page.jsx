@@ -6,8 +6,10 @@ import './about-us.css';
 
 export default function AboutUs() {
   const [progressKey, setProgressKey] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const timer = setInterval(() => {
       setProgressKey(prev => prev + 1);
     }, 6000);
@@ -56,22 +58,39 @@ export default function AboutUs() {
                   />
                 </div>
 
-                {/* Preload hero video poster image to optimize LCP */}
-                <link rel="preload" href="/video/video_thumbnail2.webp" as="image" fetchPriority="high" />
-
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
-                  <video 
-                    suppressHydrationWarning 
-                    className="elementor-background-video-hosted elementor-html5-video" 
-                    autoPlay 
-                    muted 
-                    playsInline 
-                    loop 
-                    preload="auto"
-                    poster="/video/video_thumbnail2.webp"
-                    src="/video/about-us-video.mp4" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  {/* High-priority optimized image that paints instantly as the LCP element */}
+                  <Image
+                    src="/video/video_thumbnail2.webp"
+                    alt="About Us Hero"
+                    fill
+                    priority
+                    sizes="100vw"
+                    style={{ objectFit: 'cover', zIndex: 1 }}
                   />
+
+                  {/* Video mounts immediately after first render, playing seamlessly over the identical image frame */}
+                  {isMounted && (
+                    <video 
+                      suppressHydrationWarning 
+                      className="elementor-background-video-hosted elementor-html5-video" 
+                      autoPlay 
+                      muted 
+                      playsInline 
+                      loop 
+                      preload="metadata"
+                      src="/video/about-us-video.mp4" 
+                      style={{ 
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        zIndex: 2
+                      }} 
+                    />
+                  )}
                 </div>
 
                 {/* Overlay Gradient */}
