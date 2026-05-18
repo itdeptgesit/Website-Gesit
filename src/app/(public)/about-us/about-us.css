@@ -893,7 +893,23 @@
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-d68a428 {
-					width: 100%;
+					width: 922px !important;
+					min-width: 922px !important;
+					max-width: 922px !important;
+					height: 727px !important;
+					min-height: 727px !important;
+					max-height: 727px !important;
+					margin: 0 auto !important;
+				}
+
+				.elementor-5968 .elementor-element.elementor-element-d68a428 > .elementor-element-populated {
+					height: 100% !important;
+					min-height: 100% !important;
+					display: flex !important;
+					flex-direction: column !important;
+					justify-content: center !important;
+					padding-left: 60px !important;
+					padding-right: 60px !important;
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-6f16504 {
