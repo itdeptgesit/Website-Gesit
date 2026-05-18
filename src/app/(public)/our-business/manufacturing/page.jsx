@@ -410,8 +410,8 @@ export default function ManufacturingPage() {
                 }
 
                 .project-image-container {
-                    flex: 0 0 540px;
-                    height: 680px;
+                    flex: 0 0 530px;
+                    height: 652px;
                     position: relative;
                     overflow: hidden;
                     box-shadow: 0 30px 60px rgba(0,0,0,0.1);
