@@ -59,23 +59,8 @@ export default function AboutUs() {
                 </div>
 
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
-                  {/* High-priority optimized image that paints instantly as the LCP element */}
-                  <img
-                    src="/video/video_thumbnail2.webp"
-                    alt="About Us Hero"
-                    style={{ 
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover', 
-                      zIndex: 1 
-                    }}
-                  />
-
-                  {/* Video mounts immediately after first render, playing seamlessly over the identical image frame */}
-                  {isMounted && (
+                  {/* Swap the elements cleanly: initially render only the preloaded poster image for instant LCP, then switch entirely to the full-screen video element */}
+                  {isMounted ? (
                     <video 
                       suppressHydrationWarning 
                       className="elementor-background-video-hosted elementor-html5-video" 
@@ -94,6 +79,20 @@ export default function AboutUs() {
                         objectFit: 'cover',
                         zIndex: 2
                       }} 
+                    />
+                  ) : (
+                    <img
+                      src="/video/video_thumbnail2.webp"
+                      alt="About Us Hero"
+                      style={{ 
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover', 
+                        zIndex: 1 
+                      }}
                     />
                   )}
                 </div>
