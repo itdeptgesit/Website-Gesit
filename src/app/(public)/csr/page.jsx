@@ -281,7 +281,7 @@ export default function CSRPage() {
             </section>
 
             {/* ================= OVERVIEW ================= */}
-            <section className="flex justify-center bg-[#e3eaf4] py-[60px]">
+            <section className="bg-[#e3eaf4] gs-csr-overview-section">
                 <div className="max-w-5xl w-full mx-auto px-[40px]">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}

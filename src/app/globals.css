@@ -1500,14 +1500,19 @@ a {
   top: 120px;
 }
 
-/* Standardized Gold Intro Section Padding */
+/* Standardized Gold Intro Section (1905x532 Desktop Height) */
 .gs-gold-intro-section {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  min-height: 532px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 @media (max-width: 1024px) {
   .gs-gold-intro-section {
+    min-height: auto;
     padding-top: 60px !important;
     padding-bottom: 60px !important;
   }
@@ -1519,6 +1524,24 @@ a {
 
 @media (max-width: 777px) {
   .gs-gold-intro-section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+}
+
+/* CSR Overview Section (1905x532 Desktop Height) */
+.gs-csr-overview-section {
+  min-height: 532px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .gs-csr-overview-section {
+    min-height: auto;
     padding-top: 60px !important;
     padding-bottom: 60px !important;
   }
