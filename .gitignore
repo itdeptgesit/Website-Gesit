@@ -57,3 +57,8 @@ next-env.d.ts
 /debug_news.js
 /legacy_assets_list.txt
 
+# Agent configuration files
+/AGENTS.md
+/CLAUDE.md
+
+
