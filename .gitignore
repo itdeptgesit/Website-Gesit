@@ -73,6 +73,10 @@ next-env.d.ts
 /tmp/
 /playwright-report/
 /test-results/
+/supabase/migrations/
+/tests/
+/scripts/
+
 
 
 
