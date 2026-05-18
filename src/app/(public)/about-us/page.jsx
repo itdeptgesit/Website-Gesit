@@ -60,13 +60,18 @@ export default function AboutUs() {
 
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
                   {/* High-priority optimized image that paints instantly as the LCP element */}
-                  <Image
+                  <img
                     src="/video/video_thumbnail2.webp"
                     alt="About Us Hero"
-                    fill
-                    priority
-                    sizes="100vw"
-                    style={{ objectFit: 'cover', zIndex: 1 }}
+                    style={{ 
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover', 
+                      zIndex: 1 
+                    }}
                   />
 
                   {/* Video mounts immediately after first render, playing seamlessly over the identical image frame */}
