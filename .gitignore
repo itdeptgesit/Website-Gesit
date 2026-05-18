@@ -61,4 +61,18 @@ next-env.d.ts
 /AGENTS.md
 /CLAUDE.md
 
+# Temporary and non-production directories
+/.claude/
+/directives/
+/temp-repo/
+/backup_sync/
+/csr/
+/execution/
+/.swc/
+/.tmp/
+/tmp/
+/playwright-report/
+/test-results/
+
+
 
