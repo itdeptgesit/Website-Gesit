@@ -98,6 +98,7 @@ export default function Home() {
               alt={slide.alt}
               fill
               sizes="100vw"
+              quality={60}
               style={{
                 objectFit: 'cover',
                 objectPosition: 'center bottom',
@@ -190,7 +191,7 @@ export default function Home() {
                           <div className="elementor-widget-container">
                             <div className="qodef-shortcode qodef-m text-center-mobile qodef-location-info qodef-layout--text-below qodef-text-break--disabled gs-business-card mx-auto md:mx-0" style={{ borderRadius: 5, overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
                               <div className="qodef-m-image">
-                                <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                <Image loading="lazy" decoding="async" src={biz.img} className="attachment-full size-full" alt={biz.title} width={400} height={300} sizes="(max-width: 768px) 100vw, 25vw" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
                               </div>
                               <div className="qodef-m-content gs-business-card-content" style={{ backgroundColor: '#bc9c33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
                                 <motion.div variants={textVariant} role="heading" aria-level={3} className="qodef-m-title" style={{ color: '#ffffff', fontSize: '26px', fontWeight: 600 }}>

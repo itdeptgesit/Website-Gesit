@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -11,7 +12,7 @@ export default function Footer() {
                 <div className="qodef-grid-inner clear">
                   <div className="qodef-grid-item">
                     <div id="nav_menu-2" className="widget widget_nav_menu" data-area="footer_top_area_column_1">
-                      <h5 className="qodef-widget-title">Company Links</h5>
+                      <h2 className="qodef-widget-title" style={{ fontSize: '26px', margin: '0 0 22px', fontWeight: 500, fontFamily: 'var(--font-serif)' }}>Company Links</h2>
                       <div className="menu-gesit-footer-menu-container">
                         <ul id="menu-gesit-footer-menu" className="menu">
                           <li id="menu-item-4530" className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-4530">
@@ -38,7 +39,7 @@ export default function Footer() {
                   </div>
                   <div className="qodef-grid-item">
                     <div id="nav_menu-3" className="widget widget_nav_menu" data-area="footer_top_area_column_2">
-                      <h5 className="qodef-widget-title">Our Business</h5>
+                      <h2 className="qodef-widget-title" style={{ fontSize: '26px', margin: '0 0 22px', fontWeight: 500, fontFamily: 'var(--font-serif)' }}>Our Business</h2>
                       <div className="menu-gesit-footer-categories-container">
                         <ul id="menu-gesit-footer-categories" className="menu">
                           <li id="menu-item-6532" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-6532">
@@ -60,9 +61,9 @@ export default function Footer() {
                   <div className="qodef-grid-item">
                     <div id="text-2" className="widget widget_text" data-area="footer_top_area_column_3">
                       <div className="textwidget">
-                        <h5 style={{ color: '#fff', margin: '0 0 22px', fontWeight: 500 }}>
+                        <h2 style={{ color: '#fff', margin: '0 0 22px', fontWeight: 500, fontSize: '26px', fontFamily: 'var(--font-serif)' }}>
                           Find Us
-                        </h5>
+                        </h2>
                         <p>
                           <a href="https://www.google.com/maps/place/The+City+Tower/@-6.199216,106.8213135,17z/data=!4m12!1m6!3m5!1s0x2e69f41f2b24b18b:0xb5cb3eba60efb71e!2sThe+City+Tower!8m2!3d-6.1991991!4d106.8235192!3m4!1s0x2e69f41f2b24b18b:0xb5cb3eba60efb71e!8m2!3d-6.1991991!4d106.8235192" target="_blank" rel="noopener nofollow">The City Tower, 27th Floor<br />
                             Jl. M.H. Thamrin No 81<br />
@@ -89,7 +90,7 @@ export default function Footer() {
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                       <Link href="/" className="gs-footer-logo-link">
-                        <img src="/logos/logos.png" alt="The Gesit Companies logo" className="gs-footer-logo-img" />
+                        <Image src="/logos/logos.png" alt="The Gesit Companies logo" className="gs-footer-logo-img" width={48} height={48} style={{ width: '48px', height: 'auto' }} />
                         <span className="gs-footer-logo-text" style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '2px', color: '#bc9c33' }}>THE GESIT COMPANIES</span>
                       </Link>
                     </div>

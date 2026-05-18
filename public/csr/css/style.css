@@ -25184,17 +25184,17 @@ section.qodef-elementor-content-grid.qodef-extended-grid--left>.elementor-contai
     font-size: 59px
 }
 
-@font-face {
+@font-face { font-display: swap; 
     font-family: Georgia;
     src: local("Georgia");
     font-weight: 400
-}
+ }
 
-@font-face {
+@font-face { font-display: swap; 
     font-family: Georgia;
     src: url(http://dev.gesit.co.id/wp-content/themes/thetrial/fonts/Georgia-Bold.ttf);
     font-weight: 700
-}
+ }
 
 .qodef-h1,
 .qodef-h2,

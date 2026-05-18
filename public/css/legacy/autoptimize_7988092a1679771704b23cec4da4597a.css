@@ -62586,17 +62586,17 @@ h1.entry-title {
     }
 }
 
-@font-face {
+@font-face { font-display: swap; 
     font-family: Georgia;
     src: url(../../fonts/Georgia.ttf);
     font-weight: 400
-}
+ }
 
-@font-face {
+@font-face { font-display: swap; 
     font-family: Georgia;
     src: url(../../fonts/Georgia-Bold.ttf);
     font-weight: 700
-}
+ }
 
 .qodef-h1,
 h1,
