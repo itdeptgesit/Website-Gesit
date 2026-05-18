@@ -260,7 +260,7 @@ const PropertyPage = () => {
                             {["trinity_01.webp", "trinity_02.webp", "trinity_03.webp", "trinity_04.webp", "trinity_05.webp", "trinity_06.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`Trinity Tower ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
+                                        <Image src={`/business/property/${img}`} alt={`Trinity Tower ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -287,7 +287,7 @@ const PropertyPage = () => {
                             {["property_jsl_2.webp", "property_jsl_3.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`JS Luwansa ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
+                                        <Image src={`/business/property/${img}`} alt={`JS Luwansa ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -352,7 +352,7 @@ const PropertyPage = () => {
                             {["property_PPHUI_Exterior_1.webp", "property_PPHUI_Theater_2.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`PPHUI ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
+                                        <Image src={`/business/property/${img}`} alt={`PPHUI ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -369,7 +369,7 @@ const PropertyPage = () => {
                         className="project-image-container"
                     >
                         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                            <Image src="/business/property/senayan-development-.webp" alt="Senayan Development" fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
+                            <Image src="/business/property/senayan-development-.webp" alt="Senayan Development" fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                         </div>
                     </motion.div>
 
@@ -417,7 +417,7 @@ const PropertyPage = () => {
                         className="project-image-container"
                     >
                         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                            <Image src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 540px" />
+                            <Image src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                         </div>
                     </motion.div>
                 </div>
@@ -470,8 +470,8 @@ const PropertyPage = () => {
                 }
 
                 .project-image-container {
-                    flex: 0 0 540px;
-                    height: 680px;
+                    flex: 0 0 530px;
+                    height: 652px;
                     position: relative;
                     overflow: hidden;
                     box-shadow: 0 30px 60px rgba(0,0,0,0.1);
