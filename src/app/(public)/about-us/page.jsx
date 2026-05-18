@@ -70,29 +70,14 @@ export default function AboutUs() {
                       loop 
                       preload="metadata"
                       src="/video/about-us-video.mp4" 
-                      style={{ 
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover',
-                        zIndex: 2
-                      }} 
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                     />
                   ) : (
                     <img
                       src="/video/video_thumbnail2.webp"
                       alt="About Us Hero"
-                      style={{ 
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover', 
-                        zIndex: 1 
-                      }}
+                      className="elementor-background-video-hosted"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   )}
                 </div>
