@@ -107,4 +107,5 @@ The application is highly optimized to run on **Vercel** or any node-ready cloud
 3.  **High-Capacity Processing**: Set `maxDuration` to 60s in `next.config.mjs` to allow the Cloudinary backend pipeline plenty of time for processing heavy media.
 
 ---
-Built with ❤️ for **Gesit Companies**. All rights reserved.
+Built and Coded with ❤️ by **IT Gesit** for **Gesit Companies**. All rights reserved.
+
