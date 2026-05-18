@@ -1502,14 +1502,14 @@ a {
 
 /* Standardized Gold Intro Section Padding */
 .gs-gold-intro-section {
-  padding-top: 150px;
-  padding-bottom: 150px;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 @media (max-width: 1024px) {
   .gs-gold-intro-section {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
   }
   .gs-gold-intro-section + .project-section {
     padding-top: 0 !important;
@@ -1519,8 +1519,8 @@ a {
 
 @media (max-width: 777px) {
   .gs-gold-intro-section {
-    padding-top: 64px !important;
-    padding-bottom: 64px !important;
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
   }
 }
 
