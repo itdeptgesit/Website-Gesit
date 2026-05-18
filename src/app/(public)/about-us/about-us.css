@@ -1010,6 +1010,8 @@
 	.elementor-5968 .elementor-element.elementor-element-cf349da {
 		width: 200px !important;
 		height: 100px !important;
+		align-self: flex-start !important;
+		text-align: left !important;
 	}
 
 	.elementor-5968 .elementor-element.elementor-element-cf349da svg {
