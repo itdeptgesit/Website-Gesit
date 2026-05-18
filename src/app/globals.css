@@ -1552,6 +1552,26 @@ a {
   }
 }
 
+/* Home Page Business Cards Section (1905x842 Desktop Height) */
+.gs-home-business-section {
+  background-color: #e3eaf4 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+@media (min-width: 1025px) {
+  .gs-home-business-section {
+    height: 842px !important;
+    min-height: 842px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+
 /* Shared UI Components - Pill Button */
 .pill-button {
   position: relative;

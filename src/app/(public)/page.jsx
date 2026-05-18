@@ -170,7 +170,7 @@ export default function Home() {
               </section>
 
               {/* 3. BUSINESS CARDS */}
-              <section className="elementor-section elementor-top-section elementor-element elementor-element-4e02d40 elementor-section-stretched zs-custom-height elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="4e02d40" data-element_type="section" suppressHydrationWarning>
+              <section className="elementor-section elementor-top-section elementor-element elementor-element-4e02d40 elementor-section-stretched zs-custom-height elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no gs-home-business-section" data-id="4e02d40" data-element_type="section" suppressHydrationWarning>
                 <div className="elementor-container elementor-column-gap-no flex flex-col md:flex-row gs-business-grid top: 1657px; left: 397px; width: 292.75px; height: 231.906px;" style={{ alignItems: 'stretch' }}>
                   {[
                     { id: 'b35b078', widgetId: 'd64b48a', href: '/our-business/property', img: '/business/property/property-scaled-1.webp', title: 'Property', desc: 'Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.' },
