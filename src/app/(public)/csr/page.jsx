@@ -282,13 +282,13 @@ export default function CSRPage() {
 
             {/* ================= OVERVIEW ================= */}
             <section className="bg-[#e3eaf4] gs-csr-overview-section">
-                <div className="max-w-5xl w-full mx-auto px-[40px]">
+                <div className="max-w-[824px] w-full mx-auto px-[40px] lg:px-0">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="lg:pl-20"
+                        className="lg:pl-0"
                     >
                         {/* Heading - Forced breaks to match your reference image exactly */}
                         <div className="mb-5">

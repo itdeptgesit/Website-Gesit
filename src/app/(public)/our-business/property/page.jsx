@@ -193,12 +193,12 @@ const PropertyPage = () => {
 
             {/* ── 2. GOLD INTRO ── */}
             <section className="bg-[#BC9C33] gs-gold-intro-section">
-                <div className="max-w-5xl w-full mx-auto px-6 md:px-[70px] lg:px-12">
+                <div className="max-w-[824px] w-full mx-auto px-6 md:px-[70px] lg:px-0">
                     <motion.div
                         variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
-                        className="lg:pl-20"
+                        className="lg:pl-0"
                     >
-                        <motion.div className="mb-5 lg:max-w-[824px] w-full" variants={fadeInUp}>
+                        <motion.div className="mb-5" variants={fadeInUp}>
                             <h3 className="text-[28px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#fff',
                                 fontFamily: 'Lora, serif',
