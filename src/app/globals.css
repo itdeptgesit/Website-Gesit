@@ -1500,9 +1500,9 @@ a {
   top: 120px;
 }
 
-/* Standardized Gold Intro Section (1905x532 Desktop Height) */
+/* Standardized Gold Intro Section (1905x573 Desktop Height) */
 .gs-gold-intro-section {
-  min-height: 532px;
+  min-height: 573px;
   display: flex;
   flex-direction: column;
   justify-content: center;
