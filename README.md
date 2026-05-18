@@ -1,76 +1,109 @@
-# Gesit Companies Web Application
+# 🏢 Gesit Companies Corporate Web Application
 
-Modern web application for **Gesit Companies** built with Next.js 15, Supabase, and Cloudinary. This platform features a high-performance news management system, secure admin portal, and professional landing pages.
+A premium, high-performance corporate web application for **Gesit Companies** engineered with **Next.js 16 (App Router)**, **Supabase**, **Cloudinary**, and **Framer Motion**. Designed for editorial-grade visual excellence, lightning-fast loading speeds, and robust backend operations.
 
-## 🚀 Teck Stack
+---
 
-- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router, Turbopack)
-- **Database & Auth**: [Supabase](https://supabase.com/) (PostgreSQL + Native 2FA)
-- **Media Hosting**: [Cloudinary](https://cloudinary.com/) (Optimized Images & Videos)
-- **Styling**: Tailwind CSS + Shadcn UI
-- **Animations**: Framer Motion
-- **Email**: [Resend](https://resend.com/) (Contact form notifications)
+## 🚀 Modern Tech Stack
 
-## ✨ Core Features
+*   **Core Framework**: [Next.js 16+](https://nextjs.org/) (App Router, Turbopack, Server Actions)
+*   **Database & Security**: [Supabase](https://supabase.com/) (PostgreSQL Database + Secure Native 2FA OTP Auth)
+*   **Media Hosting**: [Cloudinary](https://cloudinary.com/) (Standardized, High-Compression Images & Streamed Videos)
+*   **Styling & Components**: Vanilla CSS + Tailwind CSS + Radix UI / Shadcn UI
+*   **Smooth Animations**: [Framer Motion](https://www.framer.com/motion/) + [Swiper.js](https://swiperjs.com/) (Editorial Sliders)
+*   **Email Engine**: [Resend](https://resend.com/) (Dual-delivery real-time notification system)
 
-### 🏢 Professional Admin Portal
-- **Secure Authentication**: 2FA enabled using native Supabase OTP.
-- **Maintenance Mode**: Toggle the public site visibility with a single switch.
-- **Account Security**: Password management and access control.
+---
 
-### 📰 Advanced News Management
-- **Rich-Text Editor**: Custom editor with support for inline images and videos.
-- **Media-First Design**: Dedicated "Feature Video" banner field (YouTube, Vimeo, or raw MP4).
-- **High Performance**: Binary stream uploads to Cloudinary with real-time progress tracking.
-- **Responsive Layouts**: Desktop and mobile optimized article pages.
+## ✨ Premium Core Features
 
-### 📧 Communication
-- **Contact Us**: Dual-delivery system (Database storage + Real-time email via Resend).
-- **Inbox Management**: Professional data table with search and animated detail modals.
+### 💎 Editorial-Grade Visuals & Responsive Design
+*   **Immersive Hero Slider**: Seamlessly animated transitions with particle effects and smooth typography, achieving pixel-perfect parity with reference designs.
+*   **Modern Business Showcase**: Curated responsive grid layouts for **Manufacturing**, **Natural Resources**, **Property**, and **Trading & Services** pages.
+*   **Perfect Viewports**: Handcrafted breakpoint adjustments for desktop, laptop, tablet (split), and mobile screens.
 
-## 🛠️ Setup & Local Development
+### 🔐 Secure Admin Dashboard
+*   **Multi-Factor Authentication**: Administrative portal guarded by native Supabase 2FA OTP codes.
+*   **Global Maintenance Switch**: Easily toggle public visibility of the corporate site via a unified control panel.
+*   **Real-time Inbox**: Direct, interactive portal to manage contact submissions with live search, filtering, and animation effects.
+
+### 📰 Advanced News & Media CMS
+*   **Rich-Media Editor**: Integrated wysiwyg editor supporting inline assets and dedicated **Feature Video** (raw MP4 or streamed).
+*   **Binary Upload Streams**: Custom upload engine routing large files directly to Cloudinary with interactive percentage trackers.
+
+---
+
+## 📁 Optimized Project Architecture
+
+Our repository has been optimized for **zero-waste storage**, untracking all temporary cache, databases, test logs, and raw HTML dumps.
+
+```
+gesit-nextjs/
+├── public/                 # Static media assets (webp, svg, fonts)
+│   ├── home/               # Homepage-specific images
+│   ├── logos/              # Premium brand logos
+│   └── wp-content/         # High-resolution optimized graphics
+├── src/
+│   ├── app/                # Next.js 16 App Router (Public and Dashboard)
+│   │   ├── (public)/       # Guest-facing pages (Home, Business, CSR, etc.)
+│   │   ├── admin/          # Admin login and auth
+│   │   ├── api/            # API endpoints (Analytics, SEO, Uploads)
+│   │   └── dashboard/      # Protected administration pages
+│   ├── components/         # Reusable UI parts & slider components
+│   └── lib/                # Database clients, Cloudinary utility engines
+└── package.json            # Script definitions and package manifests
+```
+
+---
+
+## 🛠️ Local Development & Setup
 
 ### 1. Prerequisites
-- Node.js 18+
-- Supabase Project (Database + Auth)
-- Cloudinary Account (Standard credentials)
-- Resend Account (API Key)
+*   Node.js 20+
+*   Supabase project instance (DB + Authentication)
+*   Cloudinary Cloud Account
+*   Resend API access
 
-### 2. Environment Configuration
-Create a `.env.local` file in the root directory:
+### 2. Environment Setup
+Configure your local environment variables by creating a `.env.local` file in the root:
 
 ```env
-# Supabase
+# Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# Cloudinary
+# Cloudinary Storage
 CLOUDINARY_CLOUD_NAME=dmr8bxdos
 CLOUDINARY_API_KEY=your-api-key
 CLOUDINARY_API_SECRET=your-api-secret
 
-# Resend
+# Resend Email Integration
 RESEND_API_KEY=your-resend-key
 ```
 
-### 3. Installation
-```bash
-npm install
-```
+### 3. Installation & Run
+Install project dependencies and start the Turbopack-powered local dev server:
 
-### 4. Run Development Server
 ```bash
+# Install dependencies
+npm install
+
+# Run the project in development mode
 npm run dev
 ```
 
-## 📦 Deployment
-
-The app is optimized for deployment on **Vercel** or any Node.js environment.
-
-1. Ensure all environment variables are mapped in your production dashboard.
-2. Ensure the Supabase project has the correct RLS policies (see `documentation/security`).
-3. Set the `maxDuration` to 60s in `next.config.mjs` for video processing.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
 ---
-Built with ❤️ for Gesit Companies.
+
+## 📦 Production Builds & Deployment
+
+The application is highly optimized to run on **Vercel** or any node-ready cloud hosting:
+
+1.  **Statically Optimized**: Dynamic routing is automatically resolved during the build pipeline.
+2.  **Environment Sync**: Ensure all environment keys in `.env.local` are identical in your hosting provider's dashboard.
+3.  **High-Capacity Processing**: Set `maxDuration` to 60s in `next.config.mjs` to allow the Cloudinary backend pipeline plenty of time for processing heavy media.
+
+---
+Built with ❤️ for **Gesit Companies**. All rights reserved.
