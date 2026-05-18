@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# reports, dumps, and test files
+/report-*
+/seo-report*
+/*.html
+/*.csv
+/*.log
+/test_browser.js
+/test-news.js
+/run_convert.js
+/tmp_fetch_news.js
+/tmp_news_api.json
+/trading-services-raw.jsx
+/skill.md
+/testing-performance-benchmarker.md
+/debug_news.js
+/legacy_assets_list.txt
+
