@@ -15,7 +15,7 @@ import xss from 'xss';
 
 function NewsDetailSkeleton() {
     return (
-        <div className="bg-white min-h-screen pb-24 font-sans text-slate-800 animate-pulse">
+        <div className="bg-white min-h-screen pb-24 font-sans text-slate-800">
             {/* 1. HERO SKELETON */}
             <div className="w-full bg-[#103065] pt-40 pb-20 px-6 relative overflow-hidden">
                 <div className="container mx-auto max-w-6xl">
@@ -46,9 +46,7 @@ function NewsDetailSkeleton() {
                     {/* Content Column */}
                     <div className="lg:w-2/3 xl:w-3/4 space-y-12">
                         {/* Featured Media Box */}
-                        <div className="w-full aspect-[16/10] bg-slate-100 rounded-[5px] border border-slate-200/50 shadow-sm flex items-center justify-center">
-                            <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-gold/50 animate-spin"></div>
-                        </div>
+                        <div className="w-full aspect-[16/10] bg-slate-100 rounded-[5px] border border-slate-200/50 shadow-sm"></div>
 
                         {/* Article Text Paragraphs */}
                         <div className="space-y-6">
