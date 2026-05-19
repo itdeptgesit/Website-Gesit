@@ -154,7 +154,7 @@ const WorldMap = ({ countries = [] }) => {
               
               return (
                 <Marker 
-                    key={c.country_code} 
+                    key={`${c.country_code}-${c.country_name}`} 
                     coordinates={coords}
                     onMouseEnter={(e) => {
                         const markerRect = e.target.getBoundingClientRect();
