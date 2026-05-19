@@ -58,6 +58,34 @@ export default function NewsDashboard() {
     const [deleting, setDeleting] = useState(false);
     const supabase = createClient();
 
+    // Filters, Search, and Pagination States
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [currentPage, setCurrentPage] = useState(1);
+    const ITEMS_PER_PAGE = 10;
+
+    // Reset pagination to page 1 on query/category change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, selectedCategory]);
+
+    const categories = ['All', ...new Set(news.map(item => item.category || 'News'))];
+
+    const filteredNews = news.filter(item => {
+        const matchesSearch = item.title?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              item.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              item.author?.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+    });
+
+    const totalPages = Math.max(1, Math.ceil(filteredNews.length / ITEMS_PER_PAGE));
+    const paginatedNews = filteredNews.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
+
     const recordLog = async (target, action) => {
         try {
             await supabase.from('activity_logs').insert([{ target, action }]);
@@ -481,7 +509,34 @@ export default function NewsDashboard() {
 
             <Card className="border-none shadow-sm overflow-hidden bg-white">
                 <CardHeader className="bg-slate-50/50 border-b py-5 px-8">
-                    <CardTitle className="text-sm font-bold text-slate-500 uppercase tracking-widest">Article Repository</CardTitle>
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        <CardTitle className="text-sm font-bold text-slate-500 uppercase tracking-widest">Article Repository</CardTitle>
+                        <div className="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto">
+                            {/* Category Filter Select */}
+                            <select
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                className="bg-white border border-slate-200 rounded-lg text-xs font-semibold px-3 h-10 w-full sm:w-40 text-slate-700 focus:outline-none focus:ring-1 focus:ring-[#bc9c33]"
+                            >
+                                <option value="All">All Categories</option>
+                                {categories.filter(c => c !== 'All').map(c => (
+                                    <option key={c} value={c}>{c}</option>
+                                ))}
+                            </select>
+
+                            {/* Search Query Input */}
+                            <div className="relative w-full sm:w-60 group">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <Input
+                                    type="text"
+                                    placeholder="Search stories..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="pl-10 h-10 bg-white rounded-lg border-slate-200 text-xs font-medium w-full"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </CardHeader>
                 <CardContent className="p-0">
                     {loading ? (
@@ -489,65 +544,103 @@ export default function NewsDashboard() {
                             <Loader2 className="animate-spin text-[#1b365d] w-10 h-10" />
                             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Synchronizing Records...</p>
                         </div>
+                    ) : filteredNews.length === 0 ? (
+                        <div className="text-center py-24">
+                            <FileText className="w-12 h-12 text-slate-200 mx-auto mb-4" />
+                            <h3 className="text-lg font-medium text-slate-700">No Articles Found</h3>
+                            <p className="text-slate-400 text-sm mt-1">Try adjusting your search query or category filters.</p>
+                        </div>
                     ) : (
-                        <div className="overflow-x-auto">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow className="bg-slate-50/20 border-b">
-                                        <TableHead className="py-5 px-8 font-bold text-slate-700">Publication Details</TableHead>
-                                        <TableHead className="font-bold text-slate-700">Metadata</TableHead>
-                                        <TableHead className="font-bold text-slate-700">Status</TableHead>
-                                        <TableHead className="text-right px-8 font-bold text-slate-700">Options</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {news.map((item) => (
-                                        <TableRow key={item.id} className="hover:bg-slate-50/30 transition-colors border-b last:border-0">
-                                            <TableCell className="px-8 py-5">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-14 h-14 rounded-md overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
-                                                        <img src={item.image_url || '/placeholder.jpg'} alt="" className="w-full h-full object-cover" />
-                                                    </div>
-                                                    <div className="space-y-1">
-                                                        <h4 className="font-bold text-[#1b365d] text-[15px] leading-snug line-clamp-2">{item.title}</h4>
-                                                        <div className="flex items-center gap-3 text-[11px] text-slate-400 font-medium">
-                                                            <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {item.date}</span>
-                                                            <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" /> {item.author}</span>
+                        <div>
+                            <div className="overflow-x-auto">
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow className="bg-slate-50/20 border-b">
+                                            <TableHead className="py-5 px-8 font-bold text-slate-700">Publication Details</TableHead>
+                                            <TableHead className="font-bold text-slate-700">Metadata</TableHead>
+                                            <TableHead className="font-bold text-slate-700">Status</TableHead>
+                                            <TableHead className="text-right px-8 font-bold text-slate-700">Options</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {paginatedNews.map((item) => (
+                                            <TableRow key={item.id} className="hover:bg-slate-50/30 transition-colors border-b last:border-0">
+                                                <TableCell className="px-8 py-5">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className="w-14 h-14 rounded-md overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
+                                                            <img src={item.image_url || '/placeholder.jpg'} alt="" className="w-full h-full object-cover" />
+                                                        </div>
+                                                        <div className="space-y-1">
+                                                            <h4 className="font-bold text-[#1b365d] text-[15px] leading-snug line-clamp-2">{item.title}</h4>
+                                                            <div className="flex items-center gap-3 text-[11px] text-slate-400 font-medium">
+                                                                <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {item.date}</span>
+                                                                <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" /> {item.author}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell>
-                                                <div className="flex flex-wrap gap-2">
-                                                    <span className="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">{item.category}</span>
-                                                    {item.is_featured && (
-                                                        <span className="bg-amber-50 text-amber-600 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-100 uppercase tracking-wider">Featured</span>
-                                                    )}
-                                                </div>
-                                            </TableCell>
-                                            <TableCell>
-                                                <div className={cn(
-                                                    "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
-                                                    item.status === 'published' ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-500 border-slate-200"
-                                                )}>
-                                                    <div className={cn("w-1.5 h-1.5 rounded-full", item.status === 'published' ? "bg-emerald-500" : "bg-slate-400")} />
-                                                    {item.status || 'Published'}
-                                                </div>
-                                            </TableCell>
-                                            <TableCell className="text-right px-8">
-                                                <div className="flex justify-end gap-2">
-                                                    <Button variant="ghost" size="icon" onClick={() => handleEdit(item)} className="h-9 w-9 text-slate-400 hover:text-[#1b365d] hover:bg-slate-100">
-                                                        <Pencil className="w-4 h-4" />
-                                                    </Button>
-                                                    <Button variant="ghost" size="icon" onClick={() => setDeleteTarget(item)} className="h-9 w-9 text-slate-400 hover:text-red-500 hover:bg-red-50">
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </Button>
-                                                </div>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        <span className="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">{item.category}</span>
+                                                        {item.is_featured && (
+                                                            <span className="bg-amber-50 text-amber-600 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-100 uppercase tracking-wider">Featured</span>
+                                                        )}
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <div className={cn(
+                                                        "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border",
+                                                        item.status === 'published' ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-500 border-slate-200"
+                                                    )}>
+                                                        <div className={cn("w-1.5 h-1.5 rounded-full", item.status === 'published' ? "bg-emerald-500" : "bg-slate-400")} />
+                                                        {item.status || 'Published'}
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell className="text-right px-8">
+                                                    <div className="flex justify-end gap-2">
+                                                        <Button variant="ghost" size="icon" onClick={() => handleEdit(item)} className="h-9 w-9 text-slate-400 hover:text-[#1b365d] hover:bg-slate-100">
+                                                            <Pencil className="w-4 h-4" />
+                                                        </Button>
+                                                        <Button variant="ghost" size="icon" onClick={() => setDeleteTarget(item)} className="h-9 w-9 text-slate-400 hover:text-red-500 hover:bg-red-50">
+                                                            <Trash2 className="w-4 h-4" />
+                                                        </Button>
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </div>
+
+                            {/* Pagination Navigation Footer */}
+                            <div className="px-8 py-4 border-t flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/50">
+                                <p className="text-xs font-semibold text-slate-500">
+                                    Showing <span className="text-[#1b365d] font-bold">{Math.min(filteredNews.length, (currentPage - 1) * ITEMS_PER_PAGE + 1)}</span> to <span className="text-[#1b365d] font-bold">{Math.min(filteredNews.length, currentPage * ITEMS_PER_PAGE)}</span> of <span className="text-[#1b365d] font-bold">{filteredNews.length}</span> publications
+                                </p>
+                                <div className="flex items-center gap-2">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                        disabled={currentPage === 1}
+                                        className="h-8 text-xs font-semibold"
+                                    >
+                                        Previous
+                                    </Button>
+                                    <span className="text-xs font-bold text-slate-700 px-3 py-1 bg-white border rounded-md">
+                                        Page {currentPage} of {totalPages}
+                                    </span>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="h-8 text-xs font-semibold"
+                                    >
+                                        Next
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </CardContent>

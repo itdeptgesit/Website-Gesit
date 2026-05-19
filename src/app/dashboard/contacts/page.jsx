@@ -18,6 +18,11 @@ export default function ContactsInboxPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const supabase = createClient();
 
+    // Read/Unread & Pagination States
+    const [readIds, setReadIds] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const ITEMS_PER_PAGE = 10;
+
     useEffect(() => {
         const fetchMessages = async () => {
             try {
@@ -25,7 +30,7 @@ export default function ContactsInboxPage() {
                     .from('contact_messages')
                     .select('*')
                     .order('created_at', { ascending: false })
-                    .limit(100); // Prevent memory leak on large datasets
+                    .limit(100);
 
                 if (error) {
                     if (error.code === '42P01') {
@@ -42,6 +47,16 @@ export default function ContactsInboxPage() {
                 setLoading(false);
             }
         };
+
+        // Load read message IDs from localStorage
+        try {
+            const stored = localStorage.getItem('gesit_read_message_ids');
+            if (stored) {
+                setReadIds(JSON.parse(stored));
+            }
+        } catch (e) {
+            console.error("Failed to load read message state:", e);
+        }
 
         fetchMessages();
     }, []);
@@ -60,11 +75,39 @@ export default function ContactsInboxPage() {
         }
     };
 
+    const handleSelectMessage = (msg) => {
+        setSelectedMessage(msg);
+        setIsModalOpen(true);
+        if (!readIds.includes(msg.id)) {
+            const updated = [...readIds, msg.id];
+            setReadIds(updated);
+            try {
+                localStorage.setItem('gesit_read_message_ids', JSON.stringify(updated));
+            } catch (e) {
+                console.error("Failed to save read message state:", e);
+            }
+        }
+    };
+
+    // Reset pagination to page 1 on query change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery]);
+
     const filteredMessages = messages.filter(m =>
         m.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         m.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         m.message?.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    // Calculate Pagination Range
+    const totalPages = Math.max(1, Math.ceil(filteredMessages.length / ITEMS_PER_PAGE));
+    const paginatedMessages = filteredMessages.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
+    const unreadCount = messages.filter(m => !readIds.includes(m.id)).length;
 
     if (loading) {
         return (
@@ -77,7 +120,7 @@ export default function ContactsInboxPage() {
 
     return (
         <div className="space-y-8 pb-20">
-            {/* Page Header - Serif Font like News Management */}
+            {/* Page Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div className="space-y-1">
                     <h1 className="text-3xl font-bold tracking-tight text-[#103065]">
@@ -86,22 +129,35 @@ export default function ContactsInboxPage() {
                     <p className="text-slate-500 text-sm">View, sort, and manage all visitor communications.</p>
                 </div>
                 
-                <div className="bg-white px-4 py-3 rounded-lg border shadow-sm flex items-center gap-3">
-                    <div className="text-right">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Total Inbox</p>
-                        <p className="text-xl font-bold text-[#103065] leading-none">{messages.length}</p>
+                <div className="flex gap-4">
+                    {/* Unread Counter Widget */}
+                    <div className="bg-white px-4 py-3 rounded-lg border shadow-sm flex items-center gap-3">
+                        <div className="text-right">
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Belum Dibaca</p>
+                            <p className="text-xl font-bold text-[#bc9c33] leading-none">{unreadCount}</p>
+                        </div>
+                        <div className="w-8 h-8 rounded-md bg-amber-50 flex items-center justify-center text-[#bc9c33]">
+                            <Mail className="w-4 h-4" />
+                        </div>
                     </div>
-                    <div className="w-8 h-8 rounded-md bg-slate-50 flex items-center justify-center text-[#bc9c33]">
-                        <Mail className="w-4 h-4" />
+
+                    <div className="bg-white px-4 py-3 rounded-lg border shadow-sm flex items-center gap-3">
+                        <div className="text-right">
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Total Inbox</p>
+                            <p className="text-xl font-bold text-[#103065] leading-none">{messages.length}</p>
+                        </div>
+                        <div className="w-8 h-8 rounded-md bg-slate-50 flex items-center justify-center text-[#103065]">
+                            <MessageSquare className="w-4 h-4" />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Quick Stats Banner (Optional, keeping it clean like News) */}
+            {/* Quick Stats Banner */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                 <Card className="shadow-sm border ring-1 ring-slate-200/50 rounded-xl overflow-hidden">
+                 <Card className="shadow-sm border ring-1 ring-slate-200/50 rounded-xl overflow-hidden bg-white">
                     <CardHeader className="py-4">
-                        <CardTitle className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Latest Message</CardTitle>
+                        <CardTitle className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Latest Message From</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="text-sm font-bold text-[#103065] truncate">
@@ -111,8 +167,8 @@ export default function ContactsInboxPage() {
                 </Card>
             </div>
 
-            {/* Main Content List - Matches News Management "Article Database" style */}
-            <Card className="shadow-sm border ring-1 ring-slate-200/50 rounded-xl overflow-hidden">
+            {/* Main Content List */}
+            <Card className="shadow-sm border ring-1 ring-slate-200/50 rounded-xl overflow-hidden bg-white">
                 <CardHeader className="bg-slate-50/50 border-b p-6">
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                         <CardTitle className="text-xl">Communications Inbox</CardTitle>
@@ -128,86 +184,136 @@ export default function ContactsInboxPage() {
                         </div>
                     </div>
                 </CardHeader>
-                <CardContent className="p-0 overflow-x-auto">
+                <CardContent className="p-0">
                     {filteredMessages.length === 0 ? (
                         <div className="text-center py-24">
                             <MessageSquare className="w-12 h-12 text-slate-200 mx-auto mb-4" />
                             <h3 className="text-lg font-medium text-slate-700">Inbox Kosong</h3>
-                            <p className="text-slate-400 text-sm mt-1">Belum ada pesan yang masuk saat ini.</p>
+                            <p className="text-slate-400 text-sm mt-1">Belum ada pesan yang cocok dengan pencarian saat ini.</p>
                         </div>
                     ) : (
-                        <div className="min-w-[800px]">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow className="bg-slate-50/30">
-                                        <TableHead className="py-5 px-6 font-bold text-slate-700">Sender Information</TableHead>
-                                        <TableHead className="font-bold text-slate-700">Contact Details</TableHead>
-                                        <TableHead className="font-bold text-slate-700">Date Received</TableHead>
-                                        <TableHead className="text-right px-6 font-bold text-slate-700">Actions</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {filteredMessages.map((msg) => (
-                                        <TableRow key={msg.id} className="hover:bg-slate-50/50 transition-colors border-slate-100">
-                                            <TableCell className="px-6 py-5">
-                                                <div className="flex flex-col">
-                                                    <span className="font-bold text-[#103065] text-sm">{msg.name}</span>
-                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">New Message</span>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell>
-                                                <div className="space-y-1 flex flex-col">
-                                                    <span className="text-slate-500 text-xs flex items-center gap-2">
-                                                        <Mail className="w-3 h-3 text-[#bc9c33]" /> {msg.email}
-                                                    </span>
-                                                    <span className="text-slate-400 text-[10px] flex items-center gap-2">
-                                                        <Phone className="w-3 h-3" /> {msg.phone || 'N/A'}
-                                                    </span>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell>
-                                                <div className="flex flex-col">
-                                                    <span className="text-slate-700 text-xs font-bold">
-                                                        {new Date(msg.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
-                                                    </span>
-                                                    <span className="text-[10px] text-slate-400">
-                                                        {new Date(msg.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
-                                                    </span>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell className="text-right px-6">
-                                                <div className="flex justify-end gap-2">
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        className="text-slate-400 hover:text-[#103065] hover:bg-slate-100 transition-colors border border-transparent hover:border-slate-200"
-                                                        onClick={() => {
-                                                            setSelectedMessage(msg);
-                                                            setIsModalOpen(true);
-                                                        }}
-                                                    >
-                                                        <Eye className="w-4 h-4" />
-                                                    </Button>
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        className="text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors border border-transparent hover:border-red-100"
-                                                        onClick={() => handleDelete(msg.id)}
-                                                    >
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </Button>
-                                                </div>
-                                            </TableCell>
+                        <div>
+                            <div className="overflow-x-auto w-full">
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow className="bg-slate-50/30">
+                                            <TableHead className="py-5 px-6 font-bold text-slate-700">Sender Information</TableHead>
+                                            <TableHead className="font-bold text-slate-700">Contact Details</TableHead>
+                                            <TableHead className="font-bold text-slate-700">Date Received</TableHead>
+                                            <TableHead className="text-right px-6 font-bold text-slate-700">Actions</TableHead>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {paginatedMessages.map((msg) => {
+                                            const isRead = readIds.includes(msg.id);
+                                            return (
+                                                <TableRow 
+                                                    key={msg.id} 
+                                                    className={cn(
+                                                        "hover:bg-slate-50/50 transition-colors border-slate-100",
+                                                        !isRead && "bg-blue-50/20"
+                                                    )}
+                                                >
+                                                    <TableCell className="px-6 py-5">
+                                                        <div className="flex flex-col">
+                                                            <div className="flex items-center gap-2">
+                                                                {!isRead && (
+                                                                    <span className="w-2 h-2 rounded-full bg-[#bc9c33] shrink-0 animate-pulse" title="Pesan Belum Dibaca" />
+                                                                )}
+                                                                <span className={cn(
+                                                                    "text-[#103065] text-sm",
+                                                                    isRead ? "font-semibold" : "font-bold text-[#103065]"
+                                                                )}>
+                                                                    {msg.name}
+                                                                </span>
+                                                            </div>
+                                                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
+                                                                {isRead ? "Pesan Dibaca" : "Inquiry Baru"}
+                                                            </span>
+                                                        </div>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <div className="space-y-1 flex flex-col">
+                                                            <span className="text-slate-500 text-xs flex items-center gap-2">
+                                                                <Mail className="w-3 h-3 text-[#bc9c33]" /> {msg.email}
+                                                            </span>
+                                                            <span className="text-slate-400 text-[10px] flex items-center gap-2">
+                                                                <Phone className="w-3 h-3" /> {msg.phone || 'N/A'}
+                                                            </span>
+                                                        </div>
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-slate-700 text-xs font-bold">
+                                                                {new Date(msg.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+                                                            </span>
+                                                            <span className="text-[10px] text-slate-400">
+                                                                {new Date(msg.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+                                                            </span>
+                                                        </div>
+                                                    </TableCell>
+                                                    <TableCell className="text-right px-6">
+                                                        <div className="flex justify-end gap-2">
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                className="text-slate-400 hover:text-[#103065] hover:bg-slate-100 transition-colors border border-transparent hover:border-slate-200"
+                                                                onClick={() => handleSelectMessage(msg)}
+                                                            >
+                                                                <Eye className="w-4 h-4" />
+                                                            </Button>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                className="text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors border border-transparent hover:border-red-100"
+                                                                onClick={() => handleDelete(msg.id)}
+                                                            >
+                                                                <Trash2 className="w-4 h-4" />
+                                                            </Button>
+                                                        </div>
+                                                    </TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </div>
+
+                            {/* Pagination Navigation Footer */}
+                            <div className="px-6 py-4 border-t flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/50">
+                                <p className="text-xs font-semibold text-slate-500">
+                                    Menampilkan <span className="text-[#103065] font-bold">{Math.min(filteredMessages.length, (currentPage - 1) * ITEMS_PER_PAGE + 1)}</span> sampai <span className="text-[#103065] font-bold">{Math.min(filteredMessages.length, currentPage * ITEMS_PER_PAGE)}</span> dari <span className="text-[#103065] font-bold">{filteredMessages.length}</span> pesan masuk
+                                </p>
+                                <div className="flex items-center gap-2">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                        disabled={currentPage === 1}
+                                        className="h-8 text-xs font-semibold"
+                                    >
+                                        Sebelumnya
+                                    </Button>
+                                    <span className="text-xs font-bold text-slate-700 px-3 py-1 bg-white border rounded-md">
+                                        Halaman {currentPage} dari {totalPages}
+                                    </span>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                        disabled={currentPage === totalPages}
+                                        className="h-8 text-xs font-semibold"
+                                    >
+                                        Selanjutnya
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </CardContent>
             </Card>
 
-            {/* Message Detail Modal - Full Screen Overlay */}
+            {/* Message Detail Modal */}
             <AnimatePresence>
                 {isModalOpen && selectedMessage && (
                     <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4" role="dialog" aria-modal="true">
@@ -277,4 +383,5 @@ export default function ContactsInboxPage() {
         </div>
     );
 }
+
 
