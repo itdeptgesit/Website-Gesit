@@ -45,8 +45,16 @@ export async function POST(request) {
                 ? 'International' 
                 : new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode) || 'International';
 
-        const city = isLocal ? 'Local Dev Office' : (request.headers.get('x-vercel-ip-city') || 'Unknown City');
-        const region = isLocal ? 'Local Region' : (request.headers.get('x-vercel-ip-country-region') || 'Unknown Region');
+        const safeDecode = (str) => {
+            try {
+                return str ? decodeURIComponent(str) : '';
+            } catch (e) {
+                return str || '';
+            }
+        };
+
+        const city = isLocal ? 'Local Dev Office' : safeDecode(request.headers.get('x-vercel-ip-city') || 'Unknown City');
+        const region = isLocal ? 'Local Region' : safeDecode(request.headers.get('x-vercel-ip-country-region') || 'Unknown Region');
 
         if (!path) return NextResponse.json({ error: 'Path is required' }, { status: 400 });
 
