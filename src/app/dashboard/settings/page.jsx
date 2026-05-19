@@ -18,6 +18,9 @@ export default function HighFidelitySettingsPage() {
 
     // Logs Data
     const [logs, setLogs] = useState([]);
+    const [logsPage, setLogsPage] = useState(1);
+    const LOGS_PER_PAGE = 8;
+
 
     // 1. SEO Manager State
     const [activeSegment, setActiveSegment] = useState('HOME');
@@ -85,7 +88,7 @@ export default function HighFidelitySettingsPage() {
             }
 
             // Load Activity Logs
-            const { data: activityLogs } = await supabase.from('activity_logs').select('*').order('created_at', { ascending: false }).limit(20);
+            const { data: activityLogs } = await supabase.from('activity_logs').select('*').order('created_at', { ascending: false }).limit(100);
             if (activityLogs) {
                 setLogs(activityLogs);
             }
@@ -764,37 +767,71 @@ export default function HighFidelitySettingsPage() {
                     <div className="relative pl-6 lg:pl-10">
                         <div className="absolute left-8 lg:left-[51px] top-4 bottom-0 w-px bg-slate-100"></div>
 
-                        <div className="space-y-6">
+                        <div className="space-y-6 pb-6">
                             {logs.length === 0 && !loading ? (
                                 <div className="p-10 text-center text-slate-400">No activity logs recorded yet.</div>
-                            ) : logs.map((log) => (
-                                <div key={log.id} className="relative flex gap-6 lg:gap-8 hover:-translate-y-0.5 transition-transform">
-                                    {/* Timeline Marker */}
-                                    <div className="relative z-10 w-7 h-7 shrink-0 rounded bg-blue-50 flex items-center justify-center mt-3 shadow-sm border border-blue-100/50">
-                                        <Zap className="w-3 h-3 text-blue-500 shrink-0" />
-                                    </div>
-
-                                    <Card className="flex-1 p-5 shadow-sm border-slate-100 hover:border-slate-200 transition-colors bg-white">
-                                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
-                                            <div className="flex items-center gap-3">
-                                                <span className="bg-blue-50 text-blue-600 text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded">
-                                                    UPDATE
-                                                </span>
-                                                <h4 className="font-bold text-slate-700 text-sm">
-                                                    {log.target}
-                                                </h4>
-                                            </div>
-                                            <span className="text-[11px] font-medium tracking-wide text-[#a8b1c5]">
-                                                {new Date(log.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
-                                            </span>
+                            ) : (
+                                logs.slice((logsPage - 1) * LOGS_PER_PAGE, logsPage * LOGS_PER_PAGE).map((log) => (
+                                    <div key={log.id} className="relative flex gap-6 lg:gap-8 hover:-translate-y-0.5 transition-transform">
+                                        {/* Timeline Marker */}
+                                        <div className="relative z-10 w-7 h-7 shrink-0 rounded bg-blue-50 flex items-center justify-center mt-3 shadow-sm border border-blue-100/50">
+                                            <Zap className="w-3 h-3 text-blue-500 shrink-0" />
                                         </div>
-                                        <p className="text-slate-500 text-sm">
-                                            {log.action}
-                                        </p>
-                                    </Card>
-                                </div>
-                            ))}
+
+                                        <Card className="flex-1 p-5 shadow-sm border-slate-100 hover:border-slate-200 transition-colors bg-white">
+                                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
+                                                <div className="flex items-center gap-3">
+                                                    <span className="bg-blue-50 text-blue-600 text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded">
+                                                        UPDATE
+                                                    </span>
+                                                    <h4 className="font-bold text-slate-700 text-sm">
+                                                        {log.target}
+                                                    </h4>
+                                                </div>
+                                                <span className="text-[11px] font-medium tracking-wide text-[#a8b1c5]">
+                                                    {new Date(log.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
+                                                </span>
+                                            </div>
+                                            <p className="text-slate-500 text-sm">
+                                                {log.action}
+                                            </p>
+                                        </Card>
+                                    </div>
+                                ))
+                            )}
                         </div>
+
+                        {/* Pagination Footer for Logs */}
+                        {logs.length > 0 && (
+                            <div className="ml-0 lg:ml-8 mt-8 px-6 py-4 border rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/50 shadow-sm bg-white">
+                                <p className="text-xs font-semibold text-slate-500">
+                                    Showing <span className="text-[#1b365d] font-bold">{Math.min(logs.length, (logsPage - 1) * LOGS_PER_PAGE + 1)}</span> to <span className="text-[#1b365d] font-bold">{Math.min(logs.length, logsPage * LOGS_PER_PAGE)}</span> of <span className="text-[#1b365d] font-bold">{logs.length}</span> actions
+                                </p>
+                                <div className="flex items-center gap-2">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setLogsPage(prev => Math.max(1, prev - 1))}
+                                        disabled={logsPage === 1}
+                                        className="h-8 text-xs font-semibold"
+                                    >
+                                        Sebelumnya
+                                    </Button>
+                                    <span className="text-xs font-bold text-slate-700 px-3 py-1 bg-white border rounded-md">
+                                        Halaman {logsPage} dari {Math.max(1, Math.ceil(logs.length / LOGS_PER_PAGE))}
+                                    </span>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        onClick={() => setLogsPage(prev => Math.min(Math.max(1, Math.ceil(logs.length / LOGS_PER_PAGE)), prev + 1))}
+                                        disabled={logsPage === Math.max(1, Math.ceil(logs.length / LOGS_PER_PAGE))}
+                                        className="h-8 text-xs font-semibold"
+                                    >
+                                        Selanjutnya
+                                    </Button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </TabsContent>
             </Tabs>
