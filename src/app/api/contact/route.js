@@ -73,9 +73,7 @@ export async function POST(req) {
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(16, 48, 101, 0.05); border: 1px solid #eef2f6;">
               
               <!-- Top Brand Bar -->
-              <div style="background: linear-gradient(135deg, #103065 0%, #1c4587 100%); padding: 30px 40px; text-align: center; position: relative;">
-                <!-- Subtle Decorative Gold Accent Line -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #bc9c33;"></div>
+              <div style="background: linear-gradient(135deg, #103065 0%, #1c4587 100%); padding: 30px 40px; text-align: center;">
                 
                 <!-- Logo Gesit -->
                 <div style="margin-bottom: 20px; text-align: center;">
@@ -137,6 +135,9 @@ export async function POST(req) {
               <div style="background-color: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #eef2f6;">
                 <p style="font-size: 11px; color: #94a3b8; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
                   &copy; 2026 THE GESIT COMPANIES. ALL RIGHTS RESERVED.
+                </p>
+                <p style="font-size: 8px; color: #cbd5e1; margin: 6px 0 0 0; font-family: monospace;">
+                  Ref: MSG-${Date.now().toString(36).toUpperCase()}
                 </p>
               </div>
               
