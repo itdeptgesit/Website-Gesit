@@ -224,8 +224,8 @@ export default function NewsDetailPage() {
 
                         {/* Featured Media (Video or Image) */}
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             transition={{ duration: 0.8 }}
                             className="relative w-full aspect-[16/10] rounded-[5px] overflow-hidden mb-12 shadow-2xl bg-slate-100"
                         >
@@ -400,7 +400,7 @@ export default function NewsDetailPage() {
                                                         src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                                                         alt={item.title}
                                                         fill
-                                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                                        className="object-cover"
                                                     />
                                                 </div>
                                                 <div className="flex flex-col">

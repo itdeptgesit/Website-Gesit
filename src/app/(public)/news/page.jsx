@@ -238,7 +238,7 @@ const NewsPage = () => {
                   src={featuredArticle?.image_url || featuredArticle?.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                   alt={featuredArticle?.title || 'News Update'}
                   fill
-                  className="gs-news-featured-img object-cover hover:scale-105 transition duration-1000"
+                  className="gs-news-featured-img object-cover transition duration-1000"
                   sizes="(max-width: 1024px) 100vw, 65vw"
                   priority
                 />
@@ -405,14 +405,14 @@ const NewsPage = () => {
                 <motion.div
                   key={`gallery-scroll-${index}`}
                   className="gs-news-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative bg-white"
-                  whileHover={{ y: -10, scale: 1.025 }}
+                  whileHover={{ y: -10 }}
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Image
                     src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                     alt={item.title || 'News Update'}
                     fill
-                    className="object-cover grayscale-[10%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out"
+                    className="object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-[2200ms] ease-out"
                     sizes="(max-width: 768px) 280px, 450px"
                   />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
