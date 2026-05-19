@@ -59,18 +59,59 @@ const WorldMap = ({ countries = [] }) => {
     </div>
   );
 
-  const markerMap = {
-    'ID': [113.9213, -0.7893],
-    'SG': [103.8198, 1.3521],
-    'US': [-95.7129, 37.0902],
-    'JP': [138.2529, 36.2048],
-    'AU': [133.7751, -25.2744],
-    'GB': [-3.4360, 55.3781],
-    'DE': [10.4515, 51.1657],
-    'FR': [2.2137, 46.2276],
-    'CN': [104.1954, 35.8617],
-    'IN': [78.9629, 20.5937],
-    'DEV': [113.9213, -0.7893]
+  const getCityCoordinates = (countryCode, displayName) => {
+      const name = displayName?.toLowerCase() || '';
+      
+      // Java / Jakarta Area (for West Jakarta, etc.)
+      if (name.includes('jakarta') || name.includes('tangerang') || name.includes('bekasi') || name.includes('depok') || name.includes('bogor')) {
+          return [106.8272, -6.1751]; // Java (Jakarta)
+      }
+      if (name.includes('surabaya') || name.includes('sidoarjo') || name.includes('gresik')) {
+          return [112.7521, -7.2575]; // Surabaya
+      }
+      if (name.includes('bandung')) {
+          return [107.6191, -6.9175]; // Bandung
+      }
+      if (name.includes('medan')) {
+          return [98.6722, 3.5952]; // Medan
+      }
+      if (name.includes('makassar')) {
+          return [119.4179, -5.1477]; // Makassar
+      }
+      if (name.includes('semarang')) {
+          return [110.4203, -6.9667]; // Semarang
+      }
+      if (name.includes('yogyakarta') || name.includes('jogja')) {
+          return [110.3705, -7.7956]; // Yogyakarta
+      }
+      if (name.includes('denpasar') || name.includes('bali')) {
+          return [115.2167, -8.6500]; // Bali
+      }
+
+      // USA Cities (San Jose California)
+      if (name.includes('san jose') || name.includes('santa clara') || name.includes('san francisco') || name.includes('california')) {
+          return [-121.8863, 37.3382]; // San Jose, CA
+      }
+      if (name.includes('new york')) {
+          return [-74.0060, 40.7128]; // New York, NY
+      }
+
+      // Country level fallbacks (centers)
+      const countryFallbacks = {
+        'ID': [113.9213, -0.7893], // Center of Indonesia (Kalimantan)
+        'SG': [103.8519, 1.3521],  // Singapore
+        'US': [-95.7129, 37.0902],  // US Center
+        'JP': [138.2529, 36.2048],  // Japan
+        'AU': [133.7751, -25.2744], // Australia
+        'GB': [-3.4360, 55.3781],   // UK
+        'DE': [10.4515, 51.1657],   // Germany
+        'FR': [2.2137, 46.2276],    // France
+        'CN': [104.1954, 35.8617],  // China
+        'IN': [78.9629, 20.5937],   // India
+        'DEV': [106.8272, -6.1751]  // Local Dev is Jakarta/Java
+      };
+
+      return countryFallbacks[countryCode] || [113.9213, -0.7893];
   };
 
   // Mapping numeric ISO IDs to our codes (Standard for world-atlas)
@@ -149,7 +190,7 @@ const WorldMap = ({ countries = [] }) => {
             </Geographies>
             
             {countries.map((c) => {
-              const coords = markerMap[c.country_code];
+              const coords = getCityCoordinates(c.country_code, c.country_name);
               if (!coords) return null;
               
               return (
