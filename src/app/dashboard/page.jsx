@@ -38,7 +38,7 @@ export default function DashboardOverviewPage() {
             else startDate = new Date(0);
 
             const { data: logs } = await supabase.from('traffic_logs')
-                .select('path, country_code, country_name')
+                .select('*')
                 .gte('created_at', filter !== 'All Time' ? startDate.toISOString() : new Date(0).toISOString());
 
             let processedAnalytics = [];
@@ -50,10 +50,20 @@ export default function DashboardOverviewPage() {
                 logs.forEach(log => {
                     pathMap[log.path] = (pathMap[log.path] || 0) + 1;
                     if (log.country_code) {
-                        if (!countryMap[log.country_code]) {
-                            countryMap[log.country_code] = { country_code: log.country_code, country_name: log.country_name, visitor_count: 0 };
+                        const cityPrefix = log.city && log.city !== 'Unknown' && log.city !== 'Unknown City' && log.city !== 'unknown' ? `${log.city}, ` : '';
+                        const countryDisplayName = `${cityPrefix}${log.country_name}`;
+                        const key = log.city && log.city !== 'Unknown' && log.city !== 'Unknown City' && log.city !== 'unknown' 
+                            ? `${log.country_code}-${log.city}` 
+                            : log.country_code;
+
+                        if (!countryMap[key]) {
+                            countryMap[key] = { 
+                                country_code: log.country_code, 
+                                country_name: countryDisplayName, 
+                                visitor_count: 0 
+                            };
                         }
-                        countryMap[log.country_code].visitor_count++;
+                        countryMap[key].visitor_count++;
                     }
                 });
 

@@ -45,6 +45,9 @@ export async function POST(request) {
                 ? 'International' 
                 : new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode) || 'International';
 
+        const city = isLocal ? 'Local Dev Office' : (request.headers.get('x-vercel-ip-city') || 'Unknown City');
+        const region = isLocal ? 'Local Region' : (request.headers.get('x-vercel-ip-country-region') || 'Unknown Region');
+
         if (!path) return NextResponse.json({ error: 'Path is required' }, { status: 400 });
 
         const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -76,11 +79,30 @@ export async function POST(request) {
         }
         
         // 3. Log individual visit for historical analysis
-        await supabase.from('traffic_logs').insert([{
-            path,
-            country_code: countryCode,
-            country_name: countryName
-        }]);
+        try {
+            const { error: insertErr } = await supabase.from('traffic_logs').insert([{
+                path,
+                country_code: countryCode,
+                country_name: countryName,
+                city,
+                region
+            }]);
+            
+            if (insertErr) {
+                // Fallback: If column city/region doesn't exist yet, insert without them
+                await supabase.from('traffic_logs').insert([{
+                    path,
+                    country_code: countryCode,
+                    country_name: countryName
+                }]);
+            }
+        } catch (err) {
+            await supabase.from('traffic_logs').insert([{
+                path,
+                country_code: countryCode,
+                country_name: countryName
+            }]);
+        }
 
         return NextResponse.json({ success: true });
     } catch (error) {
