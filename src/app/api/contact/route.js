@@ -59,44 +59,81 @@ export async function POST(req) {
 
     // 2. Send Email Notification via Resend
     if (process.env.RESEND_API_KEY) {
+      // Construct dynamic dashboard URL based on the request host header
+      const host = req.headers.get('host') || 'localhost:3000';
+      const protocol = host.includes('localhost') ? 'http' : 'https';
+      const dashboardUrl = `${protocol}://${host}/dashboard/contacts`;
+
       const { data, error: emailError } = await resend.emails.send({
         from: 'Gesit Contact Form <contact@send.gesit.co.id>',
         to: 'contact@gesit.co.id',
         subject: `New Inquiry from ${name}`,
         html: `
-          <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; color: #333; border: 1px solid #e1e8f0; border-radius: 12px; overflow: hidden;">
-            <div style="background-color: #103065; padding: 20px; text-align: center;">
-               <h2 style="color: white; margin: 0; font-size: 20px;">New Contact Inquiry</h2>
-            </div>
-            <div style="padding: 30px;">
-              <p style="font-size: 14px; color: #64748b;">You have received a new message from the website contact form:</p>
+          <div style="background-color: #f6f9fc; padding: 40px 20px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(16, 48, 101, 0.05); border: 1px solid #eef2f6;">
               
-              <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                <tr>
-                  <td style="padding: 12px; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #1e293b; width: 30%;">Name</td>
-                  <td style="padding: 12px; border-bottom: 1px solid #f1f5f9; color: #475569;">${name}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #1e293b;">Email</td>
-                  <td style="padding: 12px; border-bottom: 1px solid #f1f5f9; color: #475569;">${email}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px; border-bottom: 1px solid #f1f5f9; font-weight: bold; color: #1e293b;">Phone</td>
-                  <td style="padding: 12px; border-bottom: 1px solid #f1f5f9; color: #475569;">${phone}</td>
-                </tr>
-              </table>
-              
-              <p style="font-weight: bold; color: #1e293b; margin-bottom: 10px;">Message:</p>
-              <div style="padding: 20px; background: #f8fafc; border-radius: 8px; color: #334155; line-height: 1.6; border: 1px solid #edf2f7;">
-                ${message || '<span style="font-style: italic; color: #94a3b8;">No message provided.</span>'}
+              <!-- Top Brand Bar -->
+              <div style="background: linear-gradient(135deg, #103065 0%, #1c4587 100%); padding: 30px 40px; text-align: center; position: relative;">
+                <!-- Subtle Decorative Gold Accent Line -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #bc9c33;"></div>
+                <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">New Contact Inquiry</h1>
+                <p style="color: #93c5fd; margin: 8px 0 0 0; font-size: 13px; font-weight: 500; letter-spacing: 1px;">THE GESIT COMPANIES</p>
               </div>
               
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f1f5f9; text-align: center;">
-                <a href="http://localhost:3000/dashboard/contacts" style="display: inline-block; padding: 12px 24px; background-color: #bc9c33; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">View in Dashboard</a>
+              <div style="padding: 40px;">
+                <p style="font-size: 15px; color: #475569; line-height: 1.6; margin: 0 0 25px 0;">
+                  Hello Team,<br/>
+                  A visitor has submitted a new inquiry through the corporate website contact form. Here are the details:
+                </p>
+                
+                <!-- Sender Info Card -->
+                <div style="background-color: #f8fafc; border-radius: 12px; border: 1px solid #edf2f7; padding: 24px; margin-bottom: 25px;">
+                  <h3 style="margin: 0 0 16px 0; color: #103065; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
+                    Sender Profile
+                  </h3>
+                  
+                  <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                      <td style="padding: 8px 0; font-size: 13px; font-weight: 600; color: #64748b; width: 30%;">Full Name</td>
+                      <td style="padding: 8px 0; font-size: 14px; font-weight: 700; color: #1e293b;">${name}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; font-size: 13px; font-weight: 600; color: #64748b;">Email Address</td>
+                      <td style="padding: 8px 0; font-size: 14px; font-weight: 600; color: #bc9c33;"><a href="mailto:${email}" style="color: #bc9c33; text-decoration: none;">${email}</a></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; font-size: 13px; font-weight: 600; color: #64748b;">Phone Number</td>
+                      <td style="padding: 8px 0; font-size: 14px; font-weight: 500; color: #475569;">${phone}</td>
+                    </tr>
+                  </table>
+                </div>
+                
+                <!-- Message Card -->
+                <div style="margin-bottom: 35px;">
+                  <h3 style="margin: 0 0 12px 0; color: #103065; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;">
+                    Message
+                  </h3>
+                  <div style="padding: 20px; background-color: #ffffff; border-left: 4px solid #bc9c33; border-radius: 4px; color: #334155; line-height: 1.6; font-size: 14px; font-style: italic; box-shadow: inset 0 1px 3px rgba(0,0,0,0.02); border-top: 1px solid #f1f5f9; border-right: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9;">
+                    "${message || 'No message provided.'}"
+                  </div>
+                </div>
+                
+                <!-- View in Dashboard CTA -->
+                <div style="text-align: center; margin-top: 30px;">
+                  <a href="${dashboardUrl}" style="display: inline-block; padding: 14px 32px; background-color: #bc9c33; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; box-shadow: 0 4px 12px rgba(188, 156, 51, 0.25); transition: background-color 0.2s ease;">
+                    View in Dashboard
+                  </a>
+                </div>
+                
               </div>
-            </div>
-            <div style="background-color: #fcfdfe; padding: 15px; border-top: 1px solid #f1f5f9; text-align: center;">
-               <p style="font-size: 11px; color: #94a3b8; margin: 0; text-transform: uppercase; letter-spacing: 1px;">&copy; 2026 THE GESIT COMPANIES</p>
+              
+              <!-- Footer -->
+              <div style="background-color: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #eef2f6;">
+                <p style="font-size: 11px; color: #94a3b8; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
+                  &copy; 2026 THE GESIT COMPANIES. ALL RIGHTS RESERVED.
+                </p>
+              </div>
+              
             </div>
           </div>
         `,
