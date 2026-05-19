@@ -134,9 +134,7 @@ const NewsPage = () => {
                   fill
                   sizes="100vw"
                   style={{
-                    objectFit: "cover",
-                    transform: idx === activeIdx ? "scale(1.08)" : "scale(1.02)",
-                    transition: "transform 5000ms ease-out"
+                    objectFit: "cover"
                   }}
                   priority={idx === 0}
                   {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
