@@ -76,6 +76,12 @@ export async function POST(req) {
               <div style="background: linear-gradient(135deg, #103065 0%, #1c4587 100%); padding: 30px 40px; text-align: center; position: relative;">
                 <!-- Subtle Decorative Gold Accent Line -->
                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background-color: #bc9c33;"></div>
+                
+                <!-- Logo Gesit -->
+                <div style="margin-bottom: 20px; text-align: center;">
+                  <img src="https://raw.githubusercontent.com/itdeptgesit/Website-Gesit/main/public/logo-gesit.png" alt="Gesit Logo" style="height: 55px; width: auto; display: inline-block;" />
+                </div>
+                
                 <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">New Contact Inquiry</h1>
                 <p style="color: #93c5fd; margin: 8px 0 0 0; font-size: 13px; font-weight: 500; letter-spacing: 1px;">THE GESIT COMPANIES</p>
               </div>
