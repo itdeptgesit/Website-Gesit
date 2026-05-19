@@ -77,7 +77,7 @@ export async function POST(req) {
                 
                 <!-- Logo Gesit -->
                 <div style="margin-bottom: 20px; text-align: center;">
-                  <img src="https://raw.githubusercontent.com/itdeptgesit/Website-Gesit/main/public/logo-gesit.png" alt="Gesit Logo" style="height: 55px; width: auto; display: inline-block;" />
+                  <img src="https://web.gesit.co.id/logo-gesit.png" alt="Gesit Logo" style="height: 55px; width: auto; display: inline-block;" />
                 </div>
                 
                 <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">New Contact Inquiry</h1>
