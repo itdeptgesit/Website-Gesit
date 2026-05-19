@@ -60,8 +60,8 @@ export async function POST(req) {
     // 2. Send Email Notification via Resend
     if (process.env.RESEND_API_KEY) {
       const { data, error: emailError } = await resend.emails.send({
-        from: 'Gesit Contact Form <onboarding@resend.dev>', // Use verified domain once available
-        to: 'rudi.siarudin@gesit.co.id',
+        from: 'Gesit Contact Form <contact@send.gesit.co.id>',
+        to: 'contact@gesit.co.id',
         subject: `New Inquiry from ${name}`,
         html: `
           <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; color: #333; border: 1px solid #e1e8f0; border-radius: 12px; overflow: hidden;">
