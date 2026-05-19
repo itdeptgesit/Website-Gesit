@@ -77,9 +77,27 @@ export default function ContactsInboxPage() {
         }
     };
 
-    const handleSelectMessage = (msg) => {
+    const handleSelectMessage = async (msg) => {
         setSelectedMessage(msg);
         setIsModalOpen(true);
+
+        // 1. Try to update status directly in Supabase
+        try {
+            const { error } = await supabase
+                .from('contact_messages')
+                .update({ is_read: true })
+                .eq('id', msg.id);
+            
+            if (!error) {
+                // Instantly update the state so UI registers it live without page reload
+                setMessages(prev => prev.map(m => m.id === msg.id ? { ...m, is_read: true } : m));
+                return;
+            }
+        } catch (dbErr) {
+            console.warn("Supabase database update failed, using localStorage fallback:", dbErr);
+        }
+
+        // 2. Fallback to localStorage if the column is not yet added in Supabase dashboard
         if (!readIds.includes(msg.id)) {
             const updated = [...readIds, msg.id];
             setReadIds(updated);
@@ -109,7 +127,8 @@ export default function ContactsInboxPage() {
         currentPage * ITEMS_PER_PAGE
     );
 
-    const unreadCount = messages.filter(m => !readIds.includes(m.id)).length;
+    const unreadCount = messages.filter(m => !m.is_read && !readIds.includes(m.id)).length;
+
 
     if (loading) {
         return (
