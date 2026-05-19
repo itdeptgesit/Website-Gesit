@@ -289,11 +289,12 @@ export default function LoginPage() {
 
                             <button
                                 type="submit"
-                                className="w-full bg-gradient-to-r from-[#103065] to-[#1c4587] hover:from-[#0c244b] hover:to-[#103065] text-white h-[48px] rounded-[8px] transition-all duration-300 shadow-[0_4px_14px_0_rgba(16,48,101,0.35)] hover:shadow-[0_6px_20px_rgba(16,48,101,0.25)] hover:-translate-y-[1px] active:translate-y-0 flex items-center justify-center gap-2 text-[14px] font-bold mt-8 border-0 cursor-pointer"
+                                className="w-full text-white h-[48px] rounded-[8px] transition-all duration-300 shadow-[0_4px_14px_0_rgba(16,48,101,0.35)] hover:shadow-[0_6px_20px_rgba(16,48,101,0.25)] hover:-translate-y-[1px] active:translate-y-0 flex items-center justify-center gap-2 text-[14px] font-bold mt-8 border-0 cursor-pointer"
+                                style={{ background: 'linear-gradient(to right, #103065, #1c4587)', color: '#ffffff' }}
                                 disabled={loading}
                             >
                                 {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" strokeWidth={2.5} />}
-                                <span>Secure Sign In</span>
+                                <span style={{ color: '#ffffff' }}>Secure Sign In</span>
                                 {!loading && <ArrowRight className="w-4 h-4 ml-1" strokeWidth={2.5} />}
                             </button>
 
@@ -302,7 +303,7 @@ export default function LoginPage() {
                                 <span>Your connection is secure and encrypted</span>
                             </div>
                         </form>
-                    ) : (
+                     ) : (
                         <div className="space-y-6">
                             <div className="p-4 bg-[#f8fafc] rounded-xl flex items-center gap-4 border border-slate-100 text-left">
                                 <div className="p-2.5 bg-white rounded-lg shadow-sm border border-slate-100 shrink-0">
@@ -336,11 +337,12 @@ export default function LoginPage() {
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-[#103065] hover:bg-[#0c244b] text-white h-[50px] rounded-xl text-sm font-semibold mt-2 shadow-[0_4px_14px_rgba(16,48,101,0.25)] border-0 cursor-pointer flex items-center justify-center"
+                                    className="w-full text-white h-[50px] rounded-xl text-sm font-semibold mt-2 shadow-[0_4px_14px_rgba(16,48,101,0.25)] border-0 cursor-pointer flex items-center justify-center"
+                                    style={{ backgroundColor: '#103065', color: '#ffffff' }}
                                     disabled={loading || mfaCode.length < 6}
                                 >
                                     {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
-                                    Complete Login
+                                    <span style={{ color: '#ffffff' }}>Complete Login</span>
                                 </button>
 
                                 <Button
