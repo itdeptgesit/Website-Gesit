@@ -208,17 +208,12 @@ const WorldMap = ({ countries = [] }) => {
                     }}
                     onMouseLeave={() => setTooltip(null)}
                 >
-                  <circle r={12} fill={c.visitor_count > 1000 ? "#bc9c33" : "#103065"} fillOpacity={0.2}>
-                    <animate attributeName="r" from="6" to="24" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" from="0.4" to="0" dur="2s" repeatCount="indefinite" />
-                  </circle>
-                  
                   <circle 
                     r={Math.min(12, 5 + c.visitor_count / 500)} 
                     fill={c.visitor_count > 1000 ? "#bc9c33" : "#103065"} 
                     stroke="white" 
                     strokeWidth={2}
-                    className="cursor-pointer transition-all duration-300 hover:scale-125 shadow-2xl"
+                    className="cursor-pointer shadow-2xl"
                   />
                 </Marker>
               );
