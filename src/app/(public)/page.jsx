@@ -126,9 +126,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.4 }}
+            className="text-[38px] md:text-[clamp(52px,7vw,85px)]"
             style={{
               fontFamily: 'var(--font-serif)', color: '#fff',
-              fontSize: 'clamp(52px, 7vw, 85px)', fontWeight: 400,
+              fontWeight: 400,
               lineHeight: 1.1, textAlign: 'center', margin: 0,
             }}
           >
