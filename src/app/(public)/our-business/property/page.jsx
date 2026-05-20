@@ -554,8 +554,8 @@ const PropertyPage = () => {
                         max-width: 100% !important;
                     }
                     .project-title {
-                        font-size: 42px !important;
-                        line-height: 50px !important;
+                        font-size: clamp(28px, 6vw, 36px) !important;
+                        line-height: 1.3 !important;
                         margin-bottom: 25px !important;
                         text-align: center !important;
                     }

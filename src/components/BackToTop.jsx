@@ -50,8 +50,8 @@ export default function BackToTop() {
       onClick={scrollToTop}
       style={{
         position: 'fixed',
-        bottom: '40px',
-        right: '40px',
+        bottom: '20px',
+        right: '16px',
         width: '50px',
         height: '50px',
         cursor: 'pointer',
