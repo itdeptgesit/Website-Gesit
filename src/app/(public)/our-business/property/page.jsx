@@ -575,6 +575,15 @@ const PropertyPage = () => {
                         margin: 10px 0 25px !important;
                         align-self: flex-start !important;
                     }
+                    .project-info-title {
+                        font-size: 16px !important;
+                        line-height: 1.4 !important;
+                    }
+                    .project-info-text {
+                        font-size: 14.5px !important;
+                        line-height: 1.4 !important;
+                        margin: 4px 0 0 0 !important;
+                    }
 
                 }
             `}</style>
