@@ -292,7 +292,7 @@ export default function CSRPage() {
                     >
                         {/* Heading - Forced breaks to match your reference image exactly */}
                         <div className="mb-5">
-                            <h3 className="text-[36px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
+                            <h3 className="text-[22px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#103065',
                                 fontFamily: 'Lora, serif',
                                 margin: 0,
@@ -364,7 +364,7 @@ export default function CSRPage() {
             <section className="py-20 bg-white">
                 <div className="container mx-auto px-6 max-w-5xl">
                     <h2
-                        className="text-center mb-12 text-[#000] text-[38px] md:text-[42px]"
+                        className="text-center mb-12 text-[#000] text-[26px] md:text-[42px]"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
                         Our CSR Initiatives & Programs
@@ -396,7 +396,7 @@ export default function CSRPage() {
                                     >
                                         {openInitiative === initiative.title ? <Minus size={16} strokeWidth={2} /> : <Plus size={16} strokeWidth={2} />}
                                     </motion.div>
-                                    <span className="text-[20px] md:text-[24px] text-[#000]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
+                                    <span className="text-[18px] md:text-[24px] text-[#000]" style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}>{initiative.title}</span>
                                 </button>
 
                                 <AnimatePresence initial={false}>
@@ -412,7 +412,7 @@ export default function CSRPage() {
                                                 {initiative.content.map((block) => (
                                                     <div key={block.subtitle} className="mt-6 first:mt-0">
                                                         {block.subtitle && (
-                                                            <h4 className="text-[20px] md:text-[22px] font-normal text-[#1a1a1a] m-0 mb-3" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
+                                                            <h4 className="text-[17px] md:text-[22px] font-normal text-[#1a1a1a] m-0 mb-3" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
@@ -420,7 +420,7 @@ export default function CSRPage() {
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
                                                                 return (
-                                                                    <li key={i} className={`gs-csr-initiative-item flex items-start gap-4 text-[18px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 py-2 pr-3 ${isSubItem ? 'pl-12' : 'pl-2'}`} style={{ fontFamily: "var(--font-sans)" }}>
+                                                                    <li key={i} className={`gs-csr-initiative-item flex items-start gap-4 text-[15px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 py-2 pr-3 ${isSubItem ? 'pl-12' : 'pl-2'}`} style={{ fontFamily: "var(--font-sans)" }}>
                                                                         {!isSubItem && (
                                                                             <span className="text-[#000] shrink-0" style={{ marginTop: '9px', fontSize: '10px', lineHeight: 1 }}>●</span>
                                                                         )}
