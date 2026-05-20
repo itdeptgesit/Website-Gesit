@@ -86,7 +86,7 @@ export default function CareerPage() {
                     >
                         {/* Heading */}
                         <motion.div className="mb-5" variants={fadeInUp}>
-                            <h2 className="text-[30px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
+                            <h2 className="text-[22px] md:text-[36px] lg:text-[36px] font-normal leading-snug md:leading-[50px]" style={{
                                 color: '#fff',
                                 fontFamily: 'var(--font-serif)',
                                 margin: 0,
@@ -147,7 +147,7 @@ export default function CareerPage() {
                                 
                                 <motion.h2
                                     variants={textVariant}
-                                    className="text-4xl md:text-5xl text-navy-deep leading-tight mb-8"
+                                    className="text-[26px] md:text-5xl text-[#103065] leading-tight mb-8"
                                     style={{ fontFamily: 'var(--font-serif)', fontWeight: 400 }}
                                 >
                                     Join Our Team
@@ -158,7 +158,7 @@ export default function CareerPage() {
                             
                             <motion.p
                                 variants={textVariant}
-                                className="text-lg md:text-[20px] leading-relaxed text-slate-500 max-w-lg"
+                                className="text-[16px] md:text-[20px] leading-relaxed text-slate-500 max-w-lg"
                                 style={{ fontFamily: 'var(--font-sans)' }}
                             >
                                 Interested in growing with us? <br />

@@ -812,8 +812,8 @@
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-ead908f .elementor-heading-title {
-					font-size: 30px;
-					line-height: 38px;
+					font-size: 22px !important;
+					line-height: 30px !important;
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-cf349da>.elementor-widget-container {
@@ -845,8 +845,8 @@
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-da6b8eb .elementor-heading-title {
-					font-size: 30px;
-					line-height: 38px;
+					font-size: 22px !important;
+					line-height: 28px !important;
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-42b3dc3 .elementor-heading-title {
@@ -855,8 +855,8 @@
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-2cce4eb .elementor-heading-title {
-					font-size: 30px;
-					line-height: 38px;
+					font-size: 22px !important;
+					line-height: 28px !important;
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-3c1aa17 .elementor-heading-title {
@@ -873,12 +873,22 @@
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-c518b5b .elementor-heading-title {
-					font-size: 30px;
-					line-height: 38px;
+					font-size: 26px !important;
+					line-height: 34px !important;
 				}
 
 				.elementor-5968 .elementor-element.elementor-element-c518b5b>.elementor-widget-container {
 					padding: 0px 0px 20px 0px;
+				}
+
+				.gs-core-value-card h4 {
+					font-size: 20px !important;
+					margin-bottom: 10px !important;
+				}
+
+				.gs-core-value-card p {
+					font-size: 15px !important;
+					line-height: 1.4 !important;
 				}
 			}
 
