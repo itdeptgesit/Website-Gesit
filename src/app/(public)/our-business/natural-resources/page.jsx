@@ -510,6 +510,29 @@ export default function NaturalResourcesPage() {
                         line-height: 1.15 !important;
                     }
                 }
+
+                @media (max-width: 767px) {
+                    .natural-business-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 24px !important;
+                        justify-content: center !important;
+                        justify-items: center !important;
+                    }
+                    .natural-business-grid > div {
+                        width: 280px !important;
+                    }
+                    .natural-business-grid > div > div:first-child {
+                        width: 280px !important;
+                        height: 162px !important;
+                        padding-top: 0 !important;
+                    }
+                    .natural-business-grid > div > div:last-child {
+                        width: 280px !important;
+                        height: auto !important;
+                        min-height: 60px !important;
+                        padding: 15px 12px !important;
+                    }
+                }
             `}</style>
         </div>
     );
