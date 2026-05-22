@@ -48,7 +48,7 @@
 .contact-content-column {
   flex: 0 0 550px;
   height: 905px;
-  padding: 40px 0;
+  padding: 55px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
