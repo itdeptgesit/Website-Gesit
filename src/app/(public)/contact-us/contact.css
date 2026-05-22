@@ -48,7 +48,7 @@
 .contact-content-column {
   flex: 0 0 550px;
   height: 905px;
-  padding: 55px;
+  padding: 30px 55px 40px 55px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -59,14 +59,14 @@
   font-family: 'Lora', serif;
   font-size: clamp(32px, 5vw, 44px);
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   letter-spacing: -0.01em;
 }
 
 .contact-info-row {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   gap: 40px;
 }
 
@@ -130,13 +130,13 @@
 
 .turnstile-wrapper {
   min-height: 65px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 .gesit-contact-form .gesit-row {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   gap: 25px;
 }
 
@@ -151,7 +151,7 @@
 
 .wpcf7-form-control {
   width: 100%;
-  padding: 10px 0;
+  padding: 15px 0;
   border: none;
   border-bottom: 1.5px solid #eee;
   background-color: transparent;
@@ -167,9 +167,9 @@
 }
 
 .wpcf7-textarea {
-  min-height: 80px;
+  min-height: 100px;
   resize: vertical;
-  padding: 12px 15px !important;
+  padding: 20px !important;
   background-color: #f9f9f9 !important;
   border: 1px solid #eee !important;
   border-radius: 4px !important;
@@ -187,7 +187,7 @@
   justify-content: center;
   cursor: pointer;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 1.5px;
   transition: all 0.3s ease;
   border-radius: 33.5px;
