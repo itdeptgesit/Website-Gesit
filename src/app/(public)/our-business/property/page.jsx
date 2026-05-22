@@ -378,7 +378,7 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title">Senayan Development</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title" style={{ marginBottom: '10px' }}>Senayan Development</motion.h2>
                             <motion.h3 variants={fadeInUp} className="gs-project-subtitle">Under Development</motion.h3>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>This development boasts a&nbsp;world-class international standard and comprises over 180 rooms with 1,500 m<sup>2</sup> of multifunction & ballroom space.</p>
@@ -400,7 +400,7 @@ const PropertyPage = () => {
                             variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
                             className="project-text-content"
                         >
-                            <motion.h2 variants={fadeInUp} className="project-title">TOD Rasuna Development</motion.h2>
+                            <motion.h2 variants={fadeInUp} className="project-title" style={{ marginBottom: '10px' }}>TOD Rasuna Development</motion.h2>
                             <motion.h3 variants={fadeInUp} className="gs-project-subtitle">Under Development</motion.h3>
                             <motion.div variants={fadeInUp} className="project-desc">
                                 <p>This TOD development within inner Jakarta&apos;s Golden Triangle will combine retail, residential, and a&nbsp;world-class theater space together into one  – enabling ease of mobility for tenants and reducing on-street traffic.</p>
