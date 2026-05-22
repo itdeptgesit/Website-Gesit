@@ -101,7 +101,7 @@ const NewsPage = () => {
               src={heroImages[0]} 
               alt="News" 
               fill 
-              style={{ objectFit: "cover" }} 
+              style={{ objectFit: "cover", objectPosition: "center bottom" }} 
               priority 
               fetchPriority="high"
             />
@@ -134,7 +134,8 @@ const NewsPage = () => {
                   fill
                   sizes="100vw"
                   style={{
-                    objectFit: "cover"
+                    objectFit: "cover",
+                    objectPosition: idx === 0 ? "center bottom" : "center"
                   }}
                   priority={idx === 0}
                   {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
