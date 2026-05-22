@@ -141,7 +141,7 @@ export default function ContactUs() {
               alt="The Gesit Companies Office"
               fill
               className="object-cover"
-              sizes="(max-width: 1100px) 100vw, 500px"
+              sizes="(max-width: 1100px) 100vw, 550px"
             />
           </motion.div>
 

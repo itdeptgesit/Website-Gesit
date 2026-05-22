@@ -39,8 +39,8 @@
 }
 
 .contact-image-column {
-  flex: 0 0 500px;
-  height: 900px;
+  flex: 0 0 550px;
+  height: 905px;
   border-radius: 4px;
   box-shadow: 0 30px 60px rgba(0,0,0,0.1);
 }
