@@ -246,7 +246,7 @@ export default function ManufacturingPage() {
       </section>
 
       {/* ── 3. ALUMINUM FABRICATION – text LEFT, images RIGHT ── */}
-      <section className="project-section" style={{ paddingTop: '150px', overflow: 'hidden' }}>
+      <section className="project-section" style={{ padding: '150px 0', overflow: 'hidden' }}>
         <div className="project-row image-right">
           {/* Text Container (Left) */}
           <div className="project-text-wrapper left">
@@ -266,7 +266,7 @@ export default function ManufacturingPage() {
                   rel="noopener noreferrer"
                   className="pill-button"
                 >
-                  View Brochure
+                  Download Brochure
                 </a>
               </motion.div>
             </motion.div>
