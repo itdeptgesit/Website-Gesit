@@ -46,10 +46,12 @@
 }
 
 .contact-content-column {
-  flex: 1;
+  flex: 0 0 550px;
+  height: 905px;
   padding: 40px 0;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .contact-heading-title {
@@ -208,6 +210,9 @@
 
   .contact-content-column {
     padding: 20px 0;
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
   }
 }
 
