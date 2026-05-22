@@ -173,8 +173,8 @@ export default function ContactUs() {
                     className="contact-address-link"
                   >
                     The City Tower, 27<sup>th</sup> Floor<br />
-                    Jl. M.H. Thamrin No 81<br />
-                    DKI Jakarta 10310 &ndash; Indonesia
+                    Jl. M.H. Thamrin No 81 DKI<br />
+                    Jakarta 10310 &ndash; Indonesia
                   </a>
                 </div>
               </motion.div>
