@@ -355,6 +355,21 @@
 			object-fit: cover;
 		}
 
+		.elementor-5968 .elementor-element.elementor-element-b817b21 .elementor-background-video-container,
+		.elementor-5968 .elementor-element.elementor-element-b817b21 .elementor-background-video-hosted {
+			position: absolute !important;
+			inset: 0 !important;
+			top: 0 !important;
+			left: 0 !important;
+			width: 100% !important;
+			height: 100% !important;
+			min-width: 100% !important;
+			min-height: 100% !important;
+			display: block !important;
+			object-fit: cover !important;
+			transform: none !important;
+		}
+
 		.elementor-5968 .elementor-element.elementor-element-602e91a .elementor-heading-title {
 			color: #FFFFFF;
 			font-family: "Roboto", Sans-serif;

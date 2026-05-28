@@ -1,19 +1,27 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import './about-us.css';
 
 export default function AboutUs() {
   const [progressKey, setProgressKey] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
+  const heroVideoRef = useRef(null);
 
   useEffect(() => {
-    setIsMounted(true);
     const timer = setInterval(() => {
       setProgressKey(prev => prev + 1);
     }, 6000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    video.play().catch(() => {
+      // Browser autoplay can still be denied in unusual user settings.
+    });
   }, []);
 
   const textVariant = {
@@ -35,6 +43,8 @@ export default function AboutUs() {
 
   return (
     <>
+      <link rel="preload" as="image" href="/video/video_thumbnail2.webp" fetchPriority="high" />
+      <link rel="preload" as="video" href="/video/about-us-video.mp4" type="video/mp4" />
       <main id="qodef-page-content">
         <div className="qodef-page-content-inner clear">
           <div className="qodef-grid-item qodef-page-content-section qodef-col--12">
@@ -58,28 +68,26 @@ export default function AboutUs() {
                   />
                 </div>
 
-                <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0 }}>
-                  {/* Swap the elements cleanly: initially render only the preloaded poster image for instant LCP, then switch entirely to the full-screen video element */}
-                  {isMounted ? (
-                    <video 
-                      suppressHydrationWarning 
-                      className="elementor-background-video-hosted elementor-html5-video" 
-                      autoPlay 
-                      muted 
-                      playsInline 
-                      loop 
-                      preload="metadata"
-                      src="/video/about-us-video.mp4" 
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                    />
-                  ) : (
-                    <img
-                      src="/video/video_thumbnail2.webp"
-                      alt="About Us Hero"
-                      className="elementor-background-video-hosted"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  )}
+                <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+                  <img
+                    src="/video/video_thumbnail2.webp"
+                    alt="About Us Hero"
+                    className="elementor-background-video-hosted"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+                  />
+                  <video
+                    ref={heroVideoRef}
+                    suppressHydrationWarning
+                    className="elementor-background-video-hosted elementor-html5-video"
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                    preload="auto"
+                    poster="/video/video_thumbnail2.webp"
+                    src="/video/about-us-video.mp4"
+                    style={{ width: '100%', height: '100%', minWidth: '100%', minHeight: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 1 }}
+                  />
                 </div>
 
                 {/* Overlay Gradient */}
