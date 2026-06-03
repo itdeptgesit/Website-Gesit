@@ -144,35 +144,56 @@ const NewsArchivePage = () => {
                 >
                   <Link
                     href={`/news/${item.slug || item.id}`}
-                    className="gs-news-grid-card flex-1 bg-[#deebf9] px-8 pt-8 pb-8 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 rounded-[5px]"
+                    className="gs-news-grid-card flex-1 bg-[#deebf9] flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 rounded-[5px] overflow-hidden"
                     style={{ height: '541px', minHeight: '541px' }}
                   >
-                    <span 
-                      className="text-[16px] font-normal text-navy-deep/60 mb-6 block"
-                      style={{ fontFamily: 'Lato, sans-serif' }}
-                    >
-                      {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </span>
-                    
-                    <div className="flex-grow">
-                      <h3
-                        className="text-[30px] text-black leading-[1.3] mb-8"
-                        style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
-                      >
-                        {item.title}
-                      </h3>
+                    {/* Image Container */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                      <Image
+                        src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                        alt={item.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
+                      
+                      {/* Floating Category */}
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-[#bc9c33] text-white text-[9px] font-black px-2 py-1 rounded-[3px] uppercase tracking-widest">
+                          {item.category || 'News'}
+                        </span>
+                      </div>
                     </div>
-                    
-                    <div className="mt-auto w-full">
-                      <div className="mb-10">
-                        <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-navy-deep group-hover:border-navy-deep transition-all duration-300">
-                          <ChevronRight size={16} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
-                        </div>
+
+                    <div className="p-8 flex flex-col flex-grow items-start w-full">
+                      <span 
+                        className="text-[16px] font-normal text-navy-deep/60 mb-4 block"
+                        style={{ fontFamily: 'Lato, sans-serif' }}
+                      >
+                        {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </span>
+                      
+                      <div className="flex-grow">
+                        <h3
+                          className="text-[22px] md:text-[24px] text-black leading-[1.3] mb-4 line-clamp-3"
+                          style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
+                        >
+                          {item.title}
+                        </h3>
                       </div>
                       
-                      <div className="gs-news-card-meta pt-8 border-t border-navy-deep/10 w-full">
-                        <p className="gs-news-card-category text-[14px] font-normal text-navy-deep/60 mb-0.5" style={{ fontFamily: 'var(--font-sans)' }}>{item.category || 'News'}</p>
-                        <p className="gs-news-card-author text-[16px] font-bold text-navy-deep" style={{ fontFamily: 'var(--font-sans)' }}>by {item.author || 'Gesit'}</p>
+                      <div className="mt-auto w-full">
+                        <div className="mb-6">
+                          <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-navy-deep group-hover:border-navy-deep transition-all duration-300">
+                            <ChevronRight size={16} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
+                          </div>
+                        </div>
+                        
+                        <div className="gs-news-card-meta pt-6 border-t border-navy-deep/10 w-full">
+                          <p className="gs-news-card-category text-[14px] font-normal text-navy-deep/60 mb-0.5" style={{ fontFamily: 'var(--font-sans)' }}>{item.category || 'News'}</p>
+                          <p className="gs-news-card-author text-[16px] font-bold text-navy-deep" style={{ fontFamily: 'var(--font-sans)' }}>by {item.author || 'Gesit'}</p>
+                        </div>
                       </div>
                     </div>
                   </Link>
