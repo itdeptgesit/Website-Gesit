@@ -144,11 +144,11 @@ const NewsArchivePage = () => {
                 >
                   <Link
                     href={`/news/${item.slug || item.id}`}
-                    className="gs-news-grid-card flex-1 bg-[#deebf9] flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 rounded-[5px] overflow-hidden"
+                    className="gs-news-archive-card flex-1 flex flex-col items-start group transition-all duration-500 overflow-hidden"
                     style={{ height: '541px', minHeight: '541px' }}
                   >
                     {/* Image Container */}
-                    <div className="relative aspect-[4/3] w-full overflow-hidden">
+                    <div className="relative aspect-[16/10] w-full overflow-hidden flex-shrink-0">
                       <Image
                         src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                         alt={item.title}

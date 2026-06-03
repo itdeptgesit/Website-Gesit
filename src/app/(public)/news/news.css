@@ -243,3 +243,30 @@
     will-change: transform;
 }
 
+/* News Archive Custom Cards */
+.gs-news-archive-card {
+    background-color: #deebf9 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    transition: all 0.5s ease !important;
+    border-radius: 5px !important;
+    overflow: hidden !important;
+    height: 541px !important;
+    min-height: 541px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+}
+
+.gs-news-archive-card:hover {
+    background-color: #d0e1f4 !important;
+}
+
+@media (max-width: 767px) {
+    .gs-news-archive-card {
+        height: auto !important;
+        min-height: 480px !important;
+    }
+}
+
