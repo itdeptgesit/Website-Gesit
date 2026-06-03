@@ -10,7 +10,7 @@ const NewsArchivePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Trigger pagination after 10 articles
+  const itemsPerPage = 6; // Trigger pagination after 6 articles
 
   useEffect(() => {
     const fetchNews = async () => {
