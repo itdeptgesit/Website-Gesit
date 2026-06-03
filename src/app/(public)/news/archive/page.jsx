@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronRight, Loader2, ChevronLeft, Calendar, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import "../news.css";
 
 const NewsArchivePage = () => {
   const [newsItems, setNewsItems] = useState([]);
