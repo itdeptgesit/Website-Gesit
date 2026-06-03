@@ -158,13 +158,6 @@ const NewsArchivePage = () => {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-                      
-                      {/* Floating Category */}
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-[#bc9c33] text-white text-[9px] font-black px-2 py-1 rounded-[3px] uppercase tracking-widest">
-                          {item.category || 'News'}
-                        </span>
-                      </div>
                     </div>
 
                     <div className="p-8 flex flex-col flex-grow items-start w-full">
@@ -185,15 +178,8 @@ const NewsArchivePage = () => {
                       </div>
                       
                       <div className="mt-auto w-full">
-                        <div className="mb-6">
-                          <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-navy-deep group-hover:border-navy-deep transition-all duration-300">
-                            <ChevronRight size={16} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
-                          </div>
-                        </div>
-                        
-                        <div className="gs-news-card-meta pt-6 border-t border-navy-deep/10 w-full">
-                          <p className="gs-news-card-category text-[14px] font-normal text-navy-deep/60 mb-0.5" style={{ fontFamily: 'var(--font-sans)' }}>{item.category || 'News'}</p>
-                          <p className="gs-news-card-author text-[16px] font-bold text-navy-deep" style={{ fontFamily: 'var(--font-sans)' }}>by {item.author || 'Gesit'}</p>
+                        <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-navy-deep group-hover:border-navy-deep transition-all duration-300">
+                          <ChevronRight size={16} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
                         </div>
                       </div>
                     </div>
