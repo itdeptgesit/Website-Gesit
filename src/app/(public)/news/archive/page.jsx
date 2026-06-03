@@ -148,7 +148,7 @@ const NewsArchivePage = () => {
                     style={{ height: '541px', minHeight: '541px' }}
                   >
                     {/* Image Container */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden">
                       <Image
                         src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                         alt={item.title}
