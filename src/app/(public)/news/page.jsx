@@ -401,8 +401,8 @@ const NewsPage = () => {
                   style={{ letterSpacing: 'normal', fontFamily: 'Lora, serif', fontWeight: 400, fontSize: '19px', lineHeight: '1.47em' }}
                 >
                   <span>See All</span>
-                  <div className="gs-news-see-all-icon w-8 h-8 rounded-full bg-black flex items-center justify-center group-hover:bg-[#BC9C33] transition-all duration-300">
-                    <ChevronRight size={18} strokeWidth={2.5} className="text-white" />
+                  <div className="gs-news-see-all-icon w-6 h-6 rounded-full bg-black flex items-center justify-center group-hover:bg-[#BC9C33] transition-all duration-300">
+                    <ChevronRight size={14} strokeWidth={2.5} className="text-white" />
                   </div>
                 </Link>
               </div>
