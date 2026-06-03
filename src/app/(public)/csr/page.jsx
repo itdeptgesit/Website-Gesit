@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation } from "swiper/modules";
@@ -9,6 +9,7 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import "./csr.css";
 
 export default function CSRPage() {
     const [isMounted, setIsMounted] = useState(false);
@@ -16,6 +17,16 @@ export default function CSRPage() {
     const [openInitiative, setOpenInitiative] = useState("Healthcare");
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
+    const [isGalleryPaused, setIsGalleryPaused] = useState(false);
+    const galleryPauseTimer = useRef(null);
+
+    const handleGalleryEnter = () => {
+        galleryPauseTimer.current = setTimeout(() => setIsGalleryPaused(true), 500);
+    };
+    const handleGalleryLeave = () => {
+        clearTimeout(galleryPauseTimer.current);
+        setIsGalleryPaused(false);
+    };
 
     const circleBtn = {
         width: 60, height: 60, borderRadius: "50%",
@@ -320,41 +331,58 @@ export default function CSRPage() {
                 </div>
             </section>
 
-            <section suppressHydrationWarning className="elementor-section elementor-top-section elementor-element elementor-element-4b82676 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default qodef-elementor-content-no bg-[#103065] py-16 md:py-24 gs-csr-focus-section" data-id="4b82676" data-element_type="section">
-                <div className="elementor-container elementor-column-gap-no">
-                    <div className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-365869f" data-id="365869f" data-element_type="column" suppressHydrationWarning>
-                        <div className="elementor-widget-wrap elementor-element-populated">
-                            <section className="elementor-section elementor-inner-section elementor-element elementor-element-c7c8c1f elementor-section-full_width zs-custom-height no-button elementor-section-height-default elementor-section-height-default qodef-elementor-content-no" data-id="c7c8c1f" data-element_type="section">
-                                <div className="elementor-container elementor-column-gap-extended flex flex-wrap justify-center px-6 lg:px-0">
-                                    {focusAreas.map((val, idx) => (
-                                        <div key={val.title} className="elementor-inner-column w-full md:w-1/2 lg:w-1/3 max-w-[420px] lg:max-w-none" style={{ display: 'flex', flexDirection: 'column', marginBottom: '40px', padding: '0 15px' }}>
-                                            <motion.div
-                                                className="elementor-widget-wrap elementor-element-populated"
-                                                variants={staggerContainer}
-                                                initial="initial"
-                                                whileInView="whileInView"
-                                                viewport={{ once: true }}
-                                                style={{ display: 'flex', flexDirection: 'column', width: '100%', flex: 1 }}
-                                            >
-                                                <div className="elementor-element elementor-element-98ea9bc p-15 text-left elementor-widget elementor-widget-thetrial_core_location_info" style={{ width: '100%', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                    <div className="elementor-widget-container" style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                        <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled" style={{ borderRadius: '5px', overflow: 'hidden', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                                                            <div className="qodef-m-image">
-                                                                <Image src={val.image} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-                                                            </div>
-                                                            <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', minHeight: '200px', padding: '35px 25px' }}>
-                                                                <motion.h4 variants={textVariant} className="qodef-m-title" style={{ color: '#FFFFFF', marginBottom: '15px' }}>{val.title}</motion.h4>
-                                                                <motion.p variants={textVariant} className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</motion.p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </motion.div>
+            <section suppressHydrationWarning className="bg-[#103065] py-16 md:py-24 gs-csr-focus-section">
+                <div className="max-w-[1209px] mx-auto px-6 lg:px-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] justify-items-center">
+                        {focusAreas.map((val, idx) => (
+                            <div key={val.title} className="w-full max-w-[383px] flex flex-col relative group">
+                                <motion.div
+                                    className="w-full flex flex-col flex-1"
+                                    variants={staggerContainer}
+                                    initial="initial"
+                                    whileInView="whileInView"
+                                    viewport={{ once: true }}
+                                >
+                                    <div className="w-full flex flex-col relative">
+                                        <div className="qodef-m-image relative rounded-[5px] overflow-hidden">
+                                            <Image
+                                                src={val.image}
+                                                alt={val.title}
+                                                fill
+                                                sizes="383px"
+                                                style={{ objectFit: 'cover' }}
+                                            />
                                         </div>
-                                    ))}
-                                </div>
-                            </section>
-                        </div>
+                                        {/* White Connector Line Animation */}
+                                        <div className="qodef-location-info-line-animated" />
+                                        
+                                        {/* 36px Spacer */}
+                                        <div className="h-[36px] w-full flex-none" />
+
+                                        <div className="qodef-m-content" style={{ backgroundColor: '#BC9C33' }}>
+                                            <motion.h4
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 0.6 }}
+                                                className="qodef-m-title !text-white"
+                                            >
+                                                {val.title}
+                                            </motion.h4>
+                                            <motion.p
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 0.6, delay: 0.15 }}
+                                                className="qodef-m-text !text-white !m-0"
+                                            >
+                                                {val.desc}
+                                            </motion.p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -362,7 +390,7 @@ export default function CSRPage() {
 
             {/* ================= INITIATIVES ================= */}
             <section className="py-20 bg-white">
-                <div className="container mx-auto px-6 max-w-5xl">
+                <div className="mx-auto w-full px-6 md:px-0" style={{ maxWidth: '1209px' }}>
                     <h2
                         className="text-center mb-12 text-[#000] text-[26px] md:text-[42px]"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
@@ -408,21 +436,23 @@ export default function CSRPage() {
                                             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="pl-8 md:pl-20 pr-4 md:pr-8 pb-8 pt-2">
+                                            <div className="pl-8 md:pl-16 pr-4 md:pr-8" style={{ paddingTop: '8px', paddingBottom: '22px' }}>
                                                 {initiative.content.map((block) => (
-                                                    <div key={block.subtitle} className="mt-6 first:mt-0">
+                                                    <div key={block.subtitle} className="mt-3 first:mt-0">
                                                         {block.subtitle && (
-                                                            <h4 className="text-[17px] md:text-[22px] font-normal text-[#1a1a1a] m-0 mb-3" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
+                                                            <h4 className="text-[18px] md:text-[20px] font-bold text-[#555] m-0 mb-0 pl-0" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="gs-csr-initiative-list space-y-2 m-0 p-0 mt-4">
+                                                        <ul className="gs-csr-initiative-list m-0 p-0 mt-0">
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
                                                                 return (
-                                                                    <li key={i} className={`gs-csr-initiative-item flex items-start gap-4 text-[15px] md:text-[19px] text-[#333] font-normal leading-relaxed m-0 py-2 pr-3 ${isSubItem ? 'pl-12' : 'pl-2'}`} style={{ fontFamily: "var(--font-sans)" }}>
+                                                                    <li key={i} className={`gs-csr-initiative-item flex items-start gap-3 text-[16px] md:text-[20px] text-[#555] font-normal leading-relaxed m-0 py-0 pr-3 ${isSubItem ? 'pl-10' : 'pl-0'}`} style={{ fontFamily: "var(--font-sans)" }}>
                                                                         {!isSubItem && (
-                                                                            <span className="text-[#000] shrink-0" style={{ marginTop: '9px', fontSize: '10px', lineHeight: 1 }}>●</span>
+                                                                            <div className="flex items-center justify-center shrink-0 w-3" style={{ height: '1.625em' }}>
+                                                                                <span className="w-[8px] h-[8px] rounded-full bg-[#555]" />
+                                                                            </div>
                                                                         )}
                                                                         <span className="flex-1">{item}</span>
                                                                     </li>
@@ -445,23 +475,25 @@ export default function CSRPage() {
             <section className="gs-csr-gallery-section py-24 bg-white overflow-hidden">
                 <div className="relative w-full">
                     <div className="gs-csr-gallery-window flex overflow-hidden relative">
-                        <motion.div
+                        <div
                             className="gs-csr-gallery-track flex gap-6 md:gap-10 px-4 py-6 md:py-12 items-center"
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{
-                                ease: "linear",
-                                duration: 95,
-                                repeat: Infinity,
-                                repeatType: "loop",
+                            style={{
+                                width: "fit-content",
+                                animationName: csrGalleryImages.length > 0 ? "gs-gallery-scroll" : "none",
+                                animationDuration: csrGalleryImages.length > 0 ? `${csrGalleryImages.length * 6}s` : "0s",
+                                animationTimingFunction: "linear",
+                                animationIterationCount: "infinite",
+                                animationPlayState: isGalleryPaused ? "paused" : "running",
                             }}
-                            style={{ width: "fit-content" }}
                         >
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
                                 <motion.div
                                     key={index}
-                                    className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-xl overflow-hidden transition-all duration-700 group relative"
+                                    className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative"
                                     whileHover={{ y: -10, scale: 1.025 }}
                                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                                    onMouseEnter={handleGalleryEnter}
+                                    onMouseLeave={handleGalleryLeave}
                                 >
                                     <img
                                         src={src}
@@ -472,7 +504,7 @@ export default function CSRPage() {
                                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
                                 </motion.div>
                             ))}
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>

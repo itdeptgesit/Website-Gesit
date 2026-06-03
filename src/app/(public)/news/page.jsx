@@ -11,9 +11,20 @@ import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import "./news.css";
 
 // Remove static import
 // import { newsItems as staticNewsItems } from './newsData';
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  const day = date.getDate();
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  return `${day} ${month} ${year}`;
+};
 
 const NewsPage = () => {
 
@@ -74,6 +85,16 @@ const NewsPage = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
+  const [isGalleryPaused, setIsGalleryPaused] = useState(false);
+  const galleryPauseTimer = useRef(null);
+
+  const handleGalleryEnter = () => {
+    galleryPauseTimer.current = setTimeout(() => setIsGalleryPaused(true), 500);
+  };
+  const handleGalleryLeave = () => {
+    clearTimeout(galleryPauseTimer.current);
+    setIsGalleryPaused(false);
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -256,17 +277,17 @@ const NewsPage = () => {
                 >
                   <motion.span 
                     variants={textVariant} 
-                    className="text-[14px] font-medium uppercase tracking-[.2em] text-white/60 mb-8 block"
-                    style={{ fontFamily: 'var(--font-source-sans), sans-serif' }}
+                    className="text-[16px] font-normal text-white/70 mb-8 block"
+                    style={{ fontFamily: 'Lato, sans-serif' }}
                   >
-                    {featuredArticle?.date || (featuredArticle?.created_at ? new Date(featuredArticle.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '')}
+                    {featuredArticle?.date || (featuredArticle?.created_at ? formatDate(featuredArticle.created_at) : '')}
                   </motion.span>
                   
                   <div className="gs-news-featured-main flex-grow flex flex-col justify-center">
                     <motion.h2
                       variants={textVariant}
                       className="text-2xl md:text-3xl lg:text-[38px] text-white leading-[1.2] mb-8"
-                      style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
+                      style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
                     >
                       {featuredArticle?.title}
                     </motion.h2>
@@ -282,8 +303,8 @@ const NewsPage = () => {
                   </div>
 
                   <motion.div variants={textVariant} className="gs-news-card-meta gs-news-card-meta-featured pt-8 mt-8 border-t border-white/10">
-                    <p className="gs-news-card-category text-[13px] font-semibold text-white/75 mb-1 uppercase tracking-[.22em]">News</p>
-                    <p className="gs-news-card-author text-[13px] font-semibold text-white/95">by {featuredArticle?.author || 'Gesit'}</p>
+                    <p className="gs-news-card-category text-[14px] font-normal text-white/70 mb-0.5" style={{ fontFamily: 'var(--font-sans)' }}>News</p>
+                    <p className="gs-news-card-author text-[16px] font-bold text-white" style={{ fontFamily: 'var(--font-sans)' }}>by {featuredArticle?.author || 'Gesit'}</p>
                   </motion.div>
                 </motion.div>
               </div>
@@ -293,8 +314,8 @@ const NewsPage = () => {
       )}
 
       {/* ================= NEWS GRID ================= */}
-      <section className="pt-8 pb-12 bg-white" id="news-archive">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="pt-8 bg-white" id="news-archive" style={{ paddingBottom: '56px' }}>
+        <div className="mx-auto w-full px-6 md:px-0" style={{ maxWidth: '1209px' }}>
 
 
           {loading ? (
@@ -322,7 +343,7 @@ const NewsPage = () => {
               <p className="text-navy-deep/60">Check back later for the latest updates from Gesit.</p>
             </div>
           ) : (
-            <div className="gs-news-grid-list grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+            <div className="gs-news-grid-list grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[30px]">
               {otherArticles.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -334,19 +355,20 @@ const NewsPage = () => {
                 >
                       <Link
                         href={`/news/${item.slug || item.id}`}
-                        className="gs-news-grid-card flex-1 bg-[#deebf9] p-10 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 min-h-[480px] rounded-[5px]"
+                        className="gs-news-grid-card flex-1 bg-[#deebf9] px-8 pt-8 pb-8 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 rounded-[5px]"
+                        style={{ height: '541px', minHeight: '541px' }}
                       >
-                        <span 
-                          className="text-[13px] font-medium uppercase tracking-[.1em] text-navy-deep/50 mb-8 block"
-                          style={{ fontFamily: 'var(--font-source-sans), sans-serif' }}
+                         <span 
+                          className="text-[16px] font-normal text-navy-deep/60 mb-6 block"
+                          style={{ fontFamily: 'Lato, sans-serif' }}
                         >
-                          {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          {item.date || (item.created_at ? formatDate(item.created_at) : '')}
                         </span>
                         
                         <div className="flex-grow">
                           <h3
-                            className="text-[24px] md:text-[26px] text-navy-deep leading-[1.3] mb-8 group-hover:text-[#bc9c33] transition-colors"
-                            style={{ fontFamily: 'Lora, serif', fontWeight: 500 }}
+                            className="text-[30px] text-black leading-[1.3] mb-8"
+                            style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
                           >
                             {item.title}
                           </h3>
@@ -354,14 +376,14 @@ const NewsPage = () => {
                         
                         <div className="mt-auto w-full">
                           <div className="mb-10">
-                            <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-[#BC9C33] group-hover:border-[#BC9C33] transition-all duration-300">
+                            <div className="w-9 h-9 rounded-full bg-transparent border border-navy-deep/20 flex items-center justify-center group-hover:bg-navy-deep group-hover:border-navy-deep transition-all duration-300">
                               <ChevronRight size={16} strokeWidth={2} className="text-navy-deep group-hover:text-white" />
                             </div>
                           </div>
                           
                           <div className="gs-news-card-meta pt-8 border-t border-navy-deep/10 w-full">
-                            <p className="gs-news-card-category text-[13px] font-semibold text-navy-deep/55 mb-1 uppercase tracking-[.22em]">News</p>
-                            <p className="gs-news-card-author text-[13px] font-semibold text-navy-deep">by {item.author || 'Gesit'}</p>
+                            <p className="gs-news-card-category text-[14px] font-normal text-navy-deep/60 mb-0.5" style={{ fontFamily: 'var(--font-sans)' }}>News</p>
+                            <p className="gs-news-card-author text-[16px] font-bold text-navy-deep" style={{ fontFamily: 'var(--font-sans)' }}>by {item.author || 'Gesit'}</p>
                           </div>
                         </div>
                       </Link>
@@ -372,14 +394,15 @@ const NewsPage = () => {
 
             {/* See All Button */}
             {newsItems.length > 4 && (
-              <div className="gs-news-see-all-row mt-8 flex justify-start">
+              <div className="gs-news-see-all-row mt-[20px] flex justify-start">
                 <Link
                   href="/news/archive"
-                  className="gs-news-see-all-link flex items-center gap-3 group text-navy-deep font-black uppercase tracking-[.3em] text-[11px]"
+                  className="gs-news-see-all-link flex items-center gap-3 group text-black hover:text-[#BC9C33] transition-colors duration-300"
+                  style={{ letterSpacing: 'normal', fontFamily: 'Lora, serif', fontWeight: 400, fontSize: '19px', lineHeight: '1.47em' }}
                 >
                   <span>See All</span>
-                  <div className="gs-news-see-all-icon w-8 h-8 rounded-full border border-navy-deep flex items-center justify-center group-hover:bg-navy-deep group-hover:text-white transition-all duration-300">
-                    <ArrowRight size={14} strokeWidth={3} />
+                  <div className="gs-news-see-all-icon w-8 h-8 rounded-full bg-black flex items-center justify-center group-hover:bg-[#BC9C33] transition-all duration-300">
+                    <ChevronRight size={18} strokeWidth={2.5} className="text-white" />
                   </div>
                 </Link>
               </div>
@@ -391,16 +414,16 @@ const NewsPage = () => {
       <section className="gs-news-gallery-section py-24 bg-[#BC9C33] overflow-hidden">
         <div className="relative w-full">
           <div className="gs-news-gallery-window flex overflow-hidden relative">
-            <motion.div
+            <div
               className="gs-news-gallery-track flex gap-6 md:gap-10 px-4 py-6 md:py-12 items-center"
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{
-                ease: "linear",
-                duration: 95,
-                repeat: Infinity,
-                repeatType: "loop",
+              style={{
+                width: "fit-content",
+                animationName: newsItems.length > 0 ? "gs-news-gallery-scroll" : "none",
+                animationDuration: newsItems.length > 0 ? `${newsItems.length * 6}s` : "0s",
+                animationTimingFunction: "linear",
+                animationIterationCount: "infinite",
+                animationPlayState: isGalleryPaused ? "paused" : "running",
               }}
-              style={{ width: "fit-content" }}
             >
               {newsItems.length > 0 && [...newsItems, ...newsItems].map((item, index) => (
                 <motion.div
@@ -408,6 +431,8 @@ const NewsPage = () => {
                   className="gs-news-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative bg-white"
                   whileHover={{ y: -10 }}
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  onMouseEnter={handleGalleryEnter}
+                  onMouseLeave={handleGalleryLeave}
                 >
                   <Image
                     src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
@@ -420,7 +445,7 @@ const NewsPage = () => {
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

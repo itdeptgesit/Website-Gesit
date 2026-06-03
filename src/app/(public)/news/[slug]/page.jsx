@@ -7,9 +7,9 @@ import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
     ChevronLeft, ChevronRight, Calendar, Tag, Loader2,
-    Facebook, Linkedin, Link as LinkIcon, Clock, Users,
-    Handshake, Heart, ShieldCheck, MessageSquare, FileText
+    Clock, Users, Handshake, Heart, ShieldCheck, MessageSquare, FileText
 } from "lucide-react";
+import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaLink } from "react-icons/fa6";
 import ShareButtons from './ShareButtons';
 import xss from 'xss';
 
@@ -136,6 +136,17 @@ export default function NewsDetailPage() {
         fetchNews();
     }, []);
 
+    useEffect(() => {
+        if (!loading) {
+            // Disable download and right-click on any video elements in content body
+            const videos = document.querySelectorAll('.news-content video');
+            videos.forEach(video => {
+                video.setAttribute('controlsList', 'nodownload');
+                video.addEventListener('contextmenu', (e) => e.preventDefault());
+            });
+        }
+    }, [loading, newsItems]);
+
     if (loading) {
         return <NewsDetailSkeleton />;
     }
@@ -160,10 +171,21 @@ export default function NewsDetailPage() {
     const prevPost = currentIndex > 0 ? newsItems[currentIndex - 1] : null;
     const nextPost = currentIndex < newsItems.length - 1 ? newsItems[currentIndex + 1] : null;
 
-    // Find related news (same category, not current post)
-    const relatedNews = newsItems
-        .filter(item => item.id !== post.id && item.category === post.category)
+    // Find recent news (not current post)
+    const recentNews = newsItems
+        .filter(item => item.id !== post.id)
         .slice(0, 3);
+
+    // Clean content to remove duplicate video tags if post has a video_url
+    let cleanContent = post.content || '';
+    if (post.video_url) {
+        const filename = post.video_url.split('/').pop();
+        if (filename) {
+            const escapedFilename = filename.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            const customVideoRegex = new RegExp(`<video[^>]*?>([\\s\\S]*?${escapedFilename}[\\s\\S]*?)<\\/video>|<video[^>]*?src=["']?[^"'>]*?${escapedFilename}[^"'>]*?["'][^>]*?>([\\s\\S]*?)<\\/video>`, 'gi');
+            cleanContent = cleanContent.replace(customVideoRegex, '');
+        }
+    }
 
     return (
         <div className="bg-white min-h-screen pb-24 font-sans text-slate-800 selection:bg-gold/30 selection:text-navy-deep">
@@ -249,7 +271,15 @@ export default function NewsDetailPage() {
                                             );
                                         }
                                         if (cleanVideoUrl.match(/\.(mp4|webm|ogg)$/i)) {
-                                            return <video src={cleanVideoUrl} controls className="w-full h-full object-cover" />;
+                                            return (
+                                                <video
+                                                    src={cleanVideoUrl} poster={post.image_url || post.image}
+                                                    controls
+                                                    controlsList="nodownload"
+                                                    onContextMenu={(e) => e.preventDefault()}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            );
                                         }
                                         // Fallback if URL is set but not recognized as video
                                         return (
@@ -307,7 +337,7 @@ export default function NewsDetailPage() {
                             `}</style>
                             {post.content ? (
                                 <div
-                                    dangerouslySetInnerHTML={{ __html: xss(post.content) }}
+                                    dangerouslySetInnerHTML={{ __html: xss(cleanContent) }}
                                 />
                             ) : (
                                 <div className="text-slate-400 italic py-10 border-y border-slate-100 text-center">
@@ -321,7 +351,7 @@ export default function NewsDetailPage() {
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
-                                className="mt-[-2rem] mb-16 pt-8 border-t border-slate-100"
+                                className="mt-[-2rem] mb-6 pt-8 border-t border-slate-100"
                             >
                                 <div className="flex items-center gap-3 text-slate-500">
                                     <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
@@ -336,6 +366,54 @@ export default function NewsDetailPage() {
                                 </div>
                             </motion.div>
                         )}
+
+                        {/* Share to Section */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className={`mb-16 ${post.source_url ? 'pt-6' : 'pt-8 border-t border-slate-100 mt-8'}`}
+                        >
+                            <h4 className="text-[16px] md:text-[18px] font-bold text-[#103065] mb-4" style={{ fontFamily: "var(--font-sans)" }}>Share to</h4>
+                            <div className="flex gap-3">
+                                {/* Facebook */}
+                                <button
+                                    onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    className="w-[36px] h-[36px] rounded-full bg-[#103065] hover:bg-[#bc9c33] text-white flex items-center justify-center transition-colors duration-300"
+                                    title="Share to Facebook"
+                                >
+                                    <FaFacebookF size={15} />
+                                </button>
+                                {/* LinkedIn */}
+                                <button
+                                    onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    className="w-[36px] h-[36px] rounded-full bg-[#103065] hover:bg-[#bc9c33] text-white flex items-center justify-center transition-colors duration-300"
+                                    title="Share to LinkedIn"
+                                >
+                                    <FaLinkedinIn size={15} />
+                                </button>
+                                {/* X */}
+                                <button
+                                    onClick={() => window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}`, '_blank')}
+                                    className="w-[36px] h-[36px] rounded-full bg-[#103065] hover:bg-[#bc9c33] text-white flex items-center justify-center transition-colors duration-300"
+                                    title="Share to X"
+                                >
+                                    <FaXTwitter size={15} />
+                                </button>
+                                {/* Copy Link */}
+                                <button
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(window.location.href);
+                                        alert("Link copied!");
+                                    }}
+                                    className="w-[36px] h-[36px] rounded-full bg-[#103065] hover:bg-[#bc9c33] text-white flex items-center justify-center transition-colors duration-300"
+                                    title="Copy Link"
+                                >
+                                    <FaLink size={15} />
+                                </button>
+                            </div>
+                        </motion.div>
 
 
                     </div>
@@ -367,18 +445,10 @@ export default function NewsDetailPage() {
                                         <span className="text-sm font-bold text-navy-deep uppercase">{post.category || 'NEWS'}</span>
                                     </div>
                                 </div>
-
-                                {/* Share Section */}
-                                <div className="!mt-6 pt-2 border-t border-slate-100">
-                                    <h4 className="text-[11px] font-black text-navy-deep uppercase tracking-widest mb-4">Share Article</h4>
-                                    <div className="flex gap-3">
-                                        <ShareButtons title={post.title} slug={post.slug} />
-                                    </div>
-                                </div>
                             </motion.div>
 
-                            {/* Related News Box */}
-                            {relatedNews.length > 0 && (
+                            {/* Recent News Box */}
+                            {recentNews.length > 0 && (
                                 <motion.div
                                     initial={{ opacity: 0, x: 20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
@@ -387,11 +457,11 @@ export default function NewsDetailPage() {
                                     className="flex flex-col pt-8"
                                 >
                                     <h3 className="text-navy-deep font-black text-sm tracking-widest uppercase mb-6 flex items-center gap-2">
-                                        RELATED NEWS
+                                        RECENT NEWS
                                     </h3>
 
                                     <div className="flex flex-col gap-6 w-full">
-                                        {relatedNews.map((item) => (
+                                        {recentNews.map((item) => (
                                             <Link href={`/news/${item.slug}`} key={item.id} className="group flex gap-4 items-start">
                                                 <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-200 mt-1">
                                                     <Image

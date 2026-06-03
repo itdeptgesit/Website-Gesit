@@ -570,3 +570,48 @@
 .group:hover .qodef-location-info-line-animated {
     animation: qode-line-from-top 0.8s cubic-bezier(.25, .46, .45, .94) forwards;
 }
+
+/* --- Gallery Infinite Scroll Animation --- */
+@keyframes gs-gallery-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.gs-csr-gallery-track {
+    /* animation set inline via React style prop */
+    will-change: transform;
+}
+
+/* --- Focus Areas Card Custom Dimensions Overrides --- */
+.gs-csr-focus-section .qodef-m-content {
+    height: 275px !important;
+    min-height: 275px !important;
+    max-height: 275px !important;
+    width: 100% !important;
+    max-width: 383px !important;
+    padding: 25px 25px !important;
+    flex: none !important;
+    border-radius: 5px !important;
+}
+
+.gs-csr-focus-section .qodef-m-title {
+    font-size: 24px !important;
+    line-height: 1.3em !important;
+    margin-bottom: 10px !important;
+}
+
+.gs-csr-focus-section .qodef-m-text {
+    font-size: 14px !important;
+    line-height: 1.5em !important;
+}
+
+.gs-csr-focus-section .qodef-m-image {
+    height: 304px !important;
+    width: 100% !important;
+    max-width: 383px !important;
+    flex: none !important;
+}
+
+.gs-csr-focus-section .qodef-location-info-line-animated {
+    top: 273px !important;
+}

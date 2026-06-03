@@ -971,15 +971,18 @@ a {
 
 .gs-news-see-all-row {
   width: min(100%, 1280px);
-  margin: 38px auto 0 !important;
+  margin: 20px auto 0 !important;
   justify-content: flex-start !important;
 }
 
 .gs-news-see-all-link {
   align-items: center;
   gap: 14px !important;
-  letter-spacing: 0.24em !important;
-  line-height: 1;
+  letter-spacing: normal !important;
+  line-height: 1.47em !important;
+  font-family: Lora, serif !important;
+  font-size: 19px !important;
+  font-weight: 400 !important;
   transition: color 0.3s ease;
 }
 
@@ -1134,6 +1137,61 @@ a {
 
   .gs-news-card-meta-featured .gs-news-card-author {
     font-size: 13px !important;
+  }
+
+  .gs-news-grid-card {
+    height: auto !important;
+    min-height: 400px !important;
+    padding: 24px !important;
+  }
+
+  .gs-news-grid-card h3 {
+    font-size: 22px !important;
+    line-height: 1.35 !important;
+    margin-bottom: 20px !important;
+  }
+
+  .gs-news-grid-card .mb-10 {
+    margin-bottom: 20px !important;
+  }
+
+  .gs-news-card-meta {
+    padding-top: 16px !important;
+  }
+
+  /* About Us Core Values Mobile Overrides */
+  .gs-core-value-card {
+    height: auto !important;
+  }
+
+  .gs-core-value-card .qodef-m-image {
+    height: 160px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .gs-core-value-card .qodef-m-image img {
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .gs-core-value-content {
+    min-height: 120px !important;
+    height: auto !important;
+    padding: 20px 15px !important;
+    justify-content: center !important;
+    margin-top: 15px !important;
+  }
+
+  .gs-core-value-card h4 {
+    font-size: 18px !important;
+    margin-bottom: 6px !important;
+    margin-top: 0 !important;
+  }
+
+  .gs-core-value-card p {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
   }
 }
 

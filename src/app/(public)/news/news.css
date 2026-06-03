@@ -232,3 +232,14 @@
         padding-left: 0;
     }
 }
+
+/* --- News Gallery Infinite Scroll Animation --- */
+@keyframes gs-news-gallery-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.gs-news-gallery-track {
+    will-change: transform;
+}
+
