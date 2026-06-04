@@ -20,6 +20,30 @@ export async function POST(req) {
     const honeypot = json.website; // Hidden field
     const turnstileToken = json.turnstileToken;
 
+    // Anti-Spam Check: Rate Limiting
+    const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    if (ip !== 'unknown') {
+      const now = Date.now();
+      const userLimits = global.rateLimitMap || new Map();
+      if (!global.rateLimitMap) global.rateLimitMap = userLimits;
+      
+      const userState = userLimits.get(ip) || { count: 0, firstRequest: now };
+      
+      // Reset window if 1 minute has passed
+      if (now - userState.firstRequest > 60000) {
+        userState.count = 1;
+        userState.firstRequest = now;
+      } else {
+        userState.count++;
+      }
+      
+      userLimits.set(ip, userState);
+      
+      if (userState.count > 5) {
+        return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+      }
+    }
+
     // Anti-Spam Check: Honeypot (Silent Drop)
     if (honeypot) {
       console.warn("Spam detected: Honeypot field filled. Silently dropping.");

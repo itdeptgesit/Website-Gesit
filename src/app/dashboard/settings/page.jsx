@@ -393,17 +393,21 @@ export default function HighFidelitySettingsPage() {
                         </div>
 
                         <div className="w-full max-w-md lg:ml-auto">
-                            <div className="bg-[#264473]/30 p-6 rounded-lg border border-[#345283]">
-                                <label className="text-xs font-bold tracking-widest text-[#a8b1c5] uppercase block mb-3">Invite New Admin</label>
-                                <div className="flex gap-2">
+                            <div className="bg-[#264473]/30 p-6 rounded-lg border border-[#345283] relative overflow-hidden">
+                                <div className="absolute top-2 right-2 bg-[#e8a317] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-widest">
+                                    Coming Soon
+                                </div>
+                                <label className="text-xs font-bold tracking-widest text-[#a8b1c5] uppercase block mb-3 opacity-50">Invite New Admin</label>
+                                <div className="flex gap-2 opacity-50 pointer-events-none">
                                     <Input
                                         className="bg-[#1b365d] border-[#345283] text-white placeholder:text-slate-500 h-12 flex-1 focus-visible:ring-[#e8a317]"
                                         placeholder="colleague@gesit.co.id"
                                         value={inviteEmail}
                                         onChange={(e) => setInviteEmail(e.target.value)}
                                         onKeyDown={(e) => { if (e.key === 'Enter') handleInviteAdmin(); }}
+                                        disabled
                                     />
-                                    <Button onClick={handleInviteAdmin} className="h-12 w-12 bg-[#a38629] hover:bg-[#8b7222] text-white shrink-0 p-0 border border-[#bfa245]">
+                                    <Button onClick={handleInviteAdmin} disabled className="h-12 w-12 bg-[#a38629] hover:bg-[#8b7222] text-white shrink-0 p-0 border border-[#bfa245]">
                                         <Plus className="w-5 h-5" />
                                     </Button>
                                 </div>

@@ -64,7 +64,7 @@ export default function ContactsInboxPage() {
     }, []);
 
     const handleDelete = async (id) => {
-        const confirmMsg = "Hapus pesan ini secara permanen?";
+        const confirmMsg = "Permanently delete this message?";
         if (!window.confirm(confirmMsg)) return;
 
         try {
@@ -154,7 +154,7 @@ export default function ContactsInboxPage() {
                     {/* Unread Counter Widget */}
                     <div className="bg-white px-4 py-3 rounded-lg border shadow-sm flex items-center gap-3">
                         <div className="text-right">
-                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Belum Dibaca</p>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Unread</p>
                             <p className="text-xl font-bold text-[#bc9c33] leading-none">{unreadCount}</p>
                         </div>
                         <div className="w-8 h-8 rounded-md bg-amber-50 flex items-center justify-center text-[#bc9c33]">
@@ -209,8 +209,8 @@ export default function ContactsInboxPage() {
                     {filteredMessages.length === 0 ? (
                         <div className="text-center py-24">
                             <MessageSquare className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                            <h3 className="text-lg font-medium text-slate-700">Inbox Kosong</h3>
-                            <p className="text-slate-400 text-sm mt-1">Belum ada pesan yang cocok dengan pencarian saat ini.</p>
+                            <h3 className="text-lg font-medium text-slate-700">Empty Inbox</h3>
+                            <p className="text-slate-400 text-sm mt-1">No messages match your current search.</p>
                         </div>
                     ) : (
                         <div>
@@ -239,7 +239,7 @@ export default function ContactsInboxPage() {
                                                         <div className="flex flex-col">
                                                             <div className="flex items-center gap-2">
                                                                 {!isRead && (
-                                                                    <span className="w-2 h-2 rounded-full bg-[#bc9c33] shrink-0 animate-pulse" title="Pesan Belum Dibaca" />
+                                                                    <span className="w-2 h-2 rounded-full bg-[#bc9c33] shrink-0 animate-pulse" title="Unread Message" />
                                                                 )}
                                                                 <span className={cn(
                                                                     "text-[#103065] text-sm",

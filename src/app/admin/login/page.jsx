@@ -273,11 +273,7 @@ export default function LoginPage() {
                             </div>
 
                             <div className="flex items-center justify-between text-[12px] mt-2">
-                                <label className="flex items-center gap-2 cursor-pointer select-none">
-                                    <input type="checkbox" className="w-[14px] h-[14px] rounded-[3px] border-slate-300 text-[#103065] focus:ring-[#103065]" />
-                                    <span className="text-slate-600 hover:text-slate-800 transition-colors font-medium">Remember me</span>
-                                </label>
-                                <a href="#" className="text-[#3b82f6] hover:text-[#2563eb] transition-colors font-semibold">Forgot password?</a>
+                                {/* Remember Me and Forgot Password placeholders removed (BUG-009) until fully implemented */}
                             </div>
 
                             {error && (

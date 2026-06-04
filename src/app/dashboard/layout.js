@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-client';
@@ -26,7 +26,7 @@ export default function DashboardLayout({ children }) {
     const [user, setUser] = useState(null);
     const router = useRouter();
     const pathname = usePathname();
-    const supabase = createClient();
+    const supabase = useMemo(() => createClient(), []);
 
     // Dropdowns and Interactive States
     const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
@@ -41,11 +41,11 @@ export default function DashboardLayout({ children }) {
 
         const checkUser = async () => {
             try {
-                const { data: { session }, error } = await supabase.auth.getSession();
-                if (error || !session) {
+                const { data: { user: authUser }, error } = await supabase.auth.getUser();
+                if (error || !authUser) {
                     if (mounted) router.push('/admin/login');
                 } else {
-                    if (mounted) setUser(session.user);
+                    if (mounted) setUser(authUser);
                 }
             } catch (err) {
                 console.error("Auth check warning:", err);
@@ -144,6 +144,9 @@ export default function DashboardLayout({ children }) {
             setIsSearching(true);
             const query = searchQuery.trim().toLowerCase();
 
+            // Escape SQL wildcard characters to prevent injection
+            const escapedQuery = query.replace(/[%_\\]/g, '\\$&');
+
             // Match navigation pages
             const matchedPages = navItems.filter(item => 
                 item.name.toLowerCase().includes(query)
@@ -154,14 +157,14 @@ export default function DashboardLayout({ children }) {
                 const { data: newsData } = await supabase
                     .from('news')
                     .select('id, title, slug')
-                    .ilike('title', `%${query}%`)
+                    .ilike('title', `%${escapedQuery}%`)
                     .limit(3);
 
                 // Match contact subject or sender
                 const { data: contactsData } = await supabase
                     .from('contact_messages')
                     .select('id, name, subject, email')
-                    .or(`name.ilike.%${query}%,subject.ilike.%${query}%,email.ilike.%${query}%`)
+                    .or(`name.ilike.%${escapedQuery}%,subject.ilike.%${escapedQuery}%,email.ilike.%${escapedQuery}%`)
                     .limit(3);
 
                 setSearchResults({

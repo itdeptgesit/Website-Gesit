@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
+import { toast } from 'sonner';
 import './contact.css';
 
 export default function ContactUs() {
@@ -19,6 +20,7 @@ export default function ContactUs() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const lockRef = useRef(false);
 
   const validate = () => {
     const newErrors = {};
@@ -42,7 +44,9 @@ export default function ContactUs() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
+    if (lockRef.current) return;
 
+    lockRef.current = true;
     setLoading(true);
     try {
       const res = await fetch('/api/contact', {
@@ -63,12 +67,14 @@ export default function ContactUs() {
         setFormData({ name: '', email: '', phone: '', message: '', website: '' });
         setTurnstileToken('');
       } else {
-        alert("Failed to send message. Please try again later.");
+        const errorData = await res.json().catch(() => ({}));
+        toast.error(errorData.error || "Failed to send message. Please try again later.");
       }
     } catch (err) {
-      alert("Error submitting form. Please check your connection.");
+      toast.error("Error submitting form. Please check your connection.");
     } finally {
       setLoading(false);
+      lockRef.current = false;
     }
   };
 

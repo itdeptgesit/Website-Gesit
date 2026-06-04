@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { createClient } from '@/lib/supabase-server';
 import JsonLd from '@/components/JsonLd';
 import { Suspense } from 'react';
+import { Toaster } from 'sonner';
 
 const sourceSans = Source_Sans_3({
   subsets: ['latin'],
@@ -107,20 +108,27 @@ export default async function RootLayout({ children }) {
     ],
   };
 
+  // Validate tracking IDs to prevent XSS injection via dangerouslySetInnerHTML
+  const isValidGaId = (id) => /^(G|GT|AW)-[A-Z0-9]+$/.test(id);
+  const isValidFbPixelId = (id) => /^\d{10,20}$/.test(id);
+
+  const safeGaId = settings?.ga_tracking_id && isValidGaId(settings.ga_tracking_id) ? settings.ga_tracking_id : null;
+  const safeFbPixelId = settings?.fb_pixel_id && isValidFbPixelId(settings.fb_pixel_id) ? settings.fb_pixel_id : null;
+
   return (
     <html lang="en" className={`${sourceSans.variable} ${lora.variable} ${georgia.variable} ${cormorantGaramond.variable}`} suppressHydrationWarning>
       <head>
         {/* Google Analytics (GA4) - Dynamic */}
-        {settings?.ga_tracking_id && (
+        {safeGaId && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${settings.ga_tracking_id}`}></script>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${safeGaId}`}></script>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${settings.ga_tracking_id}');
+                  gtag('config', '${safeGaId}');
                 `,
               }}
             />
@@ -128,7 +136,7 @@ export default async function RootLayout({ children }) {
         )}
 
         {/* Facebook Pixel - Dynamic */}
-        {settings?.fb_pixel_id && (
+        {safeFbPixelId && (
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -140,7 +148,7 @@ export default async function RootLayout({ children }) {
                 t.src=v;s=b.getElementsByTagName(e)[0];
                 s.parentNode.insertBefore(t,s)}(window, document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${settings.fb_pixel_id}');
+                fbq('init', '${safeFbPixelId}');
                 fbq('track', 'PageView');
               `,
             }}
@@ -169,6 +177,7 @@ export default async function RootLayout({ children }) {
         <Analytics />
         <SpeedInsights />
         {children}
+        <Toaster position="bottom-right" />
         
         {/* Facebook Pixel Noscript */}
         {settings?.fb_pixel_id && (

@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { toast } from 'sonner';
 import { 
     Plus, Trash2, Loader2, Upload, FileText, Calendar, User, Tag, 
     Image as ImageIcon, ArrowLeft, Pencil, AlertTriangle, Film, 
@@ -56,6 +57,7 @@ export default function NewsDashboard() {
     const [submitting, setSubmitting] = useState(false);
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [deleting, setDeleting] = useState(false);
+    const lockRef = useRef(false);
     const supabase = createClient();
 
     // Filters, Search, and Pagination States
@@ -146,6 +148,9 @@ export default function NewsDashboard() {
 
     const handleSubmit = async (e) => {
         if (e) e.preventDefault();
+        if (lockRef.current) return;
+        
+        lockRef.current = true;
         setSubmitting(true);
 
         try {
@@ -179,9 +184,10 @@ export default function NewsDashboard() {
             setIsCreating(false);
             setEditingId(null);
         } catch (err) {
-            alert('Failed: ' + err.message);
+            toast.error('Failed: ' + err.message);
         } finally {
             setSubmitting(false);
+            lockRef.current = false;
         }
     };
 
@@ -216,7 +222,7 @@ export default function NewsDashboard() {
             setNews(news.filter(n => n.id !== deleteTarget.id));
             setDeleteTarget(null);
         } catch (err) {
-            alert(err.message);
+            toast.error(err.message);
         } finally {
             setDeleting(false);
         }
