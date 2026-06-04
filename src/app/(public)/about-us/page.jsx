@@ -346,13 +346,13 @@ export default function AboutUs() {
                               >
                                 <div className="elementor-element elementor-element-98ea9bc p-15 text-center elementor-widget elementor-widget-thetrial_core_location_info">
                                   <div className="elementor-widget-container">
-                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled gs-core-value-card" style={{ borderRadius: '5px', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                      <div className="qodef-m-image">
-                                        <Image src={val.img} alt={val.title} width={400} height={300} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled gs-core-value-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
+                                      <div className="qodef-m-image" style={{ width: '289px', height: '229px', flexShrink: 0, borderRadius: '5px', overflow: 'hidden' }}>
+                                        <Image src={val.img} alt={val.title} width={289} height={229} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                       </div>
-                                      <div className="qodef-m-content gs-core-value-content" style={{ backgroundColor: '#BC9C33', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-                                        <h4 className="qodef-m-title" style={{ color: '#FFFFFF' }}>{val.title}</h4>
-                                        <p className="qodef-m-text" style={{ color: '#FFFFFF' }}>{val.desc}</p>
+                                      <div className="qodef-m-content gs-core-value-content" style={{ backgroundColor: '#BC9C33', width: '289px', height: '185px', minHeight: '185px', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', marginTop: '30px', padding: '0 20px', borderRadius: '5px' }}>
+                                        <h4 className="qodef-m-title" style={{ color: '#FFFFFF', textAlign: 'center', position: 'relative', zIndex: 11, fontSize: '30px', margin: '0 0 10px 0' }}>{val.title}</h4>
+                                        <p className="qodef-m-text" style={{ color: '#FFFFFF', textAlign: 'center', position: 'relative', zIndex: 11, margin: 0 }}>{val.desc}</p>
                                       </div>
                                     </div>
                                   </div>
