@@ -332,7 +332,7 @@ export default function CSRPage() {
             </section>
 
             <section suppressHydrationWarning className="bg-[#103065] py-16 md:py-24 gs-csr-focus-section">
-                <div className="max-w-[1209px] mx-auto px-6 lg:px-0">
+                <div className="max-w-[1200px] mx-auto px-6 lg:px-0">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] justify-items-center">
                         {focusAreas.map((val, idx) => (
                             <div key={val.title} className="w-full max-w-[383px] flex flex-col relative group">
@@ -390,9 +390,9 @@ export default function CSRPage() {
 
             {/* ================= INITIATIVES ================= */}
             <section className="py-20 bg-white">
-                <div className="mx-auto w-full px-6 md:px-0" style={{ maxWidth: '1209px' }}>
+                <div className="mx-auto w-full px-6 lg:px-0" style={{ maxWidth: '1200px' }}>
                     <h2
-                        className="text-center mb-12 text-[#000] text-[26px] md:text-[42px]"
+                        className="text-center mb-12 text-[#000] text-[26px] md:text-[44px]"
                         style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
                     >
                         Our CSR Initiatives & Programs
@@ -436,25 +436,21 @@ export default function CSRPage() {
                                             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="pl-8 md:pl-16 pr-4 md:pr-8" style={{ paddingTop: '8px', paddingBottom: '22px' }}>
+                                            <div className="pl-8 md:pl-16 pr-0" style={{ paddingTop: '0px', paddingBottom: '22px', marginTop: '-24px' }}>
                                                 {initiative.content.map((block) => (
-                                                    <div key={block.subtitle} className="mt-3 first:mt-0">
+                                                    <div key={block.subtitle} className="mt-0">
                                                         {block.subtitle && (
-                                                            <h4 className="text-[18px] md:text-[20px] font-bold text-[#555] m-0 mb-0 pl-0" style={{ fontFamily: 'Lora, serif', lineHeight: 1.2 }}>
+                                                            <h4 className="text-[16px] md:text-[18px] font-bold text-[#555] mb-0 pl-0 leading-[27px]" style={{ fontFamily: 'Lora, serif' }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="gs-csr-initiative-list m-0 p-0 mt-0">
+                                                        <ul className="list-disc pl-5 m-0 space-y-0">
                                                             {block.items.map((item, i) => {
                                                                 const isSubItem = item.startsWith("- ");
+                                                                const text = isSubItem ? item.substring(2) : item;
                                                                 return (
-                                                                    <li key={i} className={`gs-csr-initiative-item flex items-start gap-3 text-[16px] md:text-[20px] text-[#555] font-normal leading-relaxed m-0 py-0 pr-3 ${isSubItem ? 'pl-10' : 'pl-0'}`} style={{ fontFamily: "var(--font-sans)" }}>
-                                                                        {!isSubItem && (
-                                                                            <div className="flex items-center justify-center shrink-0 w-3" style={{ height: '1.625em' }}>
-                                                                                <span className="w-[8px] h-[8px] rounded-full bg-[#555]" />
-                                                                            </div>
-                                                                        )}
-                                                                        <span className="flex-1">{item}</span>
+                                                                    <li key={i} className={`text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px] ${isSubItem ? 'list-[circle] ml-6' : ''}`} style={{ fontFamily: "var(--font-sans)" }}>
+                                                                        {text}
                                                                     </li>
                                                                 );
                                                             })}
