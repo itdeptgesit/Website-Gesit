@@ -9,7 +9,7 @@ import {
     ChevronLeft, ChevronRight, Calendar, Tag, Loader2,
     Clock, Users, Handshake, Heart, ShieldCheck, MessageSquare, FileText
 } from "lucide-react";
-import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaLink } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaLink, FaCheck } from "react-icons/fa6";
 import ShareButtons from './ShareButtons';
 import xss from 'xss';
 
@@ -101,6 +101,7 @@ export default function NewsDetailPage() {
 
     const [newsItems, setNewsItems] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isCopied, setIsCopied] = useState(false);
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -206,12 +207,12 @@ export default function NewsDetailPage() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.5 }}
-                            className="flex flex-wrap items-center gap-4 text-white/80 text-[13px] uppercase tracking-widest font-bold mb-10"
+                            className="flex flex-wrap items-center gap-4 text-white text-[13px] uppercase tracking-widest font-bold mb-10"
                         >
-                            <span className="text-[#bc9c33]">{post.category || 'NEWS'}</span>
-                            <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                            <span>{post.category || 'NEWS'}</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-white/50" />
                             <div className="flex items-center gap-2">
-                                <Calendar size={14} className="text-[#bc9c33]" />
+                                <Calendar size={14} className="text-white" />
                                 <span>{post.date}</span>
                             </div>
                         </motion.div>
@@ -391,12 +392,13 @@ export default function NewsDetailPage() {
                                 <button
                                     onClick={() => {
                                         navigator.clipboard.writeText(window.location.href);
-                                        alert("Link copied!");
+                                        setIsCopied(true);
+                                        setTimeout(() => setIsCopied(false), 2000);
                                     }}
-                                    className="w-[36px] h-[36px] rounded-full bg-[#103065] hover:bg-[#bc9c33] text-white flex items-center justify-center transition-colors duration-300"
-                                    title="Copy Link"
+                                    className={`w-[36px] h-[36px] rounded-full flex items-center justify-center transition-colors duration-300 ${isCopied ? 'bg-green-600 text-white' : 'bg-[#103065] hover:bg-[#bc9c33] text-white'}`}
+                                    title={isCopied ? "Copied!" : "Copy Link"}
                                 >
-                                    <FaLink size={15} />
+                                    {isCopied ? <FaCheck size={14} /> : <FaLink size={15} />}
                                 </button>
                             </div>
                         </motion.div>
