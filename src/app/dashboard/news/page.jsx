@@ -245,7 +245,7 @@ export default function NewsDashboard() {
                         </div>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Button variant="outline" onClick={() => setIsCreating(false)} className="text-xs font-bold uppercase tracking-widest">
+                        <Button variant="outline" onClick={() => setIsCreating(false)} className="text-slate-700 hover:bg-slate-50 text-xs font-bold uppercase tracking-widest border-slate-200">
                             Dismiss
                         </Button>
                         <Button 

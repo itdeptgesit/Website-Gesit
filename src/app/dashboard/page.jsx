@@ -72,13 +72,16 @@ export default function DashboardOverviewPage() {
                     .sort((a, b) => b.views - a.views).slice(0, 5);
 
                 processedCountries = Object.values(countryMap)
+                    .filter(c => c.country_code !== 'INT' && c.country_name !== 'Unknown' && c.country_name !== 'International')
                     .sort((a, b) => b.visitor_count - a.visitor_count).slice(0, 5);
             } else {
                 // Fallback to cumulative data if logs empty
                 const { data: altAnalytics } = await supabase.from('page_analytics').select('*').order('views', { ascending: false }).limit(5);
-                const { data: altCountries } = await supabase.from('country_analytics').select('*').order('visitor_count', { ascending: false }).limit(5);
+                const { data: altCountries } = await supabase.from('country_analytics').select('*').order('visitor_count', { ascending: false }).limit(10);
                 processedAnalytics = altAnalytics || [];
-                processedCountries = altCountries || [];
+                processedCountries = (altCountries || [])
+                    .filter(c => c.country_code !== 'INT' && c.country_name !== 'Unknown' && c.country_name !== 'International')
+                    .slice(0, 5);
             }
 
             // Calculate real "Live Traffic" based on logs from the last 15 minutes

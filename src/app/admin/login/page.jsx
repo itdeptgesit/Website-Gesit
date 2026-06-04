@@ -320,7 +320,7 @@ export default function LoginPage() {
                                         maxLength={8}
                                         value={mfaCode}
                                         onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, ''))}
-                                        className="h-14 text-center text-xl tracking-[0.5em] font-mono bg-[#f8fafc] border-slate-200 focus:border-[#bc9c33] focus:ring-0 rounded-xl"
+                                        className="h-14 text-center text-xl tracking-[0.5em] font-mono text-slate-900 bg-[#f8fafc] border-slate-200 focus:border-[#bc9c33] focus:ring-0 rounded-xl"
                                         autoFocus
                                     />
                                 </div>

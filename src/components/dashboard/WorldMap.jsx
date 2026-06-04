@@ -111,7 +111,8 @@ const WorldMap = ({ countries = [] }) => {
         'DEV': [106.8272, -6.1751]  // Local Dev is Jakarta/Java
       };
 
-      return countryFallbacks[countryCode] || [113.9213, -0.7893];
+      if (countryCode === 'INT' || countryCode === 'Unknown') return null;
+      return countryFallbacks[countryCode] || null;
   };
 
   // Mapping numeric ISO IDs to our codes (Standard for world-atlas)
