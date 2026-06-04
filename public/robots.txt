@@ -1,8 +1,0 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /dashboard/
-
-# Sitemaps
-Sitemap: https://gesit.co.id/sitemap.xml

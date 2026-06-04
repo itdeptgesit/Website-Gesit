@@ -47,15 +47,26 @@ const georgia = localFont({
   display: 'swap',
 });
 
+const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === 'production';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gesit.co.id';
+
 export const metadata = {
-  metadataBase: new URL('https://gesit.co.id'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'The Gesit Companies',
     template: '%s | The Gesit Companies',
   },
   description: 'The Gesit Companies are business leaders in the fields of Property, Trading & Service, Manufacturing, and Natural Resources in Indonesia.',
+  robots: {
+    index: isProduction,
+    follow: isProduction,
+    googleBot: {
+      index: isProduction,
+      follow: isProduction,
+    },
+  },
   alternates: {
-    canonical: 'https://gesit.co.id',
+    canonical: siteUrl,
   },
   icons: {
     icon: [

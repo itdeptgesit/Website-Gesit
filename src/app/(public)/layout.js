@@ -2,11 +2,6 @@ import BodyClassHandler from '../../components/BodyClassHandler';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import BackToTop from '../../components/BackToTop';
-import { getSegmentMetadata } from '@/lib/seo-helper';
-
-export async function generateMetadata() {
-    return await getSegmentMetadata('HOME', 'The Gesit Companies');
-}
 
 export default function PublicLayout({ children }) {
     return (

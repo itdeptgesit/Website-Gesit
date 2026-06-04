@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase-server';
 
 export default async function sitemap() {
-    const baseUrl = 'https://gesit.co.id';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gesit.co.id';
 
     // Standard static routes
     const staticRoutes = [

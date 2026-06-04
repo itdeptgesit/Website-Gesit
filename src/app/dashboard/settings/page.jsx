@@ -24,7 +24,7 @@ export default function HighFidelitySettingsPage() {
 
     // 1. SEO Manager State
     const [activeSegment, setActiveSegment] = useState('HOME');
-    const segments = ['HOME', 'ABOUT US', 'PROPERTY', 'TRADING & SERVICES', 'MANUFACTURING', 'NATURAL RESOURCES', 'CAREERS', 'NEWS ARCHIVE', 'CONTACT'];
+    const segments = ['HOME', 'ABOUT US', 'PROPERTY', 'TRADING & SERVICES', 'MANUFACTURING', 'NATURAL RESOURCES', 'CAREERS', 'NEWS', 'NEWS ARCHIVE', 'CONTACT'];
     const [seoData, setSeoData] = useState({ title: '', description: '', keywords: '' });
 
     // 2. Identity & System State
