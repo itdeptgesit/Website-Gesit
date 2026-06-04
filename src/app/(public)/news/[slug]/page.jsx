@@ -424,8 +424,8 @@ export default function NewsDetailPage() {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full">
                                     {recentNews.map((item) => (
-                                        <Link href={`/news/${item.slug}`} key={item.id} className="group flex flex-col bg-white border border-slate-100 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                            <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-200">
+                                        <Link href={`/news/${item.slug}`} key={item.id} className="group flex flex-col bg-transparent overflow-hidden transition-all duration-300">
+                                            <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-slate-100 mb-5">
                                                 <Image
                                                     src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                                                     alt={item.title}
@@ -435,13 +435,11 @@ export default function NewsDetailPage() {
                                                     className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                                                 />
                                             </div>
-                                            <div className="flex flex-col p-6 flex-1">
-                                                <div className="flex items-center gap-2 mb-3">
-                                                    <span className="text-[10px] uppercase font-black text-[#bc9c33] tracking-widest leading-none">{item.category || 'NEWS'}</span>
-                                                    <span className="w-1 h-1 rounded-full bg-slate-300" />
-                                                    <span className="text-[10px] text-slate-400 font-bold leading-none">{item.date}</span>
-                                                </div>
-                                                <h4 className="text-[16px] font-bold text-navy-deep leading-snug group-hover:text-[#103065] transition-colors line-clamp-3">
+                                            <div className="flex flex-col flex-1 px-1">
+                                                <span className="text-[11px] font-bold text-[#bc9c33] tracking-[0.15em] uppercase mb-3 block" style={{ fontFamily: "var(--font-sans)" }}>
+                                                    {item.date}
+                                                </span>
+                                                <h4 className="text-[18px] md:text-[20px] text-[#103065] leading-[1.4] font-medium group-hover:text-[#bc9c33] transition-colors line-clamp-3" style={{ fontFamily: 'Lora, serif' }}>
                                                     {item.title}
                                                 </h4>
                                             </div>
