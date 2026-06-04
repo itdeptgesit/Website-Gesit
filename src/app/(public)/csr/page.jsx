@@ -184,12 +184,12 @@ export default function CSRPage() {
                     {/* Fallback Hero Image (Server-side rendered for instant loading) */}
                     {!isMounted && (
                         <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
-                            <Image 
-                                src={heroImages[0]} 
-                                alt="CSR Hero" 
-                                fill 
-                                style={{ objectFit: "cover" }} 
-                                priority 
+                            <Image
+                                src={heroImages[0]}
+                                alt="CSR Hero"
+                                fill
+                                style={{ objectFit: "cover" }}
+                                priority
                                 fetchPriority="high"
                             />
                         </div>
@@ -355,7 +355,7 @@ export default function CSRPage() {
                                         </div>
                                         {/* White Connector Line Animation */}
                                         <div className="qodef-location-info-line-animated" />
-                                        
+
                                         {/* 36px Spacer */}
                                         <div className="h-[36px] w-full flex-none" />
 
@@ -409,12 +409,12 @@ export default function CSRPage() {
                                     }
                                     className="w-full py-6 flex items-center gap-6 text-left transition-colors group"
                                 >
-                                    <motion.div 
+                                    <motion.div
                                         className="flex items-center justify-center shrink-0"
-                                        style={{ 
-                                            width: '32px', 
-                                            height: '32px', 
-                                            borderRadius: '50%', 
+                                        style={{
+                                            width: '32px',
+                                            height: '32px',
+                                            borderRadius: '50%',
                                             border: '1px solid #BC9C33',
                                             backgroundColor: openInitiative === initiative.title ? '#FFFFFF' : '#BC9C33',
                                             color: openInitiative === initiative.title ? '#BC9C33' : '#FFFFFF'
@@ -434,26 +434,44 @@ export default function CSRPage() {
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-                                            className="overflow-hidden"
+                                            className="overflow-hidden -mt-2 relative z-0"
                                         >
-                                            <div className="pl-8 md:pl-16 pr-0" style={{ paddingTop: '0px', paddingBottom: '22px', marginTop: '-24px' }}>
-                                                {initiative.content.map((block) => (
-                                                    <div key={block.subtitle} className="mt-0">
+                                            <div className="pl-8 md:pl-16 pr-0" style={{ paddingTop: '0px', paddingBottom: '22px' }}>
+                                                {initiative.content.map((block, index) => (
+                                                    <div key={block.subtitle || index} className={index === 0 ? "mt-0" : "mt-8"}>
                                                         {block.subtitle && (
-                                                            <h4 className="text-[16px] md:text-[18px] font-bold text-[#555] mb-0 pl-0 leading-[27px]" style={{ fontFamily: 'Lora, serif' }}>
+                                                            <h4 className="text-[16px] md:text-[18px] font-bold text-[#555] mb-0 !mt-0 pl-0 leading-[27px]" style={{ fontFamily: 'Lora, serif' }}>
                                                                 {block.subtitle}
                                                             </h4>
                                                         )}
-                                                        <ul className="list-disc pl-5 m-0 space-y-0">
-                                                            {block.items.map((item, i) => {
-                                                                const isSubItem = item.startsWith("- ");
-                                                                const text = isSubItem ? item.substring(2) : item;
-                                                                return (
-                                                                    <li key={i} className={`text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px] ${isSubItem ? 'list-[circle] ml-6' : ''}`} style={{ fontFamily: "var(--font-sans)" }}>
-                                                                        {text}
+                                                        <ul className="list-disc list-outside pl-5 m-0 space-y-0">
+                                                            {(() => {
+                                                                const groupedItems = [];
+                                                                block.items.forEach(item => {
+                                                                    if (item.startsWith("- ")) {
+                                                                        if (groupedItems.length > 0) {
+                                                                            if (!groupedItems[groupedItems.length - 1].sub) groupedItems[groupedItems.length - 1].sub = [];
+                                                                            groupedItems[groupedItems.length - 1].sub.push(item);
+                                                                        }
+                                                                    } else {
+                                                                        groupedItems.push({ text: item });
+                                                                    }
+                                                                });
+                                                                return groupedItems.map((group, i) => (
+                                                                    <li key={i} className="list-outside text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]" style={{ fontFamily: "var(--font-sans)" }}>
+                                                                        {group.text}
+                                                                        {group.sub && (
+                                                                            <div className="flex flex-col m-0 p-0">
+                                                                                {group.sub.map((subItem, j) => (
+                                                                                    <span key={j} className="text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px] block m-0 p-0">
+                                                                                        {subItem}
+                                                                                    </span>
+                                                                                ))}
+                                                                            </div>
+                                                                        )}
                                                                     </li>
-                                                                );
-                                                            })}
+                                                                ));
+                                                            })()}
                                                         </ul>
                                                     </div>
                                                 ))}
