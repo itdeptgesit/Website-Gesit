@@ -365,7 +365,7 @@ export default function CSRPage() {
                                                 whileInView={{ opacity: 1, y: 0 }}
                                                 viewport={{ once: true }}
                                                 transition={{ duration: 0.6 }}
-                                                className="qodef-m-title !text-white"
+                                                className="qodef-m-title !text-white min-h-[0px] md:min-h-[64px] lg:min-h-[72px]"
                                             >
                                                 {val.title}
                                             </motion.h4>
