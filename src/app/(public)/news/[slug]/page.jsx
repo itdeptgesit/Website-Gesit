@@ -29,11 +29,14 @@ function NewsDetailSkeleton() {
                     </div>
 
                     <div className="max-w-4xl space-y-6">
-                        {/* Category Tag */}
-                        <div className="h-5 w-20 bg-white/20 rounded-[5px]"></div>
                         {/* Title Lines */}
-                        <div className="h-10 w-full md:w-3/4 bg-white/25 rounded"></div>
-                        <div className="h-10 w-1/2 bg-white/20 rounded"></div>
+                        <div className="h-10 w-full md:w-3/4 bg-white/20 rounded"></div>
+                        <div className="h-10 w-1/2 bg-white/20 rounded mb-2"></div>
+                        {/* Meta Line */}
+                        <div className="flex gap-4 items-center pb-2">
+                            <div className="h-3 w-16 bg-white/10 rounded"></div>
+                            <div className="h-3 w-24 bg-white/10 rounded"></div>
+                        </div>
                         {/* Accent Bar */}
                         <div className="w-20 h-1 bg-white/30 rounded" />
                     </div>
@@ -41,68 +44,46 @@ function NewsDetailSkeleton() {
             </div>
 
             {/* 2. MAIN LAYOUT SKELETON */}
-            <div className="container mx-auto px-6 lg:px-8 max-w-6xl pt-16">
-                <div className="flex flex-col lg:flex-row gap-12 xl:gap-20">
-                    {/* Content Column */}
-                    <div className="lg:w-2/3 xl:w-3/4 space-y-12">
-                        {/* Featured Media Box */}
-                        <div className="w-full aspect-[16/10] bg-slate-100 rounded-[5px] border border-slate-200/50 shadow-sm"></div>
+            <div className="container mx-auto px-6 lg:px-8 max-w-4xl pt-16">
+                <div className="flex flex-col space-y-12 w-full">
+                    {/* Featured Media Box */}
+                    <div className="w-full aspect-[16/10] bg-slate-100 rounded-[10px] border border-slate-100 shadow-sm"></div>
 
-                        {/* Article Text Paragraphs */}
-                        <div className="space-y-6">
-                            <div className="h-4 w-full bg-slate-100 rounded"></div>
-                            <div className="h-4 w-11/12 bg-slate-100 rounded"></div>
-                            <div className="h-4 w-full bg-slate-100 rounded"></div>
-                            <div className="h-4 w-10/12 bg-slate-100 rounded"></div>
-                            <div className="h-4 w-8/12 bg-slate-100 rounded"></div>
-                        </div>
+                    {/* Article Text Paragraphs */}
+                    <div className="space-y-6">
+                        <div className="h-4 w-full bg-slate-100 rounded"></div>
+                        <div className="h-4 w-11/12 bg-slate-100 rounded"></div>
+                        <div className="h-4 w-full bg-slate-100 rounded"></div>
+                        <div className="h-4 w-10/12 bg-slate-100 rounded"></div>
+                        <div className="h-4 w-8/12 bg-slate-100 rounded"></div>
+                        <div className="h-4 w-full bg-slate-100 rounded"></div>
+                    </div>
 
-                        <div className="space-y-6 pt-6 border-t border-slate-100">
-                            <div className="h-6 w-1/4 bg-slate-100 rounded mb-4"></div>
-                            <div className="h-4 w-full bg-slate-100 rounded"></div>
-                            <div className="h-4 w-full bg-slate-100 rounded"></div>
-                            <div className="h-4 w-9/12 bg-slate-100 rounded"></div>
+                    {/* Share Button Block */}
+                    <div className="pt-8 border-t border-slate-100 space-y-4">
+                        <div className="h-5 w-24 bg-slate-100 rounded"></div>
+                        <div className="flex gap-3">
+                            <div className="w-9 h-9 rounded-full bg-slate-100"></div>
+                            <div className="w-9 h-9 rounded-full bg-slate-100"></div>
+                            <div className="w-9 h-9 rounded-full bg-slate-100"></div>
+                            <div className="w-9 h-9 rounded-full bg-slate-100"></div>
                         </div>
                     </div>
 
-                    {/* Sidebar Column */}
-                    <div className="lg:w-1/3 xl:w-1/4 space-y-10">
-                        {/* Meta Info Card */}
-                        <div className="bg-slate-50 border border-slate-100 rounded-[5px] p-8 space-y-6 shadow-sm">
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-slate-200/60"></div>
-                                <div className="space-y-2 flex-1">
-                                    <div className="h-3 w-1/3 bg-slate-200/80 rounded"></div>
-                                    <div className="h-4 w-2/3 bg-slate-200 rounded"></div>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-slate-200/60"></div>
-                                <div className="space-y-2 flex-1">
-                                    <div className="h-3 w-1/3 bg-slate-200/80 rounded"></div>
-                                    <div className="h-4 w-2/3 bg-slate-200 rounded"></div>
-                                </div>
-                            </div>
-                            <div className="pt-4 border-t border-slate-100 space-y-3">
-                                <div className="h-3 w-1/2 bg-slate-200/80 rounded"></div>
-                                <div className="flex gap-2">
-                                    <div className="w-8 h-8 rounded-full bg-slate-200"></div>
-                                    <div className="w-8 h-8 rounded-full bg-slate-200"></div>
-                                    <div className="w-8 h-8 rounded-full bg-slate-200"></div>
-                                </div>
-                            </div>
+                    {/* Recent News Block */}
+                    <div className="mt-16 pt-12 border-t border-slate-100">
+                        <div className="flex justify-between items-end mb-8">
+                            <div className="h-6 w-40 bg-slate-100 rounded"></div>
+                            <div className="h-4 w-24 bg-slate-50 rounded"></div>
                         </div>
-
-                        {/* Related News Card */}
-                        <div className="space-y-6">
-                            <div className="h-4 w-1/3 bg-slate-100 rounded"></div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                             {[1, 2, 3].map((i) => (
-                                <div key={i} className="flex gap-4 items-start">
-                                    <div className="w-20 h-20 bg-slate-100 rounded-lg shrink-0"></div>
-                                    <div className="space-y-3 flex-1">
+                                <div key={i} className="flex flex-col bg-white border border-slate-100 rounded-xl overflow-hidden">
+                                    <div className="w-full aspect-[16/10] bg-slate-100"></div>
+                                    <div className="p-6 space-y-4">
                                         <div className="h-3 w-1/2 bg-slate-100 rounded"></div>
                                         <div className="h-4 w-full bg-slate-100 rounded"></div>
-                                        <div className="h-3 w-3/4 bg-slate-100 rounded"></div>
+                                        <div className="h-4 w-3/4 bg-slate-100 rounded"></div>
                                     </div>
                                 </div>
                             ))}
@@ -213,41 +194,46 @@ export default function NewsDetailPage() {
                     </motion.nav>
 
                     <div className="max-w-4xl">
-                        <motion.span
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="inline-block bg-[#bc9c33] text-white text-[10px] font-black px-3 py-1 rounded-[5px] uppercase tracking-tighter mb-6"
-                        >
-                            {post.category || 'NEWS'}
-                        </motion.span>
-
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-3xl md:text-5xl lg:text-[54px] text-white leading-[1.1] font-serif mb-8 max-w-5xl"
+                            className="text-3xl md:text-5xl lg:text-[54px] text-white leading-[1.15] font-serif mb-6 max-w-5xl"
                         >
                             {post.title}
                         </motion.h1>
+
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
+                            className="flex flex-wrap items-center gap-4 text-white/80 text-[13px] uppercase tracking-widest font-bold mb-10"
+                        >
+                            <span className="text-[#bc9c33]">{post.category || 'NEWS'}</span>
+                            <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                            <div className="flex items-center gap-2">
+                                <Calendar size={14} className="text-[#bc9c33]" />
+                                <span>{post.date}</span>
+                            </div>
+                        </motion.div>
 
                         <div className="w-20 h-1 bg-[#bc9c33]" />
                     </div>
                 </div>
             </section>
 
-            {/* 2. MAIN LAYOUT (CONTENT + SIDEBAR) */}
-            <main className="container mx-auto px-6 lg:px-8 max-w-6xl pt-16">
-                <div className="flex flex-col lg:flex-row gap-12 xl:gap-20">
+            {/* 2. MAIN LAYOUT (CONTENT ONLY) */}
+            <main className="container mx-auto px-6 lg:px-8 max-w-4xl pt-16">
+                <div className="flex flex-col">
 
-                    {/* Left Column: Content */}
-                    <div className="lg:w-2/3 xl:w-3/4">
+                    {/* Content Area */}
+                    <div className="w-full">
 
                         {/* Featured Media (Video or Image) */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8 }}
-                            className="relative w-full aspect-[16/10] rounded-[5px] overflow-hidden mb-12 shadow-2xl bg-slate-100"
+                            className="relative w-full aspect-[16/10] rounded-[10px] overflow-hidden mb-14 shadow-2xl bg-slate-100 ring-1 ring-slate-900/5"
                         >
                             {post.video_url ? (
                                 <div className="w-full h-full bg-black">
@@ -416,101 +402,57 @@ export default function NewsDetailPage() {
                         </motion.div>
 
 
-                    </div>
-
-                    {/* Right Column: Sticky Metadata Sidebar */}
-                    <aside className="lg:w-1/3 xl:w-1/4">
-                        <div className="sticky-sidebar space-y-10">
-
-                            {/* Meta Info Box */}
+                        {/* Recent News Box (Moved from sidebar) */}
+                        {recentNews.length > 0 && (
                             <motion.div
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: 0.2 }}
-                                className="bg-slate-50 border border-slate-100 rounded-[5px] p-8 space-y-6 shadow-sm"
+                                transition={{ duration: 0.8 }}
+                                className="mt-16 pt-12 border-t border-slate-200"
                             >
-                                <div className="flex items-center gap-4 text-slate-600">
-                                    <Calendar className="text-[#bc9c33]" size={20} />
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Published</span>
-                                        <span className="text-sm font-bold text-navy-deep">{post.date}</span>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center gap-4 text-slate-600">
-                                    <Tag className="text-[#bc9c33]" size={20} />
-                                    <div className="flex flex-col">
-                                        <span className="text-[10px] uppercase tracking-tighter text-slate-400 font-bold">Category</span>
-                                        <span className="text-sm font-bold text-navy-deep uppercase">{post.category || 'NEWS'}</span>
-                                    </div>
-                                </div>
-                            </motion.div>
-
-                            {/* Recent News Box */}
-                            {recentNews.length > 0 && (
-                                <motion.div
-                                    initial={{ opacity: 0, x: 20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.8, delay: 0.3 }}
-                                    className="flex flex-col pt-8"
-                                >
-                                    <h3 className="text-navy-deep font-black text-sm tracking-widest uppercase mb-6 flex items-center gap-2">
+                                <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-4 mb-8">
+                                    <h3 className="text-navy-deep font-black text-lg tracking-widest uppercase m-0">
                                         RECENT NEWS
                                     </h3>
-
-                                    <div className="flex flex-col gap-6 w-full">
-                                        {recentNews.map((item) => (
-                                            <Link href={`/news/${item.slug}`} key={item.id} className="group flex gap-4 items-start">
-                                                <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-slate-200 mt-1">
-                                                    <Image
-                                                        src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
-                                                        alt={item.title}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <div className="flex items-center gap-2 mb-0.5">
-                                                        <span className="text-[10px] uppercase font-black text-[#bc9c33] tracking-widest leading-none">{item.category || 'NEWS'}</span>
-                                                        <span className="text-[10px] text-slate-400 font-bold leading-none">{item.date}</span>
-                                                    </div>
-                                                    <h4 className="text-sm font-bold text-navy-deep leading-tight group-hover:text-[#bc9c33] transition-colors line-clamp-3 mt-0">
-                                                        {item.title}
-                                                    </h4>
-                                                </div>
-                                            </Link>
-                                        ))}
-                                    </div>
-
-                                    <Link href="/news" className="text-navy-deep font-bold text-xs flex items-center gap-2 mt-8 hover:text-gold transition-colors w-full">
+                                    <Link href="/news" className="inline-flex items-center gap-2 text-navy-deep hover:text-gold font-bold text-xs tracking-widest uppercase transition-colors">
                                         View all news <ChevronRight size={14} />
                                     </Link>
-                                </motion.div>
-                            )}
+                                </div>
 
-                        </div>
-                    </aside>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-full">
+                                    {recentNews.map((item) => (
+                                        <Link href={`/news/${item.slug}`} key={item.id} className="group flex flex-col bg-white border border-slate-100 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                            <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-200">
+                                                <Image
+                                                    src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                                                    alt={item.title}
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    unoptimized
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col p-6 flex-1">
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <span className="text-[10px] uppercase font-black text-[#bc9c33] tracking-widest leading-none">{item.category || 'NEWS'}</span>
+                                                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                                                    <span className="text-[10px] text-slate-400 font-bold leading-none">{item.date}</span>
+                                                </div>
+                                                <h4 className="text-[16px] font-bold text-navy-deep leading-snug group-hover:text-[#103065] transition-colors line-clamp-3">
+                                                    {item.title}
+                                                </h4>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+
+                            </motion.div>
+                        )}
+
+                    </div>
                 </div>
 
-                {/* 3. NAVIGATION (PREV/NEXT) */}
-                <div className="mt-24 border-t border-slate-100 pt-8 pb-16 flex justify-between items-center px-4">
-                    <div className="w-1/2 text-left">
-                        {prevPost && (
-                            <Link href={`/news/${prevPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black text-xs tracking-widest hover:text-[#bc9c33] transition-colors">
-                                <ChevronLeft size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" /> Previous News
-                            </Link>
-                        )}
-                    </div>
-                    <div className="w-1/2 text-right">
-                        {nextPost && (
-                            <Link href={`/news/${nextPost.slug}`} className="group inline-flex items-center gap-2 text-navy-deep font-black text-xs tracking-widest hover:text-[#bc9c33] transition-colors justify-end">
-                                Next News <ChevronRight size={16} className="text-navy-deep group-hover:text-[#bc9c33] transition-colors" />
-                            </Link>
-                        )}
-                    </div>
-                </div>
             </main >
         </div >
     );
