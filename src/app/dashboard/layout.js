@@ -534,8 +534,7 @@ export default function DashboardLayout({ children }) {
                 </div>
             </main>
 
-            {/* Global Toaster for Notifications */}
-            <Toaster position="top-center" richColors />
+            {/* Toaster removed to prevent duplicate alerts (now handled globally in root layout) */}
         </div>
     );
 }

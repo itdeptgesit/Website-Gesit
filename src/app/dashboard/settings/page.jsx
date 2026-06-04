@@ -129,7 +129,8 @@ export default function HighFidelitySettingsPage() {
             toast.success(`${activeSegment} page identity updated successfully.`);
             await recordLog('Page SEO Manager', `Updated search identity for segment: "${activeSegment}"`);
         } catch (err) {
-            toast.error("Failed to update SEO. Have you run the SQL script?");
+            console.error("SEO Update Error:", err);
+            toast.error("Failed to update SEO: " + (err?.message || err?.details || "Database error"));
         } finally {
             setSaving(false);
         }

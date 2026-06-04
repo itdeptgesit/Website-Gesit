@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Loader2, Mail, Trash2, Search, Calendar, Eye, X, MessageSquare, Phone } from 'lucide-react';
@@ -23,7 +24,12 @@ export default function ContactsInboxPage() {
     // Read/Unread & Pagination States
     const [readIds, setReadIds] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [mounted, setMounted] = useState(false);
     const ITEMS_PER_PAGE = 10;
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -335,72 +341,75 @@ export default function ContactsInboxPage() {
             </Card>
 
             {/* Message Detail Modal */}
-            <AnimatePresence>
-                {isModalOpen && selectedMessage && (
-                    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4" role="dialog" aria-modal="true">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
-                            onClick={() => setIsModalOpen(false)}
-                        />
-                        <motion.div
-                            initial={{ scale: 0.98, opacity: 0, y: 10 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.98, opacity: 0, y: 10 }}
-                            className="relative bg-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden border border-slate-200"
-                            onClick={e => e.stopPropagation()}
-                        >
-                             <div className="bg-[#103065] px-8 py-8 text-white flex justify-between items-center">
-                                <div>
-                                    <h3 className="font-serif text-2xl tracking-tight leading-none mb-2">{selectedMessage.name}</h3>
-                                    <p className="text-white/50 text-[10px] font-bold uppercase tracking-[.2em] flex items-center gap-2">
-                                        <Calendar className="w-3 h-3" />
-                                        Diterima pada {new Date(selectedMessage.created_at).toLocaleString('en-GB')}
-                                    </p>
-                                </div>
-                                <Button variant="ghost" size="icon" className="text-white/40 hover:text-white hover:bg-white/10 rounded-lg" onClick={() => setIsModalOpen(false)}>
-                                    <X className="w-5 h-5" />
-                                </Button>
-                            </div>
-
-                             <div className="p-8 space-y-6">
-                                <div className="grid grid-cols-2 gap-8">
-                                    <div className="space-y-1">
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Address</p>
-                                        <p className="text-slate-800 text-sm font-medium flex items-center gap-2">
-                                            <Mail className="w-4 h-4 text-[#bc9c33]" /> {selectedMessage.email}
+            {mounted && createPortal(
+                <AnimatePresence>
+                    {isModalOpen && selectedMessage && (
+                        <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4" role="dialog" aria-modal="true">
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
+                                onClick={() => setIsModalOpen(false)}
+                            />
+                            <motion.div
+                                initial={{ scale: 0.98, opacity: 0, y: 10 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.98, opacity: 0, y: 10 }}
+                                className="relative bg-white w-full max-w-2xl rounded-xl shadow-2xl overflow-hidden border border-slate-200"
+                                onClick={e => e.stopPropagation()}
+                            >
+                                 <div className="bg-[#103065] px-8 py-8 text-white flex justify-between items-center">
+                                    <div>
+                                        <h3 className="font-serif text-2xl tracking-tight leading-none mb-2">{selectedMessage.name}</h3>
+                                        <p className="text-white/50 text-[10px] font-bold uppercase tracking-[.2em] flex items-center gap-2">
+                                            <Calendar className="w-3 h-3" />
+                                            Diterima pada {new Date(selectedMessage.created_at).toLocaleString('en-GB')}
                                         </p>
                                     </div>
-                                    <div className="space-y-1">
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Phone Number</p>
-                                        <p className="text-slate-800 text-sm font-medium flex items-center gap-2">
-                                            <Phone className="w-4 h-4 text-[#bc9c33]" /> {selectedMessage.phone || 'N/A'}
-                                        </p>
+                                    <Button variant="ghost" size="icon" className="text-white/40 hover:text-white hover:bg-white/10 rounded-lg" onClick={() => setIsModalOpen(false)}>
+                                        <X className="w-5 h-5" />
+                                    </Button>
+                                </div>
+
+                                 <div className="p-8 space-y-6">
+                                    <div className="grid grid-cols-2 gap-8">
+                                        <div className="space-y-1">
+                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email Address</p>
+                                            <p className="text-slate-800 text-sm font-medium flex items-center gap-2">
+                                                <Mail className="w-4 h-4 text-[#bc9c33]" /> {selectedMessage.email}
+                                            </p>
+                                        </div>
+                                        <div className="space-y-1">
+                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Phone Number</p>
+                                            <p className="text-slate-800 text-sm font-medium flex items-center gap-2">
+                                                <Phone className="w-4 h-4 text-[#bc9c33]" /> {selectedMessage.phone || 'N/A'}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2 border-t pt-6">
+                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Message Content</p>
+                                        <div className="bg-slate-50 p-6 rounded-lg border text-slate-700 text-sm leading-relaxed whitespace-pre-wrap italic">
+                                            "{selectedMessage.message}"
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="space-y-2 border-t pt-6">
-                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Message Content</p>
-                                    <div className="bg-slate-50 p-6 rounded-lg border text-slate-700 text-sm leading-relaxed whitespace-pre-wrap italic">
-                                        "{selectedMessage.message}"
-                                    </div>
+                                 <div className="px-8 py-6 bg-slate-50/80 border-t flex justify-end">
+                                    <Button 
+                                        className="bg-[#103065] hover:bg-[#0c244b] text-white px-8 rounded-lg text-xs font-bold uppercase tracking-widest" 
+                                        onClick={() => setIsModalOpen(false)}
+                                    >
+                                        Tutup Pesan
+                                    </Button>
                                 </div>
-                            </div>
-
-                             <div className="px-8 py-6 bg-slate-50/80 border-t flex justify-end">
-                                <Button 
-                                    className="bg-[#103065] hover:bg-[#0c244b] text-white px-8 rounded-lg text-xs font-bold uppercase tracking-widest" 
-                                    onClick={() => setIsModalOpen(false)}
-                                >
-                                    Tutup Pesan
-                                </Button>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </div>
     );
 }
