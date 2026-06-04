@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Navigation } from "swiper/modules";
+import { Autoplay, EffectFade, Navigation, FreeMode } from "swiper/modules";
 import { Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
@@ -19,13 +19,18 @@ export default function CSRPage() {
     const [nextEl, setNextEl] = useState(null);
     const [isGalleryPaused, setIsGalleryPaused] = useState(false);
     const galleryPauseTimer = useRef(null);
+    const swiperRef = useRef(null);
 
     const handleGalleryEnter = () => {
-        galleryPauseTimer.current = setTimeout(() => setIsGalleryPaused(true), 500);
+        galleryPauseTimer.current = setTimeout(() => {
+            setIsGalleryPaused(true);
+            if (swiperRef.current) swiperRef.current.autoplay.stop();
+        }, 500);
     };
     const handleGalleryLeave = () => {
         clearTimeout(galleryPauseTimer.current);
         setIsGalleryPaused(false);
+        if (swiperRef.current) swiperRef.current.autoplay.start();
     };
 
     const circleBtn = {
@@ -487,38 +492,51 @@ export default function CSRPage() {
 
             {/* ================= SMOOTH INFINITE SCROLL GALLERY ================= */}
             <section className="gs-csr-gallery-section py-24 bg-white overflow-hidden">
+                <style jsx global>{`
+                    .gs-continuous-swiper .swiper-wrapper {
+                        transition-timing-function: linear !important;
+                    }
+                `}</style>
                 <div className="relative w-full">
                     <div className="gs-csr-gallery-window flex overflow-hidden relative">
-                        <div
-                            className="gs-csr-gallery-track flex gap-6 md:gap-10 px-4 py-6 md:py-12 items-center"
-                            style={{
-                                width: "fit-content",
-                                animationName: csrGalleryImages.length > 0 ? "gs-gallery-scroll" : "none",
-                                animationDuration: csrGalleryImages.length > 0 ? `${csrGalleryImages.length * 6}s` : "0s",
-                                animationTimingFunction: "linear",
-                                animationIterationCount: "infinite",
-                                animationPlayState: isGalleryPaused ? "paused" : "running",
+                        <Swiper
+                            modules={[Autoplay, FreeMode]}
+                            onSwiper={(swiper) => (swiperRef.current = swiper)}
+                            spaceBetween={24}
+                            breakpoints={{
+                                768: { spaceBetween: 40 }
                             }}
+                            slidesPerView="auto"
+                            loop={true}
+                            freeMode={true}
+                            speed={6000}
+                            autoplay={{
+                                delay: 0,
+                                disableOnInteraction: false,
+                                pauseOnMouseEnter: false
+                            }}
+                            className="gs-continuous-swiper !px-4 !py-6 md:!py-12"
                         >
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
-                                <motion.div
-                                    key={index}
-                                    className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative"
-                                    whileHover={{ y: -10, scale: 1.025 }}
-                                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                                    onMouseEnter={handleGalleryEnter}
-                                    onMouseLeave={handleGalleryLeave}
-                                >
-                                    <img
-                                        src={src}
-                                        alt={`CSR Gallery ${index}`}
-                                        className="w-full h-full object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out"
-                                    />
-                                    <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
-                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700" />
-                                </motion.div>
+                                <SwiperSlide key={index} className="!w-auto">
+                                    <motion.div
+                                        className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative cursor-grab active:cursor-grabbing"
+                                        whileHover={{ y: -10, scale: 1.025 }}
+                                        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                                        onMouseEnter={handleGalleryEnter}
+                                        onMouseLeave={handleGalleryLeave}
+                                    >
+                                        <img
+                                            src={src}
+                                            alt={`CSR Gallery ${index}`}
+                                            className="w-full h-full object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out pointer-events-none"
+                                        />
+                                        <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
+                                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none" />
+                                    </motion.div>
+                                </SwiperSlide>
                             ))}
-                        </div>
+                        </Swiper>
                     </div>
                 </div>
             </section>
