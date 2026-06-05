@@ -301,7 +301,7 @@ const PropertyPage = () => {
                         >
                             <motion.h2 variants={fadeInUp} className="project-title">JS Luwansa</motion.h2>
                             <motion.div variants={fadeInUp} className="project-desc">
-                                <p>JS Luwansa Hotel and Convention Center is located in Jakarta&apos;s Golden Triangle, Jakarta&apos;s fastest growing and exclusive business district. Conveniently located in close proximity to major embassies, shopping malls and the toll way. JS Luwansa Hotel and Convention Center is the perfect place for discerning business travelers who need a&nbsp;strategic base to support their business activities from&nbsp;a&nbsp;location within close proximity to the rest of Jakarta.</p>
+                                <p>JS Luwansa Hotel and Convention Center is located in Jakarta&apos;s Golden Triangle, Jakarta&apos;s fastest growing and exclusive business district. Conveniently located in close proximity to major embassies, shopping malls and the toll ways. JS Luwansa Hotel and Convention Center is the perfect place for discerning business travelers who need a&nbsp;strategic base to support their business activities from&nbsp;a&nbsp;location within close proximity to the rest of Jakarta.</p>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="project-info-box">
                                 <h6 className="project-info-title">Location : Jakarta, Indonesia</h6>
