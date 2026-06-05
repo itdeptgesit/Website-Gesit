@@ -205,7 +205,7 @@ const PropertyPage = () => {
                                 margin: 0,
                                 textAlign: 'left'
                             }}>
-                                Creating value-adding and sustainable assets to our communities and partnering with leading multinational corporations.
+                                Creating value-adding and sustainable assets to our communities partnering with leading multinational corporations to do su.
                             </h3>
                         </motion.div>
 
