@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation, FreeMode } from "swiper/modules";
-import { Plus, Minus, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, Minus, ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 
 import "swiper/css";
@@ -15,22 +15,49 @@ export default function CSRPage() {
     const [isMounted, setIsMounted] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [openInitiative, setOpenInitiative] = useState("Healthcare");
+    const [lightboxIndex, setLightboxIndex] = useState(null);
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
     const [isGalleryPaused, setIsGalleryPaused] = useState(false);
     const galleryPauseTimer = useRef(null);
     const swiperRef = useRef(null);
+    const isLightboxOpenRef = useRef(false);
 
     const handleGalleryEnter = () => {
+        if (isLightboxOpenRef.current) return;
         galleryPauseTimer.current = setTimeout(() => {
             setIsGalleryPaused(true);
-            if (swiperRef.current) swiperRef.current.autoplay.stop();
-        }, 500);
+            if (swiperRef.current && swiperRef.current.autoplay) swiperRef.current.autoplay.pause();
+        }, 100);
     };
     const handleGalleryLeave = () => {
         clearTimeout(galleryPauseTimer.current);
         setIsGalleryPaused(false);
-        if (swiperRef.current) swiperRef.current.autoplay.start();
+        if (isLightboxOpenRef.current) return;
+        if (swiperRef.current && swiperRef.current.autoplay) swiperRef.current.autoplay.resume();
+    };
+
+    const openLightbox = (index) => {
+        isLightboxOpenRef.current = true;
+        setLightboxIndex(index);
+        clearTimeout(galleryPauseTimer.current);
+        if (swiperRef.current && swiperRef.current.autoplay) swiperRef.current.autoplay.pause();
+    };
+
+    const closeLightbox = () => {
+        isLightboxOpenRef.current = false;
+        setLightboxIndex(null);
+        if (swiperRef.current && swiperRef.current.autoplay) swiperRef.current.autoplay.resume();
+    };
+
+    const nextLightboxImage = (e) => {
+        e.stopPropagation();
+        setLightboxIndex((prev) => (prev + 1) % csrGalleryImages.length);
+    };
+
+    const prevLightboxImage = (e) => {
+        e.stopPropagation();
+        setLightboxIndex((prev) => (prev - 1 + csrGalleryImages.length) % csrGalleryImages.length);
     };
 
     const circleBtn = {
@@ -491,7 +518,13 @@ export default function CSRPage() {
             </section>
 
             {/* ================= SMOOTH INFINITE SCROLL GALLERY ================= */}
-            <section className="gs-csr-gallery-section py-24 bg-white overflow-hidden">
+            <motion.section 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="gs-csr-gallery-section py-24 bg-white overflow-hidden"
+            >
                 <style jsx global>{`
                     .gs-continuous-swiper .swiper-wrapper {
                         transition-timing-function: linear !important;
@@ -520,11 +553,12 @@ export default function CSRPage() {
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
                                 <SwiperSlide key={index} className="!w-auto">
                                     <motion.div
-                                        className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative cursor-grab active:cursor-grabbing"
+                                        className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative cursor-pointer"
                                         whileHover={{ y: -10, scale: 1.025 }}
                                         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                                         onMouseEnter={handleGalleryEnter}
                                         onMouseLeave={handleGalleryLeave}
+                                        onClick={() => openLightbox(index % csrGalleryImages.length)}
                                     >
                                         <img
                                             src={src}
@@ -539,7 +573,65 @@ export default function CSRPage() {
                         </Swiper>
                     </div>
                 </div>
-            </section>
+            </motion.section>
+
+            {/* ================= LIGHTBOX ================= */}
+            <AnimatePresence>
+                {lightboxIndex !== null && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center backdrop-blur-md"
+                        onClick={closeLightbox}
+                    >
+                        <button
+                            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-50 p-2"
+                            onClick={closeLightbox}
+                        >
+                            <X size={36} />
+                        </button>
+
+                        <button
+                            className="absolute left-2 md:left-10 text-white/50 hover:text-white transition-colors z-50 p-4 hidden md:block"
+                            onClick={prevLightboxImage}
+                        >
+                            <ChevronLeft size={48} strokeWidth={1.5} />
+                        </button>
+
+                        <div className="relative w-full max-w-[95vw] h-[80vh] md:max-w-[80vw] md:h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+                            <motion.img
+                                key={lightboxIndex}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                                src={csrGalleryImages[lightboxIndex]}
+                                alt={`Featured Story ${lightboxIndex + 1}`}
+                                className="max-w-full max-h-full object-contain shadow-2xl"
+                            />
+                            
+                            {/* Mobile Navigation controls overlaid on image */}
+                            <div className="absolute inset-y-0 left-0 w-1/4 flex items-center md:hidden" onClick={prevLightboxImage}></div>
+                            <div className="absolute inset-y-0 right-0 w-1/4 flex items-center md:hidden" onClick={nextLightboxImage}></div>
+
+                            <div className="absolute bottom-[-50px] left-0 right-0 text-center pointer-events-none">
+                                <p className="text-white/80 text-[16px] md:text-lg m-0" style={{ fontFamily: 'Lora, serif' }}>
+                                    Featured Story {lightboxIndex + 1} of {csrGalleryImages.length}
+                                </p>
+                            </div>
+                        </div>
+
+                        <button
+                            className="absolute right-2 md:right-10 text-white/50 hover:text-white transition-colors z-50 p-4 hidden md:block"
+                            onClick={nextLightboxImage}
+                        >
+                            <ChevronRight size={48} strokeWidth={1.5} />
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 }
