@@ -583,21 +583,22 @@ export default function CSRPage() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center backdrop-blur-md"
+                        className="fixed inset-0 bg-black/95 flex items-center justify-center backdrop-blur-md"
+                        style={{ zIndex: 999999 }}
                         onClick={closeLightbox}
                     >
                         <button
-                            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors z-50 p-2"
+                            className="absolute top-4 right-4 md:top-6 md:right-6 text-white/50 hover:text-white transition-colors z-50 p-2"
                             onClick={closeLightbox}
                         >
                             <X size={36} />
                         </button>
 
                         <button
-                            className="absolute left-2 md:left-10 text-white/50 hover:text-white transition-colors z-50 p-4 hidden md:block"
+                            className="absolute left-1 md:left-10 text-white/50 hover:text-white transition-colors z-50 p-2 md:p-4"
                             onClick={prevLightboxImage}
                         >
-                            <ChevronLeft size={48} strokeWidth={1.5} />
+                            <ChevronLeft size={48} strokeWidth={1.5} className="w-10 h-10 md:w-12 md:h-12" />
                         </button>
 
                         <div className="relative w-full max-w-[95vw] h-[80vh] md:max-w-[80vw] md:h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
@@ -611,10 +612,6 @@ export default function CSRPage() {
                                 alt={`Featured Story ${lightboxIndex + 1}`}
                                 className="max-w-full max-h-full object-contain shadow-2xl"
                             />
-                            
-                            {/* Mobile Navigation controls overlaid on image */}
-                            <div className="absolute inset-y-0 left-0 w-1/4 flex items-center md:hidden" onClick={prevLightboxImage}></div>
-                            <div className="absolute inset-y-0 right-0 w-1/4 flex items-center md:hidden" onClick={nextLightboxImage}></div>
 
                             <div className="absolute bottom-[-50px] left-0 right-0 text-center pointer-events-none">
                                 <p className="text-white/80 text-[16px] md:text-lg m-0" style={{ fontFamily: 'Lora, serif' }}>
@@ -624,10 +621,10 @@ export default function CSRPage() {
                         </div>
 
                         <button
-                            className="absolute right-2 md:right-10 text-white/50 hover:text-white transition-colors z-50 p-4 hidden md:block"
+                            className="absolute right-1 md:right-10 text-white/50 hover:text-white transition-colors z-50 p-2 md:p-4"
                             onClick={nextLightboxImage}
                         >
-                            <ChevronRight size={48} strokeWidth={1.5} />
+                            <ChevronRight size={48} strokeWidth={1.5} className="w-10 h-10 md:w-12 md:h-12" />
                         </button>
                     </motion.div>
                 )}
