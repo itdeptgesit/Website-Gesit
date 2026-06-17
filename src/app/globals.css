@@ -1162,10 +1162,14 @@ a {
   /* About Us Core Values Mobile Overrides */
   .gs-core-value-card {
     height: auto !important;
+    width: 100% !important;
+    align-items: center !important;
   }
 
   .gs-core-value-card .qodef-m-image {
-    height: 160px !important;
+    width: 395px !important;
+    max-width: 100% !important;
+    height: 313px !important;
     margin-bottom: 0 !important;
   }
 
@@ -1175,8 +1179,10 @@ a {
   }
 
   .gs-core-value-content {
-    min-height: 120px !important;
-    height: auto !important;
+    width: 395px !important;
+    max-width: 100% !important;
+    height: 185px !important;
+    min-height: 185px !important;
     padding: 20px 15px !important;
     justify-content: center !important;
     margin-top: 15px !important;

@@ -335,7 +335,7 @@ export default function AboutUs() {
                             { id: '7e17c85', img: '/about/competency-scaled-1.webp', title: 'Competency', desc: 'Knowledgeable, Skillful and Right Attitude' },
                             { id: 'ad7b5aa', img: '/about/passion-scaled-1.webp', title: 'Passion', desc: 'Strongly Engaged and Fully Accountable with Respective Job' }
                           ].map((val, idx) => (
-                            <div key={val.id} className={`elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-${val.id} gs-core-value-column`} data-id={val.id} data-element_type="column" style={{ display: 'flex' }}>
+                            <div key={val.id} className={`elementor-column w-full md:w-1/4 elementor-inner-column elementor-element elementor-element-${val.id} gs-core-value-column`} data-id={val.id} data-element_type="column" style={{ display: 'flex' }}>
                               <motion.div
                                 className="elementor-widget-wrap elementor-element-populated"
                                 variants={staggerContainer}
@@ -346,11 +346,11 @@ export default function AboutUs() {
                               >
                                 <div className="elementor-element elementor-element-98ea9bc p-15 text-center elementor-widget elementor-widget-thetrial_core_location_info">
                                   <div className="elementor-widget-container">
-                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled gs-core-value-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
-                                      <div className="qodef-m-image" style={{ width: '289px', height: '229px', flexShrink: 0, borderRadius: '5px', overflow: 'hidden' }}>
+                                    <div className="qodef-shortcode qodef-m qodef-location-info qodef-layout--text-below qodef-text-break--disabled gs-core-value-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%' }}>
+                                      <div className="qodef-m-image w-full max-w-full md:max-w-[289px]" style={{ height: '229px', flexShrink: 0, borderRadius: '5px', overflow: 'hidden' }}>
                                         <Image src={val.img} alt={val.title} width={289} height={229} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                       </div>
-                                      <div className="qodef-m-content gs-core-value-content" style={{ backgroundColor: '#BC9C33', width: '289px', height: '185px', minHeight: '185px', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', marginTop: '30px', padding: '0 20px', borderRadius: '5px' }}>
+                                      <div className="qodef-m-content gs-core-value-content w-full max-w-full md:max-w-[289px]" style={{ backgroundColor: '#BC9C33', height: '185px', minHeight: '185px', flexShrink: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', position: 'relative', marginTop: '30px', padding: '0 20px', borderRadius: '5px' }}>
                                         <h4 className="qodef-m-title" style={{ color: '#FFFFFF', textAlign: 'center', position: 'relative', zIndex: 11, fontSize: '30px', margin: '0 0 10px 0' }}>{val.title}</h4>
                                         <p className="qodef-m-text" style={{ color: '#FFFFFF', textAlign: 'center', position: 'relative', zIndex: 11, margin: 0 }}>{val.desc}</p>
                                       </div>
