@@ -11,6 +11,35 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "./csr.css";
 
+const renderTextWithLinks = (text) => {
+    if (typeof text !== "string") return text;
+    const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+            parts.push(text.substring(lastIndex, match.index));
+        }
+        parts.push(
+            <a
+                key={match.index}
+                href={match[2]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#BC9C33] hover:underline inline-flex items-center gap-1 font-medium"
+            >
+                {match[1]}
+            </a>
+        );
+        lastIndex = regex.lastIndex;
+    }
+    if (lastIndex < text.length) {
+        parts.push(text.substring(lastIndex));
+    }
+    return parts.length > 0 ? parts : text;
+};
+
 export default function CSRPage() {
     const [isMounted, setIsMounted] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -121,6 +150,8 @@ export default function CSRPage() {
         "/csr/gallery/gallery18.webp",
         "/csr/gallery/gallery19.webp",
         "/csr/gallery/gallery20.webp",
+        "/csr/gallery/gallery21.jpg",
+        "/csr/gallery/gallery22.jpg",
     ];
 
     const focusAreas = [
@@ -130,7 +161,7 @@ export default function CSRPage() {
             image: "/csr/Healthcare.webp"
         },
         {
-            title: "Environment & Cultural Outreach",
+            title: "Social & Environment",
             desc: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.",
             image: "/csr/Environment-Cultural-Outreach.webp"
         },
@@ -148,8 +179,8 @@ export default function CSRPage() {
                 {
                     subtitle: "Pandemic",
                     items: [
-                        "Distributing ventilators and PPE to 128 Hospitals across in Indonesia",
-                        "Distributing food aid to people affected by COVID in 5 provinces in Indonesia"
+                        "Distributing more than 200 ventilators and thousands of PPE to more than 130 hospitals across Indonesia",
+                        "Supporting Covid Vaccination"
                     ]
                 },
                 {
@@ -170,7 +201,7 @@ export default function CSRPage() {
             ]
         },
         {
-            title: "Environment & Cultural Outreach",
+            title: "Social & Environment",
             content: [
                 {
                     subtitle: "Environment",
@@ -182,7 +213,7 @@ export default function CSRPage() {
                     ]
                 },
                 {
-                    subtitle: "Cultural Outreach",
+                    subtitle: "Social Outreach",
                     items: [
                         "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
                         "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples"
@@ -201,7 +232,10 @@ export default function CSRPage() {
                         "- Jakarta: Down Syndrome & Deaf School of Cempaka Putih",
                         "- Jakarta: School of Yayasan Penyandang Anak Cacat",
                         "- Fujian: Primary, Secondary School, Sport and Library in Normal University",
-                        "Providing over 300 university scholarships per year"
+                        "Providing over 300 university scholarships per year",
+                        "Supporting online classes to reach students and children in frontier area",
+                        "Train and equip teachers with improved teaching skills.",
+                        "Supporting Program Pendidikan Kesetaraan Paket C"
                     ]
                 }
             ]
@@ -356,7 +390,7 @@ export default function CSRPage() {
                                 margin: 0
                             }}>
                                 Our social investment programs focus on three areas: <strong className="font-extrabold">Healthcare, </strong><br className="hidden lg:block" />
-                                <strong className="font-extrabold">Environment &amp; Cultural Outreach,</strong> and <strong className="font-extrabold">Education.</strong>
+                                <strong className="font-extrabold">Social &amp; Environment,</strong> and <strong className="font-extrabold">Education.</strong>
                             </p>
                         </div>
                     </motion.div>
@@ -491,12 +525,12 @@ export default function CSRPage() {
                                                                 });
                                                                 return groupedItems.map((group, i) => (
                                                                     <li key={i} className="list-outside text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]" style={{ fontFamily: "var(--font-sans)" }}>
-                                                                        {group.text}
+                                                                        {renderTextWithLinks(group.text)}
                                                                         {group.sub && (
                                                                             <div className="flex flex-col m-0 p-0">
                                                                                 {group.sub.map((subItem, j) => (
                                                                                     <span key={j} className="text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px] block m-0 p-0">
-                                                                                        {subItem}
+                                                                                        {renderTextWithLinks(subItem)}
                                                                                     </span>
                                                                                 ))}
                                                                             </div>

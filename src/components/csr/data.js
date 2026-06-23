@@ -11,7 +11,7 @@ export const focusAreas = [
         text: "We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare."
     },
     {
-        title: "Environment & Cultural Outreach",
+        title: "Social & Environment",
         img: "/csr/images/environment-scaled-1.jpg",
         text: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday."
     },
@@ -29,8 +29,8 @@ export const csrPrograms = [
             {
                 subtitle: "Pandemic",
                 items: [
-                    "Distributing ventilators and PPE to 128 Hospitals across in Indonesia",
-                    "Distributing food aid to people affected by COVID in 5 provinces in Indonesia"
+                    "Distributing more than 200 ventilators and thousands of PPE to more than 130 hospitals across Indonesia",
+                    "Supporting Covid Vaccination"
                 ]
             },
             {
@@ -51,7 +51,7 @@ export const csrPrograms = [
         ]
     },
     {
-        title: "Environment & Cultural Outreach",
+        title: "Social & Environment",
         content: [
             {
                 subtitle: "Environment",
@@ -63,7 +63,7 @@ export const csrPrograms = [
                 ]
             },
             {
-                subtitle: "Cultural Outreach",
+                subtitle: "Social Outreach",
                 items: [
                     "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
                     "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples"
@@ -77,7 +77,10 @@ export const csrPrograms = [
             {
                 items: [
                     "Building, renovating, and providing school facilities for:\n- North Sumatera: Sekolah Mitra Inalum\n- Jakarta: Down Syndrome & Deaf School of Cempaka Putih\n- Jakarta: School of Yayasan Penyandang Anak Cacat\n- Fujian: Primary, Secondary School, Sport and Library in Normal University",
-                    "Providing over 300 university scholarships per year"
+                    "Providing over 300 university scholarships per year",
+                    "Supporting online classes to reach students and children in frontier area",
+                    "Train and equip teachers with improved teaching skills.",
+                    "Supporting Program Pendidikan Kesetaraan Paket C"
                 ]
             }
         ]
