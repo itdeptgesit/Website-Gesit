@@ -254,7 +254,7 @@ export default function ManufacturingPage() {
               variants={staggerContainer} initial="initial" whileInView="whileInView" viewport={{ once: true, margin: "-100px" }}
               className="project-text-content"
             >
-              <motion.h2 variants={fadeInUp} className="project-title">Aluminum Fabrication</motion.h2>
+              <motion.h2 variants={fadeInUp} className="project-title">Aluminum Metal Fabrication</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
                 <p>The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market. We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as&nbsp;a&nbsp;leader in Manufacturing and Fabricating Aluminum.</p>
               </motion.div>

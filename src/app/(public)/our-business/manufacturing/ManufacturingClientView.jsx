@@ -143,7 +143,7 @@ const ManufacturingClientView = () => {
 
     const projects = [
         {
-            title: "Aluminum Fabrication",
+            title: "Aluminum Metal Fabrication",
             desc: "The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market.\n\nWe have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum.",
             images: [
                 "/business/manufacturing/3-e1646232593879.webp",
