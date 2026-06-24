@@ -123,13 +123,15 @@ export default function CSRPage() {
 
     /* ================= HERO IMAGES ================= */
     const heroImages = [
-        "/csr/images/csr_slider_1.jpg",
-        "/csr/images/HP3A763-scaled.jpg",
-        "/csr/images/HP3A783-scaled.jpg",
+        "/csr/images/csr_slider_1.webp",
+        "/csr/images/HP3A763-scaled.webp",
+        "/csr/images/HP3A783-scaled.webp",
     ];
 
     /* ================= GALLERY IMAGES ================= */
     const csrGalleryImages = [
+        "/csr/gallery/gallery21.webp",
+        "/csr/gallery/gallery22.webp",
         "/csr/gallery/gallery1.webp",
         "/csr/gallery/gallery2.webp",
         "/csr/gallery/gallery3.webp",
@@ -150,8 +152,6 @@ export default function CSRPage() {
         "/csr/gallery/gallery18.webp",
         "/csr/gallery/gallery19.webp",
         "/csr/gallery/gallery20.webp",
-        "/csr/gallery/gallery21.jpg",
-        "/csr/gallery/gallery22.jpg",
     ];
 
     const focusAreas = [
@@ -552,7 +552,7 @@ export default function CSRPage() {
             </section>
 
             {/* ================= SMOOTH INFINITE SCROLL GALLERY ================= */}
-            <motion.section 
+            <motion.section
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}

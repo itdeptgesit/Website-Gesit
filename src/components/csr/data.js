@@ -1,23 +1,23 @@
 export const heroSlides = [
-    { url: "/csr/images/csr_slider_1.jpg", alt: "Corporate Social Responsibility" },
-    { url: "/csr/images/HP3A763-scaled.jpg", alt: "Gesit Foundation Activities" },
-    { url: "/csr/images/HP3A783-scaled.jpg", alt: "Healthcare Initiatives" }
+    { url: "/csr/images/csr_slider_1.webp", alt: "Corporate Social Responsibility" },
+    { url: "/csr/images/HP3A763-scaled.webp", alt: "Gesit Foundation Activities" },
+    { url: "/csr/images/HP3A783-scaled.webp", alt: "Healthcare Initiatives" }
 ];
 
 export const focusAreas = [
     {
         title: "Healthcare",
-        img: "/csr/images/healthcare-scaled-1.jpg",
+        img: "/csr/images/healthcare-scaled-1.webp",
         text: "We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare."
     },
     {
         title: "Social & Environment",
-        img: "/csr/images/environment-scaled-1.jpg",
+        img: "/csr/images/environment-scaled-1.webp",
         text: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday."
     },
     {
         title: "Education",
-        img: "/csr/images/education-scaled-1.jpg",
+        img: "/csr/images/education-scaled-1.webp",
         text: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most."
     }
 ];
