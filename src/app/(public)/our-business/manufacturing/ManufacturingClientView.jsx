@@ -150,7 +150,7 @@ const ManufacturingClientView = () => {
                 "/business/manufacturing/DSCF3418-edi-2-e1646233775296.webp",
                 "/business/manufacturing/alu_lr.webp"
             ],
-            brochure: "/business/manufacturing/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf",
+            brochure: "/manufacturing/Company%20Profile%20Alakasa%20Andalan%20Mitra%20Sejati%20(2026).pdf",
             reverse: true
         },
         {

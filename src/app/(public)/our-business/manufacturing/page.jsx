@@ -261,7 +261,7 @@ export default function ManufacturingPage() {
 
               <motion.div variants={textVariant}>
                 <a
-                  href="/business/manufacturing/Company-Profile-Alakasa-Andalan-Mitra-Sejati-2022.pdf"
+                  href="/manufacturing/Company%20Profile%20Alakasa%20Andalan%20Mitra%20Sejati%20(2026).pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pill-button"
