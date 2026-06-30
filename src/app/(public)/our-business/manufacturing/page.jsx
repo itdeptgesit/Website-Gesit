@@ -320,7 +320,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Steel & Plastic Packaging</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as Steel and Plastic drums as well as Jerry cans, for use in industries such as Lubricant, any kind of Chemical, Essential Oil, Flavor, Fragrance, Food processing and etc. We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating with international standards and have certification (SGS ISO 9001:2015, UN-TUV Packaging, Halal/BPJPH, FoodGrade, Evovadis, TKDN)</p>
+                <p>The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as Steel and Plastic drums as well as Jerry cans, for use in industries such as Lubricant, any kind of Chemical, Essential Oil, Flavor, Fragrance, Food processing and etc. We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating with international standards and have certification (SGS ISO 9001:2015, UN-TUV Packaging, Halal/BPJPH, FoodGrade, Evovadis, TKDN).</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
