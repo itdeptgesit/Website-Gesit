@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from 'next/image';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -57,23 +57,11 @@ export default function ManufacturingPage() {
   const [nextEl, setNextEl] = useState(null);
 
   const [activeIdx, setActiveIdx] = useState(0);
-  const [activeAlu, setActiveAlu] = useState(0);
-  const [activePackaging, setActivePackaging] = useState(0);
 
   const SLIDE_DURATION = 5000;
 
   useEffect(() => {
     setIsMounted(true);
-    const aluTimer = setInterval(() => {
-      setActiveAlu(prev => (prev + 1) % 4);
-    }, 5000);
-    const packagingTimer = setInterval(() => {
-      setActivePackaging(prev => (prev + 1) % 4);
-    }, 5000);
-    return () => {
-      clearInterval(aluTimer);
-      clearInterval(packagingTimer);
-    };
   }, []);
 
   const aluminumImages = [
@@ -278,15 +266,22 @@ export default function ManufacturingPage() {
             variants={imageVariant} initial="initial" whileInView="whileInView" viewport={{ once: true }}
             className="project-image-container"
           >
-            <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+            <Swiper
+              modules={[Autoplay, EffectFade]}
+              effect="fade"
+              speed={1500}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              loop={true}
+              style={{ width: '100%', height: '100%' }}
+            >
               {aluminumImages.map((img, i) => (
-                <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === activeAlu ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: i === activeAlu ? 10 : 0 }}>
-                  {(i === activeAlu || i === (activeAlu + 1) % aluminumImages.length) && (
-                    <Image src={img} alt={`Aluminum ${i}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
-                  )}
-                </div>
+                <SwiperSlide key={i}>
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image src={img} alt={`Aluminum ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                  </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </motion.div>
         </div>
       </section>
@@ -299,15 +294,22 @@ export default function ManufacturingPage() {
             variants={imageVariant} initial="initial" whileInView="whileInView" viewport={{ once: true }}
             className="project-image-container"
           >
-            <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+            <Swiper
+              modules={[Autoplay, EffectFade]}
+              effect="fade"
+              speed={1500}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              loop={true}
+              style={{ width: '100%', height: '100%' }}
+            >
               {packagingImages.map((img, i) => (
-                <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === activePackaging ? 1 : 0, transition: 'opacity 1.5s ease-in-out', zIndex: i === activePackaging ? 10 : 0 }}>
-                  {(i === activePackaging || i === (activePackaging + 1) % packagingImages.length) && (
-                    <Image src={img} alt={`Packaging ${i}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
-                  )}
-                </div>
+                <SwiperSlide key={i}>
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image src={img} alt={`Packaging ${i + 1}`} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                  </div>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </motion.div>
 
           {/* Text Container (Right) */}
