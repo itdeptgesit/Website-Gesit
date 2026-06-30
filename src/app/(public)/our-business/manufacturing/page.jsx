@@ -65,7 +65,7 @@ export default function ManufacturingPage() {
   useEffect(() => {
     setIsMounted(true);
     const aluTimer = setInterval(() => {
-      setActiveAlu(prev => (prev + 1) % 3);
+      setActiveAlu(prev => (prev + 1) % 4);
     }, 5000);
     const packagingTimer = setInterval(() => {
       setActivePackaging(prev => (prev + 1) % 4);
@@ -77,9 +77,10 @@ export default function ManufacturingPage() {
   }, []);
 
   const aluminumImages = [
-    "/manufacturing/aluminum1.webp",
-    "/manufacturing/aluminum2.webp",
-    "/manufacturing/aluminum3.webp"
+    "/manufacturing/Aluminum-Metal-Fabrication1.webp",
+    "/manufacturing/Aluminum-Metal-Fabrication2.webp",
+    "/manufacturing/Aluminum-Metal-Fabrication3.webp",
+    "/manufacturing/Aluminum-Metal-Fabrication4.webp"
   ];
 
   const packagingImages = [
@@ -238,7 +239,7 @@ export default function ManufacturingPage() {
                 fontWeight: 400,
                 margin: 0
               }}>
-                The Gesit Companies operates aluminum fabrication and packaging company through two business lines: <strong>Alakasa Andalan Mitra Sejati</strong> and <strong>Rheem Indonesia</strong>.
+                The Gesit Companies operates aluminum, metal fabrication and packaging company through two business lines: <strong>Alakasa Andalan Mitra Sejati </strong> and <strong>Rheem Indonesia</strong>.
               </p>
             </motion.div>
           </motion.div>
@@ -256,7 +257,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Aluminum Metal Fabrication</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market. We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as&nbsp;a&nbsp;leader in Manufacturing and Fabricating Aluminum.</p>
+                <p>The Gesit Companies invests and manages its aluminum and metal fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with ALCAN Aluminum in 1972. We focus on aluminum and metal fabrication that specialized in the Industrial sector (e.g. train, green house , plantation, modular house , other industrial products) to serve the local and international market over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing, Fabricating Aluminum and Metal.</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
