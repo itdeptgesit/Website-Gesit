@@ -234,7 +234,7 @@ export default function CSRPage() {
                         "- Fujian: Primary, Secondary School, Sport and Library in Normal University",
                         "Providing over 300 university scholarships per year",
                         "Supporting online classes to reach students and children in frontier area",
-                        "Train and equip teachers with improved teaching skills.",
+                        "Train and equip teachers with improved teaching skills",
                         "Supporting Program Pendidikan Kesetaraan Paket C"
                     ]
                 }
