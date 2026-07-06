@@ -245,7 +245,7 @@ export default function ManufacturingPage() {
             >
               <motion.h2 variants={fadeInUp} className="project-title">Aluminum Metal Fabrication</motion.h2>
               <motion.div variants={fadeInUp} className="project-desc">
-                <p>The Gesit Companies invests and manages its aluminum and metal fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with ALCAN Aluminum in 1972. We focus on aluminum and metal fabrication that specialized in the Industrial sector (e.g. train, green house, plantation, modular house, other industrial products) to serve the local and international market over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing, Fabricating Aluminum and Metal.</p>
+                <p>The Gesit Companies invests and manages its aluminum and metal fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum and metal fabrication that specialized in the Industrial sector (e.g. train, green house, plantation, modular house, other industrial products) to serve the local and international market over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing, Fabricating Aluminum and Metal.</p>
               </motion.div>
 
               <motion.div variants={textVariant}>
