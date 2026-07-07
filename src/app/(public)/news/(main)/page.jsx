@@ -356,7 +356,7 @@ const NewsPage = () => {
                       <Link
                         href={`/news/${item.slug || item.id}`}
                         className="gs-news-grid-card flex-1 bg-[#deebf9] px-8 pt-8 pb-8 flex flex-col items-start group hover:bg-[#d0e1f4] transition-all duration-500 rounded-[5px]"
-                        style={{ height: '541px', minHeight: '541px' }}
+                        style={{ height: '541px', minHeight: '541px', width: '100%', maxWidth: '383px', margin: '0 auto' }}
                       >
                          <span 
                           className="text-[16px] font-normal text-navy-deep/60 mb-6 block"
@@ -365,9 +365,9 @@ const NewsPage = () => {
                           {item.date || (item.created_at ? formatDate(item.created_at) : '')}
                         </span>
                         
-                        <div className="flex-grow">
+                        <div className="flex-grow overflow-hidden w-full">
                           <h3
-                            className="text-[30px] text-black leading-[1.3] mb-8"
+                            className="text-[30px] text-black leading-[1.3] mb-8 line-clamp-4"
                             style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
                           >
                             {item.title}

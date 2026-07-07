@@ -145,8 +145,8 @@ const NewsArchivePage = () => {
                 >
                   <Link
                     href={`/news/${item.slug || item.id}`}
-                    className="gs-news-archive-card flex-1 flex flex-col items-start group transition-all duration-500 overflow-hidden"
-                    style={{ height: '541px', minHeight: '541px' }}
+                    className="gs-news-archive-card flex-1 flex flex-col items-start group transition-all duration-500 overflow-hidden mx-auto"
+                    style={{ height: '541px', minHeight: '541px', width: '100%', maxWidth: '383px' }}
                   >
                     {/* Image Container */}
                     <div className="relative aspect-[16/10] w-full overflow-hidden flex-shrink-0">
@@ -160,7 +160,7 @@ const NewsArchivePage = () => {
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                     </div>
 
-                    <div className="p-8 flex flex-col flex-grow items-start w-full">
+                    <div className="p-8 flex flex-col flex-grow items-start w-full overflow-hidden">
                       <span 
                         className="text-[16px] font-normal text-navy-deep/60 mb-4 block"
                         style={{ fontFamily: 'Lato, sans-serif' }}
@@ -168,9 +168,9 @@ const NewsArchivePage = () => {
                         {item.date || new Date(item.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                       </span>
                       
-                      <div className="flex-grow">
+                      <div className="flex-grow overflow-hidden w-full">
                         <h3
-                          className="text-[22px] md:text-[24px] text-black leading-[1.3] mb-4 line-clamp-3"
+                          className="text-[22px] md:text-[24px] text-black leading-[1.3] mb-4 line-clamp-4"
                           style={{ fontFamily: 'Lora, serif', fontWeight: 400 }}
                         >
                           {item.title}

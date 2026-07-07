@@ -320,7 +320,14 @@ export default function NewsDetailPage() {
                                     margin-bottom: 1rem !important;
                                     text-align: left !important;
                                 }
-                                .news-content img { border-radius: 8px; margin: 2rem auto; }
+                                .news-content img { 
+                                    width: 100% !important;
+                                    height: auto !important;
+                                    border-radius: 12px !important; 
+                                    margin: 2.5rem 0 !important; 
+                                    box-shadow: 0 12px 35px -5px rgba(16, 48, 101, 0.1), 0 5px 15px -5px rgba(16, 48, 101, 0.05) !important;
+                                    border: 1px solid rgba(16, 48, 101, 0.05) !important;
+                                }
                             `}</style>
                             {post.content ? (
                                 <div
