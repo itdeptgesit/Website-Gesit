@@ -69,11 +69,12 @@ export default function NaturalResourcesPage() {
         {
             title: "Silica Sand Mining",
             image: "/business/natural-resources/20220317_15075.webp"
-        },
-        {
-            title: "Alumina Refinery and Aluminum Smelter",
-            image: "/business/natural-resources/aluminium_smelter.webp"
         }
+        // Temporarily hidden as requested
+        // {
+        //     title: "Alumina Refinery and Aluminum Smelter",
+        //     image: "/business/natural-resources/aluminium_smelter.webp"
+        // }
     ];
 
     const circleBtn = {
@@ -287,7 +288,7 @@ export default function NaturalResourcesPage() {
                         New Business Development
                     </motion.h2>
 
-                    <div className="natural-business-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[35px]">
+                    <div className="natural-business-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-[35px]">
                         {businessCards.map((card, i) => (
                             <motion.div
                                 key={i}
@@ -486,7 +487,7 @@ export default function NaturalResourcesPage() {
                     }
 
                     .natural-business-grid {
-                        grid-template-columns: repeat(3, 251px) !important;
+                        grid-template-columns: repeat(2, 251px) !important;
                         gap: 30px !important;
                         justify-content: center !important;
                     }
