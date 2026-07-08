@@ -66,8 +66,9 @@ export default function ManufacturingPage() {
 
   const aluminumImages = [
     "/manufacturing/Aluminum-Metal-Fabrication1.webp",
-    "/manufacturing/Aluminum-Metal-Fabrication2.webp",
-    "/manufacturing/Aluminum-Metal-Fabrication3.webp",
+    "/manufacturing/kereta.webp",
+    "/manufacturing/kerangka-kereta.webp",
+    "/manufacturing/solar-panel.webp",
     "/manufacturing/Aluminum-Metal-Fabrication4.webp"
   ];
 
