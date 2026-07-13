@@ -7,6 +7,8 @@ import { Check } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { toast } from 'sonner';
 import './contact.css';
+import heroImg from '../../../../public/contact/hero.jpg';
+import greetingImg from '../../../../public/contact/greeting.jpg';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -110,10 +112,10 @@ export default function ContactUs() {
             className="w-full h-full relative"
           >
             <Image
-              src="/hero/contact_us_hero_revise.webp"
+              src={heroImg}
               alt="Contact Us Hero"
               fill
-              className="object-cover"
+              className="object-cover object-right md:object-center"
               priority
               fetchPriority="high"
             />
@@ -143,7 +145,7 @@ export default function ContactUs() {
             transition={{ duration: 0.8 }}
           >
             <Image
-              src="/hero/contact_us_im.webp"
+              src={greetingImg}
               alt="The Gesit Companies Office"
               fill
               className="object-cover"

@@ -30,6 +30,7 @@ export const csrPrograms = [
                 subtitle: "Pandemic",
                 items: [
                     "Distributing more than 200 ventilators and thousands of PPE to more than 130 hospitals across Indonesia",
+                    "Distributing food aid to people affected by COVID in 5 provinces in Indonesia",
                     "Supporting Covid Vaccination"
                 ]
             },
@@ -41,11 +42,11 @@ export const csrPrograms = [
                 ]
             },
             {
-                subtitle: "Medical Equipment",
+                subtitle: "Medical Support",
                 items: [
                     "Donating speedboat ambulances in West Kalimantan",
                     "Providing ambulances for DKI Jakarta Region, in partnership with Red Cross Indonesia",
-                    "Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile"
+                    "Collaboration to Support Children with Clubfoot"
                 ]
             }
         ]
@@ -66,7 +67,8 @@ export const csrPrograms = [
                 subtitle: "Social Outreach",
                 items: [
                     "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
-                    "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples"
+                    "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples",
+                    "Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile"
                 ]
             }
         ]

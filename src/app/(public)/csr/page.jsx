@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "./csr.css";
+import { csrPrograms as initiatives } from "../../../components/csr/data";
 
 const renderTextWithLinks = (text) => {
     if (typeof text !== "string") return text;
@@ -172,75 +173,7 @@ export default function CSRPage() {
         }
     ];
 
-    const initiatives = [
-        {
-            title: "Healthcare",
-            content: [
-                {
-                    subtitle: "Pandemic",
-                    items: [
-                        "Distributing more than 200 ventilators and thousands of PPE to more than 130 hospitals across Indonesia",
-                        "Supporting Covid Vaccination"
-                    ]
-                },
-                {
-                    subtitle: "Natural Disaster",
-                    items: [
-                        "Rebuilding healthcare facilities and hospitals",
-                        "Donating food and other resources to victims of natural disasters, such as the volcanic eruption at Mount Merapi, Mentawai, the landslide at Puncak and the floods in Jakarta"
-                    ]
-                },
-                {
-                    subtitle: "Medical Equipment",
-                    items: [
-                        "Donating speedboat ambulances in West Kalimantan",
-                        "Providing ambulances for DKI Jakarta Region, in partnership with Red Cross Indonesia",
-                        "Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile"
-                    ]
-                }
-            ]
-        },
-        {
-            title: "Social & Environment",
-            content: [
-                {
-                    subtitle: "Environment",
-                    items: [
-                        "Developing water projects and clean water facilities in remote areas",
-                        "Creating and maintaining roads and open road access in some districts in Indonesia",
-                        "Collaborating with Yayasan Kebun Raya Indonesia in the conservation of endangered and rare botanical species in Kebun Raya Cibodas and Kebun Raya Bedugul, Bali",
-                        "Planting 1,000 trees in West Kalimantan Deforestation Areas"
-                    ]
-                },
-                {
-                    subtitle: "Social Outreach",
-                    items: [
-                        "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
-                        "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples"
-                    ]
-                }
-            ]
-        },
-        {
-            title: "Education",
-            content: [
-                {
-                    subtitle: "",
-                    items: [
-                        "Building, renovating, and providing school facilities for:",
-                        "- North Sumatera: Sekolah Mitra Inalum",
-                        "- Jakarta: Down Syndrome & Deaf School of Cempaka Putih",
-                        "- Jakarta: School of Yayasan Penyandang Anak Cacat",
-                        "- Fujian: Primary, Secondary School, Sport and Library in Normal University",
-                        "Providing over 300 university scholarships per year",
-                        "Supporting online classes to reach students and children in frontier area",
-                        "Train and equip teachers with improved teaching skills",
-                        "Supporting Program Pendidikan Kesetaraan Paket C"
-                    ]
-                }
-            ]
-        }
-    ];
+    // The `initiatives` array is now imported from `data.js`
 
     return (
         <div className="bg-white min-h-screen">

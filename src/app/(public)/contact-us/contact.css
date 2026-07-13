@@ -222,7 +222,7 @@
 
 @media (max-width: 767px) {
   .contact-hero-bg img {
-    object-position: 15% center !important;
+    object-position: 85% center !important;
   }
 
   .contact-section {

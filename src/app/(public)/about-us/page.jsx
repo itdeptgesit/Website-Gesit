@@ -6,22 +6,12 @@ import './about-us.css';
 
 export default function AboutUs() {
   const [progressKey, setProgressKey] = useState(0);
-  const heroVideoRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgressKey(prev => prev + 1);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const video = heroVideoRef.current;
-    if (!video) return;
-
-    video.play().catch(() => {
-      // Browser autoplay can still be denied in unusual user settings.
-    });
   }, []);
 
   const textVariant = {
@@ -75,18 +65,22 @@ export default function AboutUs() {
                     className="elementor-background-video-hosted"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
                   />
-                  <video
-                    ref={heroVideoRef}
-                    suppressHydrationWarning
-                    className="elementor-background-video-hosted elementor-html5-video"
-                    autoPlay
-                    muted
-                    playsInline
-                    loop
-                    preload="auto"
-                    poster="/video/video_thumbnail2.webp"
-                    src="/video/about-us-video.mp4"
-                    style={{ width: '100%', height: '100%', minWidth: '100%', minHeight: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 1 }}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: `
+                        <video
+                          class="elementor-background-video-hosted elementor-html5-video"
+                          autoplay
+                          muted
+                          playsinline
+                          loop
+                          preload="auto"
+                          poster="/video/video_thumbnail2.webp"
+                          src="/video/about-us-video.mp4"
+                          style="width: 100%; height: 100%; min-width: 100%; min-height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 1;"
+                        ></video>
+                      `
+                    }}
                   />
                 </div>
 
@@ -251,7 +245,24 @@ export default function AboutUs() {
                             className="e-hosted-video elementor-wrapper elementor-open-inline"
                             style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <video suppressHydrationWarning className="elementor-video" src="/video/about-us-video.mp4" autoPlay loop muted playsInline preload="metadata" poster="/video/video_thumbnail2.webp" style={{ width: '100%', borderRadius: 12 }} />
+                            <div
+                              style={{ width: '100%' }}
+                              dangerouslySetInnerHTML={{
+                                __html: `
+                                  <video
+                                    class="elementor-video"
+                                    autoplay
+                                    muted
+                                    playsinline
+                                    loop
+                                    preload="metadata"
+                                    poster="/video/video_thumbnail2.webp"
+                                    src="/video/about-us-video.mp4"
+                                    style="width: 100%; border-radius: 12px;"
+                                  ></video>
+                                `
+                              }}
+                            />
                           </motion.div>
                         </div>
                       </div>
