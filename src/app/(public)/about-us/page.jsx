@@ -6,11 +6,22 @@ import './about-us.css';
 
 export default function AboutUs() {
   const [progressKey, setProgressKey] = useState(0);
+  const heroVideoRef = useRef(null);
+  const contentVideoRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgressKey(prev => prev + 1);
     }, 6000);
+
+    // Attempt to play videos programmatically to bypass browser autoplay restrictions
+    if (heroVideoRef.current) {
+      heroVideoRef.current.play().catch(e => console.log("Hero video autoplay failed:", e));
+    }
+    if (contentVideoRef.current) {
+      contentVideoRef.current.play().catch(e => console.log("Content video autoplay failed:", e));
+    }
+
     return () => clearInterval(timer);
   }, []);
 
@@ -65,23 +76,18 @@ export default function AboutUs() {
                     className="elementor-background-video-hosted"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
                   />
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: `
-                        <video
-                          class="elementor-background-video-hosted elementor-html5-video"
-                          autoplay
-                          muted
-                          playsinline
-                          loop
-                          preload="auto"
-                          poster="/video/video_thumbnail2.webp"
-                          src="/video/about-us-video.mp4"
-                          style="width: 100%; height: 100%; min-width: 100%; min-height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 1;"
-                        ></video>
-                      `
-                    }}
-                  />
+                  <video
+                    ref={heroVideoRef}
+                    className="elementor-background-video-hosted elementor-html5-video"
+                    autoPlay
+                    muted
+                    playsInline
+                    loop
+                    preload="auto"
+                    poster="/video/video_thumbnail2.webp"
+                    src="/video/about-us-video.mp4"
+                    style={{ width: '100%', height: '100%', minWidth: '100%', minHeight: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 1 }}
+                  ></video>
                 </div>
 
                 {/* Overlay Gradient */}
@@ -245,24 +251,20 @@ export default function AboutUs() {
                             className="e-hosted-video elementor-wrapper elementor-open-inline"
                             style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <div
-                              style={{ width: '100%' }}
-                              dangerouslySetInnerHTML={{
-                                __html: `
-                                  <video
-                                    class="elementor-video"
-                                    autoplay
-                                    muted
-                                    playsinline
-                                    loop
-                                    preload="metadata"
-                                    poster="/video/video_thumbnail2.webp"
-                                    src="/video/about-us-video.mp4"
-                                    style="width: 100%; border-radius: 12px;"
-                                  ></video>
-                                `
-                              }}
-                            />
+                            <div style={{ width: '100%' }}>
+                              <video
+                                ref={contentVideoRef}
+                                className="elementor-video"
+                                autoPlay
+                                muted
+                                playsInline
+                                loop
+                                preload="metadata"
+                                poster="/video/video_thumbnail2.webp"
+                                src="/video/about-us-video.mp4"
+                                style={{ width: '100%', borderRadius: 12 }}
+                              ></video>
+                            </div>
                           </motion.div>
                         </div>
                       </div>

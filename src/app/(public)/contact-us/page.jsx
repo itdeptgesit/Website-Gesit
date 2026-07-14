@@ -115,7 +115,7 @@ export default function ContactUs() {
               src={heroImg}
               alt="Contact Us Hero"
               fill
-              className="object-cover object-right md:object-center"
+              className="object-cover object-[40%_center] md:object-center"
               priority
               fetchPriority="high"
             />
