@@ -444,33 +444,26 @@ export default function CSRPage() {
                                                             </h4>
                                                         )}
                                                         <ul className="list-disc list-outside pl-5 m-0 space-y-0">
-                                                            {(() => {
-                                                                const groupedItems = [];
-                                                                block.items.forEach(item => {
-                                                                    if (item.startsWith("- ")) {
-                                                                        if (groupedItems.length > 0) {
-                                                                            if (!groupedItems[groupedItems.length - 1].sub) groupedItems[groupedItems.length - 1].sub = [];
-                                                                            groupedItems[groupedItems.length - 1].sub.push(item);
-                                                                        }
-                                                                    } else {
-                                                                        groupedItems.push({ text: item });
-                                                                    }
-                                                                });
-                                                                return groupedItems.map((group, i) => (
-                                                                    <li key={i} className="list-outside text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]" style={{ fontFamily: "var(--font-sans)" }}>
-                                                                        {renderTextWithLinks(group.text)}
-                                                                        {group.sub && (
-                                                                            <div className="flex flex-col m-0 p-0">
-                                                                                {group.sub.map((subItem, j) => (
-                                                                                    <span key={j} className="text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px] block m-0 p-0">
-                                                                                        {renderTextWithLinks(subItem)}
-                                                                                    </span>
-                                                                                ))}
-                                                                            </div>
-                                                                        )}
-                                                                    </li>
-                                                                ));
-                                                            })()}
+                                                            {block.items.map((item, i) => (
+                                                                <li key={i} className="list-outside text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]" style={{ fontFamily: "var(--font-sans)" }}>
+                                                                    {typeof item === 'string' ? (
+                                                                        renderTextWithLinks(item)
+                                                                    ) : (
+                                                                        <>
+                                                                            {renderTextWithLinks(item.text)}
+                                                                            {item.subItems && (
+                                                                                <ul className="list-none pl-0 mt-0 space-y-0">
+                                                                                    {item.subItems.map((sub, j) => (
+                                                                                        <li key={j} className="text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]">
+                                                                                            {'- '}{renderTextWithLinks(sub)}
+                                                                                        </li>
+                                                                                    ))}
+                                                                                </ul>
+                                                                            )}
+                                                                        </>
+                                                                    )}
+                                                                </li>
+                                                            ))}
                                                         </ul>
                                                     </div>
                                                 ))}

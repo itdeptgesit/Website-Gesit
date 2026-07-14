@@ -29,7 +29,7 @@ export const csrPrograms = [
             {
                 subtitle: "Pandemic",
                 items: [
-                    "Distributing more than 200 ventilators and thousands of PPE to more than 130 hospitals across Indonesia",
+                    "Distributing more than 200 ventilators and ten thousands of PPE to 60 hospitals across Indonesia",
                     "Distributing food aid to people affected by COVID in 5 provinces in Indonesia",
                     "Supporting Covid Vaccination"
                 ]
@@ -38,7 +38,7 @@ export const csrPrograms = [
                 subtitle: "Natural Disaster",
                 items: [
                     "Rebuilding healthcare facilities and hospitals",
-                    "Donating food and other resources to victims of natural disasters, such as the volcanic eruption at Mount Merapi, Mentawai, the landslide at Puncak and the floods in Jakarta"
+                    "Donating food and other resources to victims of natural disasters, such as the volcanic eruption at Mount Merapi, Mentawai, the landslide at Puncak and the floods in Jakarta and Meliau "
                 ]
             },
             {
@@ -46,7 +46,8 @@ export const csrPrograms = [
                 items: [
                     "Donating speedboat ambulances in West Kalimantan",
                     "Providing ambulances for DKI Jakarta Region, in partnership with Red Cross Indonesia",
-                    "Collaboration to Support Children with Clubfoot"
+                    "Collaboration to provide medical treatment for club-footed children with DoctorShare",
+                    "Distributing 29 ventilators to 14 hospital to support their ICU capacity"
                 ]
             }
         ]
@@ -57,10 +58,11 @@ export const csrPrograms = [
             {
                 subtitle: "Environment",
                 items: [
-                    "Developing water projects and clean water facilities in remote areas",
+                    "Constructing clean water facilities in remote areas with Solar Chapter",
                     "Creating and maintaining roads and open road access in some districts in Indonesia",
                     "Collaborating with Yayasan Kebun Raya Indonesia in the conservation of endangered and rare botanical species in Kebun Raya Cibodas and Kebun Raya Bedugul, Bali",
-                    "Planting 1,000 trees in West Kalimantan Deforestation Areas"
+                    "Planting 1,000 trees in West Kalimantan Deforestation Areas",
+                    "Sponsoring Indonesia Climate Change Forum 2025"
                 ]
             },
             {
@@ -68,7 +70,8 @@ export const csrPrograms = [
                 items: [
                     "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
                     "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples",
-                    "Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile"
+                    "Contributed in the construction of YPAC (Yayasan Penyandang Anak Cacat) by providing Aluminum Profile",
+                    "Supporting Indonesia sport development through Federasi Kempo Indonesia and sponsoring sport events (IFSC Climbing World Cup 2022)"
                 ]
             }
         ]
@@ -77,11 +80,24 @@ export const csrPrograms = [
         title: "Education",
         content: [
             {
+
                 items: [
-                    "Building, renovating, and providing school facilities for:\n- North Sumatera: Sekolah Mitra Inalum\n- Jakarta: Down Syndrome & Deaf School of Cempaka Putih\n- Jakarta: School of Yayasan Penyandang Anak Cacat\n- Fujian: Primary, Secondary School, Sport and Library in Normal University",
+                    "Pilot project with holistic approach to improve infrastructure, education facilities, and teacher capacity in providing education service in SDN 08 Mentawak, Sansat",
+                    {
+                        text: "Building, renovating, and providing school facilities for:",
+                        subItems: [
+                            "North Sumatera: Sekolah Mitra Inalum",
+                            "Jakarta: Down Syndrome & Deaf School of Cempaka Putih",
+                            "Jakarta: School of Yayasan Penyandang Anak Cacat",
+                            "Fujian: Primary, Secondary School, Sport and Library in Normal University",
+                            "Bogor: SD Sinar Kasih",
+                            "Kupang: PAUD Berkat Tuamnanu"
+                        ]
+                    },
                     "Providing over 300 university scholarships per year",
                     "Supporting online classes to reach students and children in frontier area",
-                    "Train and equip teachers with improved teaching skills.",
+                    "Providing laptop to SMP Adulam in collaboration with PINTU",
+                    "Train and equip teachers with improved teaching skills",
                     "Supporting Program Pendidikan Kesetaraan Paket C"
                 ]
             }

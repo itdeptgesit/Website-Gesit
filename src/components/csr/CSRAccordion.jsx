@@ -40,7 +40,20 @@ export default function CSRAccordion({ data }) {
                                             {section.subtitle && <b data-stringify-type="bold">{section.subtitle}</b>}
                                             <ul>
                                                 {section.items.map((li, liIdx) => (
-                                                    <li key={liIdx} style={{ whiteSpace: 'pre-line' }}>{li}</li>
+                                                    <li key={liIdx}>
+                                                        {typeof li === 'string' ? (
+                                                            li
+                                                        ) : (
+                                                            <>
+                                                                {li.text}
+                                                                <ul style={{ marginTop: '0px', paddingLeft: '0px', listStyleType: 'none' }}>
+                                                                    {li.subItems.map((sub, subIdx) => (
+                                                                        <li key={subIdx} style={{ marginBottom: '2px' }}>{'- '}{sub}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </>
+                                                        )}
+                                                    </li>
                                                 ))}
                                             </ul>
                                         </div>

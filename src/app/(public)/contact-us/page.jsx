@@ -7,7 +7,7 @@ import { Check } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { toast } from 'sonner';
 import './contact.css';
-import heroImg from '../../../../public/contact/hero.jpg';
+import heroImg from '../../../../public/contact/hero.png';
 import greetingImg from '../../../../public/contact/greeting.jpg';
 
 export default function ContactUs() {
