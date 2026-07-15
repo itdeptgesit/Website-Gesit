@@ -344,7 +344,7 @@ export default function AboutUs() {
                         <div className="elementor-container elementor-column-gap-extended" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch' }}>
                           {[
                             { id: 'fabac30', img: '/about/integrity-scaled-1.webp', title: 'Integrity', desc: 'Think, Talk, Act Honestly and be Ethical​' },
-                            { id: 'b940250', img: '/about/respect-scaled-1.webp', title: 'Respect', desc: 'Be Empathetic, Listen to Others and Give an Ethical Response' },
+                            { id: 'b940250', img: '/about/Respect.webp', title: 'Respect', desc: 'Be Empathetic, Listen to Others and Give an Ethical Response' },
                             { id: '7e17c85', img: '/about/competency-scaled-1.webp', title: 'Competency', desc: 'Knowledgeable, Skillful and Right Attitude' },
                             { id: 'ad7b5aa', img: '/about/passion-scaled-1.webp', title: 'Passion', desc: 'Strongly Engaged and Fully Accountable with Respective Job' }
                           ].map((val, idx) => (

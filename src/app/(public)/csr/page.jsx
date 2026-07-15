@@ -133,15 +133,8 @@ export default function CSRPage() {
     const csrGalleryImages = [
         "/csr/gallery/Gallery 1_WVI PAUD.jpg",
         "/csr/gallery/Gallery 2_water for nansean.jpg",
-        "/csr/gallery/Gallery 3_SD Mentawak.jpg",
         "/csr/gallery/Gallery 4_SD Mentawak.jpg",
         "/csr/gallery/Gallery 5_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 6_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 7_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 8_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 9_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 10_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 11_SD Mentawak.jpg",
         "/csr/gallery/Gallery 12_Laptop untuk sekolah Adulam.jpg",
         "/csr/gallery/Gallery 13_Pelatihan komputer untuk Guru di Tangsel .jpeg",
         "/csr/gallery/Gallery 14_RS Cakra Medika, Cepu.jpg",
@@ -149,9 +142,6 @@ export default function CSRPage() {
         "/csr/gallery/Gallery 16_RS Cakra Husada Klaten.jpeg",
         "/csr/gallery/Gallery 17_SMTK Setia.jpg",
         "/csr/gallery/Gallery 18_Ragats.jpg",
-        "/csr/gallery/Gallery 19_WVI PAUD.jpg",
-        "/csr/gallery/gallery21.webp",
-        "/csr/gallery/gallery22.webp",
         "/csr/gallery/gallery1.webp",
         "/csr/gallery/gallery2.webp",
         "/csr/gallery/gallery3.webp",
@@ -172,6 +162,8 @@ export default function CSRPage() {
         "/csr/gallery/gallery18.webp",
         "/csr/gallery/gallery19.webp",
         "/csr/gallery/gallery20.webp",
+        "/csr/gallery/gallery21.webp",
+        "/csr/gallery/gallery22.webp",
     ];
 
     const focusAreas = [

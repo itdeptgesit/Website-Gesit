@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Play, Maximize, Minimize } from 'lucide-react';
 
 /* ── Hero slides (from RevSlider rs-slides) ── */
 const heroSlides = [
@@ -17,7 +18,11 @@ const SLIDE_DURATION = 6000; // ms per slide
 
 export default function Home() {
   const [activeIdx, setActiveIdx] = useState(0);
-  const videoRef = useRef(null);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [isYtPlaying, setIsYtPlaying] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const ytIframeRef = useRef(null);
+  const videoContainerRef = useRef(null);
 
   // Auto-advance hero slides
   useEffect(() => {
@@ -27,19 +32,82 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // Force-play video
+  const YT_VIDEO_ID = 'fK5J6qNrVUE';
+  const YT_THUMB = '/csr/gallery/Gallery 2_water for nansean.jpg';
+
+  const toggleYtPlay = () => {
+    const iframe = ytIframeRef.current;
+    if (!iframe) return;
+    const cmd = isYtPlaying ? 'pauseVideo' : 'playVideo';
+    iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: [] }), '*');
+    setIsYtPlaying(prev => !prev);
+  };
+
   useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = true;
-    const tryPlay = () => {
-      const p = v.play();
-      if (p && p.catch) p.catch(() => { });
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
     };
-    tryPlay();
-    v.addEventListener('canplay', tryPlay);
-    return () => v.removeEventListener('canplay', tryPlay);
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
+
+  const toggleFullscreen = (e) => {
+    e.stopPropagation();
+    if (!videoContainerRef.current) return;
+    
+    if (!document.fullscreenElement) {
+      if (videoContainerRef.current.requestFullscreen) {
+        videoContainerRef.current.requestFullscreen();
+      } else if (videoContainerRef.current.webkitRequestFullscreen) {
+        videoContainerRef.current.webkitRequestFullscreen();
+      } else if (videoContainerRef.current.msRequestFullscreen) {
+        videoContainerRef.current.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  };
+
+  // Auto-mute video when leaving page or scrolling away
+  useEffect(() => {
+    if (!videoPlaying) return;
+
+    const handleVisibilityChange = () => {
+      if (!ytIframeRef.current) return;
+      if (document.hidden) {
+        ytIframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+      } else {
+        ytIframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!ytIframeRef.current) return;
+        if (!entry.isIntersecting) {
+          ytIframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+        } else {
+          ytIframeRef.current.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+        }
+      });
+    }, { threshold: 0 });
+
+    if (ytIframeRef.current) {
+      observer.observe(ytIframeRef.current);
+    }
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
+    };
+  }, [videoPlaying]);
 
   const textVariant = {
     initial: { opacity: 0, y: 30 },
@@ -231,9 +299,78 @@ export default function Home() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="e-hosted-video elementor-wrapper elementor-open-inline" style={{ borderRadius: 12, overflow: 'hidden' }}
+                            style={{ borderRadius: 12, overflow: 'hidden' }}
                           >
-                            <video suppressHydrationWarning ref={videoRef} className="elementor-video" src="/video/csr-video.mp4" autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', borderRadius: 12 }} />
+                            <div
+                              style={{ position: 'relative', paddingBottom: '56.25%', height: 0, background: '#000', cursor: videoPlaying ? 'default' : 'pointer', borderRadius: 12, overflow: 'hidden' }}
+                              onClick={() => !videoPlaying && setVideoPlaying(true)}
+                            >
+                              {!videoPlaying ? (
+                                <>
+                                  <img
+                                    src={YT_THUMB}
+                                    alt="Water For Nansean 2025 - Gesit Foundation"
+                                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                                  />
+                                  {/* Dark overlay */}
+                                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)' }} />
+                                  {/* Play button */}
+                                  <div style={{
+                                    position: 'absolute', inset: 0,
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    pointerEvents: 'none'
+                                  }}>
+                                    <div style={{
+                                      width: 72, height: 72, borderRadius: '50%',
+                                      background: 'rgba(255,255,255,0.95)',
+                                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                      boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                                    }}>
+                                      <Play size={28} style={{ color: '#BC9C33', marginLeft: 4 }} fill="#BC9C33" />
+                                    </div>
+                                  </div>
+                                </>
+                              ) : (
+                                /* Outer clip container - hides title bar (top) and YouTube logo (bottom) */
+                                <div ref={videoContainerRef} style={{ position: 'absolute', inset: 0, borderRadius: isFullscreen ? 0 : 12, overflow: 'hidden', background: '#000' }}>
+                                  {/* Inner container - iframe scaled to hide YouTube UI bands */}
+                                  <div style={{ position: 'absolute', top: isFullscreen ? '-10%' : '-80px', left: 0, right: 0, bottom: isFullscreen ? '-10%' : '-80px' }}>
+                                    <iframe
+                                      ref={ytIframeRef}
+                                      src={`https://www.youtube-nocookie.com/embed/${YT_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&controls=0&fs=0&disablekb=1&enablejsapi=1`}
+                                      title="Water For Nansean 2025"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                      style={{ width: '100%', height: '100%', border: 'none' }}
+                                    />
+                                  </div>
+                                  
+                                  {/* Custom Fullscreen Button */}
+                                  <button
+                                    onClick={toggleFullscreen}
+                                    style={{
+                                      position: 'absolute',
+                                      bottom: 16,
+                                      right: 16,
+                                      zIndex: 20,
+                                      background: 'rgba(0,0,0,0.6)',
+                                      border: 'none',
+                                      borderRadius: 8,
+                                      padding: 8,
+                                      cursor: 'pointer',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      color: '#fff',
+                                      transition: 'background 0.2s'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.8)'}
+                                    onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.6)'}
+                                  >
+                                    {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+                                  </button>
+                                </div>
+                              )}
+                            </div>
                           </motion.div>
                         </div>
                       </div>
@@ -249,14 +386,14 @@ export default function Home() {
                       <div className="elementor-element elementor-element-7e9aa1b elementor-widget elementor-widget-heading" data-id="7e9aa1b" data-element_type="widget" data-widget_type="heading.default">
                         <div className="elementor-widget-container">
                           <motion.h4 variants={textVariant} className="elementor-heading-title elementor-size-default">
-                            We want to create a positive effect on lives and communities in Indonesia
+                            Water For Nansean 2025
                           </motion.h4>
                         </div>
                       </div>
                       <div className="elementor-element elementor-element-6fecd41 elementor-widget elementor-widget-text-editor" data-id="6fecd41" data-element_type="widget" data-widget_type="text-editor.default">
                         <div className="elementor-widget-container">
                           <motion.p variants={textVariant}>
-                            Our social investment programs focus on three areas where we believe Gesit will add the most value and make a significant and lasting impact: <strong>Healthcare, Environment &amp; Cultural Outreach,</strong> and <strong>Education.</strong>
+                            Gesit Foundation provides access to clean water for the Nansean community in East Nusa Tenggara, Indonesia. This initiative is part of our ongoing commitment to improving the quality of life in underserved areas through sustainable infrastructure.
                           </motion.p>
                         </div>
                       </div>
@@ -276,8 +413,8 @@ export default function Home() {
                       <div className="elementor-element elementor-element-b4752b6 elementor-widget elementor-widget-thetrial_core_section_title" data-id="b4752b6" data-element_type="widget" data-widget_type="thetrial_core_section_title.default">
                         <div className="elementor-widget-container">
                           <motion.div variants={textVariant} className="qodef-shortcode qodef-m qodef-section-title qodef-alignment--left">
-                            <div role="heading" aria-level={3} className="qodef-m-title" style={{ fontSize: '24px', fontWeight: 400, margin: 0, padding: 0, fontFamily: 'Georgia, Lora, serif', color: '#1e1e1e' }}>Gesit Foundation COVID-19 Vaccination Program</div>
-                            <p className="qodef-m-text" style={{ marginTop: 8, fontSize: '18px', color: '#555555', fontFamily: "var(--font-sans)" }}>Participating in COVID control and distributing vaccines.</p>
+                            <div role="heading" aria-level={3} className="qodef-m-title" style={{ fontSize: '24px', fontWeight: 400, margin: 0, padding: 0, fontFamily: 'Georgia, Lora, serif', color: '#1e1e1e' }}>Gesit Foundation CSR Program</div>
+                            <p className="qodef-m-text" style={{ marginTop: 8, fontSize: '18px', color: '#555555', fontFamily: "var(--font-sans)" }}>Constructing clean water facilities in remote areas to support the Nansean community.</p>
                           </motion.div>
                         </div>
                       </div>

@@ -31,6 +31,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+      },
     ],
   },
   async headers() {
@@ -40,7 +44,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://challenges.cloudflare.com https://dev.gesit.co.id https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://bbntlrtozsdqvelsxlhz.supabase.co https://res.cloudinary.com https://dev.gesit.co.id https://gesit.co.id https://blogger.googleusercontent.com https://*.googleusercontent.com https://upload.wikimedia.org https://www.google-analytics.com https://www.facebook.com; font-src 'self' data: https://fonts.gstatic.com https://dev.gesit.co.id; connect-src 'self' https://bbntlrtozsdqvelsxlhz.supabase.co https://challenges.cloudflare.com https://dev.gesit.co.id https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://connect.facebook.net; frame-src 'self' https://www.youtube.com https://challenges.cloudflare.com; media-src 'self' https://bbntlrtozsdqvelsxlhz.supabase.co https://dev.gesit.co.id https://gesit.co.id;",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://challenges.cloudflare.com https://dev.gesit.co.id https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://bbntlrtozsdqvelsxlhz.supabase.co https://res.cloudinary.com https://dev.gesit.co.id https://gesit.co.id https://blogger.googleusercontent.com https://*.googleusercontent.com https://upload.wikimedia.org https://www.google-analytics.com https://www.facebook.com https://img.youtube.com; font-src 'self' data: https://fonts.gstatic.com https://dev.gesit.co.id; connect-src 'self' https://bbntlrtozsdqvelsxlhz.supabase.co https://challenges.cloudflare.com https://dev.gesit.co.id https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://connect.facebook.net; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://challenges.cloudflare.com; media-src 'self' https://bbntlrtozsdqvelsxlhz.supabase.co https://dev.gesit.co.id https://gesit.co.id;",
           },
           {
             key: 'X-XSS-Protection',
