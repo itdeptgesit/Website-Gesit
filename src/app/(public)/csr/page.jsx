@@ -124,13 +124,32 @@ export default function CSRPage() {
 
     /* ================= HERO IMAGES ================= */
     const heroImages = [
-        "/csr/images/csr_slider_1.webp",
-        "/csr/images/HP3A763-scaled.webp",
-        "/csr/images/HP3A783-scaled.webp",
+        "/csr/Header 1.jpeg",
+        "/csr/Header 2.jpg",
+        "/csr/Header 4.jpg",
     ];
 
     /* ================= GALLERY IMAGES ================= */
     const csrGalleryImages = [
+        "/csr/gallery/Gallery 1_WVI PAUD.jpg",
+        "/csr/gallery/Gallery 2_water for nansean.jpg",
+        "/csr/gallery/Gallery 3_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 4_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 5_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 6_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 7_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 8_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 9_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 10_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 11_SD Mentawak.jpg",
+        "/csr/gallery/Gallery 12_Laptop untuk sekolah Adulam.jpg",
+        "/csr/gallery/Gallery 13_Pelatihan komputer untuk Guru di Tangsel .jpeg",
+        "/csr/gallery/Gallery 14_RS Cakra Medika, Cepu.jpg",
+        "/csr/gallery/Gallery 15_RS Wisma Prashanti, Bali.jpeg",
+        "/csr/gallery/Gallery 16_RS Cakra Husada Klaten.jpeg",
+        "/csr/gallery/Gallery 17_SMTK Setia.jpg",
+        "/csr/gallery/Gallery 18_Ragats.jpg",
+        "/csr/gallery/Gallery 19_WVI PAUD.jpg",
         "/csr/gallery/gallery21.webp",
         "/csr/gallery/gallery22.webp",
         "/csr/gallery/gallery1.webp",
@@ -164,12 +183,12 @@ export default function CSRPage() {
         {
             title: "Social & Environment",
             desc: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.",
-            image: "/csr/Environment-Cultural-Outreach.webp"
+            image: "/csr/Banner_Environment.jpeg"
         },
         {
             title: "Education",
             desc: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.",
-            image: "/csr/Education.webp"
+            image: "/csr/Banner_Education.jpeg"
         }
     ];
 

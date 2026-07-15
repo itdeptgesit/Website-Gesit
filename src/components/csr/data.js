@@ -1,7 +1,7 @@
 export const heroSlides = [
-    { url: "/csr/images/csr_slider_1.webp", alt: "Corporate Social Responsibility" },
-    { url: "/csr/images/HP3A763-scaled.webp", alt: "Gesit Foundation Activities" },
-    { url: "/csr/images/HP3A783-scaled.webp", alt: "Healthcare Initiatives" }
+    { url: "/csr/Header 1.jpeg", alt: "Corporate Social Responsibility" },
+    { url: "/csr/Header 2.jpg", alt: "Gesit Foundation Activities" },
+    { url: "/csr/Header 3.JPG", alt: "Healthcare Initiatives" }
 ];
 
 export const focusAreas = [

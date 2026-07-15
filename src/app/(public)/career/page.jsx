@@ -55,7 +55,7 @@ export default function CareerPage() {
                 {!isMounted && (
                     <div className="gs-ken-burns" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 1 }}>
                         <Image
-                            src="/career/hero1.png"
+                            src="/career/IMG_2103.jpg"
                             alt="Gesit Career"
                             fill
                             style={{ objectFit: "cover" }}
@@ -76,9 +76,9 @@ export default function CareerPage() {
                         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 1 }}
                     >
                         {[
-                            { url: "/career/hero1.png", alt: "Career 1" },
-                            { url: "/career/hero2.png", alt: "Career 2" },
-                            { url: "/career/hero3.png", alt: "Career 3" }
+                            { url: "/career/IMG_2103.jpg", alt: "Career 1" },
+                            { url: "/career/IMG_2092.jpg", alt: "Career 2" },
+                            { url: "/career/IMG_2100.jpg", alt: "Career 3" }
                         ].map((slide, idx) => (
                             <SwiperSlide key={idx}>
                                 <div className="gs-ken-burns" style={{ position: "relative", width: "100%", height: "100%" }}>
@@ -146,8 +146,6 @@ export default function CareerPage() {
 
             {/* 3. RECRUITMENT SECTION — Premium Minimalist ── */}
             <section className="py-24 md:py-32 bg-slate-50 overflow-hidden relative">
-                {/* Subtle Background Decoration */}
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-[#103065]/5 -skew-x-12 transform origin-top-right"></div>
 
                 <div className="container mx-auto px-6 max-w-7xl relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -156,13 +154,10 @@ export default function CareerPage() {
                             variants={fadeInUp}
                             className="relative order-1 lg:order-2 px-4 md:px-8"
                         >
-                            {/* Decorative background blocks */}
-                            <div className="absolute inset-0 bg-[#BC9C33]/20 rounded-xl transform rotate-3 transition-transform duration-500 hover:rotate-6"></div>
-                            <div className="absolute inset-0 bg-[#103065]/10 rounded-xl transform -rotate-3 transition-transform duration-500 hover:-rotate-6"></div>
 
-                            <div className="relative aspect-video rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(16,48,101,0.2)] group">
+                            <div className="relative aspect-[3/2] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(16,48,101,0.2)] group">
                                 <Image
-                                    src="/career/IMG_2053.jpg"
+                                    src="/career/IMG_2110.jpg"
                                     alt="Join Our Team"
                                     fill
                                     className="object-cover object-top scale-125 group-hover:scale-[1.35] transition-transform duration-[3000ms] ease-out"
