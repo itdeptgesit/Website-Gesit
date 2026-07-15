@@ -111,7 +111,7 @@ export default function TradingServicesPage() {
                             src="/hero/hero_image_trading_1-2.webp"
                             alt="Trading"
                             className="gs-hero-zoom-image"
-                            fill
+                            fill sizes="100vw" quality={100}
                             style={{ objectFit: "cover" }}
                             priority
                             fetchPriority="high"
@@ -144,7 +144,7 @@ export default function TradingServicesPage() {
                                     src={slide.url}
                                     alt={slide.alt}
                                     className="gs-hero-zoom-image"
-                                    fill
+                                    fill sizes="100vw" quality={100}
                                     style={{ objectFit: "cover" }}
                                     priority={idx === 0}
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
@@ -253,7 +253,7 @@ export default function TradingServicesPage() {
                             {tradingGallery.map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={img} alt={`Trading ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                                        <Image src={img} alt={`Trading ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -280,7 +280,7 @@ export default function TradingServicesPage() {
                             {agencyGallery.map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={img} alt={`Agency Services ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                                        <Image src={img} alt={`Agency Services ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} />
                                     </div>
                                 </SwiperSlide>
                             ))}

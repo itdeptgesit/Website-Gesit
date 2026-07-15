@@ -58,6 +58,8 @@ export default function CareerPage() {
                             src="/career/IMG_2103.jpg"
                             alt="Gesit Career"
                             fill
+                            sizes="100vw"
+                            quality={100}
                             style={{ objectFit: "cover" }}
                             priority
                             fetchPriority="high"
@@ -86,6 +88,8 @@ export default function CareerPage() {
                                         src={slide.url}
                                         alt={slide.alt}
                                         fill
+                                        sizes="100vw"
+                                        quality={100}
                                         style={{ objectFit: "cover" }}
                                         priority={idx === 0}
                                         {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}

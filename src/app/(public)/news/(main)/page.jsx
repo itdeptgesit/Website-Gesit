@@ -121,7 +121,7 @@ const NewsPage = () => {
             <Image 
               src={heroImages[0]} 
               alt="News" 
-              fill 
+              fill sizes="100vw" quality={100} 
               style={{ objectFit: "cover", objectPosition: "center bottom" }} 
               priority 
               fetchPriority="high"
@@ -152,7 +152,7 @@ const NewsPage = () => {
                 <Image
                   src={url}
                   alt={`News ${idx}`}
-                  fill
+                  fill sizes="100vw" quality={100}
                   sizes="100vw"
                   style={{
                     objectFit: "cover",
@@ -259,7 +259,7 @@ const NewsPage = () => {
                 <Image
                   src={featuredArticle?.image_url || featuredArticle?.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                   alt={featuredArticle?.title || 'News Update'}
-                  fill
+                  fill sizes="100vw" quality={100}
                   className="gs-news-featured-img object-cover transition duration-1000"
                   sizes="(max-width: 1024px) 100vw, 65vw"
                   priority
@@ -437,7 +437,7 @@ const NewsPage = () => {
                   <Image
                     src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
                     alt={item.title || 'News Update'}
-                    fill
+                    fill sizes="100vw" quality={100}
                     className="object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-[2200ms] ease-out"
                     sizes="(max-width: 768px) 280px, 450px"
                   />

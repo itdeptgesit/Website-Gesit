@@ -113,7 +113,7 @@ export default function NaturalResourcesPage() {
                             src="/hero/hero_natural_resources.webp"
                             alt="Natural Resources"
                             className="gs-hero-zoom-image"
-                            fill
+                            fill sizes="100vw" quality={100}
                             style={{ objectFit: "cover" }}
                             priority
                             fetchPriority="high"
@@ -149,7 +149,7 @@ export default function NaturalResourcesPage() {
                                     src={slide.url}
                                     alt={slide.alt}
                                     className="gs-hero-zoom-image"
-                                    fill
+                                    fill sizes="100vw" quality={100}
                                     style={{ objectFit: "cover" }}
                                     priority={idx === 0}
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
@@ -261,7 +261,7 @@ export default function NaturalResourcesPage() {
                             ].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={img} alt={`Bauxite Mining ${i + 1}`} fill style={{ objectFit: 'cover' }} />
+                                        <Image src={img} alt={`Bauxite Mining ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -316,7 +316,7 @@ export default function NaturalResourcesPage() {
                                         <Image
                                             src={card.image}
                                             alt={card.title}
-                                            fill
+                                            fill sizes="100vw" quality={100}
                                             style={{ objectFit: "cover" }}
                                         />
                                     </motion.div>

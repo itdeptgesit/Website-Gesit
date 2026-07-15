@@ -96,7 +96,7 @@ export default function Home() {
             <Image
               src={slide.src}
               alt={slide.alt}
-              fill
+              fill sizes="100vw" quality={100}
               sizes="100vw"
               quality={60}
               style={{
