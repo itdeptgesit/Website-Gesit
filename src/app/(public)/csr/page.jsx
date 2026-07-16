@@ -136,7 +136,6 @@ export default function CSRPage() {
         "/csr/gallery/Gallery 4_SD Mentawak.webp",
         "/csr/gallery/Gallery 5_SD Mentawak.webp",
         "/csr/gallery/Gallery 12_Laptop untuk sekolah Adulam.webp",
-        "/csr/gallery/Gallery 13_Pelatihan komputer untuk Guru di Tangsel .jpeg",
         "/csr/gallery/Gallery 14_RS Cakra Medika, Cepu.webp",
         "/csr/gallery/Gallery 15_RS Wisma Prashanti, Bali.webp",
         "/csr/gallery/Gallery 16_RS Cakra Husada Klaten.webp",
