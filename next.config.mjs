@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ['192.168.5.3', '192.168.10.254'],
+  allowedDevOrigins: ['192.168.5.3', '192.168.10.254', '192.168.0.2', 'gesit.dev', 'gesit.local', 'gesit.localhost', 'gesit.test'],
   devIndicators: {
     appIsrStatus: false,
     buildActivity: false,

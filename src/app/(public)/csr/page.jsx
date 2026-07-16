@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "./csr.css";
-import { csrPrograms as initiatives } from "../../../components/csr/data";
+import { csrPrograms as initiatives, csrOngoingPrograms } from "../../../components/csr/data";
 
 const renderTextWithLinks = (text) => {
     if (typeof text !== "string") return text;
@@ -24,7 +24,7 @@ const renderTextWithLinks = (text) => {
         }
         parts.push(
             <a
-                key={match.index}
+                key={match.index || `match-${match.text}`}
                 href={match[2]}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -44,7 +44,7 @@ const renderTextWithLinks = (text) => {
 export default function CSRPage() {
     const [isMounted, setIsMounted] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
-    const [openInitiative, setOpenInitiative] = useState("Healthcare");
+    const [openInitiative, setOpenInitiative] = useState("Education");
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [prevEl, setPrevEl] = useState(null);
     const [nextEl, setNextEl] = useState(null);
@@ -124,24 +124,24 @@ export default function CSRPage() {
 
     /* ================= HERO IMAGES ================= */
     const heroImages = [
-        "/csr/Header 1.jpeg",
-        "/csr/Header 2.jpg",
-        "/csr/Header 4.jpg",
+        "/csr/Header 1.webp",
+        "/csr/Header 2.webp",
+        "/csr/Header 4.webp",
     ];
 
     /* ================= GALLERY IMAGES ================= */
     const csrGalleryImages = [
-        "/csr/gallery/Gallery 1_WVI PAUD.jpg",
-        "/csr/gallery/Gallery 2_water for nansean.jpg",
-        "/csr/gallery/Gallery 4_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 5_SD Mentawak.jpg",
-        "/csr/gallery/Gallery 12_Laptop untuk sekolah Adulam.jpg",
+        "/csr/gallery/Gallery 1_WVI PAUD.webp",
+        "/csr/gallery/Gallery 2_water for nansean.webp",
+        "/csr/gallery/Gallery 4_SD Mentawak.webp",
+        "/csr/gallery/Gallery 5_SD Mentawak.webp",
+        "/csr/gallery/Gallery 12_Laptop untuk sekolah Adulam.webp",
         "/csr/gallery/Gallery 13_Pelatihan komputer untuk Guru di Tangsel .jpeg",
-        "/csr/gallery/Gallery 14_RS Cakra Medika, Cepu.jpg",
-        "/csr/gallery/Gallery 15_RS Wisma Prashanti, Bali.jpeg",
-        "/csr/gallery/Gallery 16_RS Cakra Husada Klaten.jpeg",
-        "/csr/gallery/Gallery 17_SMTK Setia.jpg",
-        "/csr/gallery/Gallery 18_Ragats.jpg",
+        "/csr/gallery/Gallery 14_RS Cakra Medika, Cepu.webp",
+        "/csr/gallery/Gallery 15_RS Wisma Prashanti, Bali.webp",
+        "/csr/gallery/Gallery 16_RS Cakra Husada Klaten.webp",
+        "/csr/gallery/Gallery 17_SMTK Setia.webp",
+        "/csr/gallery/Gallery 18_Ragats.webp",
         "/csr/gallery/gallery1.webp",
         "/csr/gallery/gallery2.webp",
         "/csr/gallery/gallery3.webp",
@@ -157,16 +157,18 @@ export default function CSRPage() {
         "/csr/gallery/gallery13.webp",
         "/csr/gallery/gallery14.webp",
         "/csr/gallery/gallery15.webp",
-        "/csr/gallery/gallery16.webp",
         "/csr/gallery/gallery17.webp",
         "/csr/gallery/gallery18.webp",
         "/csr/gallery/gallery19.webp",
         "/csr/gallery/gallery20.webp",
-        "/csr/gallery/gallery21.webp",
-        "/csr/gallery/gallery22.webp",
     ];
 
     const focusAreas = [
+        {
+            title: "Education",
+            desc: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.",
+            image: "/csr/Banner_Education.webp"
+        },
         {
             title: "Healthcare",
             desc: "We provide initiatives that ensure proper medical treatment and aid for the sick and injured. Our focus goes beyond donations; we get involved in the causes that help improve the infrastructures needed to support healthcare.",
@@ -175,12 +177,7 @@ export default function CSRPage() {
         {
             title: "Social & Environment",
             desc: "We provide cultural training, concerts, religious infrastructure, and enforce diversity in our society, but most importantly we prioritize initiatives that improve the environments in which we operate everyday.",
-            image: "/csr/Banner_Environment.jpeg"
-        },
-        {
-            title: "Education",
-            desc: "We provide hands-on opportunities for disadvantaged children through various initiatives, such as scholarships. Most notably, we ensure that educational facilities are available to the people that we believe need it most.",
-            image: "/csr/Banner_Education.jpeg"
+            image: "/csr/Banner_Environment.webp"
         }
     ];
 
@@ -224,7 +221,7 @@ export default function CSRPage() {
                             className="h-full w-full"
                         >
                             {heroImages.map((src, index) => (
-                                <SwiperSlide key={index}>
+                                <SwiperSlide key={`hero-${index}`}>
                                     <div className="relative h-full w-full overflow-hidden">
                                         <Image
                                             src={src}
@@ -252,7 +249,7 @@ export default function CSRPage() {
                     {/* Gold Progress Bar - TOP */}
                     <div className="absolute top-0 left-0 w-full h-[4px] bg-black/20 z-40">
                         <motion.div
-                            key={activeIndex}
+                            key={`bullet-${activeIndex}`}
                             initial={{ scaleX: 0 }}
                             animate={{ scaleX: 1 }}
                             transition={{ duration: 6, ease: "linear" }}
@@ -334,8 +331,8 @@ export default function CSRPage() {
                                 fontWeight: 400,
                                 margin: 0
                             }}>
-                                Our social investment programs focus on three areas: <strong className="font-extrabold">Healthcare, </strong><br className="hidden lg:block" />
-                                <strong className="font-extrabold">Social &amp; Environment,</strong> and <strong className="font-extrabold">Education.</strong>
+                                Our social investment programs focus on three areas: <strong className="font-extrabold">Education, </strong><br className="hidden lg:block" />
+                                <strong className="font-extrabold"> Healthcare,</strong> and <strong className="font-extrabold">Social & Environment.</strong>
                             </p>
                         </div>
                     </motion.div>
@@ -449,7 +446,7 @@ export default function CSRPage() {
                                         >
                                             <div className="pl-8 md:pl-16 pr-0" style={{ paddingTop: '0px', paddingBottom: '22px' }}>
                                                 {initiative.content.map((block, index) => (
-                                                    <div key={block.subtitle || index} className={index === 0 ? "mt-0" : "mt-8"}>
+                                                    <div key={block.subtitle || `block-${index}`} className={index === 0 ? "mt-0" : "mt-8"}>
                                                         {block.subtitle && (
                                                             <h4 className="text-[16px] md:text-[18px] font-bold text-[#555] mb-0 !mt-0 pl-0 leading-[27px]" style={{ fontFamily: 'Lora, serif' }}>
                                                                 {block.subtitle}
@@ -457,7 +454,7 @@ export default function CSRPage() {
                                                         )}
                                                         <ul className="list-disc list-outside pl-5 m-0 space-y-0">
                                                             {block.items.map((item, i) => (
-                                                                <li key={i} className="list-outside text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]" style={{ fontFamily: "var(--font-sans)" }}>
+                                                                <li key={`item-${i}`} className="list-outside text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]" style={{ fontFamily: "var(--font-sans)" }}>
                                                                     {typeof item === 'string' ? (
                                                                         renderTextWithLinks(item)
                                                                     ) : (
@@ -466,7 +463,7 @@ export default function CSRPage() {
                                                                             {item.subItems && (
                                                                                 <ul className="list-none pl-0 mt-0 space-y-0">
                                                                                     {item.subItems.map((sub, j) => (
-                                                                                        <li key={j} className="text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]">
+                                                                                        <li key={`sub-${j}`} className="text-[16px] md:text-[19px] text-[#555] font-normal leading-[28px]">
                                                                                             {'- '}{renderTextWithLinks(sub)}
                                                                                         </li>
                                                                                     ))}
@@ -484,6 +481,39 @@ export default function CSRPage() {
                                     )}
                                 </AnimatePresence>
                             </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ================= ONGOING PROGRAMS ================= */}
+            <section className="pb-20 bg-white">
+                <div className="mx-auto w-full px-6 lg:px-0" style={{ maxWidth: '1200px' }}>
+                    <h2
+                        className="text-center mb-10 text-[#000] text-[24px] md:text-[36px]"
+                        style={{ fontFamily: 'Georgia, serif', fontWeight: 400 }}
+                    >
+                        Ongoing Program
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {csrOngoingPrograms.map((program, idx) => (
+                            <motion.div
+                                key={`ongoing-${idx}`}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                className="bg-[#F9F9F9] p-6 rounded-[5px] border-l-4 border-[#BC9C33] shadow-sm hover:shadow-md transition-shadow"
+                            >
+                                <div className="flex items-start gap-4">
+                                    <div className="mt-1">
+                                        <div className="w-[8px] h-[8px] bg-[#BC9C33] rounded-full"></div>
+                                    </div>
+                                    <p className="text-[16px] md:text-[18px] text-[#555] font-normal leading-[28px] m-0" style={{ fontFamily: "var(--font-sans)" }}>
+                                        {program}
+                                    </p>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
@@ -523,7 +553,7 @@ export default function CSRPage() {
                             className="gs-continuous-swiper !px-4 !py-6 md:!py-12"
                         >
                             {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
-                                <SwiperSlide key={index} className="!w-auto">
+                                <SwiperSlide key={`gallery-${index}`} className="!w-auto">
                                     <motion.div
                                         className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative cursor-pointer"
                                         whileHover={{ y: -10, scale: 1.025 }}
@@ -532,10 +562,12 @@ export default function CSRPage() {
                                         onMouseLeave={handleGalleryLeave}
                                         onClick={() => openLightbox(index % csrGalleryImages.length)}
                                     >
-                                        <img
+                                        <Image
                                             src={src}
                                             alt={`CSR Gallery ${index}`}
-                                            className="w-full h-full object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out pointer-events-none"
+                                            fill
+                                            sizes="(max-width: 768px) 280px, 450px"
+                                            className="object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out pointer-events-none"
                                         />
                                         <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
                                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none" />

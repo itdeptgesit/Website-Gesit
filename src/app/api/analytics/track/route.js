@@ -36,11 +36,11 @@ export async function POST(request) {
 
         const { path, name } = body;
         
-        // Detect country from Vercel headers (fallback to 'Local Development' if localhost)
-        const isLocal = request.headers.get('host')?.includes('localhost');
+        // BUG-05 FIX: Detect local dev by env var, not by host header (which fails for IPs/custom domains)
+        const isLocal = process.env.NEXT_PUBLIC_SITE_ENV !== 'production';
         const countryCode = isLocal ? 'DEV' : (request.headers.get('x-vercel-ip-country') || 'INT');
         const countryName = isLocal 
-            ? 'Local Development'
+            ? 'Local Development' 
             : countryCode === 'INT' 
                 ? 'International' 
                 : new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode) || 'International';

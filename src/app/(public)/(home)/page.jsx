@@ -17,12 +17,18 @@ const heroSlides = [
 const SLIDE_DURATION = 6000; // ms per slide
 
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [isYtPlaying, setIsYtPlaying] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const ytIframeRef = useRef(null);
   const videoContainerRef = useRef(null);
+
+  // BUG-09 FIX: Set mounted flag after hydration to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Auto-advance hero slides
   useEffect(() => {
@@ -33,7 +39,7 @@ export default function Home() {
   }, []);
 
   const YT_VIDEO_ID = 'fK5J6qNrVUE';
-  const YT_THUMB = '/csr/gallery/Gallery 2_water for nansean.jpg';
+  const YT_THUMB = '/csr/gallery/Gallery 2_water for nansean.webp';
 
   const toggleYtPlay = () => {
     const iframe = ytIframeRef.current;
@@ -307,10 +313,11 @@ export default function Home() {
                             >
                               {!videoPlaying ? (
                                 <>
-                                  <img
+                                  <Image
                                     src={YT_THUMB}
                                     alt="Water For Nansean 2025 - Gesit Foundation"
-                                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
                                   />
                                   {/* Dark overlay */}
                                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.35)' }} />

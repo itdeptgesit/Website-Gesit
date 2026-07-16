@@ -7,8 +7,8 @@ import { Check } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { toast } from 'sonner';
 import './contact.css';
-import heroImg from '../../../../public/contact/hero-contact.jpg';
-import greetingImg from '../../../../public/contact/greeting.jpg';
+import heroImg from '../../../../public/contact/hero-contact.webp';
+import greetingImg from '../../../../public/contact/greeting.webp';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({

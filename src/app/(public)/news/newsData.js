@@ -4,7 +4,7 @@ export const newsItems = [
         slug: "gesit-foundation-salurkan-3000-masker-melalui-kelompok-bakti-kasih-kemanusian-indonesia",
         title: "Gesit Foundation Salurkan 3,000 Masker Melalui Kelompok Bakti Kasih Kemanusiaan Indonesia",
         date: "10 Dec 2021",
-        image: "/csr/Gesit-Foundation-Salurkan-3000-Masker-Melalui-Kelompok-Bakti-Kasih-Kemanusian-Indonesia.jpeg",
+        image: "/csr/Gesit-Foundation-Salurkan-3000-Masker-Melalui-Kelompok-Bakti-Kasih-Kemanusian-Indonesia.webp",
         bgColor: "#103065",
         textColor: "#ffffff",
         category: "News",
@@ -15,7 +15,7 @@ export const newsItems = [
         slug: "pemprov-sulut-terima-bantuan-3-unit-non-invasive-ventilator-dari-gesit-foundation",
         title: "Pemprov Sulut terima bantuan 3 Unit Non Invasive Ventilator dari Gesit Foundation",
         date: "10 Dec 2021",
-        image: "/news/Pemprov-Sulut-terima-bantuan-3-Unit-Non-Invasive-Ventilator-dari-Gesit-Foundation-scaled.jpeg",
+        image: "/news/Pemprov-Sulut-terima-bantuan-3-Unit-Non-Invasive-Ventilator-dari-Gesit-Foundation-scaled.webp",
         bgColor: "#deebf9",
         textColor: "#103065",
         category: "News",
@@ -27,7 +27,7 @@ export const newsItems = [
         slug: "gesit-foundation-bantu-polda-kalbar-dalam-penanganan-covid-19",
         title: "Gesit Foundation Bantu Polda Kalbar Dalam Penanganan Covid-19",
         date: "10 Dec 2021",
-        image: "/csr/Gesit-Foundation-Bantu-Polda-Kalbar-Dalam-Penanganan-Covid-19.jpeg",
+        image: "/csr/Gesit-Foundation-Bantu-Polda-Kalbar-Dalam-Penanganan-Covid-19.webp",
         bgColor: "#deebf9",
         textColor: "#103065",
         category: "News",
@@ -38,7 +38,7 @@ export const newsItems = [
         slug: "bantuan-tiga-unit-ventilator-diserahkan-gesit-foundation-ke-ketua-gugus-tugas-sulsel",
         title: "Bantuan Tiga Unit Ventilator Diserahkan Gesit Foundation ke Ketua Gugus Tugas Sulsel",
         date: "10 Dec 2021",
-        image: "/csr/Bantuan-Tiga-Unit-Ventilator-Diserahkan-Gesit-Foundation-ke-Ketua-Gugus-Tugas-Sulsel-scaled.jpeg",
+        image: "/csr/Bantuan-Tiga-Unit-Ventilator-Diserahkan-Gesit-Foundation-ke-Ketua-Gugus-Tugas-Sulsel-scaled.webp",
         bgColor: "#deebf9",
         textColor: "#103065",
         category: "News",
@@ -48,8 +48,8 @@ export const newsItems = [
 ];
 
 export const goldSectionImages = [
-    "/csr/Gesit-Foundation-Salurkan-3000-Masker-Melalui-Kelompok-Bakti-Kasih-Kemanusian-Indonesia.jpeg",
-    "/csr/Bantuan-30-Ventilator-dan-10-Ton-Beras-ke-Wali-Kota-Surabaya.jpeg",
-    "/news/PMI-Ventilator.jpeg"
+    "/csr/Gesit-Foundation-Salurkan-3000-Masker-Melalui-Kelompok-Bakti-Kasih-Kemanusian-Indonesia.webp",
+    "/csr/Bantuan-30-Ventilator-dan-10-Ton-Beras-ke-Wali-Kota-Surabaya.webp",
+    "/news/PMI-Ventilator.webp"
 ];
 

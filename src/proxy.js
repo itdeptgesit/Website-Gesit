@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server';
 import { updateSession } from "@/lib/supabase-middleware";
 import { createServerClient } from "@supabase/ssr";
 
+// BUG-10 FIX: In-memory cache for middleware to prevent DB hits on every request
+let cachedSettings = null;
+let lastFetchTime = 0;
+const CACHE_TTL = 60000; // 1 minute cache
+
 export async function proxy(request) {
     const path = request.nextUrl.pathname;
 
@@ -14,27 +19,38 @@ export async function proxy(request) {
     // 1. Database-driven checks (Maintenance & Security)
     if (isPublicRoute || isDashboard || isMaintenancePage) {
         try {
-            const supabase = createServerClient(
-                process.env.NEXT_PUBLIC_SUPABASE_URL,
-                process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-                {
-                    cookies: {
-                        getAll() { return request.cookies.getAll(); },
-                        setAll(cookiesToSet) {
-                            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-                        },
-                    },
-                }
-            );
+            let settings = cachedSettings;
+            const now = Date.now();
 
-            const { data: settings, error: settingsError } = await supabase
-                .from('seo_settings')
-                .select('maintenance_mode, maintenance_until, email_2fa_enabled')
-                .eq('id', 1)
-                .single();
+            if (!settings || (now - lastFetchTime > CACHE_TTL)) {
+                const supabase = createServerClient(
+                    process.env.NEXT_PUBLIC_SUPABASE_URL,
+                    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+                    {
+                        cookies: {
+                            getAll() { return request.cookies.getAll(); },
+                            setAll(cookiesToSet) {
+                                cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+                            },
+                        },
+                    }
+                );
+
+                const { data, error: settingsError } = await supabase
+                    .from('seo_settings')
+                    .select('maintenance_mode, maintenance_until, email_2fa_enabled')
+                    .eq('id', 1)
+                    .single();
+
+                if (data) {
+                    cachedSettings = data;
+                    lastFetchTime = now;
+                    settings = data;
+                }
+            }
 
             // DEBUG LOG
-            console.log('[Proxy]', path, '| maintenance:', settings?.maintenance_mode, '| until:', settings?.maintenance_until);
+            console.debug('[Proxy]', path, '| maintenance:', settings?.maintenance_mode, '| until:', settings?.maintenance_until, '| cached:', now - lastFetchTime < CACHE_TTL);
 
             if (settings) {
                 const isMaintenance = settings.maintenance_mode === true;
@@ -43,7 +59,7 @@ export async function proxy(request) {
 
                 // Redirect public visitors to maintenance page only if active and NOT expired
                 if (isMaintenance && !isExpired && isPublicRoute) {
-                    console.log('[Proxy] REDIRECTING', path, '-> /maintenance');
+                    console.debug('[Proxy] REDIRECTING', path, '-> /maintenance');
                     return NextResponse.redirect(new URL('/maintenance', request.url));
                 }
 

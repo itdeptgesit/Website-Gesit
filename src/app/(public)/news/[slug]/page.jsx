@@ -176,7 +176,7 @@ export default function NewsDetailPage() {
             <section className="w-full bg-[#103065] pt-40 pb-20 px-6 relative overflow-hidden">
                 {/* Background Logo Overlay */}
                 <div className="absolute right-[-5%] bottom-[-10%] w-[40%] opacity-[0.03] pointer-events-none">
-                    <img src="/logos/logos.png" alt="" className="w-full h-full object-contain brightness-0 invert" />
+                    <Image src="/logos/logos.webp" alt="" fill className="object-contain brightness-0 invert" />
                 </div>
 
                 <div className="container mx-auto max-w-6xl relative z-10">
@@ -279,7 +279,7 @@ export default function NewsDetailPage() {
                                 </div>
                             ) : (
                                 <Image
-                                    src={post.image_url || post.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                                    src={post.image_url || post.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.webp'}
                                     alt={post.title}
                                     fill
                                     className="object-cover"
@@ -434,7 +434,7 @@ export default function NewsDetailPage() {
                                         <Link href={`/news/${item.slug}`} key={item.id} className="group flex flex-col bg-transparent overflow-hidden transition-all duration-300">
                                             <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl bg-slate-100 mb-5">
                                                 <Image
-                                                    src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                                                    src={item.image_url || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.webp'}
                                                     alt={item.title}
                                                     fill
                                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -10,6 +10,10 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY // Use service role to bypass RLS for public submissions
 );
 
+// BUG-03 FIX: Module-level rate limit map (persists across requests in the same serverless instance)
+// Note: For true distributed rate limiting across all serverless instances, use Redis/Upstash.
+const rateLimitMap = new Map();
+
 export async function POST(req) {
   try {
     const json = await req.json();
@@ -24,10 +28,7 @@ export async function POST(req) {
     const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
     if (ip !== 'unknown') {
       const now = Date.now();
-      const userLimits = global.rateLimitMap || new Map();
-      if (!global.rateLimitMap) global.rateLimitMap = userLimits;
-      
-      const userState = userLimits.get(ip) || { count: 0, firstRequest: now };
+      const userState = rateLimitMap.get(ip) || { count: 0, firstRequest: now };
       
       // Reset window if 1 minute has passed
       if (now - userState.firstRequest > 60000) {
@@ -37,8 +38,16 @@ export async function POST(req) {
         userState.count++;
       }
       
-      userLimits.set(ip, userState);
+      rateLimitMap.set(ip, userState);
       
+      // Cleanup to prevent memory leak on long-running instances
+      if (rateLimitMap.size > 500) {
+        const expiredCutoff = now - 60000;
+        for (const [key, val] of rateLimitMap.entries()) {
+          if (val.firstRequest < expiredCutoff) rateLimitMap.delete(key);
+        }
+      }
+
       if (userState.count > 5) {
         return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
       }
@@ -83,9 +92,10 @@ export async function POST(req) {
 
     // 2. Send Email Notification via Resend
     if (process.env.RESEND_API_KEY) {
-      // Construct dynamic dashboard URL based on the request host header
+      // BUG-04 FIX: Construct dynamic dashboard URL — detect local dev by env var, not host string
       const host = req.headers.get('host') || 'localhost:3000';
-      const protocol = host.includes('localhost') ? 'http' : 'https';
+      const isDevEnv = process.env.NEXT_PUBLIC_SITE_ENV !== 'production';
+      const protocol = isDevEnv ? 'http' : 'https';
       const dashboardUrl = `${protocol}://${host}/dashboard/contacts`;
 
       const { data, error: emailError } = await resend.emails.send({
@@ -175,7 +185,8 @@ export async function POST(req) {
         // If DB succeeded but email failed, we still return success with a warning or just handle it.
       }
     } else {
-      console.log("[DEBUG] Contact Submission (No Resend API Key):", { name, email, phone, message });
+      // BUG-01 FIX: Do NOT log user data (name, email, phone, message) — privacy violation
+      console.warn("[Contact] Submission received but RESEND_API_KEY is not set. Email not sent.");
     }
 
     return NextResponse.json({ success: true });

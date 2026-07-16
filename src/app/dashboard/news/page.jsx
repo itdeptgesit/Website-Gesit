@@ -574,7 +574,7 @@ export default function NewsDashboard() {
                                                 <TableCell className="px-8 py-5">
                                                     <div className="flex items-center gap-4">
                                                         <div className="w-14 h-14 rounded-md overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
-                                                            <img src={item.image_url || '/placeholder.jpg'} alt="" className="w-full h-full object-cover" />
+                                                            <img src={item.image_url || '/placeholder.webp'} alt="" className="w-full h-full object-cover" />
                                                         </div>
                                                         <div className="space-y-1">
                                                             <h4 className="font-bold text-[#1b365d] text-[15px] leading-snug line-clamp-2">{item.title}</h4>

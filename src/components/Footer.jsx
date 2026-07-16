@@ -90,7 +90,7 @@ export default function Footer() {
                   <div className="qodef-grid-item" style={{ textAlign: 'center' }}>
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                       <Link href="/" className="gs-footer-logo-link">
-                        <Image src="/logos/logos.png" alt="The Gesit Companies logo" className="gs-footer-logo-img" width={48} height={48} style={{ width: '48px', height: 'auto' }} />
+                        <Image src="/logos/logos.webp" alt="The Gesit Companies logo" className="gs-footer-logo-img" width={48} height={48} style={{ width: '48px', height: 'auto' }} />
                         <span className="gs-footer-logo-text" style={{ fontSize: '14px', fontWeight: 700, letterSpacing: '2px', color: '#bc9c33' }}>THE GESIT COMPANIES</span>
                       </Link>
                     </div>

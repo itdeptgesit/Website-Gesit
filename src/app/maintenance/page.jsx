@@ -92,7 +92,7 @@ export default function MaintenancePage() {
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-black/20 rounded-full blur-[160px] animate-pulse" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#bc9c33]/10 rounded-full blur-[140px]" />
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]" />
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.webp')] opacity-[0.03]" />
             </div>
 
             <div className="relative z-10 max-w-4xl w-full">

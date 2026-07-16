@@ -75,7 +75,7 @@ export default function Header() {
       <header id="qodef-page-header" className={isSticky ? 'gs-is-sticky' : ''} suppressHydrationWarning>
         <div id="qodef-page-header-inner">
           <Link href="/" className="gs-logo-link">
-            <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={150} height={56} className="gs-header-logo-img" style={{ width: 'auto' }} priority />
+            <Image src="/logos/logos.webp" alt="The Gesit Companies logo" width={150} height={56} className="gs-header-logo-img" style={{ width: 'auto' }} priority />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
 
@@ -110,7 +110,7 @@ export default function Header() {
       <header id="gs-custom-mobile-header" className={`${isSticky ? 'gs-is-sticky' : ''} ${mounted && mobileMenuOpen ? 'gs-menu-open' : ''}`} suppressHydrationWarning>
         <div className="gs-mobile-header-inner">
           <Link href="/" className="gs-mobile-logo">
-            <Image src="/logos/logos.png" alt="The Gesit Companies logo" width={120} height={32} className="gs-mobile-logo-img" />
+            <Image src="/logos/logos.webp" alt="The Gesit Companies logo" width={120} height={32} className="gs-mobile-logo-img" />
             <span className="gs-logo-text">THE GESIT COMPANIES</span>
           </Link>
           <div

@@ -75,7 +75,7 @@ const NewsArchivePage = () => {
       <section className="w-full bg-[#103065] pt-40 pb-20 px-6 relative overflow-hidden">
         {/* Background Logo Overlay */}
         <div className="absolute right-[-5%] bottom-[-10%] w-[40%] opacity-[0.03] pointer-events-none text-white">
-          <img src="/logos/logos.png" alt="" className="w-full h-full object-contain brightness-0 invert" />
+          <Image src="/logos/logos.webp" alt="" fill className="object-contain brightness-0 invert" />
         </div>
 
         <div className="container mx-auto max-w-6xl relative z-10">
@@ -151,7 +151,7 @@ const NewsArchivePage = () => {
                     {/* Image Container */}
                     <div className="relative aspect-[16/10] w-full overflow-hidden flex-shrink-0">
                       <Image
-                        src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                        src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.webp'}
                         alt={item.title}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"

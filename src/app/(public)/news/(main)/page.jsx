@@ -29,10 +29,10 @@ const formatDate = (dateStr) => {
 const NewsPage = () => {
 
   const heroImages = [
-    "/news/Background-Handover-Daswin.jpeg",
-    "/news/30-Ventilator-DKI.jpeg",
-    "/news/Gubernur-Kalbar-Ventilator.jpeg",
-    "/news/PMI-Ventilator.jpeg"
+    "/news/Background-Handover-Daswin.webp",
+    "/news/30-Ventilator-DKI.webp",
+    "/news/Gubernur-Kalbar-Ventilator.webp",
+    "/news/PMI-Ventilator.webp"
   ];
 
   const textVariant = {
@@ -257,7 +257,7 @@ const NewsPage = () => {
               {/* Image Side - Balanced Landscape */}
               <div className="gs-news-featured-image relative aspect-[16/9] lg:aspect-auto h-full overflow-hidden bg-slate-100 min-h-[350px] lg:min-h-[480px]">
                 <Image
-                  src={featuredArticle?.image_url || featuredArticle?.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                  src={featuredArticle?.image_url || featuredArticle?.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.webp'}
                   alt={featuredArticle?.title || 'News Update'}
                   fill sizes="100vw" quality={100}
                   className="gs-news-featured-img object-cover transition duration-1000"
@@ -435,7 +435,7 @@ const NewsPage = () => {
                   onMouseLeave={handleGalleryLeave}
                 >
                   <Image
-                    src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.jpg'}
+                    src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.webp'}
                     alt={item.title || 'News Update'}
                     fill sizes="100vw" quality={100}
                     className="object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-[2200ms] ease-out"

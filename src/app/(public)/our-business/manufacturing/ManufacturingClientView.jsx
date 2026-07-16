@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -91,8 +93,8 @@ const ProjectItem = ({ project, index }) => {
                     </p>
                 )}
                 <div className={`text-[#000] ${!project.subtitle ? 'mt-8' : ''} mb-12`} style={{ fontSize: '18px', fontWeight: 400, lineHeight: '1.6', fontFamily: "var(--font-sans)", maxWidth: '440px' }}>
-                    {project.desc.split('\n\n').map((p, i) => (
-                        <p key={i} className="m-0 mb-4">{p}</p>
+                    {project.description.map((p, i) => (
+                        <p key={`desc-${i}`} className="m-0 mb-4">{p}</p>
                     ))}
                 </div>
 
@@ -144,7 +146,10 @@ const ManufacturingClientView = () => {
     const projects = [
         {
             title: "Aluminum Metal Fabrication",
-            desc: "The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market.\n\nWe have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum.",
+            description: [
+                "The Gesit Companies invests and manages its aluminum fabrication company—Alakasa Andalan Mitra Sejati—since its Joint Venture with Alcan Aluminum in 1972. We focus on aluminum fabrication company that specializes in the industrial sector (e.g., train, marine, plantation, other industrial products) to serve the local and international market.",
+                "We have served countries such as Singapore, Malaysia, Philippine, Brunei, Japan, and Hong Kong over the last 40 years, and we plan on continuing our vision to be recognized as a leader in Manufacturing and Fabricating Aluminum."
+            ],
             images: [
                 "/business/manufacturing/3-e1646232593879.webp",
                 "/business/manufacturing/DSCF3418-edi-2-e1646233775296.webp",
@@ -155,10 +160,13 @@ const ManufacturingClientView = () => {
         },
         {
             title: "Steel & Plastic Packaging",
-            desc: "The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing.\n\nWe ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices).",
+            description: [
+                "The Gesit Companies invests and manages its packaging company—Rheem Indonesia—since it was established by Rheem Australia in 1969. The focus is to build a packaging company that specialises in industrial packaging products, such as steel and plastic drums as well as Jerry cans, for use in industries such as oil, paint, fragrance, chemical, and food processing.",
+                "We ensure that customers obtain the highest standard of quality products and services, using premium materials and operating to international standards (on time and at competitive prices)."
+            ],
             images: [
-                "/business/manufacturing/manufacturing_steel_1.png",
-                "/business/manufacturing/manufacturing_steel_2.png",
+                "/business/manufacturing/manufacturing_steel_1.webp",
+                "/business/manufacturing/manufacturing_steel_2.webp",
                 "/business/manufacturing/plastic_packaging.webp",
                 "/business/manufacturing/steel.webp"
             ],
@@ -168,7 +176,10 @@ const ManufacturingClientView = () => {
         {
             title: "Alumina Refinery & Aluminum Smelter Development",
             subtitle: "Under Development",
-            desc: "We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia’s rich natural resources and logistical advantage.\n\nThe Gesit Companies will develop a 2-million-ton Alumina Refinery and upon completion, develop an Aluminum Smelter which will reach 1 million ton for the next phase.",
+            description: [
+                "We believe the Alumina and Aluminum industries can be domestically developed to service domestic and global clients due to Indonesia’s rich natural resources and logistical advantage.",
+                "The Gesit Companies will develop a 2-million-ton Alumina Refinery and upon completion, develop an Aluminum Smelter which will reach 1 million ton for the next phase."
+            ],
             images: ["/business/manufacturing/distillation-column.webp"],
             reverse: true
         }
@@ -193,16 +204,15 @@ const ManufacturingClientView = () => {
                         className="h-full w-full"
                     >
                         {heroImages.map((img, index) => (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide key={`slide-${index}`}>
                                 <div className="relative w-full h-full overflow-hidden">
-                                    <img
+                                    <Image
                                         src={img}
                                         alt={`Manufacturing Hero ${index + 1}`}
-                                        className="w-full h-full object-cover animate-property-zoom"
+                                        fill
+                                        className="object-cover animate-property-zoom"
                                         style={{ transformOrigin: 'center' }}
-                                        loading={index === 0 ? "eager" : "lazy"}
-                                        {...(index === 0 ? { fetchPriority: "high" } : {})}
-                                        decoding="async"
+                                        priority={index === 0}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-b from-[#103065]/70 via-[#103065]/30 to-transparent" />
                                     <div className="absolute inset-0 bg-black/10" />
@@ -289,7 +299,7 @@ const ManufacturingClientView = () => {
                 <div className="container mx-auto px-6">
                     <div className="space-y-48">
                         {projects.map((project, index) => (
-                            <ProjectItem key={index} project={project} index={index} />
+                            <ProjectItem key={`project-${index}`} project={project} index={index} />
                         ))}
                     </div>
                 </div>

@@ -55,7 +55,7 @@ export default function CareerPage() {
                 {!isMounted && (
                     <div className="gs-ken-burns" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 1 }}>
                         <Image
-                            src="/career/IMG_2103.jpg"
+                            src="/career/IMG_2103.webp"
                             alt="Gesit Career"
                             fill
                             sizes="100vw"
@@ -78,9 +78,9 @@ export default function CareerPage() {
                         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 1 }}
                     >
                         {[
-                            { url: "/career/IMG_2103.jpg", alt: "Career 1" },
-                            { url: "/career/IMG_2092.jpg", alt: "Career 2" },
-                            { url: "/career/IMG_2100.jpg", alt: "Career 3" }
+                            { url: "/career/IMG_2103.webp", alt: "Career 1" },
+                            { url: "/career/IMG_2092.webp", alt: "Career 2" },
+                            { url: "/career/IMG_2100.webp", alt: "Career 3" }
                         ].map((slide, idx) => (
                             <SwiperSlide key={idx}>
                                 <div className="gs-ken-burns" style={{ position: "relative", width: "100%", height: "100%" }}>
@@ -161,7 +161,7 @@ export default function CareerPage() {
 
                             <div className="relative aspect-[3/2] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(16,48,101,0.2)] group">
                                 <Image
-                                    src="/career/IMG_2110.jpg"
+                                    src="/career/IMG_2110.webp"
                                     alt="Join Our Team"
                                     fill
                                     className="object-cover object-top scale-125 group-hover:scale-[1.35] transition-transform duration-[3000ms] ease-out"

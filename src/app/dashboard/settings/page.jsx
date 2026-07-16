@@ -568,7 +568,7 @@ export default function HighFidelitySettingsPage() {
                                                 className="border-0 shadow-none h-12 focus-visible:ring-0 text-slate-700 bg-white"
                                                 value={identityData.logo_url}
                                                 onChange={e => setIdentityData({ ...identityData, logo_url: e.target.value })}
-                                                placeholder="/logos/logos.png"
+                                                placeholder="/logos/logos.webp"
                                             />
                                         </div>
                                     </div>

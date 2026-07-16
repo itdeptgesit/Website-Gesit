@@ -16,10 +16,10 @@ export default function AboutUs() {
 
     // Attempt to play videos programmatically to bypass browser autoplay restrictions
     if (heroVideoRef.current) {
-      heroVideoRef.current.play().catch(e => console.log("Hero video autoplay failed:", e));
+      heroVideoRef.current.play().catch(e => console.debug("Hero video autoplay failed:", e));
     }
     if (contentVideoRef.current) {
-      contentVideoRef.current.play().catch(e => console.log("Content video autoplay failed:", e));
+      contentVideoRef.current.play().catch(e => console.debug("Content video autoplay failed:", e));
     }
 
     return () => clearInterval(timer);
@@ -70,13 +70,16 @@ export default function AboutUs() {
                 </div>
 
                 <div className="elementor-background-video-container" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-                  <img
+                  <Image
                     src="/video/video_thumbnail2.webp"
                     alt="About Us Hero"
                     className="elementor-background-video-hosted"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    priority
                   />
                   <video
+                    suppressHydrationWarning
                     ref={heroVideoRef}
                     className="elementor-background-video-hosted elementor-html5-video"
                     autoPlay
@@ -253,6 +256,7 @@ export default function AboutUs() {
                           >
                             <div style={{ width: '100%' }}>
                               <video
+                                suppressHydrationWarning
                                 ref={contentVideoRef}
                                 className="elementor-video"
                                 autoPlay

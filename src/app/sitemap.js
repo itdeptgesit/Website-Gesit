@@ -7,6 +7,7 @@ export default async function sitemap() {
     const staticRoutes = [
         '',
         '/about-us',
+        '/csr',
         '/career',
         '/contact-us',
         '/our-business',

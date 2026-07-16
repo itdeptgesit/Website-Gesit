@@ -77,9 +77,9 @@ export const metadata = {
       { url: '/logos/cropped-gesit-favicon-1-180x180-1.webp', sizes: '180x180', type: 'image/webp' },
     ]
   },
-  other: {
+  other: isProduction ? {
     'Content-Security-Policy': 'upgrade-insecure-requests',
-  },
+  } : {},
 };
 
 export default async function RootLayout({ children }) {
@@ -112,7 +112,7 @@ export default async function RootLayout({ children }) {
     '@type': 'Organization',
     name: 'The Gesit Companies',
     url: 'https://gesit.co.id',
-    logo: 'https://gesit.co.id/logos/logos.png',
+    logo: 'https://gesit.co.id/logos/logos.webp',
     description: 'The Gesit Companies are business leaders in the fields of Property, Trading & Service, Manufacturing, and Natural Resources in Indonesia.',
     sameAs: [
       'https://www.linkedin.com/company/the-gesit-companies',
@@ -171,7 +171,7 @@ export default async function RootLayout({ children }) {
         <link rel="preload" href="/hero/hero_image_property_1-2.webp" as="image" type="image/webp" fetchPriority="high" />
         <link rel="preload" href="/hero/contact_us_hero_revise.webp" as="image" type="image/webp" fetchPriority="high" />
       </head>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className={`${sourceSans.variable} ${lora.variable} ${cormorantGaramond.variable} ${georgia.variable}`}>
         <Suspense fallback={null}>
           <JsonLd />
         </Suspense>
