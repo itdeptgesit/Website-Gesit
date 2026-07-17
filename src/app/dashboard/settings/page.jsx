@@ -818,11 +818,11 @@ export default function HighFidelitySettingsPage() {
                                         size="sm"
                                         onClick={() => setLogsPage(prev => Math.max(1, prev - 1))}
                                         disabled={logsPage === 1}
-                                        className="h-8 text-xs font-semibold"
+                                        className="h-8 px-3 text-xs font-semibold text-slate-700 border-slate-300 hover:bg-slate-100"
                                     >
-                                        Sebelumnya
+                                        &larr; Sebelumnya
                                     </Button>
-                                    <span className="text-xs font-bold text-slate-700 px-3 py-1 bg-white border rounded-md">
+                                    <span className="text-xs font-bold text-[#1b365d] px-3 py-1.5 bg-[#1b365d]/5 border border-[#1b365d]/10 rounded-md">
                                         Halaman {logsPage} dari {Math.max(1, Math.ceil(logs.length / LOGS_PER_PAGE))}
                                     </span>
                                     <Button
@@ -830,9 +830,9 @@ export default function HighFidelitySettingsPage() {
                                         size="sm"
                                         onClick={() => setLogsPage(prev => Math.min(Math.max(1, Math.ceil(logs.length / LOGS_PER_PAGE)), prev + 1))}
                                         disabled={logsPage === Math.max(1, Math.ceil(logs.length / LOGS_PER_PAGE))}
-                                        className="h-8 text-xs font-semibold"
+                                        className="h-8 px-3 text-xs font-semibold text-slate-700 border-slate-300 hover:bg-slate-100"
                                     >
-                                        Selanjutnya
+                                        Selanjutnya &rarr;
                                     </Button>
                                 </div>
                             </div>
