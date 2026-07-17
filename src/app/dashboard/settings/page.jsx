@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Search, Plus, Users, Image as ImageIcon, Phone, RotateCcw, Zap, Globe, Loader2, ShieldCheck, Key, RefreshCw, AlertCircle, Eye, EyeOff, Clock } from 'lucide-react';
+import { Search, Plus, Users, Image as ImageIcon, Phone, RotateCcw, Zap, Globe, Loader2, ShieldCheck, Key, RefreshCw, AlertCircle, Eye, EyeOff, Clock, ChevronDown, User, Building2, Lock, CheckSquare } from 'lucide-react';
 import { toast } from 'sonner';
 import { createClient } from '@/lib/supabase-client';
 import { cn } from "@/lib/utils";
@@ -278,12 +278,24 @@ export default function HighFidelitySettingsPage() {
         setSaving(true);
         try {
             const { error } = await supabase.from('admin_profiles').update({
+                display_name: editingAdmin.display_name,
                 department: editingAdmin.department,
                 role: editingAdmin.role,
                 accessible_menus: editingAdmin.accessible_menus
             }).eq('id', editingAdmin.id);
 
-            if (error) throw error;
+            if (error) {
+                // If display_name column doesn't exist yet, save without it
+                if (error.code === '42703') {
+                    await supabase.from('admin_profiles').update({
+                        department: editingAdmin.department,
+                        role: editingAdmin.role,
+                        accessible_menus: editingAdmin.accessible_menus
+                    }).eq('id', editingAdmin.id);
+                } else {
+                    throw error;
+                }
+            }
             
             toast.success(`Updated profile for ${editingAdmin.email}`);
             await recordLog('Access Control', `Updated role/permissions for ${editingAdmin.email}`);
@@ -895,47 +907,113 @@ export default function HighFidelitySettingsPage() {
                 </TabsContent>
             </Tabs>
 
-            {/* Admin Edit Modal */}
+            {/* Admin Edit Modal — Redesigned */}
             {editingAdmin && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setEditingAdmin(null)}></div>
-                    <div className="relative bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-in zoom-in-95 duration-200">
-                        <h3 className="text-xl font-bold text-[#1b365d] mb-1" style={{ fontFamily: 'Georgia, serif' }}>Edit Admin Profile</h3>
-                        <p className="text-sm text-slate-500 mb-6">{editingAdmin.email}</p>
+                    <div className="absolute inset-0 bg-[#0c1a2e]/70 backdrop-blur-sm" onClick={() => setEditingAdmin(null)}></div>
+                    <div className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full animate-in zoom-in-95 duration-200 overflow-hidden">
+                        
+                        {/* Modal Header */}
+                        <div className="bg-[#1b365d] px-6 py-5 text-white">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                    <span className="text-sm font-bold">{editingAdmin.email.substring(0, 2).toUpperCase()}</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-base font-bold" style={{ fontFamily: 'Georgia, serif' }}>Edit Admin Profile</h3>
+                                    <p className="text-white/60 text-xs mt-0.5">{editingAdmin.email}</p>
+                                </div>
+                            </div>
+                        </div>
 
-                        <form onSubmit={handleAdminProfileUpdate} className="space-y-5">
-                            <div className="space-y-2">
-                                <label className="text-xs font-bold tracking-widest text-slate-500 uppercase">Department Name</label>
-                                <Input 
-                                    value={editingAdmin.department || ''} 
-                                    onChange={e => setEditingAdmin({...editingAdmin, department: e.target.value})}
-                                    placeholder="e.g. IT Department"
-                                />
+                        <form onSubmit={handleAdminProfileUpdate} className="p-6 space-y-5">
+                            {/* Row 1: Name + Department side by side */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-[11px] font-bold tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
+                                        <User className="w-3 h-3" /> Display Name
+                                    </label>
+                                    <Input 
+                                        value={editingAdmin.display_name || ''} 
+                                        onChange={e => setEditingAdmin({...editingAdmin, display_name: e.target.value})}
+                                        placeholder="e.g. Rudi Siarudin"
+                                        className="h-9 text-sm"
+                                    />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-[11px] font-bold tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
+                                        <Building2 className="w-3 h-3" /> Department
+                                    </label>
+                                    <Input 
+                                        value={editingAdmin.department || ''} 
+                                        onChange={e => setEditingAdmin({...editingAdmin, department: e.target.value})}
+                                        placeholder="e.g. IT Department"
+                                        className="h-9 text-sm"
+                                    />
+                                </div>
                             </div>
 
+                            {/* Role Selector as Cards */}
                             <div className="space-y-2">
-                                <label className="text-xs font-bold tracking-widest text-slate-500 uppercase">Admin Role</label>
-                                <select 
-                                    className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2"
-                                    value={editingAdmin.role}
-                                    onChange={e => setEditingAdmin({...editingAdmin, role: e.target.value})}
-                                >
-                                    <option value="SUPER_ADMIN">SUPER_ADMIN (Full Access & Delete)</option>
-                                    <option value="CONTENT_EDITOR">CONTENT_EDITOR (Add/Edit only)</option>
-                                </select>
+                                <label className="text-[11px] font-bold tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
+                                    <Lock className="w-3 h-3" /> Admin Role
+                                </label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setEditingAdmin({...editingAdmin, role: 'SUPER_ADMIN'})}
+                                        className={`p-3 rounded-xl border-2 text-left transition-all ${
+                                            editingAdmin.role === 'SUPER_ADMIN'
+                                                ? 'border-red-400 bg-red-50'
+                                                : 'border-slate-200 hover:border-red-200 hover:bg-red-50/30'
+                                        }`}
+                                    >
+                                        <div className="flex items-center justify-between mb-1.5">
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm ${
+                                                editingAdmin.role === 'SUPER_ADMIN' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-500'
+                                            }`}>SUPER</span>
+                                            {editingAdmin.role === 'SUPER_ADMIN' && <div className="w-3 h-3 rounded-full bg-red-400" />}
+                                        </div>
+                                        <p className="text-xs font-bold text-slate-800">Super Admin</p>
+                                        <p className="text-[10px] text-slate-400 mt-0.5">Full access, can delete</p>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setEditingAdmin({...editingAdmin, role: 'CONTENT_EDITOR'})}
+                                        className={`p-3 rounded-xl border-2 text-left transition-all ${
+                                            editingAdmin.role === 'CONTENT_EDITOR'
+                                                ? 'border-blue-400 bg-blue-50'
+                                                : 'border-slate-200 hover:border-blue-200 hover:bg-blue-50/30'
+                                        }`}
+                                    >
+                                        <div className="flex items-center justify-between mb-1.5">
+                                            <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-sm ${
+                                                editingAdmin.role === 'CONTENT_EDITOR' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'
+                                            }`}>EDITOR</span>
+                                            {editingAdmin.role === 'CONTENT_EDITOR' && <div className="w-3 h-3 rounded-full bg-blue-400" />}
+                                        </div>
+                                        <p className="text-xs font-bold text-slate-800">Content Editor</p>
+                                        <p className="text-[10px] text-slate-400 mt-0.5">Add/edit only, no delete</p>
+                                    </button>
+                                </div>
                             </div>
 
+                            {/* Menu Access — only visible for CONTENT_EDITOR */}
                             {editingAdmin.role !== 'SUPER_ADMIN' && (
-                                <div className="space-y-3 pt-2">
-                                    <label className="text-xs font-bold tracking-widest text-slate-500 uppercase block mb-1 border-b pb-2">Accessible Menus</label>
-                                    <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
+                                <div className="space-y-2">
+                                    <label className="text-[11px] font-bold tracking-widest text-slate-500 uppercase flex items-center gap-1.5">
+                                        <CheckSquare className="w-3 h-3" /> Accessible Menus
+                                    </label>
+                                    <div className="rounded-xl border border-slate-200 divide-y divide-slate-100 overflow-hidden">
                                         {availableMenus.map(menu => {
                                             const isChecked = editingAdmin.accessible_menus.includes(menu.path);
                                             return (
-                                                <label key={menu.path} className="flex items-center gap-3 p-2 hover:bg-slate-50 rounded-md cursor-pointer border border-transparent hover:border-slate-100">
+                                                <label key={menu.path} className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer transition-colors ${
+                                                    isChecked ? 'bg-[#1b365d]/5' : 'hover:bg-slate-50'
+                                                }`}>
                                                     <input 
-                                                        type="checkbox" 
-                                                        className="w-4 h-4 rounded border-slate-300 text-[#1b365d] focus:ring-[#1b365d]"
+                                                        type="checkbox"
+                                                        className="w-4 h-4 rounded accent-[#1b365d]"
                                                         checked={isChecked}
                                                         onChange={(e) => {
                                                             const newMenus = e.target.checked 
@@ -944,18 +1022,21 @@ export default function HighFidelitySettingsPage() {
                                                             setEditingAdmin({...editingAdmin, accessible_menus: newMenus});
                                                         }}
                                                     />
-                                                    <span className="text-sm text-slate-700 font-medium">{menu.name}</span>
+                                                    <span className={`text-sm font-medium ${
+                                                        isChecked ? 'text-[#1b365d] font-bold' : 'text-slate-600'
+                                                    }`}>{menu.name}</span>
+                                                    {isChecked && <span className="ml-auto text-[9px] font-bold text-[#1b365d] bg-[#1b365d]/10 px-1.5 py-0.5 rounded-sm uppercase tracking-widest">Allowed</span>}
                                                 </label>
                                             );
                                         })}
                                     </div>
-                                    <p className="text-[10px] text-slate-400 italic">Super Admins automatically have access to all menus.</p>
                                 </div>
                             )}
 
-                            <div className="flex items-center justify-end gap-3 pt-6 border-t border-slate-100">
-                                <Button type="button" variant="ghost" onClick={() => setEditingAdmin(null)}>Cancel</Button>
-                                <Button type="submit" disabled={saving} className="bg-[#1b365d] hover:bg-[#152e50]">
+                            {/* Footer */}
+                            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                                <Button type="button" variant="ghost" onClick={() => setEditingAdmin(null)} className="text-slate-600">Cancel</Button>
+                                <Button type="submit" disabled={saving} className="bg-[#1b365d] hover:bg-[#152e50] px-6">
                                     {saving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                                     Save Profile
                                 </Button>
