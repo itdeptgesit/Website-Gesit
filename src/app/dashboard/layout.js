@@ -26,6 +26,7 @@ import { Toaster } from '@/components/ui/sonner';
 export default function DashboardLayout({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [user, setUser] = useState(null);
+    const [userProfile, setUserProfile] = useState(null);
     const router = useRouter();
     const pathname = usePathname();
     const supabase = useMemo(() => createClient(), []);
@@ -47,7 +48,31 @@ export default function DashboardLayout({ children }) {
                 if (error || !authUser) {
                     if (mounted) router.push('/admin/login');
                 } else {
-                    if (mounted) setUser(authUser);
+                    if (mounted) {
+                        setUser(authUser);
+                        
+                        // Fetch or Create Admin Profile
+                        const { data: profile, error: profileError } = await supabase
+                            .from('admin_profiles')
+                            .select('*')
+                            .eq('id', authUser.id)
+                            .single();
+                            
+                        if (!profile) {
+                            // Create default profile for existing user
+                            const newProfile = {
+                                id: authUser.id,
+                                email: authUser.email,
+                                role: authUser.email === 'admin@gesit.co.id' ? 'SUPER_ADMIN' : 'SUPER_ADMIN', // Default to super admin so they don't get locked out initially
+                                accessible_menus: ['/dashboard/news', '/dashboard/contacts', '/dashboard/csr', '/dashboard/heroes', '/dashboard/settings'],
+                                department: 'IT Department'
+                            };
+                            const { data: insertedProfile } = await supabase.from('admin_profiles').insert([newProfile]).select().single();
+                            setUserProfile(insertedProfile || newProfile);
+                        } else {
+                            setUserProfile(profile);
+                        }
+                    }
                 }
             } catch (err) {
                 console.error("Auth check warning:", err);
@@ -60,7 +85,10 @@ export default function DashboardLayout({ children }) {
             if (event === 'SIGNED_OUT' || !session) {
                 if (mounted) router.push('/admin/login');
             } else if (session) {
-                if (mounted) setUser(session.user);
+                if (mounted) {
+                    setUser(session.user);
+                    checkUser(); // Re-fetch profile on auth change
+                }
             }
         });
 
@@ -135,6 +163,32 @@ export default function DashboardLayout({ children }) {
         { name: 'Hero Sliders', icon: ImageIcon, href: '/dashboard/heroes' },
         { name: 'Global Settings', icon: Settings, href: '/dashboard/settings' },
     ];
+
+    // Filter Navigation based on Role and accessible menus
+    const filteredNavItems = useMemo(() => {
+        if (!userProfile) return []; // Render nothing or loading while fetching profile
+        if (userProfile.role === 'SUPER_ADMIN') return navItems;
+        
+        // Ensure they always have access to main dashboard
+        const allowedMenus = new Set(userProfile.accessible_menus || []);
+        allowedMenus.add('/dashboard');
+
+        return navItems.filter(item => allowedMenus.has(item.href));
+    }, [userProfile]);
+
+    // Enforce Route Protection
+    useEffect(() => {
+        if (userProfile && userProfile.role !== 'SUPER_ADMIN' && pathname !== '/dashboard') {
+            const allowed = userProfile.accessible_menus || [];
+            if (!allowed.includes(pathname)) {
+                // If they try to access a subpath of an allowed path (e.g. /dashboard/news/create) allow it if parent is allowed
+                const isSubpathAllowed = allowed.some(menu => pathname.startsWith(menu));
+                if (!isSubpathAllowed) {
+                    router.replace('/dashboard');
+                }
+            }
+        }
+    }, [userProfile, pathname, router]);
 
     // Dynamic Search Filter Logic
     useEffect(() => {
@@ -217,8 +271,8 @@ export default function DashboardLayout({ children }) {
                     <div className="px-6 mb-2">
                         {isSidebarOpen && <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-2">Main Menu</p>}
                     </div>
-                    {navItems.map((item) => {
-                        const isActive = pathname === item.href;
+                    {filteredNavItems.map((item) => {
+                        const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/dashboard');
                         return (
                             <Link
                                 key={item.name}
@@ -261,10 +315,10 @@ export default function DashboardLayout({ children }) {
                         {isSidebarOpen && (
                             <div className="flex items-center gap-3 overflow-hidden pl-2">
                                 <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center shrink-0 border border-slate-700">
-                                    <span className="text-xs font-bold text-slate-300">AD</span>
+                                    <span className="text-xs font-bold text-slate-300">{user?.email?.substring(0, 2).toUpperCase() || 'AD'}</span>
                                 </div>
                                 <div className="overflow-hidden">
-                                    <p className="text-xs font-semibold text-white truncate">Administrator</p>
+                                    <p className="text-xs font-semibold text-white truncate">{userProfile?.department || 'Administrator'}</p>
                                     <p className="text-[10px] text-slate-500 truncate">{user?.email || 'admin@gesit.co.id'}</p>
                                 </div>
                             </div>
@@ -487,19 +541,26 @@ export default function DashboardLayout({ children }) {
                                 >
                                     {/* User header */}
                                     <div className="px-4 py-2 border-b mb-1">
-                                        <p className="text-xs font-bold text-slate-800">Administrator</p>
+                                        <div className="flex items-center justify-between mb-1">
+                                            <p className="text-xs font-bold text-slate-800">{userProfile?.department || 'Administrator'}</p>
+                                            <span className={cn("text-[8px] font-bold px-1.5 py-0.5 rounded-sm uppercase tracking-widest", userProfile?.role === 'SUPER_ADMIN' ? "bg-red-100 text-red-700" : "bg-blue-100 text-blue-700")}>
+                                                {userProfile?.role === 'SUPER_ADMIN' ? 'SUPER' : 'EDITOR'}
+                                            </span>
+                                        </div>
                                         <p className="text-[10px] text-slate-400 truncate mt-0.5">{user?.email || 'admin@gesit.co.id'}</p>
                                     </div>
 
                                     {/* Action Links */}
-                                    <Link 
-                                        href="/dashboard/settings" 
-                                        onClick={() => setIsAdminMenuOpen(false)}
-                                        className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors"
-                                    >
-                                        <Settings className="w-4 h-4 text-slate-400" />
-                                        <span>System Settings</span>
-                                    </Link>
+                                    {userProfile?.role === 'SUPER_ADMIN' && (
+                                        <Link 
+                                            href="/dashboard/settings" 
+                                            onClick={() => setIsAdminMenuOpen(false)}
+                                            className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors"
+                                        >
+                                            <Settings className="w-4 h-4 text-slate-400" />
+                                            <span>System Settings</span>
+                                        </Link>
+                                    )}
 
                                     <Link 
                                         href="/dashboard/news" 

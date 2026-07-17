@@ -47,6 +47,7 @@ export default function CSRDashboard() {
     const [loading, setLoading] = useState(true);
     const [uploadingImageId, setUploadingImageId] = useState(null);
     const [galleryPage, setGalleryPage] = useState(1);
+    const [userRole, setUserRole] = useState(null);
     const GALLERY_PER_PAGE = 10;
 
     const recordLog = async (target, action) => {
@@ -108,7 +109,15 @@ export default function CSRDashboard() {
     const [initiatives, setInitiatives] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        const init = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { data } = await supabase.from('admin_profiles').select('role').eq('id', user.id).single();
+                if (data) setUserRole(data.role);
+            }
+            fetchData();
+        };
+        init();
     }, []);
 
     const fetchData = async () => {
@@ -526,15 +535,17 @@ export default function CSRDashboard() {
                                                             }}
                                                         />
                                                     </div>
-                                                    <Button
-                                                        size="sm"
-                                                        variant="destructive"
-                                                        onClick={() => showRemoveConfirm('csr_gallery', item.id, gallery, setGallery, globalIndex + 1)}
-                                                        className="w-24 h-8 text-xs font-semibold gap-1"
-                                                    >
-                                                        <Trash2 className="w-3 h-3" />
-                                                        Remove
-                                                    </Button>
+                                                    {userRole === 'SUPER_ADMIN' && (
+                                                        <Button
+                                                            size="sm"
+                                                            variant="destructive"
+                                                            onClick={() => showRemoveConfirm('csr_gallery', item.id, gallery, setGallery, globalIndex + 1)}
+                                                            className="w-24 h-8 text-xs font-semibold gap-1"
+                                                        >
+                                                            <Trash2 className="w-3 h-3" />
+                                                            Remove
+                                                        </Button>
+                                                    )}
                                                 </div>
                                             </div>
                                         );
@@ -579,9 +590,11 @@ export default function CSRDashboard() {
                                             className="min-h-[80px] bg-white"
                                         />
                                     </div>
-                                    <Button variant="ghost" size="icon" onClick={() => handleDelete('csr_ongoing_programs', item.id, ongoing, setOngoing)} className="text-red-500 hover:text-red-700 hover:bg-red-50 shrink-0 mt-1">
-                                        <Trash2 className="w-4 h-4" />
-                                    </Button>
+                                    {userRole === 'SUPER_ADMIN' && (
+                                        <Button variant="ghost" size="icon" onClick={() => handleDelete('csr_ongoing_programs', item.id, ongoing, setOngoing)} className="text-red-500 hover:text-red-700 hover:bg-red-50 shrink-0 mt-1">
+                                            <Trash2 className="w-4 h-4" />
+                                        </Button>
+                                    )}
                                 </div>
                             ))}
                             <Button onClick={saveOngoing} disabled={loading} className="w-full gap-2 bg-[#103065] text-white hover:bg-[#0c244b]">
@@ -606,9 +619,11 @@ export default function CSRDashboard() {
                         <CardContent className="space-y-12">
                             {initiatives.map((init, initIndex) => (
                                 <div key={init.id} className="bg-slate-50 p-5 rounded-xl border-2 border-slate-200 relative">
-                                    <Button variant="destructive" size="sm" onClick={() => handleDelete('csr_initiatives', init.id, initiatives, setInitiatives)} className="absolute -top-3 -right-3">
-                                        <Trash2 className="w-4 h-4 mr-2" /> Delete Initiative
-                                    </Button>
+                                    {userRole === 'SUPER_ADMIN' && (
+                                        <Button variant="destructive" size="sm" onClick={() => handleDelete('csr_initiatives', init.id, initiatives, setInitiatives)} className="absolute -top-3 -right-3">
+                                            <Trash2 className="w-4 h-4 mr-2" /> Delete Initiative
+                                        </Button>
+                                    )}
                                     
                                     <div className="space-y-4">
                                         <div>

@@ -21,6 +21,10 @@ export default function HighFidelitySettingsPage() {
     const [logsPage, setLogsPage] = useState(1);
     const LOGS_PER_PAGE = 8;
 
+    // Admin Profiles Data
+    const [adminProfiles, setAdminProfiles] = useState([]);
+    const [editingAdmin, setEditingAdmin] = useState(null);
+
 
     // 1. SEO Manager State
     const [activeSegment, setActiveSegment] = useState('HOME');
@@ -92,6 +96,10 @@ export default function HighFidelitySettingsPage() {
             if (activityLogs) {
                 setLogs(activityLogs);
             }
+
+            // Load Admin Profiles
+            const { data: profiles } = await supabase.from('admin_profiles').select('*').order('created_at', { ascending: true });
+            if (profiles) setAdminProfiles(profiles);
         } catch (error) {
             console.error("Fetch Data Error:", error);
         } finally {
@@ -264,7 +272,41 @@ export default function HighFidelitySettingsPage() {
     };
 
 
-    if (loading && logs.length === 0) {
+    // --- LOGIC: UPDATE ADMIN PROFILE ---
+    const handleAdminProfileUpdate = async (e) => {
+        e.preventDefault();
+        setSaving(true);
+        try {
+            const { error } = await supabase.from('admin_profiles').update({
+                department: editingAdmin.department,
+                role: editingAdmin.role,
+                accessible_menus: editingAdmin.accessible_menus
+            }).eq('id', editingAdmin.id);
+
+            if (error) throw error;
+            
+            toast.success(`Updated profile for ${editingAdmin.email}`);
+            await recordLog('Access Control', `Updated role/permissions for ${editingAdmin.email}`);
+            
+            // Refresh list
+            setAdminProfiles(adminProfiles.map(p => p.id === editingAdmin.id ? editingAdmin : p));
+            setEditingAdmin(null);
+        } catch (err) {
+            toast.error("Failed to update admin profile");
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const availableMenus = [
+        { path: '/dashboard/news', name: 'Manage News' },
+        { path: '/dashboard/contacts', name: 'Contact Messages' },
+        { path: '/dashboard/csr', name: 'CSR Content' },
+        { path: '/dashboard/heroes', name: 'Hero Sliders' },
+        { path: '/dashboard/settings', name: 'Global Settings' }
+    ];
+
+    if (loading && logs.length === 0 && adminProfiles.length === 0) {
         return <div className="flex justify-center p-20"><Loader2 className="w-8 h-8 animate-spin text-[#1b365d]" /></div>;
     }
 
@@ -425,18 +467,30 @@ export default function HighFidelitySettingsPage() {
                             </div>
 
                             <div className="space-y-4">
-                                {[
-                                    { name: 'admin@gesit.co.id', role: 'SUPER_ADMIN', initials: 'AD' },
-                                    { name: 'rudi.siarudin@gesit.co.id', role: 'SUPER_ADMIN', initials: 'RU' }
-                                ].map((admin, idx) => (
-                                    <div key={idx} className="bg-white border-l-4 border-l-[#1b365d] border border-slate-100 shadow-sm p-4 flex items-center gap-4 transition-transform hover:translate-x-1">
-                                        <div className="w-10 h-10 rounded-full bg-[#1b365d] text-white flex items-center justify-center font-bold text-xs shrink-0">
-                                            {admin.initials}
+                                {adminProfiles.map((admin) => (
+                                    <div key={admin.id} className="bg-white border-l-4 border-l-[#1b365d] border border-slate-100 shadow-sm p-4 flex items-center justify-between transition-transform hover:translate-x-1">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-full bg-[#1b365d] text-white flex items-center justify-center font-bold text-xs shrink-0">
+                                                {admin.email.substring(0, 2).toUpperCase()}
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-slate-800 text-sm">{admin.email}</h3>
+                                                <div className="flex items-center gap-2 mt-0.5">
+                                                    <p className={cn("text-[10px] font-bold uppercase tracking-widest", admin.role === 'SUPER_ADMIN' ? "text-red-500" : "text-blue-500")}>
+                                                        {admin.role}
+                                                    </p>
+                                                    {admin.department && (
+                                                        <>
+                                                            <span className="text-slate-300">•</span>
+                                                            <p className="text-[10px] text-slate-500 font-medium tracking-widest">{admin.department}</p>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h3 className="font-bold text-slate-800 text-sm">{admin.name}</h3>
-                                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">{admin.role}</p>
-                                        </div>
+                                        <Button variant="ghost" size="sm" onClick={() => setEditingAdmin({ ...admin, accessible_menus: admin.accessible_menus || [] })} className="text-[#1b365d] hover:bg-slate-100 font-bold text-xs">
+                                            Edit Access
+                                        </Button>
                                     </div>
                                 ))}
                             </div>
@@ -840,6 +894,76 @@ export default function HighFidelitySettingsPage() {
                     </div>
                 </TabsContent>
             </Tabs>
+
+            {/* Admin Edit Modal */}
+            {editingAdmin && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setEditingAdmin(null)}></div>
+                    <div className="relative bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-in zoom-in-95 duration-200">
+                        <h3 className="text-xl font-bold text-[#1b365d] mb-1" style={{ fontFamily: 'Georgia, serif' }}>Edit Admin Profile</h3>
+                        <p className="text-sm text-slate-500 mb-6">{editingAdmin.email}</p>
+
+                        <form onSubmit={handleAdminProfileUpdate} className="space-y-5">
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold tracking-widest text-slate-500 uppercase">Department Name</label>
+                                <Input 
+                                    value={editingAdmin.department || ''} 
+                                    onChange={e => setEditingAdmin({...editingAdmin, department: e.target.value})}
+                                    placeholder="e.g. IT Department"
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold tracking-widest text-slate-500 uppercase">Admin Role</label>
+                                <select 
+                                    className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2"
+                                    value={editingAdmin.role}
+                                    onChange={e => setEditingAdmin({...editingAdmin, role: e.target.value})}
+                                >
+                                    <option value="SUPER_ADMIN">SUPER_ADMIN (Full Access & Delete)</option>
+                                    <option value="CONTENT_EDITOR">CONTENT_EDITOR (Add/Edit only)</option>
+                                </select>
+                            </div>
+
+                            {editingAdmin.role !== 'SUPER_ADMIN' && (
+                                <div className="space-y-3 pt-2">
+                                    <label className="text-xs font-bold tracking-widest text-slate-500 uppercase block mb-1 border-b pb-2">Accessible Menus</label>
+                                    <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
+                                        {availableMenus.map(menu => {
+                                            const isChecked = editingAdmin.accessible_menus.includes(menu.path);
+                                            return (
+                                                <label key={menu.path} className="flex items-center gap-3 p-2 hover:bg-slate-50 rounded-md cursor-pointer border border-transparent hover:border-slate-100">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        className="w-4 h-4 rounded border-slate-300 text-[#1b365d] focus:ring-[#1b365d]"
+                                                        checked={isChecked}
+                                                        onChange={(e) => {
+                                                            const newMenus = e.target.checked 
+                                                                ? [...editingAdmin.accessible_menus, menu.path]
+                                                                : editingAdmin.accessible_menus.filter(p => p !== menu.path);
+                                                            setEditingAdmin({...editingAdmin, accessible_menus: newMenus});
+                                                        }}
+                                                    />
+                                                    <span className="text-sm text-slate-700 font-medium">{menu.name}</span>
+                                                </label>
+                                            );
+                                        })}
+                                    </div>
+                                    <p className="text-[10px] text-slate-400 italic">Super Admins automatically have access to all menus.</p>
+                                </div>
+                            )}
+
+                            <div className="flex items-center justify-end gap-3 pt-6 border-t border-slate-100">
+                                <Button type="button" variant="ghost" onClick={() => setEditingAdmin(null)}>Cancel</Button>
+                                <Button type="submit" disabled={saving} className="bg-[#1b365d] hover:bg-[#152e50]">
+                                    {saving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                                    Save Profile
+                                </Button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

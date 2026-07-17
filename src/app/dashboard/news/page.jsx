@@ -57,6 +57,7 @@ export default function NewsDashboard() {
     const [submitting, setSubmitting] = useState(false);
     const [deleteTarget, setDeleteTarget] = useState(null);
     const [deleting, setDeleting] = useState(false);
+    const [userRole, setUserRole] = useState(null);
     const lockRef = useRef(false);
     const supabase = createClient();
 
@@ -115,7 +116,15 @@ export default function NewsDashboard() {
     const [preview, setPreview] = useState(null);
 
     useEffect(() => {
-        fetchNews();
+        const fetchRoleAndNews = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { data } = await supabase.from('admin_profiles').select('role').eq('id', user.id).single();
+                if (data) setUserRole(data.role);
+            }
+            fetchNews();
+        };
+        fetchRoleAndNews();
     }, []);
 
     const fetchNews = async () => {
@@ -604,12 +613,14 @@ export default function NewsDashboard() {
                                                 </TableCell>
                                                 <TableCell className="text-right px-8">
                                                     <div className="flex justify-end gap-2">
-                                                        <Button variant="ghost" size="icon" onClick={() => handleEdit(item)} className="h-9 w-9 text-slate-400 hover:text-[#1b365d] hover:bg-slate-100">
+                                                        <Button variant="ghost" size="icon" onClick={() => handleEdit(item)} className="h-9 w-9 text-slate-400 hover:text-[#1b365d] hover:bg-slate-100" title="Edit Article">
                                                             <Pencil className="w-4 h-4" />
                                                         </Button>
-                                                        <Button variant="ghost" size="icon" onClick={() => setDeleteTarget(item)} className="h-9 w-9 text-slate-400 hover:text-red-500 hover:bg-red-50">
-                                                            <Trash2 className="w-4 h-4" />
-                                                        </Button>
+                                                        {userRole === 'SUPER_ADMIN' && (
+                                                            <Button variant="ghost" size="icon" onClick={() => setDeleteTarget(item)} className="h-9 w-9 text-slate-400 hover:text-red-500 hover:bg-red-50" title="Delete Article">
+                                                                <Trash2 className="w-4 h-4" />
+                                                            </Button>
+                                                        )}
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

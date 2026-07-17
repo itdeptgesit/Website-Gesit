@@ -19,6 +19,7 @@ export default function ContactsInboxPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedMessage, setSelectedMessage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userRole, setUserRole] = useState(null);
     const supabase = createClient();
 
     // Read/Unread & Pagination States
@@ -65,6 +66,14 @@ export default function ContactsInboxPage() {
         } catch (e) {
             console.error("Failed to load read message state:", e);
         }
+
+        // Fetch current user's role
+        supabase.auth.getUser().then(({ data: { user } }) => {
+            if (user) {
+                supabase.from('admin_profiles').select('role').eq('id', user.id).single()
+                    .then(({ data }) => { if (data) setUserRole(data.role); });
+            }
+        });
 
         fetchMessages();
     }, []);
@@ -289,14 +298,17 @@ export default function ContactsInboxPage() {
                                                             >
                                                                 <Eye className="w-4 h-4" />
                                                             </Button>
-                                                            <Button
-                                                                variant="ghost"
-                                                                size="icon"
-                                                                className="text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors border border-transparent hover:border-red-100"
-                                                                onClick={() => handleDelete(msg.id)}
-                                                            >
-                                                                <Trash2 className="w-4 h-4" />
-                                                            </Button>
+                                                            {userRole === 'SUPER_ADMIN' && (
+                                                                <Button
+                                                                    variant="ghost"
+                                                                    size="icon"
+                                                                    className="text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors border border-transparent hover:border-red-100"
+                                                                    onClick={() => handleDelete(msg.id)}
+                                                                    title="Delete Message"
+                                                                >
+                                                                    <Trash2 className="w-4 h-4" />
+                                                                </Button>
+                                                            )}
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>
