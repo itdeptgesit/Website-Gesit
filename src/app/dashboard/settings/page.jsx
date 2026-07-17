@@ -937,7 +937,7 @@ export default function HighFidelitySettingsPage() {
                                         value={editingAdmin.display_name || ''} 
                                         onChange={e => setEditingAdmin({...editingAdmin, display_name: e.target.value})}
                                         placeholder="e.g. Rudi Siarudin"
-                                        className="h-9 text-sm"
+                                        className="h-9 text-sm bg-slate-50 border-slate-300 focus:border-[#1b365d] focus:ring-[#1b365d]/20 placeholder:text-slate-400"
                                     />
                                 </div>
                                 <div className="space-y-1.5">
@@ -948,7 +948,7 @@ export default function HighFidelitySettingsPage() {
                                         value={editingAdmin.department || ''} 
                                         onChange={e => setEditingAdmin({...editingAdmin, department: e.target.value})}
                                         placeholder="e.g. IT Department"
-                                        className="h-9 text-sm"
+                                        className="h-9 text-sm bg-slate-50 border-slate-300 focus:border-[#1b365d] focus:ring-[#1b365d]/20 placeholder:text-slate-400"
                                     />
                                 </div>
                             </div>
