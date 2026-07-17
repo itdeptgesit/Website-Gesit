@@ -374,11 +374,11 @@ export default function CSRDashboard() {
                 </div>
             </div>
 
-            <Tabs defaultValue="gallery" className="w-full">
+            <Tabs defaultValue="initiatives" className="w-full">
                 <TabsList className="mb-4">
-                    <TabsTrigger value="gallery">Photo Gallery</TabsTrigger>
-                    <TabsTrigger value="ongoing">Ongoing Programs</TabsTrigger>
                     <TabsTrigger value="initiatives">Initiatives</TabsTrigger>
+                    <TabsTrigger value="ongoing">Ongoing Programs</TabsTrigger>
+                    <TabsTrigger value="gallery">Photo Gallery</TabsTrigger>
                 </TabsList>
 
                 {/* GALLERY TAB */}
