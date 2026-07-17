@@ -76,7 +76,7 @@ export default function CareerPage() {
                             src="/career/IMG_2103.webp"
                             alt="Gesit Career"
                             fill
-                            sizes="100vw"
+                            sizes="(max-width: 768px) 200vw, 100vw"
                             quality={100}
                             style={{ objectFit: "cover" }}
                             priority
@@ -102,7 +102,7 @@ export default function CareerPage() {
                                         src={slide.url}
                                         alt={slide.alt}
                                         fill
-                                        sizes="100vw"
+                                        sizes="(max-width: 768px) 200vw, 100vw"
                                         quality={100}
                                         style={{ objectFit: "cover" }}
                                         priority={idx === 0}

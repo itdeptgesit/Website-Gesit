@@ -270,7 +270,7 @@ export default function CSRPage() {
                                             src={src}
                                             alt={`CSR Hero ${index + 1}`}
                                             fill
-                                            sizes="100vw"
+                                            sizes="(max-width: 768px) 200vw, 100vw"
                                             quality={100}
                                             style={{
                                                 objectFit: 'cover',

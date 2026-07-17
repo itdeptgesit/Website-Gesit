@@ -134,7 +134,9 @@ export default function ManufacturingPage() {
               src="/manufacturing/hero1.webp"
               alt="Manufacturing"
               className="gs-hero-zoom-image"
-              fill sizes="100vw" quality={100}
+              fill
+              sizes="(max-width: 768px) 200vw, 100vw"
+              quality={100}
               style={{ objectFit: "cover" }}
               priority
               fetchPriority="high"
@@ -166,7 +168,9 @@ export default function ManufacturingPage() {
                   src={slide.url}
                   alt={slide.alt}
                   className="gs-hero-zoom-image"
-                  fill sizes="100vw" quality={100}
+                  fill
+                  sizes="(max-width: 768px) 200vw, 100vw"
+                  quality={100}
                   style={{ objectFit: "cover" }}
                   priority={idx === 0}
                   fetchPriority={idx === 0 ? "high" : "low"}
@@ -293,7 +297,7 @@ export default function ManufacturingPage() {
               {aluminumImages.map((img, i) => (
                 <SwiperSlide key={i}>
                   <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                    <Image src={img} alt={`Aluminum ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                    <Image src={img} alt={`Aluminum ${i + 1}`} fill quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                   </div>
                 </SwiperSlide>
               ))}
@@ -321,7 +325,7 @@ export default function ManufacturingPage() {
               {packagingImages.map((img, i) => (
                 <SwiperSlide key={i}>
                   <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                    <Image src={img} alt={`Packaging ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                    <Image src={img} alt={`Packaging ${i + 1}`} fill quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
                   </div>
                 </SwiperSlide>
               ))}
@@ -378,7 +382,7 @@ export default function ManufacturingPage() {
             variants={imageVariant} initial="initial" whileInView="whileInView" viewport={{ once: true }}
             className="project-image-container"
           >
-            <Image src="/manufacturing/alumina.webp" alt="Alumina Refinery" fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
+            <Image src="/manufacturing/alumina.webp" alt="Alumina Refinery" fill quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 50vw" />
           </motion.div>
         </div>
       </section>

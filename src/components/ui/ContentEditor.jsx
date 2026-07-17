@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Bold, Italic, Underline, List, ListOrdered, Image as ImageIcon, Video, Link2, Film, Plus } from 'lucide-react';
 import { compressImage } from '@/lib/compressImage';
+import { toast } from 'sonner';
 
 const ToolbarBtn = ({ onClick, title, children, active }) => (
     <button
@@ -159,7 +160,9 @@ export default function ContentEditor({ value, onChange }) {
             if (!file) return;
 
             if (file.size > 50 * 1024 * 1024) {
-                alert('File video terlalu besar (Maksimal 50MB). Gunakan link YouTube untuk video berdurasi panjang.');
+                toast.error('File video terlalu besar (Maksimal 50MB).', {
+                    description: 'Gunakan link YouTube untuk video berdurasi panjang.'
+                });
                 return;
             }
 
@@ -201,7 +204,7 @@ export default function ContentEditor({ value, onChange }) {
                     xhr.send(file); // Send raw binary file
                 });
             } catch (err) {
-                alert('Gagal upload video: ' + err.message);
+                toast.error('Gagal upload video: ' + err.message);
             } finally {
                 setUploadingVideo(false);
                 setVideoUploadProgress(0);
@@ -241,7 +244,7 @@ export default function ContentEditor({ value, onChange }) {
                 document.execCommand('insertHTML', false, html);
                 syncContent();
             } catch (err) {
-                alert('Gagal upload gambar: ' + err.message);
+                toast.error('Gagal upload gambar: ' + err.message);
             } finally {
                 setUploadingImage(false);
             }

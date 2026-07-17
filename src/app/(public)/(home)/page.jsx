@@ -182,8 +182,8 @@ export default function Home() {
             <Image
               src={slide.src}
               alt={slide.alt}
-              fill sizes="100vw" quality={100}
-              sizes="100vw"
+              fill quality={100}
+                  sizes="(max-width: 768px) 200vw, 100vw"
               quality={60}
               style={{
                 objectFit: 'cover',

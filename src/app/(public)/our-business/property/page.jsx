@@ -129,7 +129,7 @@ const PropertyPage = () => {
                             alt="Property"
                             className="gs-hero-zoom-image"
                             fill
-                            sizes="100vw"
+                            sizes="(max-width: 768px) 200vw, 100vw"
                             quality={100}
                             style={{ objectFit: "cover" }}
                             priority
@@ -160,7 +160,7 @@ const PropertyPage = () => {
                                     alt={slide.alt}
                                     className="gs-hero-zoom-image"
                                     fill
-                                    sizes="100vw"
+                                    sizes="(max-width: 768px) 200vw, 100vw"
                                     quality={100}
                                     style={{ objectFit: "cover" }}
                                     priority={idx === 0}
