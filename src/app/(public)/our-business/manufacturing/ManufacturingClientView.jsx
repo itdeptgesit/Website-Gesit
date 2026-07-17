@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { useState, useEffect } from "react";
+import { createClient } from '@/lib/supabase-client';
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -135,13 +136,26 @@ const ProjectItem = ({ project, index }) => {
 
 const ManufacturingClientView = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-
-    // Correct paths based on public folder mappings
-    const heroImages = [
+    const [heroImages, setHeroImages] = useState([
         "/hero/hero_manufacturing.webp",
         "/hero/edit-1-scaled.webp",
         "/business/manufacturing/distillation-column.webp"
-    ];
+    ]);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            const supabase = createClient();
+            const { data } = await supabase
+                .from('hero_images')
+                .select('image_url')
+                .eq('page_name', 'manufacturing')
+                .order('display_order');
+            if (data && data.length > 0) {
+                setHeroImages(data.map(h => h.image_url));
+            }
+        };
+        fetchImages();
+    }, []);
 
     const projects = [
         {

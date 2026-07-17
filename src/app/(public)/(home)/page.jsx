@@ -5,19 +5,18 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Play, Maximize, Minimize } from 'lucide-react';
-
-/* ── Hero slides (from RevSlider rs-slides) ── */
-const heroSlides = [
-  { src: '/hero/hero_image_property_3-2.webp', alt: 'Property' },
-  { src: '/hero/hero_image_trading_1-2.webp', alt: 'Trading & Services' },
-  { src: '/hero/hero_manufacturing.webp', alt: 'Manufacturing' },
-  { src: '/hero/hero_natural_resources.webp', alt: 'Natural Resources' },
-];
+import { createClient } from '@/lib/supabase-client';
 
 const SLIDE_DURATION = 6000; // ms per slide
 
 export default function Home() {
   const [isMounted, setIsMounted] = useState(false);
+  const [heroSlides, setHeroSlides] = useState([
+    { src: '/hero/hero_image_property_3-2.webp', alt: 'Property' },
+    { src: '/hero/hero_image_trading_1-2.webp', alt: 'Trading & Services' },
+    { src: '/hero/hero_manufacturing.webp', alt: 'Manufacturing' },
+    { src: '/hero/hero_natural_resources.webp', alt: 'Natural Resources' },
+  ]);
   const [activeIdx, setActiveIdx] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [isYtPlaying, setIsYtPlaying] = useState(true);
@@ -28,15 +27,28 @@ export default function Home() {
   // BUG-09 FIX: Set mounted flag after hydration to prevent hydration mismatch
   useEffect(() => {
     setIsMounted(true);
+    const fetchImages = async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+          .from('hero_images')
+          .select('image_url')
+          .eq('page_name', 'home')
+          .order('display_order');
+      if (data && data.length > 0) {
+          setHeroSlides(data.map((h, i) => ({ src: h.image_url, alt: `Home Slide ${i + 1}` })));
+      }
+    };
+    fetchImages();
   }, []);
 
   // Auto-advance hero slides
   useEffect(() => {
+    if (heroSlides.length <= 1) return;
     const timer = setInterval(() => {
       setActiveIdx(prev => (prev + 1) % heroSlides.length);
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroSlides]);
 
   const YT_VIDEO_ID = 'fK5J6qNrVUE';
   const YT_THUMB = '/csr/gallery/Gallery 2_water for nansean.webp';

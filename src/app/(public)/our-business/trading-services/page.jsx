@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
+'use client';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
@@ -8,6 +10,7 @@ import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
+import { createClient } from '@/lib/supabase-client';
 
 /* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
@@ -70,9 +73,27 @@ export default function TradingServicesPage() {
     const [nextEl, setNextEl] = useState(null);
     const SLIDE_DURATION = 5000;
 
+    const [heroImages, setHeroImages] = useState([
+        { url: "/hero/hero_image_trading_1-2.webp", alt: "Trading 1" },
+        { url: "/hero/hero_image_trading_2-2.webp", alt: "Trading 2" },
+        { url: "/hero/hero_image_trading_3-2.webp", alt: "Trading 3" }
+    ]);
+    const supabase = createClient();
+
     useEffect(() => {
         setIsMounted(true);
-    }, []);
+        const fetchImages = async () => {
+            const { data } = await supabase
+                .from('hero_images')
+                .select('image_url')
+                .eq('page_name', 'trading-services')
+                .order('display_order');
+            if (data && data.length > 0) {
+                setHeroImages(data.map((h, i) => ({ url: h.image_url, alt: `Trading ${i + 1}` })));
+            }
+        };
+        fetchImages();
+    }, [supabase]);
 
     const circleBtn = {
         width: 60, height: 60, borderRadius: "50%",
@@ -134,12 +155,8 @@ export default function TradingServicesPage() {
                         onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
                         style={{ width: "100%", height: "100%" }}
                     >
-                        {[
-                            { url: "/hero/hero_image_trading_1-2.webp", alt: "Trading 1" },
-                            { url: "/hero/hero_image_trading_2-2.webp", alt: "Trading 2" },
-                            { url: "/hero/hero_image_trading_3-2.webp", alt: "Trading 3" }
-                        ].map((slide, idx) => (
-                            <SwiperSlide key={idx}>
+                        {heroImages.map((slide, idx) => (
+                            <SwiperSlide key={idx} style={{ position: "relative" }}>
                                 <Image
                                     src={slide.url}
                                     alt={slide.alt}

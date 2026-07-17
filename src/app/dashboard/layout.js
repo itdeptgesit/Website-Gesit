@@ -16,7 +16,9 @@ import {
     Mail,
     ChevronDown,
     Search,
-    Bell
+    Bell,
+    Heart,
+    ImageIcon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/sonner';
@@ -129,6 +131,8 @@ export default function DashboardLayout({ children }) {
         { name: 'Dashboard', icon: LayoutDashboard, href: '/dashboard' },
         { name: 'Manage News', icon: Newspaper, href: '/dashboard/news' },
         { name: 'Contact Messages', icon: Mail, href: '/dashboard/contacts' },
+        { name: 'CSR Content', icon: Heart, href: '/dashboard/csr' },
+        { name: 'Hero Sliders', icon: ImageIcon, href: '/dashboard/heroes' },
         { name: 'Global Settings', icon: Settings, href: '/dashboard/settings' },
     ];
 

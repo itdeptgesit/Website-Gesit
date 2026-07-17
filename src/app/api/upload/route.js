@@ -57,6 +57,8 @@ export async function POST(request) {
             return NextResponse.json({ error: 'No data received' }, { status: 400 });
         }
 
+        const isImage = contentType.startsWith('image/');
+
         // Direct stream upload to Cloudinary
         const uploadResponse = await new Promise((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream(
@@ -65,6 +67,7 @@ export async function POST(request) {
                     folder: 'gesit_news',
                     filename_override: fileName,
                     use_filename: true,
+                    ...(isImage ? { format: 'webp' } : {})
                 },
                 (error, result) => {
                     if (error) {

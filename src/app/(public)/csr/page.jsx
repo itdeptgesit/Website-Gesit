@@ -5,12 +5,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, Navigation, FreeMode } from "swiper/modules";
 import { Plus, Minus, ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
+import { createClient } from '@/lib/supabase-client';
 
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "./csr.css";
-import { csrPrograms as initiatives, csrOngoingPrograms } from "../../../components/csr/data";
+import { csrPrograms as staticInitiatives, csrOngoingPrograms as staticOngoingPrograms } from "../../../components/csr/data";
 
 const renderTextWithLinks = (text) => {
     if (typeof text !== "string") return text;
@@ -53,6 +54,17 @@ export default function CSRPage() {
     const swiperRef = useRef(null);
     const isLightboxOpenRef = useRef(false);
 
+    // Supabase Dynamic State
+    const supabase = createClient();
+    const [galleryImages, setGalleryImages] = useState([]);
+    const [ongoingPrograms, setOngoingPrograms] = useState(staticOngoingPrograms);
+    const [initiatives, setInitiatives] = useState(staticInitiatives);
+    const [heroImages, setHeroImages] = useState([
+        "/csr/Header 1.webp",
+        "/csr/Header 2.webp",
+        "/csr/Header 4.webp",
+    ]);
+
     const handleGalleryEnter = () => {
         if (isLightboxOpenRef.current) return;
         galleryPauseTimer.current = setTimeout(() => {
@@ -82,12 +94,12 @@ export default function CSRPage() {
 
     const nextLightboxImage = (e) => {
         e.stopPropagation();
-        setLightboxIndex((prev) => (prev + 1) % csrGalleryImages.length);
+        setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
     };
 
     const prevLightboxImage = (e) => {
         e.stopPropagation();
-        setLightboxIndex((prev) => (prev - 1 + csrGalleryImages.length) % csrGalleryImages.length);
+        setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
     };
 
     const circleBtn = {
@@ -103,6 +115,44 @@ export default function CSRPage() {
 
     useEffect(() => {
         setIsMounted(true);
+        setGalleryImages(csrGalleryImagesFallback);
+
+        const fetchData = async () => {
+            try {
+                const [galRes, ongRes, initRes] = await Promise.all([
+                    supabase.from('csr_gallery').select('image_url').order('display_order'),
+                    supabase.from('csr_ongoing_programs').select('description').order('display_order'),
+                    supabase.from('csr_initiatives').select('*').order('display_order')
+                ]);
+                
+                if (galRes.data && galRes.data.length > 0) {
+                    setGalleryImages(galRes.data.map(g => g.image_url));
+                }
+                if (ongRes.data && ongRes.data.length > 0) {
+                    setOngoingPrograms(ongRes.data.map(o => o.description));
+                }
+                if (initRes.data && initRes.data.length > 0) {
+                    setInitiatives(initRes.data.map(i => ({
+                        title: i.title,
+                        content: i.content_json
+                    })));
+                }
+
+                // Fetch Hero Images
+                const { data: heroData } = await supabase
+                    .from('hero_images')
+                    .select('image_url')
+                    .eq('page_name', 'csr')
+                    .order('display_order');
+                
+                if (heroData && heroData.length > 0) {
+                    setHeroImages(heroData.map(h => h.image_url));
+                }
+            } catch (error) {
+                console.error("Error fetching CSR data", error);
+            }
+        };
+        fetchData();
     }, []);
 
     const textVariant = {
@@ -123,14 +173,10 @@ export default function CSRPage() {
     };
 
     /* ================= HERO IMAGES ================= */
-    const heroImages = [
-        "/csr/Header 1.webp",
-        "/csr/Header 2.webp",
-        "/csr/Header 4.webp",
-    ];
+    // Fetched dynamically, see above state
 
     /* ================= GALLERY IMAGES ================= */
-    const csrGalleryImages = [
+    const csrGalleryImagesFallback = [
         "/csr/gallery/Gallery 1_WVI PAUD.webp",
         "/csr/gallery/Gallery 2_water for nansean.webp",
         "/csr/gallery/Gallery 4_SD Mentawak.webp",
@@ -179,8 +225,6 @@ export default function CSRPage() {
             image: "/csr/Banner_Environment.webp"
         }
     ];
-
-    // The `initiatives` array is now imported from `data.js`
 
     return (
         <div className="bg-white min-h-screen">
@@ -495,7 +539,7 @@ export default function CSRPage() {
                         Ongoing Program
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {csrOngoingPrograms.map((program, idx) => (
+                        {ongoingPrograms.map((program, idx) => (
                             <motion.div
                                 key={`ongoing-${idx}`}
                                 initial={{ opacity: 0, y: 20 }}
@@ -551,7 +595,7 @@ export default function CSRPage() {
                             }}
                             className="gs-continuous-swiper !px-4 !py-6 md:!py-12"
                         >
-                            {[...csrGalleryImages, ...csrGalleryImages].map((src, index) => (
+                            {[...galleryImages, ...galleryImages].map((src, index) => (
                                 <SwiperSlide key={`gallery-${index}`} className="!w-auto">
                                     <motion.div
                                         className="gs-csr-gallery-card w-[280px] h-[190px] md:w-[450px] md:h-[300px] shrink-0 rounded-[5px] overflow-hidden transition-all duration-700 group relative cursor-pointer"
@@ -559,14 +603,14 @@ export default function CSRPage() {
                                         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                                         onMouseEnter={handleGalleryEnter}
                                         onMouseLeave={handleGalleryLeave}
-                                        onClick={() => openLightbox(index % csrGalleryImages.length)}
+                                        onClick={() => openLightbox(index % galleryImages.length)}
                                     >
                                         <Image
                                             src={src}
                                             alt={`CSR Gallery ${index}`}
                                             fill
                                             sizes="(max-width: 768px) 280px, 450px"
-                                            className="object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[2200ms] ease-out pointer-events-none"
+                                            className="object-cover grayscale-[15%] scale-[1.01] group-hover:grayscale-0 group-hover:scale-110 transition-all [transition-duration:2200ms] ease-out pointer-events-none"
                                         />
                                         <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700 pointer-events-none" />
                                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#103065]/45 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none" />
@@ -611,14 +655,14 @@ export default function CSRPage() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                                src={csrGalleryImages[lightboxIndex]}
+                                src={galleryImages[lightboxIndex]}
                                 alt={`Featured Story ${lightboxIndex + 1}`}
                                 className="max-w-full max-h-full object-contain shadow-2xl"
                             />
 
                             <div className="absolute bottom-[-50px] left-0 right-0 text-center pointer-events-none">
                                 <p className="text-white/80 text-[16px] md:text-lg m-0" style={{ fontFamily: 'Lora, serif' }}>
-                                    Featured Story {lightboxIndex + 1} of {csrGalleryImages.length}
+                                    Featured Story {lightboxIndex + 1} of {galleryImages.length}
                                 </p>
                             </div>
                         </div>

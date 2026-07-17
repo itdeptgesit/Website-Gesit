@@ -33,16 +33,16 @@ export const csrPrograms = [
                     {
                         text: "Building, renovating, and providing school facilities for:",
                         subItems: [
-                            "Kupang: PAUD Berkat Tuamnanu",
-                            "Sanggau: SDN 08 Mentawak",
-                            "Bogor: SD Sinar Kasih",
                             "North Sumatera: Sekolah Mitra Inalum",
                             "Jakarta: Down Syndrome & Deaf School of Cempaka Putih",
                             "Jakarta: School of Yayasan Penyandang Anak Cacat",
-                            "Fujian: Primary, Secondary School, Sport and Library in Normal University"
+                            "Fujian: Primary, Secondary School, Sport and Library in Normal University",
+                            "Bogor: SD Sinar Kasih",
+                            "Kupang: PAUD Berkat Tuamnanu",
+                            "Sanggau: SDN 08 Mentawak"
                         ]
                     },
-                    "Providing over 300 university scholarships",
+                    "Providing over 300 university scholarships per year",
                     "Supporting online classes to reach students and children in frontier area",
                     "Providing laptop to SMP Adulam in collaboration with PINTU",
                     "Train and equip teachers with improved teaching skills",
@@ -99,7 +99,8 @@ export const csrPrograms = [
                 items: [
                     "Supporting Indonesia sport development through Federasi Kempo Indonesia and sponsoring sport events (IFSC Climbing World Cup 2022)",
                     "Holding charitable concerts in partnership with foreign embassies to gather donations for disaster victims",
-                    "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples"
+                    "Contributed to the construction of a mosque in Ciloto-Puncak as well as renovation of local churches and temples",
+                    "Supporting Indonesia sport development through Federasi Kempo Indonesia and sponsoring sport events (IFSC Climbing World Cup 2022)"
                 ]
             }
         ]
@@ -107,11 +108,11 @@ export const csrPrograms = [
 ];
 
 export const csrOngoingPrograms = [
-    "Training and improving teacher’s teaching capacity in Sansat village, Sanggau",
-    "Collaborating with DoctorShare to provide medical treatment for 20 children with club foot",
+    "Training and improving teacher’s teaching capacity in Sansat village, Sanggau (on-site training start in August, req photo to Saka Guru)",
+    "Collaborating with DoctorShare to provide medical treatment for 20 children with club foot (photo requested to doctor share)",
     "Supporting and or/ providing scholarship for 6 undergraduate students",
-    "Continuing collaboration with Solar Chapter in constructing clean water facilities in 2 villages in NTT",
-    "Supporting online classes for elementary school children",
+    "Continuing collaboration with Solar Chapter in constructing clean water facilities in 2 villages in NTT with Solar Chapter",
+    "Supporting online classes for elementary school children in 6 villages in Asmat, Papua",
     "Supporting Federasi Kempo Indonesia program"
 ];
 

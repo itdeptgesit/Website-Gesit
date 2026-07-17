@@ -1,4 +1,5 @@
 "use client";
+"use client";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -7,6 +8,7 @@ import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import { createClient } from '@/lib/supabase-client';
 
 /* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
@@ -57,9 +59,27 @@ export default function NaturalResourcesPage() {
     const [activeIdx, setActiveIdx] = useState(0);
     const SLIDE_DURATION = 5000;
 
+    const [heroImages, setHeroImages] = useState([
+        { url: "/hero/hero_natural_resources.webp", alt: "Natural Resources 1" },
+        { url: "/hero/natural_lds_bauxite_1-1.webp", alt: "Natural Resources 2" },
+        { url: "/hero/hero_image_natural_2-2-1.webp", alt: "Natural Resources 3" }
+    ]);
+    const supabase = createClient();
+
     useEffect(() => {
         setIsMounted(true);
-    }, []);
+        const fetchImages = async () => {
+            const { data } = await supabase
+                .from('hero_images')
+                .select('image_url')
+                .eq('page_name', 'natural-resources')
+                .order('display_order');
+            if (data && data.length > 0) {
+                setHeroImages(data.map((h, i) => ({ url: h.image_url, alt: `Natural Resources ${i + 1}` })));
+            }
+        };
+        fetchImages();
+    }, [supabase]);
 
     const businessCards = [
         {
@@ -139,11 +159,7 @@ export default function NaturalResourcesPage() {
                         onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
                         style={{ width: "100%", height: "100%" }}
                     >
-                        {[
-                            { url: "/hero/hero_natural_resources.webp", alt: "Natural Resources 1" },
-                            { url: "/hero/natural_lds_bauxite_1-1.webp", alt: "Natural Resources 2" },
-                            { url: "/hero/hero_image_natural_2-2-1.webp", alt: "Natural Resources 3" }
-                        ].map((slide, idx) => (
+                        {heroImages.map((slide, idx) => (
                             <SwiperSlide key={idx} style={{ position: "relative" }}>
                                 <Image
                                     src={slide.url}

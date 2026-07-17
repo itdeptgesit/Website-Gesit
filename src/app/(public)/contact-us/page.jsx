@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import './contact.css';
 import heroImg from '../../../../public/contact/hero-contact.webp';
 import greetingImg from '../../../../public/contact/greeting.webp';
+import { createClient } from '@/lib/supabase-client';
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,24 @@ export default function ContactUs() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [heroImageState, setHeroImageState] = useState(heroImg);
   const lockRef = useRef(false);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+          .from('hero_images')
+          .select('image_url')
+          .eq('page_name', 'contact-us')
+          .order('display_order')
+          .limit(1);
+      if (data && data.length > 0) {
+          setHeroImageState(data[0].image_url);
+      }
+    };
+    fetchImages();
+  }, []);
 
   const validate = () => {
     const newErrors = {};
@@ -112,7 +130,7 @@ export default function ContactUs() {
             className="w-full h-full relative"
           >
             <Image
-              src={heroImg}
+              src={heroImageState}
               alt="Contact Us Hero"
               fill
               sizes="100vw"

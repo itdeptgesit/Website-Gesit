@@ -7,6 +7,7 @@ import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import { createClient } from '@/lib/supabase-client';
 
 /* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
@@ -66,11 +67,29 @@ const PropertyPage = () => {
     const [nextEl, setNextEl] = useState(null);
     const SLIDE_DURATION = 5000;
 
+    const [heroImages, setHeroImages] = useState([
+        { url: "/hero/hero_image_property_1-2.webp", alt: "Property 1" },
+        { url: "/hero/hero_image_property_2-2.webp", alt: "Property 2" },
+        { url: "/hero/hero_image_property_3-2.webp", alt: "Property 3" }
+    ]);
+    const supabase = createClient();
+
     useEffect(() => {
         setIsMounted(true);
+        const fetchImages = async () => {
+            const { data } = await supabase
+                .from('hero_images')
+                .select('image_url')
+                .eq('page_name', 'property')
+                .order('display_order');
+            if (data && data.length > 0) {
+                setHeroImages(data.map((h, i) => ({ url: h.image_url, alt: `Property ${i + 1}` })));
+            }
+        };
+        fetchImages();
         document.body.classList.add('property-page-full-width');
         return () => document.body.classList.remove('property-page-full-width');
-    }, []);
+    }, [supabase]);
 
     const circleBtn = {
         width: 60, height: 60, borderRadius: "50%",
@@ -109,11 +128,12 @@ const PropertyPage = () => {
                             src="/hero/hero_image_property_1-2.webp"
                             alt="Property"
                             className="gs-hero-zoom-image"
-                            fill sizes="100vw" quality={100}
+                            fill
+                            sizes="100vw"
+                            quality={100}
                             style={{ objectFit: "cover" }}
                             priority
                             fetchPriority="high"
-                            sizes="100vw"
                         />
                     </div>
                 )}
@@ -133,21 +153,18 @@ const PropertyPage = () => {
                         onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
                         style={{ width: "100%", height: "100%" }}
                     >
-                        {[
-                            { url: "/hero/hero_image_property_1-2.webp", alt: "Property 1" },
-                            { url: "/hero/hero_image_property_2-2.webp", alt: "Property 2" },
-                            { url: "/hero/hero_image_property_3-2.webp", alt: "Property 3" }
-                        ].map((slide, idx) => (
+                        {heroImages.map((slide, idx) => (
                             <SwiperSlide key={idx}>
                                 <Image
                                     src={slide.url}
                                     alt={slide.alt}
                                     className="gs-hero-zoom-image"
-                                    fill sizes="100vw" quality={100}
+                                    fill
+                                    sizes="100vw"
+                                    quality={100}
                                     style={{ objectFit: "cover" }}
                                     priority={idx === 0}
                                     {...(idx === 0 ? { fetchPriority: "high", loading: "eager" } : {})}
-                                    sizes="100vw"
                                 />
                             </SwiperSlide>
                         ))}
@@ -260,7 +277,7 @@ const PropertyPage = () => {
                             {["trinity_01.webp", "trinity_02.webp", "trinity_03.webp", "trinity_04.webp", "trinity_05.webp", "trinity_06.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`Trinity Tower ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                                        <Image src={`/business/property/${img}`} alt={`Trinity Tower ${i + 1}`} fill sizes="(max-width: 1024px) 100vw, 530px" quality={100} style={{ objectFit: 'cover' }} />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -287,7 +304,7 @@ const PropertyPage = () => {
                             {["property_jsl_2.webp", "property_jsl_3.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`JS Luwansa ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                                        <Image src={`/business/property/${img}`} alt={`JS Luwansa ${i + 1}`} fill sizes="(max-width: 1024px) 100vw, 530px" quality={100} style={{ objectFit: 'cover' }} />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -352,7 +369,7 @@ const PropertyPage = () => {
                             {["property_PPHUI_Exterior_1.webp", "property_PPHUI_Theater_2.webp"].map((img, i) => (
                                 <SwiperSlide key={i}>
                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                                        <Image src={`/business/property/${img}`} alt={`PPHUI ${i + 1}`} fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                                        <Image src={`/business/property/${img}`} alt={`PPHUI ${i + 1}`} fill sizes="(max-width: 1024px) 100vw, 530px" quality={100} style={{ objectFit: 'cover' }} />
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -369,7 +386,7 @@ const PropertyPage = () => {
                         className="project-image-container"
                     >
                         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                            <Image src="/business/property/senayan-development-.webp" alt="Senayan Development" fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                            <Image src="/business/property/senayan-development-.webp" alt="Senayan Development" fill sizes="(max-width: 1024px) 100vw, 530px" quality={100} style={{ objectFit: 'cover' }} />
                         </div>
                     </motion.div>
 
@@ -417,7 +434,7 @@ const PropertyPage = () => {
                         className="project-image-container"
                     >
                         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                            <Image src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" fill sizes="100vw" quality={100} style={{ objectFit: 'cover' }} sizes="(max-width: 1024px) 100vw, 530px" />
+                            <Image src="/business/property/property_TOD_Rasuna_1.webp" alt="TOD Rasuna" fill sizes="(max-width: 1024px) 100vw, 530px" quality={100} style={{ objectFit: 'cover' }} />
                         </div>
                     </motion.div>
                 </div>

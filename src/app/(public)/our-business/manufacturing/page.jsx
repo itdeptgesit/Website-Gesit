@@ -7,6 +7,7 @@ import { Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
+import { createClient } from '@/lib/supabase-client';
 
 /* ── Animation Variants (Refined Editorial) ── */
 const fadeInUp = {
@@ -60,9 +61,26 @@ export default function ManufacturingPage() {
 
   const SLIDE_DURATION = 5000;
 
+  const [heroImages, setHeroImages] = useState([
+    { url: "/manufacturing/hero1.webp", alt: "Manufacturing 1" },
+    { url: "/manufacturing/hero2.webp", alt: "Manufacturing 2" }
+  ]);
+  const supabase = createClient();
+
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+    const fetchImages = async () => {
+        const { data } = await supabase
+            .from('hero_images')
+            .select('image_url')
+            .eq('page_name', 'manufacturing')
+            .order('display_order');
+        if (data && data.length > 0) {
+            setHeroImages(data.map((h, i) => ({ url: h.image_url, alt: `Manufacturing ${i + 1}` })));
+        }
+    };
+    fetchImages();
+  }, [supabase]);
 
   const aluminumImages = [
     "/manufacturing/Aluminum-Metal-Fabrication1.webp",
@@ -142,10 +160,7 @@ export default function ManufacturingPage() {
             onSlideChange={(swiper) => setActiveIdx(swiper.realIndex)}
             style={{ width: "100%", height: "100%" }}
           >
-            {[
-              { url: "/manufacturing/hero1.webp", alt: "Manufacturing 1" },
-              { url: "/manufacturing/hero2.webp", alt: "Manufacturing 2" }
-            ].map((slide, idx) => (
+            {heroImages.map((slide, idx) => (
               <SwiperSlide key={idx} style={{ position: "relative" }}>
                 <Image
                   src={slide.url}

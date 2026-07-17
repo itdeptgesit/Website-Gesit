@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { createClient } from '@/lib/supabase-client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
@@ -42,10 +43,27 @@ const staggerContainer = {
 
 export default function CareerPage() {
     const [isMounted, setIsMounted] = useState(false);
+    const [heroImages, setHeroImages] = useState([
+        { url: "/career/IMG_2103.webp", alt: "Career 1" },
+        { url: "/career/IMG_2092.webp", alt: "Career 2" },
+        { url: "/career/IMG_2100.webp", alt: "Career 3" }
+    ]);
+    const supabase = createClient();
 
     useEffect(() => {
         setIsMounted(true);
-    }, []);
+        const fetchImages = async () => {
+            const { data } = await supabase
+                .from('hero_images')
+                .select('image_url')
+                .eq('page_name', 'career')
+                .order('display_order');
+            if (data && data.length > 0) {
+                setHeroImages(data.map((h, i) => ({ url: h.image_url, alt: `Career ${i + 1}` })));
+            }
+        };
+        fetchImages();
+    }, [supabase]);
 
     return (
         <div className="bg-white min-h-screen text-[#103065] font-sans">
@@ -77,11 +95,7 @@ export default function CareerPage() {
                         loop={true}
                         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 1 }}
                     >
-                        {[
-                            { url: "/career/IMG_2103.webp", alt: "Career 1" },
-                            { url: "/career/IMG_2092.webp", alt: "Career 2" },
-                            { url: "/career/IMG_2100.webp", alt: "Career 3" }
-                        ].map((slide, idx) => (
+                        {heroImages.map((slide, idx) => (
                             <SwiperSlide key={idx}>
                                 <div className="gs-ken-burns" style={{ position: "relative", width: "100%", height: "100%" }}>
                                     <Image
@@ -164,7 +178,7 @@ export default function CareerPage() {
                                     src="/career/IMG_2110.webp"
                                     alt="Join Our Team"
                                     fill
-                                    className="object-cover object-top scale-125 group-hover:scale-[1.35] transition-transform duration-[3000ms] ease-out"
+                                    className="object-cover object-top scale-125 group-hover:scale-[1.35] transition-transform [transition-duration:3000ms] ease-out"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#103065]/40 via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none" />
                             </div>

@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "../news.css";
+import { createClient } from '@/lib/supabase-client';
 
 // Remove static import
 // import { newsItems as staticNewsItems } from './newsData';
@@ -27,13 +28,12 @@ const formatDate = (dateStr) => {
 };
 
 const NewsPage = () => {
-
-  const heroImages = [
+  const [heroImages, setHeroImages] = useState([
     "/news/Background-Handover-Daswin.webp",
     "/news/30-Ventilator-DKI.webp",
     "/news/Gubernur-Kalbar-Ventilator.webp",
     "/news/PMI-Ventilator.webp"
-  ];
+  ]);
 
   const textVariant = {
     initial: { opacity: 0, y: 30 },
@@ -74,7 +74,21 @@ const NewsPage = () => {
         setLoading(false);
       }
     };
+
+    const fetchHeroImages = async () => {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from('hero_images')
+        .select('image_url')
+        .eq('page_name', 'news')
+        .order('display_order');
+      if (data && data.length > 0) {
+        setHeroImages(data.map(h => h.image_url));
+      }
+    };
+
     fetchNews();
+    fetchHeroImages();
   }, []);
 
   const featuredArticle = newsItems[0];
@@ -438,7 +452,7 @@ const NewsPage = () => {
                     src={item.image_url || item.image || '/images/bussines8-o86fclow0s83d4m73w4dshh7h51ssp4m6ngk248b8o.webp'}
                     alt={item.title || 'News Update'}
                     fill sizes="100vw" quality={100}
-                    className="object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-[2200ms] ease-out"
+                    className="object-cover grayscale-[10%] group-hover:grayscale-0 transition-all [transition-duration:2200ms] ease-out"
                     sizes="(max-width: 768px) 280px, 450px"
                   />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-700" />
