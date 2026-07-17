@@ -19,11 +19,16 @@ export default function HighFidelitySettingsPage() {
     // Logs Data
     const [logs, setLogs] = useState([]);
     const [logsPage, setLogsPage] = useState(1);
+    const [logFilter, setLogFilter] = useState('');
     const LOGS_PER_PAGE = 8;
 
     // Admin Profiles Data
     const [adminProfiles, setAdminProfiles] = useState([]);
     const [editingAdmin, setEditingAdmin] = useState(null);
+
+    // Invite state
+    const [inviteLoading, setInviteLoading] = useState(false);
+    const [inviteRole, setInviteRole] = useState('CONTENT_EDITOR');
 
 
     // 1. SEO Manager State
@@ -241,16 +246,31 @@ export default function HighFidelitySettingsPage() {
 
     // --- LOGIC: INVITE ADMIN ---
     const handleInviteAdmin = async () => {
-        if (!inviteEmail) return;
-        toast.info("Sending invitation...", { id: "invite" });
+        if (!inviteEmail || !inviteEmail.includes('@')) {
+            toast.error('Please enter a valid email address.');
+            return;
+        }
+        setInviteLoading(true);
+        toast.loading('Sending invitation...', { id: 'invite' });
         try {
-            await recordLog('Access Control', `Queued invitation for new admin: "${inviteEmail}"`);
-            toast.success(`Invitation queued for ${inviteEmail}`, { id: "invite" });
+            const res = await fetch('/api/admin/invite', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: inviteEmail, role: inviteRole })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Failed to send invitation');
+            toast.success(`Invitation sent to ${inviteEmail}`, { id: 'invite' });
+            await recordLog('Access Control', `Sent admin invitation to "${inviteEmail}" with role ${inviteRole}`);
             setInviteEmail('');
+            fetchData(); // Refresh admin list
         } catch (err) {
-            toast.error("Could not invite admin.");
+            toast.error(err.message, { id: 'invite' });
+        } finally {
+            setInviteLoading(false);
         }
     };
+
 
     // --- LOGIC: EMAIL 2FA ---
     const handleEmail2FAToggle = async () => {
@@ -317,6 +337,28 @@ export default function HighFidelitySettingsPage() {
         { path: '/dashboard/heroes', name: 'Hero Sliders' },
         { path: '/dashboard/settings', name: 'Global Settings' }
     ];
+
+    // --- LOGIC: EXPORT LOGS CSV ---
+    const exportLogsCSV = () => {
+        const filtered = logFilter
+            ? logs.filter(l => l.target?.toLowerCase().includes(logFilter.toLowerCase()) || l.action?.toLowerCase().includes(logFilter.toLowerCase()))
+            : logs;
+        const header = 'Date,Target,Action';
+        const rows = filtered.map(l => [
+            `"${new Date(l.created_at).toLocaleString()}"`,
+            `"${(l.target || '').replace(/"/g, '""')}"`,
+            `"${(l.action || '').replace(/"/g, '""')}"`
+        ].join(','));
+        const csv = [header, ...rows].join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `activity-logs-${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
 
     if (loading && logs.length === 0 && adminProfiles.length === 0) {
         return <div className="flex justify-center p-20"><Loader2 className="w-8 h-8 animate-spin text-[#1b365d]" /></div>;
@@ -449,22 +491,38 @@ export default function HighFidelitySettingsPage() {
 
                         <div className="w-full max-w-md lg:ml-auto">
                             <div className="bg-[#264473]/30 p-6 rounded-lg border border-[#345283] relative overflow-hidden">
-                                <div className="absolute top-2 right-2 bg-[#e8a317] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-widest">
-                                    Coming Soon
-                                </div>
-                                <label className="text-xs font-bold tracking-widest text-[#a8b1c5] uppercase block mb-3 opacity-50">Invite New Admin</label>
-                                <div className="flex gap-2 opacity-50 pointer-events-none">
+                                <label className="text-xs font-bold tracking-widest text-[#a8b1c5] uppercase block mb-3">Invite New Admin</label>
+                                <div className="flex gap-2 mb-3">
                                     <Input
                                         className="bg-[#1b365d] border-[#345283] text-white placeholder:text-slate-500 h-12 flex-1 focus-visible:ring-[#e8a317]"
                                         placeholder="colleague@gesit.co.id"
                                         value={inviteEmail}
                                         onChange={(e) => setInviteEmail(e.target.value)}
                                         onKeyDown={(e) => { if (e.key === 'Enter') handleInviteAdmin(); }}
-                                        disabled
                                     />
-                                    <Button onClick={handleInviteAdmin} disabled className="h-12 w-12 bg-[#a38629] hover:bg-[#8b7222] text-white shrink-0 p-0 border border-[#bfa245]">
-                                        <Plus className="w-5 h-5" />
+                                    <Button
+                                        onClick={handleInviteAdmin}
+                                        disabled={inviteLoading || !inviteEmail}
+                                        className="h-12 w-12 bg-[#a38629] hover:bg-[#8b7222] text-white shrink-0 p-0 border border-[#bfa245]"
+                                    >
+                                        {inviteLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-5 h-5" />}
                                     </Button>
+                                </div>
+                                <div className="flex gap-2">
+                                    {['CONTENT_EDITOR', 'SUPER_ADMIN'].map(r => (
+                                        <button
+                                            key={r}
+                                            type="button"
+                                            onClick={() => setInviteRole(r)}
+                                            className={`flex-1 py-1.5 rounded text-[10px] font-bold tracking-widest uppercase transition-all border ${
+                                                inviteRole === r
+                                                    ? r === 'SUPER_ADMIN' ? 'bg-red-600 border-red-600 text-white' : 'bg-[#e8a317] border-[#e8a317] text-white'
+                                                    : 'bg-[#1b365d] border-[#345283] text-slate-300 hover:border-slate-400'
+                                            }`}
+                                        >
+                                            {r === 'SUPER_ADMIN' ? 'Super Admin' : 'Editor'}
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -821,7 +879,7 @@ export default function HighFidelitySettingsPage() {
 
                 {/* 4. ACTIVITY LOGS */}
                 <TabsContent value="logs" className="animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <div className="flex items-start justify-between mb-10 px-2 pt-4">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 px-2 pt-4 gap-4">
                         <div>
                             <h1 className="text-3xl font-bold tracking-tight text-[#1b365d] mb-2" style={{ fontFamily: 'Georgia, serif' }}>
                                 System Activity Logs
@@ -830,19 +888,37 @@ export default function HighFidelitySettingsPage() {
                                 Track recent updates and modifications
                             </p>
                         </div>
-                        <Button onClick={fetchData} variant="outline" size="icon" className="bg-slate-50 border-slate-200">
-                            <RotateCcw className={`w-4 h-4 text-slate-500 ${loading ? 'animate-spin' : ''}`} />
-                        </Button>
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="text"
+                                placeholder="Filter logs..."
+                                value={logFilter}
+                                onChange={e => { setLogFilter(e.target.value); setLogsPage(1); }}
+                                className="h-9 px-3 text-sm border border-slate-200 rounded-lg bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#bc9c33] w-44 sm:w-56"
+                            />
+                            <Button onClick={exportLogsCSV} variant="outline" size="sm" className="h-9 text-xs font-bold gap-1.5 border-slate-200 text-slate-600 hover:bg-slate-50">
+                                ↓ Export CSV
+                            </Button>
+                            <Button onClick={fetchData} variant="outline" size="icon" className="bg-slate-50 border-slate-200 h-9 w-9">
+                                <RotateCcw className={`w-4 h-4 text-slate-500 ${loading ? 'animate-spin' : ''}`} />
+                            </Button>
+                        </div>
                     </div>
 
                     <div className="relative pl-6 lg:pl-10">
                         <div className="absolute left-8 lg:left-[51px] top-4 bottom-0 w-px bg-slate-100"></div>
 
                         <div className="space-y-6 pb-6">
-                            {logs.length === 0 && !loading ? (
-                                <div className="p-10 text-center text-slate-400">No activity logs recorded yet.</div>
-                            ) : (
-                                logs.slice((logsPage - 1) * LOGS_PER_PAGE, logsPage * LOGS_PER_PAGE).map((log) => (
+                            {(() => {
+                                const filteredLogs = logFilter
+                                    ? logs.filter(l => l.target?.toLowerCase().includes(logFilter.toLowerCase()) || l.action?.toLowerCase().includes(logFilter.toLowerCase()))
+                                    : logs;
+                                if (filteredLogs.length === 0 && !loading) return (
+                                    <div className="p-10 text-center text-slate-400">
+                                        {logFilter ? `No logs matching "${logFilter}"` : 'No activity logs recorded yet.'}
+                                    </div>
+                                );
+                                return filteredLogs.slice((logsPage - 1) * LOGS_PER_PAGE, logsPage * LOGS_PER_PAGE).map((log) => (
                                     <div key={log.id} className="relative flex gap-6 lg:gap-8 hover:-translate-y-0.5 transition-transform">
                                         {/* Timeline Marker */}
                                         <div className="relative z-10 w-7 h-7 shrink-0 rounded bg-blue-50 flex items-center justify-center mt-3 shadow-sm border border-blue-100/50">
@@ -868,8 +944,8 @@ export default function HighFidelitySettingsPage() {
                                             </p>
                                         </Card>
                                     </div>
-                                ))
-                            )}
+                                ));
+                            })()}
                         </div>
 
                         {/* Pagination Footer for Logs */}

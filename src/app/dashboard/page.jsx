@@ -3,24 +3,53 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Newspaper, Mail, Settings, Activity, ArrowRight, Server, Eye, TrendingUp, LayoutDashboard, Users, Clock, MousePointer2 } from 'lucide-react';
+import { Newspaper, Mail, Settings, Activity, ArrowRight, Server, Clock, Heart, Images, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase-client';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import WorldMap from '@/components/dashboard/WorldMap';
 
+// ── Maintenance Countdown ───────────────────────────────────────────────────
+function MaintenanceCountdown({ until }) {
+    const [remaining, setRemaining] = useState('');
+
+    useEffect(() => {
+        if (!until) return;
+        const tick = () => {
+            const diff = new Date(until) - new Date();
+            if (diff <= 0) { setRemaining('Expired'); return; }
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+            setRemaining(`${h}h ${m}m ${s}s remaining`);
+        };
+        tick();
+        const id = setInterval(tick, 1000);
+        return () => clearInterval(id);
+    }, [until]);
+
+    if (!until) return null;
+    return (
+        <span className="text-[10px] font-mono font-bold text-red-400 animate-pulse">{remaining}</span>
+    );
+}
+
 export default function DashboardOverviewPage() {
     const [stats, setStats] = useState({
         newsCount: 0,
         contactCount: 0,
+        csrCount: 0,
+        heroCount: 0,
         maintenance: false,
+        maintenanceUntil: null,
         analytics: [],
         countries: [],
         timeFilter: 'Month',
-        liveTraffic: 24,
+        liveTraffic: 0,
         loading: true
     });
     const supabase = createClient();
+    const [currentTime, setCurrentTime] = useState('');
 
     const fetchStats = useCallback(async (filter) => {
         try {
@@ -28,7 +57,9 @@ export default function DashboardOverviewPage() {
             
             const { count: newsC } = await supabase.from('news').select('*', { count: 'exact', head: true });
             const { count: contactC } = await supabase.from('contact_messages').select('*', { count: 'exact', head: true });
-            const { data: seoData } = await supabase.from('seo_settings').select('maintenance_mode').eq('id', 1).single();
+            const { count: csrC } = await supabase.from('csr_gallery').select('*', { count: 'exact', head: true });
+            const { count: heroC } = await supabase.from('hero_images').select('*', { count: 'exact', head: true });
+            const { data: seoData } = await supabase.from('seo_settings').select('maintenance_mode, maintenance_until').eq('id', 1).single();
 
             let startDate = new Date();
             if (filter === 'Today') startDate.setHours(0, 0, 0, 0);
@@ -95,7 +126,10 @@ export default function DashboardOverviewPage() {
                 ...prev,
                 newsCount: newsC || 0,
                 contactCount: contactC || 0,
+                csrCount: csrC || 0,
+                heroCount: heroC || 0,
                 maintenance: seoData?.maintenance_mode || false,
+                maintenanceUntil: seoData?.maintenance_until || null,
                 analytics: processedAnalytics,
                 countries: processedCountries,
                 liveTraffic: liveCount || 0,
@@ -115,10 +149,20 @@ export default function DashboardOverviewPage() {
         return () => clearInterval(interval);
     }, [stats.timeFilter, fetchStats]);
 
+    // Update clock only on client to avoid hydration mismatch
+    useEffect(() => {
+        const updateTime = () => setCurrentTime(new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }));
+        updateTime();
+        const timer = setInterval(updateTime, 60000);
+        return () => clearInterval(timer);
+    }, []);
+
     const cards = [
         { title: 'News Articles', count: stats.newsCount, icon: Newspaper, href: '/dashboard/news', color: 'text-blue-600', bg: 'bg-blue-50', label: 'Total Published' },
         { title: 'Contact Inbox', count: stats.contactCount, icon: Mail, href: '/dashboard/contacts', color: 'text-orange-600', bg: 'bg-orange-50', label: 'Inbound Messages' },
-        { title: 'System Status', count: stats.maintenance ? 'MAINTENANCE' : 'ACTIVE', icon: Settings, href: '/dashboard/settings', color: stats.maintenance ? 'text-red-600' : 'text-emerald-600', bg: stats.maintenance ? 'bg-red-50' : 'bg-emerald-50', label: 'Infrastructure' }
+        { title: 'CSR Stories', count: stats.csrCount, icon: Heart, href: '/dashboard/csr', color: 'text-rose-600', bg: 'bg-rose-50', label: 'Gallery Photos' },
+        { title: 'Hero Slides', count: stats.heroCount, icon: Images, href: '/dashboard/heroes', color: 'text-violet-600', bg: 'bg-violet-50', label: 'Active Slides' },
+        { title: 'System Status', count: stats.maintenance ? 'MAINTENANCE' : 'ACTIVE', icon: Settings, href: '/dashboard/settings', color: stats.maintenance ? 'text-red-600' : 'text-emerald-600', bg: stats.maintenance ? 'bg-red-50' : 'bg-emerald-50', label: 'Infrastructure', maintenance: stats.maintenance, maintenanceUntil: stats.maintenanceUntil }
     ];
 
     return (
@@ -132,31 +176,38 @@ export default function DashboardOverviewPage() {
                     <p className="text-slate-500 text-sm">Monitor performance metrics and global traffic.</p>
                 </div>
                 
-                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border shadow-sm text-slate-400 font-medium text-xs">
-                    <Clock className="w-4 h-4" />
-                    <span>Last updated: {new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</span>
-                </div>
+                {currentTime && (
+                    <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border shadow-sm text-slate-400 font-medium text-xs">
+                        <Clock className="w-4 h-4" />
+                        <span>Last updated: {currentTime}</span>
+                    </div>
+                )}
             </div>
 
             {/* Stats Cards - Clean Shadcn Style */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                 {cards.map((card, idx) => {
                     const Icon = card.icon;
                     return (
                         <Link href={card.href} key={idx} className="group">
-                            <Card className="border ring-1 ring-slate-200/50 shadow-sm hover:shadow-md transition-all rounded-xl overflow-hidden bg-white">
-                                <CardContent className="p-6">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div className={`p-3 rounded-lg ${card.bg} ${card.color}`}>
-                                            <Icon className="w-6 h-6" />
+                            <Card className="border ring-1 ring-slate-200/50 shadow-sm hover:shadow-md transition-all rounded-xl overflow-hidden bg-white h-full">
+                                <CardContent className="p-5">
+                                    <div className="flex items-center justify-between mb-3">
+                                        <div className={`p-2.5 rounded-lg ${card.bg} ${card.color}`}>
+                                            <Icon className="w-5 h-5" />
                                         </div>
                                         <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-[#bc9c33] transition-colors" />
                                     </div>
-                                    <div className="space-y-1">
-                                        <h3 className="text-3xl font-bold tracking-tight text-slate-900">{card.count}</h3>
+                                    <div className="space-y-0.5">
+                                        <h3 className="text-2xl font-bold tracking-tight text-slate-900">{card.count}</h3>
                                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{card.label}</p>
                                     </div>
-                                    <div className="mt-6 pt-4 border-t text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center justify-between">
+                                    {card.maintenance && card.maintenanceUntil && (
+                                        <div className="mt-2">
+                                            <MaintenanceCountdown until={card.maintenanceUntil} />
+                                        </div>
+                                    )}
+                                    <div className="mt-4 pt-3 border-t text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center justify-between">
                                         {card.title}
                                         <span className="w-1.5 h-1.5 rounded-full bg-[#bc9c33] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                     </div>
