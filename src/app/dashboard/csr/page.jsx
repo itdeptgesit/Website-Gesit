@@ -49,6 +49,14 @@ export default function CSRDashboard() {
     const [galleryPage, setGalleryPage] = useState(1);
     const GALLERY_PER_PAGE = 10;
 
+    const recordLog = async (target, action) => {
+        try {
+            await supabase.from('activity_logs').insert([{ target, action }]);
+        } catch (error) {
+            console.error("Failed to write log", error);
+        }
+    };
+
     // Confirm dialog state
     const [confirmDialog, setConfirmDialog] = useState({ open: false, title: '', description: '', onConfirm: null, pendingFile: null, pendingItemId: null });
     const closeConfirm = () => setConfirmDialog(d => ({ ...d, open: false }));
@@ -155,6 +163,7 @@ export default function CSRDashboard() {
                 setGallery(newGallery);
             }
             toast.success("Image uploaded to Cloudinary!");
+            await recordLog('CSR Management', 'Replaced a photo in the gallery');
         } catch (error) {
             console.error("Upload error:", error);
             toast.error("Failed to upload image");
@@ -181,6 +190,7 @@ export default function CSRDashboard() {
             setGallery(prev => [{ id: 'temp-' + Date.now(), image_url: data.url, display_order: 0 }, ...prev]);
             setGalleryPage(1); // jump to first page to see new photo
             toast.success("New image uploaded! Saved to Story 1.");
+            await recordLog('CSR Management', 'Uploaded a new photo to the gallery');
         } catch (error) {
             console.error("Upload error:", error);
             toast.error("Failed to upload new image");
@@ -212,6 +222,11 @@ export default function CSRDashboard() {
         }
         setState(state.filter(item => item.id !== id));
         toast.success("Item deleted");
+        
+        // Convert table name to readable target
+        const targetName = table === 'csr_gallery' ? 'Photo Gallery' : 
+                           table === 'csr_ongoing_programs' ? 'Ongoing Programs' : 'Initiatives';
+        await recordLog('CSR Management', `Deleted an item from ${targetName}`);
     };
 
     // ==========================================
@@ -314,6 +329,7 @@ export default function CSRDashboard() {
                 }
             }
             toast.success("Gallery saved successfully");
+            await recordLog('CSR Management', 'Saved updates to Photo Gallery');
             fetchData();
         } catch (e) {
             toast.error("Error saving gallery");
@@ -334,6 +350,7 @@ export default function CSRDashboard() {
                 }
             }
             toast.success("Ongoing programs saved successfully");
+            await recordLog('CSR Management', 'Saved updates to Ongoing Programs');
             fetchData();
         } catch (e) {
             toast.error("Error saving ongoing programs");
@@ -354,6 +371,7 @@ export default function CSRDashboard() {
                 }
             }
             toast.success("Initiatives saved successfully");
+            await recordLog('CSR Management', 'Saved updates to Initiatives');
             fetchData();
         } catch (e) {
             toast.error("Error saving initiatives");
