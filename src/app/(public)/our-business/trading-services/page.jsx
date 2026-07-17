@@ -1,7 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-'use client';
-import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
